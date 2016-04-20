@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('password'); // hashed
 
             $table->date('created_at');
+            $table->date('updated_at');
             $table->string('confirmation_code')->nullable(); // null once confirmed
             $table->rememberToken('');
         });
