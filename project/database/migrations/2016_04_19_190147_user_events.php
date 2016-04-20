@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UserSailings extends Migration
+class UserEvents extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,17 @@ class UserSailings extends Migration
      */
     public function up()
     {
-        Schema::create('user_sailings', function (Blueprint $table) {
+        Schema::create('user_events', function (Blueprint $table) {
 
             //declare type first
-            $table->integer('sailing_id')->unsigned();
-            $table->foreign('sailing_id')->references('id')->on('sailings');
+            $table->integer('event_id')->unsigned();
+            $table->foreign('event_id')->references('id')->on('events');
 
             // declare type fist
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+
+            $table->string('role'); // only host or member
 
         });
     }
@@ -32,6 +34,6 @@ class UserSailings extends Migration
      */
     public function down()
     {
-        Schema::drop('user_sailings');
+        Schema::drop('user_events');
     }
 }
