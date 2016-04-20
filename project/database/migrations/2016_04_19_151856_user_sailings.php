@@ -19,7 +19,7 @@ class UserSailings extends Migration
             $table->foreign('sailing_id')->references('id')->on('sailings');
 
             // declare type fist
-            $table->string('user_id');
+            $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
         });

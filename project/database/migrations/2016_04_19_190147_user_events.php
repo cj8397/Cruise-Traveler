@@ -19,7 +19,7 @@ class UserEvents extends Migration
             $table->foreign('event_id')->references('id')->on('events');
 
             // declare type fist
-            $table->string('user_id');
+            $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('role'); // only host or member
