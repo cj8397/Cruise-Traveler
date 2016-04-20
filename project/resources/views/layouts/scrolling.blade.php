@@ -43,7 +43,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Home</a>
+            <a class="navbar-brand" href="/">Home</a>
         </div>
         <a class="brand">
             <img src="http://placehold.it/750x450">
@@ -55,7 +55,7 @@
                     <a href="#">About Us</a>
                 </li>
                 <li>
-                    <a href="#">Sailings</a>
+                    <a href="/sailings">Sailings</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
