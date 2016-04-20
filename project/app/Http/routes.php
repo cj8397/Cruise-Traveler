@@ -19,4 +19,6 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/events', 'EventsController@GetAllEvents');
+Route::get('/events/{sailing}', 'EventsController@GetAllEvents');
+
+Route::get('/sailings', 'SailingsController@GetAllSailings');
