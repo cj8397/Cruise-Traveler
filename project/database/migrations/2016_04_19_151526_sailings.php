@@ -16,9 +16,10 @@ class Sailings extends Migration
 
             $table->increments('id')->unique();
             $table->string('cruise_line');
-            $table->datetime('start');
-            $table->datetime('end');
-            $table->string('origin');
+            $table->datetime('start_date');
+            $table->datetime('end_date');
+            $table->string('port_org');
+            $table->string('port_dest');
             $table->string('destination');
         });
     }
