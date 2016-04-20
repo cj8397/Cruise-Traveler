@@ -9,6 +9,7 @@ return array(
     'Admin' => $baseDir . '/database/migrations/2016_04_19_190921_admin.php',
     'ConfigurationGenerator' => $vendorDir . '/phpunit/phpunit/src/Util/ConfigurationGenerator.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreateRolesTable' => $baseDir . '/database/migrations/2016_04_20_212642_create_roles_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'EventMessages' => $baseDir . '/database/migrations/2016_04_19_193147_event_messages.php',
