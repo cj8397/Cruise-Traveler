@@ -16,26 +16,27 @@
 
             <!-- link to sass files -->
     {{-- <link href="{{ elixir('styles/app.styles') }}" rel="stylesheet"> --}}
-<style>
-    /* Glyph, by Harry Roberts */
+    <style>
+        /* Glyph, by Harry Roberts */
 
-    hr.style-eight {
-        padding: 0;
-        border: none;
-        border-top: medium double #333;
-        color: #333;
-        text-align: center;
-    }
-    hr.style-eight:after {
-        content: "§";
-        display: inline-block;
-        position: relative;
-        top: -0.7em;
-        font-size: 1.5em;
-        padding: 0 0.25em;
-        background: white;
-    }
-</style>
+        hr.style-eight {
+            padding: 0;
+            border: none;
+            border-top: medium double #333;
+            color: #333;
+            text-align: center;
+        }
+
+        hr.style-eight:after {
+            content: "§";
+            display: inline-block;
+            position: relative;
+            top: -0.7em;
+            font-size: 1.5em;
+            padding: 0 0.25em;
+            background: white;
+        }
+    </style>
     <!-- custom theme -->
     {{--<link rel="stylesheet" href="{{ URL::asset('styles/bootstrap.css') }}" />--}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -77,6 +78,7 @@
                 <li>
                     <a href="{{ url('/sailings') }}">Sailings</a>
                 </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
@@ -100,8 +102,12 @@
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
-                        <ul class="dropdown-menu" role="menu">
+
+                            <li>
+                                <a href="{{ url('/users') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Profile</a>
+                            </li>
                             <li><a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Logout</a></li>
+                    <ul class="dropdown-menu" role="menu">
                         </ul>
                     </li>
                 @endif

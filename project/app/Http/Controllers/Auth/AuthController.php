@@ -23,6 +23,11 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    /*protected function authenticated(Request $request, User $user)
+    {
+        return redirect()->inteded('/userprofile');
+    }*/
+
     /**
      * Where to redirect users after login / registration.
      *
