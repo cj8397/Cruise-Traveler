@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6b3dd9605eb2578003440cddb8f57abf",
-    "content-hash": "8590ceeb93631fa1815928de23258a58",
+    "hash": "a4b3620d8e18d95dcb34a5d2cc884a7d",
+    "content-hash": "044e8587101e6ed78e16c0a7028b10e2",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -162,6 +162,58 @@
             "time": "2015-11-06 14:35:42"
         },
         {
+            "name": "fzaninotto/faker",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "d0190b156bcca848d401fb80f31f504f37141c8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d0190b156bcca848d401fb80f31f504f37141c8d",
+                "reference": "d0190b156bcca848d401fb80f31f504f37141c8d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~1.5"
+            },
+            "suggest": {
+                "ext-intl": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2015-05-29 06:29:14"
+        },
+        {
             "name": "jakub-onderka/php-console-color",
             "version": "0.1",
             "source": {
@@ -316,7 +368,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/58f10f29416d1049811893e52ba4588c8423266e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/3ecffb9dc29c9be946a2fd2dc873c87c3f3e3954",
                 "reference": "58f10f29416d1049811893e52ba4588c8423266e",
                 "shasum": ""
             },
@@ -958,7 +1010,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/4d18e4f2f164f18b52794f14d58e4fb40d85f167",
+                "url": "https://api.github.com/repos/symfony/console/zipball/f16423c7da1036e09f15fd144eeaa25a7d0e3011",
                 "reference": "4d18e4f2f164f18b52794f14d58e4fb40d85f167",
                 "shasum": ""
             },
@@ -1237,7 +1289,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/7f662675772a7dfa0f423779744ef48a003e6f91",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/6b139fba3ba2ab7f390c7ea32b7dbdd5d74630ae",
                 "reference": "7f662675772a7dfa0f423779744ef48a003e6f91",
                 "shasum": ""
             },
@@ -1535,7 +1587,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/496038466add75c605e83037d5b94d2b6491c8d8",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/29167a186fbb1ad5be7315db89f4255f8233cae0",
                 "reference": "496038466add75c605e83037d5b94d2b6491c8d8",
                 "shasum": ""
             },
@@ -1674,7 +1726,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/59c57f4d982026f19a8748473020a5ab9b65a9aa",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/eb7420b81f804647c7f3aebd872afad53018c488",
                 "reference": "59c57f4d982026f19a8748473020a5ab9b65a9aa",
                 "shasum": ""
             },
@@ -1833,58 +1885,6 @@
                 "instantiate"
             ],
             "time": "2015-06-14 21:17:01"
-        },
-        {
-            "name": "fzaninotto/faker",
-            "version": "v1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "d0190b156bcca848d401fb80f31f504f37141c8d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d0190b156bcca848d401fb80f31f504f37141c8d",
-                "reference": "d0190b156bcca848d401fb80f31f504f37141c8d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "~1.5"
-            },
-            "suggest": {
-                "ext-intl": "*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.5.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Faker\\": "src/Faker/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "François Zaninotto"
-                }
-            ],
-            "description": "Faker is a PHP library that generates fake data for you.",
-            "keywords": [
-                "data",
-                "faker",
-                "fixtures"
-            ],
-            "time": "2015-05-29 06:29:14"
         },
         {
             "name": "hamcrest/hamcrest-php",
