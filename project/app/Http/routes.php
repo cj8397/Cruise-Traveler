@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/events/{sailing}', 'EventsController@GetAllEvents');
+
+Route::get('/sailings', 'SailingsController@GetAllSailings');
