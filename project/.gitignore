@@ -1,5 +1,4 @@
 *.sqlite
-<<<<<<< HEAD
 # Created by https://www.gitignore.io
 
 ### Laravel ###
@@ -54,7 +53,6 @@ atlassian-ide-plugin.xml
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
-<<<<<<< HEAD
 #ERROR!
 
 ### Laravel ###
