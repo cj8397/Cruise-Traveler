@@ -1,4 +1,4 @@
-@extends('layouts.thumbnail')
+@extends('layouts.scrolling')
 
 @section('content')
         <!-- Page Content -->
