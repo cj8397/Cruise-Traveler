@@ -300,7 +300,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/eb7420b81f804647c7f3aebd872afad53018c488",
+            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/59c57f4d982026f19a8748473020a5ab9b65a9aa",
             "reference": "59c57f4d982026f19a8748473020a5ab9b65a9aa",
             "shasum": ""
         },
@@ -365,7 +365,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/console/zipball/f16423c7da1036e09f15fd144eeaa25a7d0e3011",
+            "url": "https://api.github.com/repos/symfony/console/zipball/4d18e4f2f164f18b52794f14d58e4fb40d85f167",
             "reference": "4d18e4f2f164f18b52794f14d58e4fb40d85f167",
             "shasum": ""
         },
@@ -792,7 +792,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/routing/zipball/29167a186fbb1ad5be7315db89f4255f8233cae0",
+            "url": "https://api.github.com/repos/symfony/routing/zipball/496038466add75c605e83037d5b94d2b6491c8d8",
             "reference": "496038466add75c605e83037d5b94d2b6491c8d8",
             "shasum": ""
         },
@@ -1136,7 +1136,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/http-kernel/zipball/6b139fba3ba2ab7f390c7ea32b7dbdd5d74630ae",
+            "url": "https://api.github.com/repos/symfony/http-kernel/zipball/7f662675772a7dfa0f423779744ef48a003e6f91",
             "reference": "7f662675772a7dfa0f423779744ef48a003e6f91",
             "shasum": ""
         },
@@ -1711,7 +1711,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laravel/framework/zipball/3ecffb9dc29c9be946a2fd2dc873c87c3f3e3954",
+            "url": "https://api.github.com/repos/laravel/framework/zipball/58f10f29416d1049811893e52ba4588c8423266e",
             "reference": "58f10f29416d1049811893e52ba4588c8423266e",
             "shasum": ""
         },
