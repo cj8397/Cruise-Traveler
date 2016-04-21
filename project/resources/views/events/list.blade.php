@@ -17,7 +17,7 @@
     <!-- Projects Row -->
     <div class="row">
         <div class="col-md-3 portfolio-item">
-            <a href="#">
+            <a href="/eventdetail/1">
                 <img class="img-responsive" src="http://placehold.it/750x450" alt="">
             </a>
         </div>

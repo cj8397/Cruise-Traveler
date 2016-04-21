@@ -21,4 +21,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/events/{sailing}', 'EventsController@GetAllEvents');
 
+Route::get('/eventdetail/{event_id}', 'EventsController@GetOneEvent');
+
 Route::get('/sailings', 'SailingsController@GetAllSailings');
+
