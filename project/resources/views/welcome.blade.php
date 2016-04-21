@@ -11,10 +11,10 @@
                         frameborder="2" allowfullscreen></iframe>
             </div>
             <div class="col-md-5 col-md-offset-1 col-xs-5 col-xs-offset-1">
-                <button type="button" class="btn btn-primary col-md-5 col-xs-5"> Login! </button>
+                <input type="button" href="/login" class="btn btn-primary col-md-5 col-xs-5"> </input>
             </div>
             <div class="col-md-5 col-md-offset-1 col-xs-5 col-xs-offset-1">
-                <button type="button" class="btn btn-primary col-md-5 col-xs-5"> Register! </button>
+                <input type="buttons" href="/register" class="btn btn-primary col-md-5 col-xs-5"></input>
             </div>
         </div>
         <div class="row">
