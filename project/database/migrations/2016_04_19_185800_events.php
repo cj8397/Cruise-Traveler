@@ -20,8 +20,8 @@ class Events extends Migration
             $table->foreign('sailing_id')->references('id')->on('sailings');
 
             $table->string('title');
-            $table->datetime('start');
-            $table->datetime('end');
+            $table->datetime('start_date');
+            $table->datetime('end_date');
             $table->string('desc');
             $table->string('location');
 

@@ -15,6 +15,7 @@ class Sailings extends Migration
         Schema::create('sailings', function (Blueprint $table) {
 
             $table->increments('id')->unique();
+            $table->string('title');
             $table->string('cruise_line');
             $table->datetime('start_date');
             $table->datetime('end_date');
