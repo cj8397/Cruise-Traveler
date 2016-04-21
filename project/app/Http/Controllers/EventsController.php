@@ -33,7 +33,11 @@ class EventsController extends Controller
         return view('events.createEventForm');
     }
     protected function CreateEvent(Request $request){
-        dd($request);
+        return $request->input('start');
+        //$this->validate($request, [
+       //    'title' => 'required|max:20',
+       //     'start' => 'required'
+       // ]);
     }
 
 }

@@ -28,7 +28,7 @@
                             <label class="col-md-4 control-label">Start Date And Time</label>
 
                             <div class="col-md-6">
-                                <input type="datetime" class="form-control" name="start">
+                                <input type="datetime-local" class="form-control" name="start">
 
                                 @if ($errors->has('start'))
                                     <span class="help-block">
@@ -42,7 +42,7 @@
                             <label class="col-md-4 control-label">End Date And Time</label>
 
                             <div class="col-md-6">
-                                <input type="datetime" class="form-control" name="end">
+                                <input type="datetime-local" class="form-control" name="end">
 
                                 @if ($errors->has('end'))
                                     <span class="help-block">
