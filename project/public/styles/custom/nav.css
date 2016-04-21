@@ -1,5 +1,6 @@
 .navbar {
     position: relative;
+
 }
 
 .brand {
@@ -11,4 +12,7 @@
 .brand img {
     width: 100px;
     height: 50px;
+}
+body{
+    padding-top: 0;
 }

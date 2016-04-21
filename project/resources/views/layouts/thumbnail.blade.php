@@ -18,10 +18,8 @@
     {{-- <link href="{{ elixir('styles/app.styles') }}" rel="stylesheet"> --}}
 
     <!-- custom theme -->
-    {{--<link rel="stylesheet" href="{{ URL::asset('styles/bootstrap.css') }}" />--}}
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ URL::asset('styles/4-col-portfolio.css') }}" />
-    <link rel="stylesheet" href="{{ URL::asset('styles/custom/thumbnail.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/nav.css') }}" />
 
 
@@ -45,11 +43,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Home</a>
+            <a class="navbar-brand" href="/">Home</a>
+            <a class="brand">
+                <img src="https://placehold.it/750x450">
+            </a>
         </div>
-        <a class="brand">
-            <img src="http://placehold.it/750x450">
-        </a>
+
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -57,13 +56,25 @@
                     <a href="#">About Us</a>
                 </li>
                 <li>
-                    <a href="#">Sailings</a>
+                    <a href="{{ url('/sailings') }}">Sailings</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"> Admin </a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <!-- Authentication Links -->
+                @if (Auth::guest())
+                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/register') }}">Register</a></li>
+                @else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                @endif
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -84,8 +95,7 @@
 
 <!-- JavaScripts -->
 <script type="text/javascript" src="{{ URL::asset('scripts/jquery.js') }}"></script>
-{{--<script type="text/javascript" src="{{ URL::asset('scripts/bootstrap.js') }}"></script>--}}
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>--}}
 {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}

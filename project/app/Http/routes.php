@@ -11,7 +11,6 @@
 |
 */
 
-// DEMO OF SCROLLING NAV
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,13 +19,9 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/events/{sailing}', 'EventsController@GetAllEvents');
 
-// DEMO OF THE THUMBNAIL SET UP
-Route::get('/events', function() {
-    return view('events.list');
-});
+Route::get('/eventdetail/{event_id}', 'EventsController@GetOneEvent');
 
-Route::get('/sailings', function() {
-    return view('sailings.list');
-});
+Route::get('/sailings', 'SailingsController@GetAllSailings');
 

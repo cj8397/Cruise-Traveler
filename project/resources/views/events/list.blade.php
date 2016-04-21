@@ -1,4 +1,4 @@
-@extends('layouts.thumbnail')
+@extends('layouts.scrolling')
 
 @section('content')
         <!-- Page Content -->
@@ -7,8 +7,8 @@
     <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Page Heading
-                <small>Secondary Text</small>
+            <h1 class="page-header">Events Page
+                <small>Events on Cruise Ship 1</small>
             </h1>
         </div>
     </div>
@@ -17,7 +17,7 @@
     <!-- Projects Row -->
     <div class="row">
         <div class="col-md-3 portfolio-item">
-            <a href="#">
+            <a href="/eventdetail/1">
                 <img class="img-responsive" src="http://placehold.it/750x450" alt="">
             </a>
         </div>

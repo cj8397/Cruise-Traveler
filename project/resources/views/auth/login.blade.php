@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.scrolling')
 
 @section('content')
 <div class="container">
@@ -62,5 +62,6 @@
             </div>
         </div>
     </div>
+
 </div>
 @endsection
