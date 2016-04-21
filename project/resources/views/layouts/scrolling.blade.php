@@ -16,10 +16,29 @@
 
             <!-- link to sass files -->
     {{-- <link href="{{ elixir('styles/app.styles') }}" rel="stylesheet"> --}}
+<style>
+    /* Glyph, by Harry Roberts */
 
+    hr.style-eight {
+        padding: 0;
+        border: none;
+        border-top: medium double #333;
+        color: #333;
+        text-align: center;
+    }
+    hr.style-eight:after {
+        content: "§";
+        display: inline-block;
+        position: relative;
+        top: -0.7em;
+        font-size: 1.5em;
+        padding: 0 0.25em;
+        background: white;
+    }
+</style>
     <!-- custom theme -->
     {{--<link rel="stylesheet" href="{{ URL::asset('styles/bootstrap.css') }}" />--}}
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ URL::asset('styles/scrolling-nav.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/nav.css') }}" />
 
@@ -44,10 +63,11 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">Home</a>
+            <a class="brand">
+                <img src="https://placehold.it/750x450">
+            </a>
         </div>
-        <a class="brand">
-            <img src="http://placehold.it/750x450">
-        </a>
+
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -55,7 +75,7 @@
                     <a href="#">About Us</a>
                 </li>
                 <li>
-                    <a href="/sailings">Sailings</a>
+                    <a href="{{ url('/sailings') }}">Sailings</a>
                 </li>
 
             </ul>
@@ -100,7 +120,7 @@
 <!-- JavaScripts -->
 <script type="text/javascript" src="{{ URL::asset('scripts/jquery.js') }}"></script>
 {{--<script type="text/javascript" src="{{ URL::asset('scripts/bootstrap.js') }}"></script>--}}
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="{{ URL::asset('scripts/jquery.easing.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('scripts/scrolling-nav.js') }}"></script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>--}}
