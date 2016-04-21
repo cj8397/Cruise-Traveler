@@ -12,7 +12,8 @@ class NodeDumper
      * @param array $options Boolean option 'dumpComments' controls whether comments should be
      *                       dumped
      */
-    public function __construct(array $options = []) {
+    public function __construct(array $options = [])
+    {
         $this->dumpComments = !empty($options['dumpComments']);
     }
 

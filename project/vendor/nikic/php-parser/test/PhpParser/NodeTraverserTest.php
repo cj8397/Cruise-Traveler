@@ -205,7 +205,8 @@ class NodeTraverserTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LogicException
      * @expectedExceptionMessage leaveNode() may only return an array if the parent structure is an array
      */
-    public function testReplaceByArrayOnlyAllowedIfParentIsArray() {
+    public function testReplaceByArrayOnlyAllowedIfParentIsArray()
+    {
         $stmts = array(new Node\Expr\UnaryMinus(new Node\Scalar\LNumber(42)));
 
         $visitor = $this->getMock('PhpParser\NodeVisitor');

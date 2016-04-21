@@ -466,7 +466,8 @@ abstract class ParserAbstract implements Parser
             /* declare(), __halt_compiler() and nops can be used before a namespace declaration */
             if ($stmt instanceof Node\Stmt\Declare_
                 || $stmt instanceof Node\Stmt\HaltCompiler
-                || $stmt instanceof Node\Stmt\Nop) {
+                || $stmt instanceof Node\Stmt\Nop
+            ) {
                 continue;
             }
 
