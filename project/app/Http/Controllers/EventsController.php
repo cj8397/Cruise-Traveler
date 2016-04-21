@@ -15,18 +15,18 @@ class EventsController extends Controller
     protected function GetAllEvents($sailing){
         if($events = Event::where('sailing_id', $sailing)){
             return view('events.list')->with('events', $events);
-        }else{
+        } else {
 
             return Redirect::back();
         }
     }
 
-    protected function GetOneEvent($event_id){
-        if($event = Event::where('id', $event_id)){
+    protected function GetOneEvent($event_id)
+    {
+        if ($event = Event::where('id', $event_id)) {
             return view('events.eventdetail');
 
-        }
-        else{
+        } else {
             return Redirect::back();
         }
     }

@@ -2,14 +2,14 @@
 
 @section('content')
     <img class="img-responsive jumbotron" src="/426631.jpg" alt="">
-<div class="container-fluid">
+    <div class="container-fluid">
     <div class="row">
         <div class="panel panel-default col-md-6 col-xs-6">
             <div class="panel-heading">Drinks With Friends!</div>
             <div class="panel-body">
                 <ul class="list-group">
                     <li class="list-group-item">
-                       <strong>Start Time!</strong>
+                        <strong>Start Time!</strong>
                         <span class="label label-success label-pill pull-right">
                             5:00PM
                         </span>
