@@ -23,5 +23,11 @@ Route::get('/events/{sailing}', 'EventsController@GetAllEvents');
 
 Route::get('/eventdetail/{event_id}', 'EventsController@GetOneEvent');
 
+Route::get('/eventform/get', 'EventsController@ShowCreateForm');
+
+Route::post('/eventform/post', 'EventsController@CreateEvent');
+
+Route::get('/sailings', 'SailingsController@GetAllSailings');
+
 Route::get('/sailings', 'SailingsController@GetAllSailings');
 

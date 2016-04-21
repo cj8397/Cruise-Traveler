@@ -75,7 +75,7 @@
             <div class="row">
                 <div class="col-md-4 col-xs-4">
                     <a href="/sailings">
-                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                        <img class="img-responsive" src="https://placehold.it/750x450" alt="">
                     </a>
                     <h2>
                         Caribbean
@@ -83,7 +83,7 @@
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <a href="/sailings">
-                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                        <img class="img-responsive" src="https://placehold.it/750x450" alt="">
                     </a>
                     <h2>
                         Mediterranean
@@ -91,7 +91,7 @@
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <a href="/sailings">
-                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                        <img class="img-responsive" src="https://placehold.it/750x450" alt="">
                     </a>
                     <h2>
                         Alaska

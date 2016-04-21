@@ -24,11 +24,16 @@ class EventsController extends Controller
     protected function GetOneEvent($event_id){
         if($event = Event::where('id', $event_id)){
             return view('events.eventdetail');
-
         }
         else{
             return Redirect::back();
         }
+    }
+    protected function ShowCreateForm(){
+        return view('events.createEventForm');
+    }
+    protected function CreateEvent(Request $request){
+        dd($request);
     }
 
 }
