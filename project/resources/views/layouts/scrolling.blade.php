@@ -57,11 +57,28 @@
                 <li>
                     <a href="/sailings">Sailings</a>
                 </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"> Admin </a></li>
-                <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <!-- Authentication Links -->
+                @if (Auth::guest())
+                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/register') }}">Register</a></li>
+                @else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+
+
+                            <li>
+                                <a href="{{ url('/users') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Profile</a>
+                            </li>
+                            <li><a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Logout</a></li>
+                    <ul class="dropdown-menu" role="menu">
+                        </ul>
+                    </li>
+                @endif
             </ul>
         </div>
         <!-- /.navbar-collapse -->
