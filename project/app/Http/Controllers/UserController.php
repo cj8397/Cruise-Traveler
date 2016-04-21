@@ -21,4 +21,20 @@ class UserProfileController extends Controller
     {
         return view('users');
     }
+
+    protected function CreateUser()
+    {
+
+    }
+
+    protected function UpdateUser()
+    {
+
+    }
+
+    protected function DeleteUser()
+    {
+
+    }
 }
+
