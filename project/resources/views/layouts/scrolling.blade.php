@@ -75,7 +75,7 @@
                     <a href="#">About Us</a>
                 </li>
                 <li>
-                    <a href="/sailings">Sailings</a>
+                    <a href="{{ url('/sailings') }}">Sailings</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
