@@ -25,5 +25,5 @@ Route::get('/eventdetail/{event_id}', 'EventsController@GetOneEvent');
 
 Route::get('/sailings', 'SailingsController@GetAllSailings');
 
-Route::get('/users', 'UserProfileController@getUser');
+Route::get('/users', 'UserController@getUser');
 
