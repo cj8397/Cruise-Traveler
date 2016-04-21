@@ -1682,3 +1682,13 @@ Stack trace:
 #53 C:\Users\MarioHugo\PhpstormProjects\IndustryProject\project\public\index.php(52): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #54 C:\Users\MarioHugo\PhpstormProjects\IndustryProject\project\server.php(21): require_once('C:\\Users\\MarioH...')
 #55 {main}  
+[2016-04-21 03:17:30] local.ERROR: Symfony\Component\Console\Exception\CommandNotFoundException: Command "servce" is not defined.
+
+Did you mean this?
+    serve in /Users/Jalen/Desktop/ssd21IndustryProject/IndustryProject/project/vendor/symfony/console/Application.php:532
+Stack trace:
+#0 /Users/Jalen/Desktop/ssd21IndustryProject/IndustryProject/project/vendor/symfony/console/Application.php(183): Symfony\Component\Console\Application->find('servce')
+#1 /Users/Jalen/Desktop/ssd21IndustryProject/IndustryProject/project/vendor/symfony/console/Application.php(117): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#2 /Users/Jalen/Desktop/ssd21IndustryProject/IndustryProject/project/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(107): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 /Users/Jalen/Desktop/ssd21IndustryProject/IndustryProject/project/artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#4 {main}  
