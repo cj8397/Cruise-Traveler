@@ -18,7 +18,7 @@
     {{-- <link href="{{ elixir('styles/app.styles') }}" rel="stylesheet"> --}}
 
     <!-- custom theme -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ URL::asset('styles/4-col-portfolio.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/nav.css') }}" />
 
@@ -44,10 +44,11 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">Home</a>
+            <a class="brand">
+                <img src="https://placehold.it/750x450">
+            </a>
         </div>
-        <a class="brand">
-            <img src="http://placehold.it/750x450">
-        </a>
+
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -55,12 +56,23 @@
                     <a hrefC:\Users\MarioHugo\PhpstormProjects\IndustryProject\project="#">About Us</a>
                 </li>
                 <li>
-                    <a href="/sailings">Sailings</a>
+                    <a href="{{ url('/sailings') }}">Sailings</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Documentation <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Last Update: April 21th, 2016 @ 9:30AM </a> </li>
+                            <li><a href="https://docs.google.com/spreadsheets/d/1KQc5cRAnqdWS55JQb59NHHYKRtqtslBXlHjbWU2QIqc/edit#gid=0">SCRUM WOKRBOOK</a></li>
+                            <li><a href="https://docs.google.com/document/d/1yIuRZO1HJ71moInaR_B1Y0mb6yfwxB9oClgWSx5CTpw/edit#heading=h.tphyqzr77ydu">Design Model</a></li>
+                        </ul>
+                    </li>
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 @else
@@ -94,7 +106,7 @@
 
 <!-- JavaScripts -->
 <script type="text/javascript" src="{{ URL::asset('scripts/jquery.js') }}"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>--}}
 {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
