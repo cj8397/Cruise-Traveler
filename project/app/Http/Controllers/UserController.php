@@ -1,40 +1,31 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Cheng
- * Date: 2016-04-20
- * Time: 10:47 PM
- */
 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Event;
-use Illuminate\Support\Facades\Redirect;
 
-class UserProfileController extends Controller
+class UserController extends Controller
 {
-    protected function GetUser()
+    //
+    public function getUser()
     {
-        return view('users');
+        return view('users.userprofile');
     }
 
-    protected function CreateUser()
-    {
-
-    }
-
-    protected function UpdateUser()
+    public function createUser()
     {
 
     }
 
-    protected function DeleteUser()
+    public function updateUser()
+    {
+
+    }
+
+    public function deleteUser()
     {
 
     }
 }
-

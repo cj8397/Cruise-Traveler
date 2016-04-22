@@ -3,7 +3,6 @@
 @section('content')
     <div class="container">
         <img src="/images/profilepic.png">
-        {{ URL::to('/') }}/images/profilepic.png
     </div>
     <div class="container-fluid">
         <div class="row">

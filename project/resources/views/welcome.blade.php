@@ -11,10 +11,61 @@
                         frameborder="2" allowfullscreen></iframe>
             </div>
         </div>
+
         @if (Auth::guest())
             <div class="row col-xs-5 col-xs-offset-2 col-md-offset-2 col-md-5">
                 <div class="panel panel-default">
                     <div class="panel-heading">Login</div>
+                    <style type="text/css">
+                        .tg {
+                            border-collapse: collapse;
+                            border-spacing: 0;
+                        }
+
+                        .tg td {
+                            font-family: Arial, sans-serif;
+                            font-size: 14px;
+                            padding: 10px 12px;
+                            border-style: solid;
+                            border-width: 1px;
+                            overflow: hidden;
+                            word-break: normal;
+                        }
+
+                        .tg th {
+                            font-family: Arial, sans-serif;
+                            font-size: 14px;
+                            font-weight: normal;
+                            padding: 10px 12px;
+                            border-style: solid;
+                            border-width: 1px;
+                            overflow: hidden;
+                            word-break: normal;
+                        }
+
+                        .tg .tg-baqh {
+                            text-align: center;
+                            vertical-align: top
+                        }
+
+                        .tg .tg-amwm {
+                            font-weight: bold;
+                            text-align: center;
+                            vertical-align: top
+                        }
+                    </style>
+                    <table class="tg">
+                        <tr>
+                            <th class="tg-amwm">Username</th>
+                            <th class="tg-amwm">Password</th>
+                            <th class="tg-amwm">Role</th>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">vacation@gmail.com</td>
+                            <td class="tg-baqh">password</td>
+                            <td class="tg-baqh">Vacationer</td>
+                        </tr>
+                    </table>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                             {!! csrf_field() !!}

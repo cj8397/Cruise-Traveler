@@ -28,4 +28,4 @@ Route::get('/sailings/create', 'SailingsController@CreateSailing');
 Route::get('/sailings/delete/{id}', 'SailingsController@DeleteSailing');
 Route::get('/sailings/{id}', 'SailingsController@GetOneSailing');
 
-Route::get('/users', 'UserProfileController@GetUser');
+Route::get('/users', 'UserController@getUser');
