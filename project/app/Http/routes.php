@@ -27,3 +27,4 @@ Route::get('/sailings', 'SailingsController@GetAllSailings');
 
 Route::get('/users', 'UserController@getUser');
 
+
