@@ -19,13 +19,13 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('events/eventdetail/{event_id}', 'EventsController@GetOneEvent');
+
+Route::get('events/eventform/get', 'EventsController@ShowCreateForm');
+
+Route::post('events/eventform/post', 'EventsController@CreateEvent');
+
 Route::get('/events/{sailing}', 'EventsController@GetAllEvents');
-
-Route::get('/eventdetail/{event_id}', 'EventsController@GetOneEvent');
-
-Route::get('/eventform/get', 'EventsController@ShowCreateForm');
-
-Route::post('/eventform/post', 'EventsController@CreateEvent');
 
 Route::get('/sailings', 'SailingsController@GetAllSailings');
 

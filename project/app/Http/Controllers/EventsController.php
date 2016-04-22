@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Sailing;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Event;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\EventRequest;
 
 class EventsController extends Controller
 {
@@ -32,12 +35,19 @@ class EventsController extends Controller
     protected function ShowCreateForm(){
         return view('events.createEventForm');
     }
-    protected function CreateEvent(Request $request){
-        return $request->input('start');
-        //$this->validate($request, [
-       //    'title' => 'required|max:20',
-       //     'start' => 'required'
-       // ]);
+    protected function CreateEvent(EventRequest $request){
+
+        $start = Carbon::parse($request->start);
+        $end = Carbon::parse($request->end);
+        $event = Event::create([
+            'sailing_id' => $request->sailing_id,
+            'title' => $request->title,
+            'start_date' => $start,
+            'end_date' => $end,
+            'desc' => $request->desc,
+            'location' => $request->location
+        ]);
+           return redirect()->action('EventsController@GetOneEvent', [$event->id]);
     }
 
 }

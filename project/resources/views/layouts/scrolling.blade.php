@@ -41,12 +41,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ URL::asset('styles/scrolling-nav.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/nav.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('styles/custom/bootstrap-datetimepicker.min.css') }}" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
     <![endif]-->
 
 </head>
@@ -129,6 +131,15 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="{{ URL::asset('scripts/jquery.easing.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('scripts/scrolling-nav.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('scripts/moment-with-locales.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('scripts/bootstrap-datetimepicker.min.js') }}"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepickerstart').datetimepicker();
+        $('#datetimepickersend').datetimepicker();
+    });
+</script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>--}}
 {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
