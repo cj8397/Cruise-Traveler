@@ -9,6 +9,9 @@ use PhpParser\Node\Scalar\String_;
 
 abstract class ParserTest extends \PHPUnit_Framework_TestCase
 {
+    /** @returns Parser */
+    abstract protected function getParser(Lexer $lexer);
+
     /**
      * @expectedException \PhpParser\Error
      * @expectedExceptionMessage Syntax error, unexpected EOF on line 1
@@ -17,9 +20,6 @@ abstract class ParserTest extends \PHPUnit_Framework_TestCase
         $parser = $this->getParser(new Lexer());
         $parser->parse('<?php foo');
     }
-
-    /** @returns Parser */
-    abstract protected function getParser(Lexer $lexer);
 
     /**
      * @expectedException \PhpParser\Error
@@ -112,8 +112,7 @@ EOC;
     /**
      * @dataProvider provideTestKindAttributes
      */
-    public function testKindAttributes($code, $expectedAttributes)
-    {
+    public function testKindAttributes($code, $expectedAttributes) {
         $parser = $this->getParser(new Lexer);
         $stmts = $parser->parse("<?php $code;");
         $attributes = $stmts[0]->getAttributes();
@@ -122,8 +121,7 @@ EOC;
         }
     }
 
-    public function provideTestKindAttributes()
-    {
+    public function provideTestKindAttributes() {
         return array(
             array('0', ['kind' => Scalar\LNumber::KIND_DEC]),
             array('9', ['kind' => Scalar\LNumber::KIND_DEC]),

@@ -10,6 +10,10 @@ use PhpParser\Node\Scalar\String_;
 
 class FunctionTest extends \PHPUnit_Framework_TestCase
 {
+    public function createFunctionBuilder($name) {
+        return new Function_($name);
+    }
+
     public function testReturnByRef() {
         $node = $this->createFunctionBuilder('test')
             ->makeReturnByRef()
@@ -22,11 +26,6 @@ class FunctionTest extends \PHPUnit_Framework_TestCase
             )),
             $node
         );
-    }
-
-    public function createFunctionBuilder($name)
-    {
-        return new Function_($name);
     }
 
     public function testParams() {
@@ -77,8 +76,7 @@ class FunctionTest extends \PHPUnit_Framework_TestCase
         )), $node);
     }
 
-    public function testReturnType()
-    {
+    public function testReturnType() {
         $node = $this->createFunctionBuilder('test')
             ->setReturnType('bool')
             ->getNode();

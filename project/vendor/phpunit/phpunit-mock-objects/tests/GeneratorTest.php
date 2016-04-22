@@ -6,6 +6,11 @@ class Framework_MockObject_GeneratorTest extends PHPUnit_Framework_TestCase
      */
     protected $generator;
 
+    protected function setUp()
+    {
+        $this->generator = new PHPUnit_Framework_MockObject_Generator;
+    }
+
     /**
      * @covers PHPUnit_Framework_MockObject_Generator::getMock
      * @expectedException PHPUnit_Framework_MockObject_RuntimeException
@@ -174,10 +179,5 @@ class Framework_MockObject_GeneratorTest extends PHPUnit_Framework_TestCase
     public function testExceptionIsRaisedForMutuallyExclusiveOptions()
     {
         $this->generator->getMock(StdClass::class, [], [], '', false, true, true, true, true);
-    }
-
-    protected function setUp()
-    {
-        $this->generator = new PHPUnit_Framework_MockObject_Generator;
     }
 }

@@ -29,6 +29,9 @@ class UsersTableSeeder extends Seeder
                 'lang' => $faker->languageCode,
                 'country' => $faker->country,
                 'password' => bcrypt('password'),
+                'created_at' => new DateTime('now'),
+                'updated_at' => new DateTime('now'),
+
             ]);
         }
     }

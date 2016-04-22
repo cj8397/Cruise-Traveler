@@ -11,12 +11,11 @@ class Comment
     /**
      * Constructs a comment node.
      *
-     * @param string $text Comment text (including comment delimiters like /*)
-     * @param int $startLine Line number the comment started on
-     * @param int $startFilePos File offset the comment started on
+     * @param string $text         Comment text (including comment delimiters like /*)
+     * @param int    $startLine    Line number the comment started on
+     * @param int    $startFilePos File offset the comment started on
      */
-    public function __construct($text, $startLine = -1, $startFilePos = -1)
-    {
+    public function __construct($text, $startLine = -1, $startFilePos = -1) {
         $this->text = $text;
         $this->line = $startLine;
         $this->filePos = $startFilePos;
@@ -67,8 +66,7 @@ class Comment
      *
      * @return int File offset
      */
-    public function getFilePos()
-    {
+    public function getFilePos() {
         return $this->filePos;
     }
 
@@ -138,8 +136,7 @@ class Comment
         return $text;
     }
 
-    private function getShortestWhitespacePrefixLen($str)
-    {
+    private function getShortestWhitespacePrefixLen($str) {
         $lines = explode("\n", $str);
         $shortestPrefixLen = INF;
         foreach ($lines as $line) {

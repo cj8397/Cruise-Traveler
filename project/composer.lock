@@ -312,12 +312,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "58f10f29416d1049811893e52ba4588c8423266e"
+                "reference": "3ecffb9dc29c9be946a2fd2dc873c87c3f3e3954"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/58f10f29416d1049811893e52ba4588c8423266e",
-                "reference": "58f10f29416d1049811893e52ba4588c8423266e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/3ecffb9dc29c9be946a2fd2dc873c87c3f3e3954",
+                "reference": "3ecffb9dc29c9be946a2fd2dc873c87c3f3e3954",
                 "shasum": ""
             },
             "require": {
@@ -432,7 +432,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-04-18 14:43:46"
+            "time": "2016-04-21 13:31:43"
         },
         {
             "name": "league/flysystem",
@@ -688,16 +688,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v2.0.1",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "ce5be709d59b32dd8a88c80259028759991a4206"
+                "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ce5be709d59b32dd8a88c80259028759991a4206",
-                "reference": "ce5be709d59b32dd8a88c80259028759991a4206",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
+                "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
                 "shasum": ""
             },
             "require": {
@@ -713,7 +713,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -735,7 +735,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2016-02-28 19:48:28"
+            "time": "2016-04-19 13:41:41"
         },
         {
             "name": "paragonie/random_compat",
@@ -954,12 +954,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "4d18e4f2f164f18b52794f14d58e4fb40d85f167"
+                "reference": "f16423c7da1036e09f15fd144eeaa25a7d0e3011"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/4d18e4f2f164f18b52794f14d58e4fb40d85f167",
-                "reference": "4d18e4f2f164f18b52794f14d58e4fb40d85f167",
+                "url": "https://api.github.com/repos/symfony/console/zipball/f16423c7da1036e09f15fd144eeaa25a7d0e3011",
+                "reference": "f16423c7da1036e09f15fd144eeaa25a7d0e3011",
                 "shasum": ""
             },
             "require": {
@@ -1006,7 +1006,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-12 18:27:47"
+            "time": "2016-04-20 18:54:21"
         },
         {
             "name": "symfony/debug",
@@ -1233,12 +1233,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "7f662675772a7dfa0f423779744ef48a003e6f91"
+                "reference": "6b139fba3ba2ab7f390c7ea32b7dbdd5d74630ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/7f662675772a7dfa0f423779744ef48a003e6f91",
-                "reference": "7f662675772a7dfa0f423779744ef48a003e6f91",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/6b139fba3ba2ab7f390c7ea32b7dbdd5d74630ae",
+                "reference": "6b139fba3ba2ab7f390c7ea32b7dbdd5d74630ae",
                 "shasum": ""
             },
             "require": {
@@ -1307,7 +1307,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-11 08:32:34"
+            "time": "2016-04-20 11:42:08"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1531,12 +1531,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "496038466add75c605e83037d5b94d2b6491c8d8"
+                "reference": "29167a186fbb1ad5be7315db89f4255f8233cae0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/496038466add75c605e83037d5b94d2b6491c8d8",
-                "reference": "496038466add75c605e83037d5b94d2b6491c8d8",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/29167a186fbb1ad5be7315db89f4255f8233cae0",
+                "reference": "29167a186fbb1ad5be7315db89f4255f8233cae0",
                 "shasum": ""
             },
             "require": {
@@ -1598,7 +1598,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2016-04-02 08:08:03"
+            "time": "2016-04-20 18:54:21"
         },
         {
             "name": "symfony/translation",
@@ -1670,12 +1670,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "59c57f4d982026f19a8748473020a5ab9b65a9aa"
+                "reference": "eb7420b81f804647c7f3aebd872afad53018c488"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/59c57f4d982026f19a8748473020a5ab9b65a9aa",
-                "reference": "59c57f4d982026f19a8748473020a5ab9b65a9aa",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/eb7420b81f804647c7f3aebd872afad53018c488",
+                "reference": "eb7420b81f804647c7f3aebd872afad53018c488",
                 "shasum": ""
             },
             "require": {
@@ -1725,7 +1725,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2016-04-12 18:27:47"
+            "time": "2016-04-20 18:54:21"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -2467,16 +2467,16 @@
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.1.2",
+            "version": "3.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "7c34c9bdde4131b824086457a3145e27dba10ca1"
+                "reference": "151c96874bff6fe61a25039df60e776613a61489"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/7c34c9bdde4131b824086457a3145e27dba10ca1",
-                "reference": "7c34c9bdde4131b824086457a3145e27dba10ca1",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/151c96874bff6fe61a25039df60e776613a61489",
+                "reference": "151c96874bff6fe61a25039df60e776613a61489",
                 "shasum": ""
             },
             "require": {
@@ -2519,7 +2519,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2016-03-24 05:58:25"
+            "time": "2016-04-20 14:39:26"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

@@ -86,8 +86,7 @@ foreach ($files as $file) {
     }
 }
 
-function showHelp($error = '')
-{
+function showHelp($error = '') {
     if ($error) {
         echo $error . "\n\n";
     }

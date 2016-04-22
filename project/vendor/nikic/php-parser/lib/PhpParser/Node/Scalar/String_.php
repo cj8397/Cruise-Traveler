@@ -12,6 +12,10 @@ class String_ extends Scalar
     const KIND_DOUBLE_QUOTED = 2;
     const KIND_HEREDOC = 3;
     const KIND_NOWDOC = 4;
+
+    /** @var string String value */
+    public $value;
+
     protected static $replacements = array(
         '\\' => '\\',
         '$'  =>  '$',
@@ -22,8 +26,6 @@ class String_ extends Scalar
         'v'  => "\v",
         'e'  => "\x1B",
     );
-    /** @var string String value */
-    public $value;
 
     /**
      * Constructs a string scalar node.
@@ -34,6 +36,10 @@ class String_ extends Scalar
     public function __construct($value, array $attributes = array()) {
         parent::__construct($attributes);
         $this->value = $value;
+    }
+
+    public function getSubNodeNames() {
+        return array('value');
     }
 
     /**
@@ -143,10 +149,5 @@ class String_ extends Scalar
         }
 
         return self::parseEscapeSequences($str, null, $parseUnicodeEscape);
-    }
-
-    public function getSubNodeNames()
-    {
-        return array('value');
     }
 }

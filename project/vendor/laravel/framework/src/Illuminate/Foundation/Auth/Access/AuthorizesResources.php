@@ -21,7 +21,7 @@ trait AuthorizesResources
 
         $map = $this->resourceAbilityMap();
 
-        if (!in_array($method, array_keys($map))) {
+        if (! in_array($method, array_keys($map))) {
             return new ControllerMiddlewareOptions($options);
         }
 
@@ -40,11 +40,11 @@ trait AuthorizesResources
     protected function resourceAbilityMap()
     {
         return [
-            'index' => 'view',
+            'index'  => 'view',
             'create' => 'create',
-            'store' => 'create',
-            'show' => 'view',
-            'edit' => 'update',
+            'store'  => 'create',
+            'show'   => 'view',
+            'edit'   => 'update',
             'update' => 'update',
             'delete' => 'delete',
         ];
