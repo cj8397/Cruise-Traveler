@@ -10,7 +10,7 @@ class Event extends Model
     public $timestamps = false;
     protected $table = 'events';
     protected $fillable = [
-        'sailing_id', 'title', 'start_date', 'end_date', 'desc', 'location'
+        'sailing_id','title','start','end','desc','location'
     ];
 
     public function users()

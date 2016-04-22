@@ -27,25 +27,6 @@ class UrlGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://localhost/app.php/testing', $url);
     }
 
-    protected function getRoutes($name, Route $route)
-    {
-        $routes = new RouteCollection();
-        $routes->add($name, $route);
-
-        return $routes;
-    }
-
-    protected function getGenerator(RouteCollection $routes, array $parameters = array(), $logger = null)
-    {
-        $context = new RequestContext('/app.php');
-        foreach ($parameters as $key => $value) {
-            $method = 'set' . $key;
-            $context->$method($value);
-        }
-
-        return new UrlGenerator($routes, $context, $logger);
-    }
-
     public function testAbsoluteSecureUrlWithPort443()
     {
         $routes = $this->getRoutes('test', new Route('/testing'));
@@ -651,5 +632,24 @@ class UrlGeneratorTest extends \PHPUnit_Framework_TestCase
                 './:subdir/',
             ),
         );
+    }
+
+    protected function getGenerator(RouteCollection $routes, array $parameters = array(), $logger = null)
+    {
+        $context = new RequestContext('/app.php');
+        foreach ($parameters as $key => $value) {
+            $method = 'set'.$key;
+            $context->$method($value);
+        }
+
+        return new UrlGenerator($routes, $context, $logger);
+    }
+
+    protected function getRoutes($name, Route $route)
+    {
+        $routes = new RouteCollection();
+        $routes->add($name, $route);
+
+        return $routes;
     }
 }

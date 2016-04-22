@@ -46,3 +46,12 @@ Route::get('/joinsailing/{user_id}/{sailing_id}', 'UserSailingsController@JoinSa
 
 Route::get('/leavesailing/{user_id}/{sailing_id}', 'UserSailingsController@LeaveSailing');
 
+// just to see the
+Route::get('/testsailing/{user_id}/{sailing_id}', function($user_id, $sailing_id) {
+    return view('sailingtest', compact('user_id', 'sailing_id'));
+});
+
+Route::get('/joinsailing/{user_id}/{sailing_id}', 'UserSailingsController@JoinSailing');
+
+Route::get('/leavesailing/{user_id}/{sailing_id}', 'UserSailingsController@LeaveSailing');
+
