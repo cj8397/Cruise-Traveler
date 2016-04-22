@@ -3,90 +3,119 @@
 @section('content')
         <!-- Page Content -->
 <div class="container">
-
     <!-- Page Heading -->
     <div class="row">
+        <img class="img-responsive" src="/images/searchBar.png" alt="">
         <div class="col-lg-12">
-            <h1 class="page-header">Sailings
-            </h1>
+            <h1 class="page-header">Sailings</h1>
+
         </div>
     </div>
     <!-- /.row -->
 
     <!-- Projects Row -->
     <div class="row">
-        <div class="col-md-3 portfolio-item">
+        <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/events/1">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
+        </div>
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
+        </div>
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
             </a>
         </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
             </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
         </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
+    </div>
+    <!-- /.row -->
+    <!-- Projects Row -->
+    <div class="row">
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+            </a><p>200 going 80% male 20% male 12 events plan</p>
         </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+            </a><p>200 going 80% male 20% male 12 events plan</p>
+        </div>
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+            </a><p>200 going 80% male 20% male 12 events plan</p>
+        </div>
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+            </a><p>200 going 80% male 20% male 12 events plan</p>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- Projects Row -->
+    <div class="row">
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+            </a><p>200 going 80% male 20% male 12 events plan</p>
+        </div>
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+            </a><p>200 going 80% male 20% male 12 events plan</p>
+        </div>
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+            </a><p>200 going 80% male 20% male 12 events plan</p>
+        </div>
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+            </a><p>200 going 80% male 20% male 12 events plan</p>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- Projects Row -->
+    <div class="row">
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+            </a><p>200 going 80% male 20% male 12 events plan</p>
+        </div>
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+            </a><p>200 going 80% male 20% male 12 events plan</p>
+        </div>
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+            </a><p>200 going 80% male 20% male 12 events plan</p>
+        </div>
+        <div class="col-xs-6 col-sm-3 portfolio-item">
+            <a href="/events/1">
+                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+            </a><p>200 going 80% male 20% male 12 events plan</p>
         </div>
     </div>
     <!-- /.row -->
 
-    <!-- Projects Row -->
-    <div class="row">
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-    </div>
-    <!-- /.row -->
 
-    <!-- Projects Row -->
-    <div class="row">
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-    </div>
-    <!-- /.row -->
+
+
 
     <hr>
     <!-- Pagination -->
@@ -94,25 +123,25 @@
         <div class="col-lg-12">
             <ul class="pagination">
                 <li>
-                    <a href="#">&laquo;</a>
+                    <a href="/events/1">&laquo;</a>
                 </li>
                 <li class="active">
-                    <a href="#">1</a>
+                    <a href="/events/1">1</a>
                 </li>
                 <li>
-                    <a href="#">2</a>
+                    <a href="/events/1">2</a>
                 </li>
                 <li>
-                    <a href="#">3</a>
+                    <a href="/events/1">3</a>
                 </li>
                 <li>
-                    <a href="#">4</a>
+                    <a href="/events/1">4</a>
                 </li>
                 <li>
-                    <a href="#">5</a>
+                    <a href="/events/1">5</a>
                 </li>
                 <li>
-                    <a href="#">&raquo;</a>
+                    <a href="/events/1">&raquo;</a>
                 </li>
             </ul>
         </div>

@@ -1,6 +1,10 @@
 @extends('layouts.scrolling')
 
 @section('content')
+
+    <img class="img-responsive jumbotron" src="/images/eventProfile.png" alt="">
+
+    <h1> DEV </h1>
     <img class="img-responsive jumbotron" src="/426631.jpg" alt="">
     <div class="container-fluid">
     <div class="row">

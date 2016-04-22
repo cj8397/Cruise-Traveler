@@ -69,7 +69,6 @@
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                             {!! csrf_field() !!}
-
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">E-Mail Address</label>
 
@@ -115,7 +114,7 @@
                                     </button>
 
                                     <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your
-                                        Password?</a>
+                                        Password?</a><p>200 going 80% male 20% male 12 events plan</p>
                                 </div>
                             </div>
                         </form>
@@ -127,24 +126,24 @@
             <div class="row">
                 <div class="col-md-4 col-xs-4">
                     <a href="/sailings">
-                        <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-                    </a>
+                        <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+                    </a><p>200 going 80% male 20% male 12 events plan</p>
                     <h2>
                         Caribbean
                     </h2>
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <a href="/sailings">
-                        <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-                    </a>
+                        <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+                    </a><p>200 going 80% male 20% male 12 events plan</p>
                     <h2>
                         Mediterranean
                     </h2>
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <a href="/sailings">
-                        <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-                    </a>
+                        <img class="img-responsive" src="/images/sailingInfo.png" alt="">
+                    </a><p>200 going 80% male 20% male 12 events plan</p>
                     <h2>
                         Alaska
                     </h2>
