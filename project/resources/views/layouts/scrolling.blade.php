@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ URL::asset('styles/scrolling-nav.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/nav.css') }}" />
-    <link rel="stylesheet" href="{{ URL::asset('styles/custom/bootstrap-datetimepicker.min.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('styles/custom/bootstrap-datetimepicker.min.css') }}"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

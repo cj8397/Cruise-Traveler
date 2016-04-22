@@ -25,7 +25,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function events(){
+    public function events()
+    {
         return $this->belongsToMany(Event::class, 'user_events');
     }
 
