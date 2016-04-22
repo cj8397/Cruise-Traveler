@@ -11,5 +11,4 @@ class Event extends Model
     protected $fillable = [
         'sailing_id','title','start','end','desc','location'
     ];
-
 }

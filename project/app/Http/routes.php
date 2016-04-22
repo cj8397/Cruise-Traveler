@@ -24,7 +24,19 @@ Route::get('/events/{sailing}', 'EventsController@GetAllEvents');
 Route::get('/eventdetail/{event_id}', 'EventsController@GetOneEvent');
 
 Route::get('/sailings', 'SailingsController@GetAllSailings');
+Route::get('/sailings/create', 'SailingsController@CreateSailing');
+Route::get('/sailings/delete/{id}', 'SailingsController@DeleteSailing');
+Route::get('/sailings/{id}', 'SailingsController@GetOneSailing');
 
 Route::get('/users', 'UserController@getUser');
 
+
+// just to see the
+Route::get('/testsailing/{user_id}/{sailing_id}', function($user_id, $sailing_id) {
+    return view('sailingtest', compact('user_id', 'sailing_id'));
+});
+
+Route::get('/joinsailing/{user_id}/{sailing_id}', 'UserSailingsController@JoinSailing');
+
+Route::get('/leavesailing/{user_id}/{sailing_id}', 'UserSailingsController@LeaveSailing');
 
