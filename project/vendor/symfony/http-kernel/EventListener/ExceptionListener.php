@@ -37,13 +37,6 @@ class ExceptionListener implements EventSubscriberInterface
         $this->logger = $logger;
     }
 
-    public static function getSubscribedEvents()
-    {
-        return array(
-            KernelEvents::EXCEPTION => array('onKernelException', -128),
-        );
-    }
-
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
@@ -74,6 +67,13 @@ class ExceptionListener implements EventSubscriberInterface
         }
 
         $event->setResponse($response);
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return array(
+            KernelEvents::EXCEPTION => array('onKernelException', -128),
+        );
     }
 
     /**

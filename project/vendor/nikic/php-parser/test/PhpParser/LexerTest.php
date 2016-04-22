@@ -7,6 +7,10 @@ use PhpParser\Parser\Tokens;
 class LexerTest extends \PHPUnit_Framework_TestCase
 {
     /* To allow overwriting in parent class */
+    protected function getLexer(array $options = array()) {
+        return new Lexer($options);
+    }
+
     /**
      * @dataProvider provideTestError
      */
@@ -25,11 +29,6 @@ class LexerTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->fail('Expected PhpParser\Error');
-    }
-
-    protected function getLexer(array $options = array())
-    {
-        return new Lexer($options);
     }
 
     public function provideTestError() {
