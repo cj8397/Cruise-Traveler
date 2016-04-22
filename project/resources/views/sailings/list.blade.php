@@ -2,91 +2,28 @@
 
 @section('content')
         <!-- Page Content -->
-<div class="container">
-
+        <div class="container">
     <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Sailings
+            <h1 class="page-header">All Sailings
             </h1>
         </div>
     </div>
     <!-- /.row -->
 
     <!-- Projects Row -->
-    <div class="row">
-        <div class="col-md-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-    </div>
-    <!-- /.row -->
 
-    <!-- Projects Row -->
     <div class="row">
+    @foreach ($sailings as $sailing)
         <div class="col-md-3 portfolio-item">
-            <a href="#">
+          <h2>{{$sailing->id}} {{$sailing->cruise_line}} {{$sailing->title}}</h2>
+            <a href="{{ action('SailingsController@GetSailing', [$sailing->id]) }}">
                 <img class="img-responsive" src="https://placehold.it/750x450" alt="">
             </a>
         </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
+        @endforeach
     </div>
-    <!-- /.row -->
-
-    <!-- Projects Row -->
-    <div class="row">
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-3 portfolio-item">
-            <a href="#">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
-            </a>
-        </div>
-    </div>
-    <!-- /.row -->
 
     <hr>
     <!-- Pagination -->
