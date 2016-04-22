@@ -31,7 +31,7 @@ class EventsController extends Controller
 
     protected function GetOneEvent($event_id){
         if($event = Event::where('id', $event_id)->first()){
-            $this->GetAllParticipantsInEvent($event_id);
+           // $this->GetAllParticipantsInEvent($event_id);
             $event->start_date = Carbon::parse($event->start_date)->format('l jS \\of F Y h:i:s A');
             $event->end_date = Carbon::parse($event->end_date)->format('l jS \\of F Y h:i:s A');
             return view('events.eventdetail')->with('event', $event);
