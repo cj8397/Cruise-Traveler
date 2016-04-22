@@ -7,9 +7,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Register</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/eventform/post') }}">
+                        <form class="form-horizontal" role="form" method="POST"
+                              action="{{ url('events/eventform/post') }}">
                             {!! csrf_field() !!}
 
+                            <input type="hidden" name="sailing_id" value="1"/>
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Event Title</label>
@@ -22,35 +24,35 @@
                                         <strong>{{ $errors->first('title') }}</strong>
                                     </span>
                                     @endif
-                                </div>
+                            </div>
                             </div>
 
                             <div class="form-group{{ $errors->has('start') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Start Date And Time</label>
 
                                 <div class="col-md-6">
-                                    <input type="datetime" class="form-control" name="start">
+                                    <input type="text" class="form-control date" id="datetimepickerstart" name="start">
 
                                     @if ($errors->has('start'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('start') }}</strong>
                                     </span>
                                     @endif
-                                </div>
+                            </div>
                             </div>
 
                             <div class="form-group{{ $errors->has('end') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">End Date And Time</label>
 
                                 <div class="col-md-6">
-                                    <input type="datetime" class="form-control" name="end">
+                                    <input type="text" class="form-control" id="datetimepickersend" name="end">
 
                                     @if ($errors->has('end'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('end') }}</strong>
                                     </span>
                                     @endif
-                                </div>
+                            </div>
                             </div>
 
                             <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
@@ -63,7 +65,7 @@
                                         <strong>{{ $errors->first('desc') }}</strong>
                                     </span>
                                     @endif
-                                </div>
+                            </div>
                             </div>
 
                             <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
@@ -76,7 +78,7 @@
                                         <strong>{{ $errors->first('location') }}</strong>
                                     </span>
                                     @endif
-                                </div>
+                            </div>
                             </div>
 
                             <div class="form-group">
@@ -84,12 +86,12 @@
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-btn fa-user"></i>Register
                                     </button>
-                                </div>
+                            </div>
                             </div>
                         </form>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection

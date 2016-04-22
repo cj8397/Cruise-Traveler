@@ -9087,13 +9087,3 @@ Stack trace:
 #61 C:\Users\MarioHugo\PhpstormProjects\IndustryProject\project\public\index.php(52): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #62 C:\Users\MarioHugo\PhpstormProjects\IndustryProject\project\server.php(21): require_once('C:\\Users\\MarioH...')
 #63 {main}  
-[2016-04-22 18:26:55] local.ERROR: Symfony\Component\Console\Exception\CommandNotFoundException: Command "server" is not defined.
-
-Did you mean this?
-    serve in /Users/Cheng/Google Drive/SSD/Industry Project/IndustryProject/project/vendor/symfony/console/Application.php:532
-Stack trace:
-#0 /Users/Cheng/Google Drive/SSD/Industry Project/IndustryProject/project/vendor/symfony/console/Application.php(183): Symfony\Component\Console\Application->find('server')
-#1 /Users/Cheng/Google Drive/SSD/Industry Project/IndustryProject/project/vendor/symfony/console/Application.php(117): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
-#2 /Users/Cheng/Google Drive/SSD/Industry Project/IndustryProject/project/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(107): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
-#3 /Users/Cheng/Google Drive/SSD/Industry Project/IndustryProject/project/artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
-#4 {main}  
