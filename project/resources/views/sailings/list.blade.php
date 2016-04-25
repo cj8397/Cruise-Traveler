@@ -3,128 +3,30 @@
 @section('content')
         <!-- Page Content -->
 <div class="container">
+        <div class="container">
     <!-- Page Heading -->
     <div class="row">
         <img class="img-responsive" src="/images/searchBar.png" alt="">
         <div class="col-lg-12">
-            <h1 class="page-header">Sailings</h1>
-
+            <h1 class="page-header">All Sailings
+            </h1>
         </div>
     </div>
     <!-- /.row -->
 
     <!-- Projects Row -->
-    <div class="row">
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-    </div>
-    <!-- /.row -->
-    <!-- Projects Row -->
-    <div class="row">
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-    </div>
-    <!-- /.row -->
-    <!-- Projects Row -->
-    <div class="row">
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-    </div>
-    <!-- /.row -->
-    <!-- Projects Row -->
-    <div class="row">
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/1">
-                <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male 12 events plan</p>
-        </div>
-    </div>
-    <!-- /.row -->
 
+    <div class="row">
+    @foreach ($sailings as $sailing)
+        <div class="col-md-3 portfolio-item">
+          <h2>{{$sailing->id}} {{$sailing->cruise_line}} {{$sailing->title}}</h2>
+            <a href="{{ action('SailingsController@GetSailing', [$sailing->id]) }}">
+                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
+        </div>
+        @endforeach
+    </div>
 
     <hr>
     <!-- Pagination -->
