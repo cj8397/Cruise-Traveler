@@ -30,11 +30,13 @@ class UserSailingsController extends Controller
             $userSailing->user_id = $user_id;
             $userSailing->sailing_id = $sailing_id;
             $userSailing->save();
-            $success = "Joined the sailing.";
-            return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
+            //$success = "Joined the sailing.";
+            //return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
+            return redirect::back();
         } else {
-            $failure= "Already joined the sailing";
-            return view('sailingtest', compact('user_id', 'sailing_id', 'failure'));
+          return redirect::back();
+            //$failure= "Already joined the sailing";
+            //return view('sailingtest', compact('user_id', 'sailing_id', 'failure'));
         }
     }
 
@@ -45,11 +47,13 @@ class UserSailingsController extends Controller
         $conditions = compact('user_id', 'sailing_id');
         if( UserSailing::where($conditions)->exists()) {
             UserSailing::where($conditions)->delete();
-            $success = "Left the sailing";
-            return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
+            return redirect::back();
+            //$success = "Left the sailing";
+            //return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
         } else {
-            $failure= "Already left the sailing";
-            return view('sailingtest', compact('user_id', 'sailing_id', 'failure'));
+          return redirect::back();
+            //$failure= "Already left the sailing";
+            //return view('sailingtest', compact('user_id', 'sailing_id', 'failure'));
         }
     }
 
