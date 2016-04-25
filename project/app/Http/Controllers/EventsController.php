@@ -17,32 +17,37 @@ use Illuminate\Support\Facades\Response;
 class EventsController extends Controller
 {
     //
-    protected function GetAllParticipantsInEvent($event_id){
+    protected function GetAllParticipantsInEvent($event_id)
+    {
         dd($event_id);
     }
     protected function GetAllEvents($sailing){
         if($events = Event::where('sailing_id', $sailing)){
             return view('events.list')->with('events', $events);
-        }else{
+        } else {
             return Redirect::back();
         }
     }
 
-    protected function GetOneEvent($event_id){
-        if($event = Event::where('id', $event_id)->first()){
-           // $this->GetAllParticipantsInEvent($event_id);
+    protected function GetOneEvent($event_id)
+    {
+        if ($event = Event::where('id', $event_id)->first()) {
+            // $this->GetAllParticipantsInEvent($event_id);
             $event->start_date = Carbon::parse($event->start_date)->format('l jS \\of F Y h:i:s A');
             $event->end_date = Carbon::parse($event->end_date)->format('l jS \\of F Y h:i:s A');
             return view('events.eventdetail')->with('event', $event);
-        }
-        else{
+        } else {
             return Redirect::back();
         }
     }
-    protected function ShowCreateForm(){
+
+    protected function ShowCreateForm()
+    {
         return view('events.createEventForm');
     }
-    protected function CreateEvent(EventRequest $request){
+
+    protected function CreateEvent(EventRequest $request)
+    {
 
         $start = Carbon::parse($request->start);
         $end = Carbon::parse($request->end);
@@ -54,9 +59,9 @@ class EventsController extends Controller
             'desc' => $request->desc,
             'location' => $request->location
         ]);
-           return redirect()->action('EventsController@GetOneEvent', [$event->id]);
+        return redirect()->action('EventsController@GetOneEvent', [$event->id]);
     }
-=======
+====== =
     protected function GetOneEvent($event_id)
     {
         if ($event = Event::where('id', $event_id)) {

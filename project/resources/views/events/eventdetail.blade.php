@@ -10,11 +10,11 @@
         <div class="row col-md-6 col-xs-12">
             <div class="panel panel-default col-md-12 col-xs-12">
                 <div class="panel-heading">{!! $event->title !!}</div>
-    <img class="img-responsive" src="/426631.jpg" alt="">
-<div class="container-fluid">
-    <div class="row col-md-6 col-xs-12">
-        <div class="panel panel-default col-md-12 col-xs-12">
-            <div class="panel-heading">{!! $event->title !!}</div>
+                <img class="img-responsive" src="/426631.jpg" alt="">
+                <div class="container-fluid">
+                    <div class="row col-md-6 col-xs-12">
+                        <div class="panel panel-default col-md-12 col-xs-12">
+                            <div class="panel-heading">{!! $event->title !!}</div>
             <div class="panel-body">
                 <ul class="list-group">
                     <li class="list-group-item">

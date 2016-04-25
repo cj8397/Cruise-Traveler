@@ -34,7 +34,9 @@ class SailingRequest extends Request
             'destination' => 'required|max:20'
         ];
     }
-    public function messages(){
+
+    public function messages()
+    {
         return [
             'title.required' => 'Please assign a title to your event!',
             'cruise_line.required' => 'Please assign a Cruise Line?',
