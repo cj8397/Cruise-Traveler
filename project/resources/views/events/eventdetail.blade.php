@@ -1,7 +1,11 @@
 @extends('layouts.scrolling')
 
 @section('content')
-    <img class="img-responsive" src="/426631.jpg" alt="">
+
+    <img class="img-responsive jumbotron" src="/images/eventProfile.png" alt="">
+
+    <h1> DEV </h1>
+    <img class="img-responsive jumbotron" src="/426631.jpg" alt="">
     <div class="container-fluid">
         <div class="row col-md-6 col-xs-12">
             <div class="panel panel-default col-md-12 col-xs-12">
@@ -77,11 +81,22 @@
                         <img class="img-responsive" src="http://placehold.it/750x450" alt="">
                         <span class="label label-default label-pill">Cheng!</span>
                     </a>
-                        <a class="col-xs-6 col-md-6">
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default col-md-8 col-xs-8">
+            <div class="panel-heading">Message Boards!</div>
+            <div class="panel-body">
+                <div class="row">
+                    <a class="col-xs-3 col-md-3">
                         <img class="img-responsive" src="http://placehold.it/750x450" alt="">
                         <span class="label label-default label-pill">Cheng!</span>
                     </a>
-                        <a class="col-xs-6 col-md-6">
+                    <p class="alert alert-info col-xs-9 col-md-9">Cheng just Joined the Event! say HI!</p>
+                </div>
+                <div class="row">
+                    <p class="alert alert-success col-xs-9 col-md-9">Lets get the party started!</p>
+                    <a class="col-xs-3 col-md-3">
                         <img class="img-responsive" src="http://placehold.it/750x450" alt="">
                         <span class="label label-default label-pill">Cheng!</span>
                     </a>

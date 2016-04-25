@@ -12,6 +12,7 @@
             {{$failure}}
         </div>
     @endif
+    <p> HEY! GOT RID OF .idea/workspace</p>
     <p>{{$user_id}} {{$sailing_id}} </p>
 <<<<<<< HEAD
     <a href="/joinsailing/{{$user_id}}/{{$sailing_id}}">

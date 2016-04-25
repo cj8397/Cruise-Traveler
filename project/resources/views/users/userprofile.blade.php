@@ -1,6 +1,10 @@
 @extends('layouts.scrolling')
 
 @section('content')
+    <div class="container col-xs-12">
+        <img src="/images/userprofile.png" style="width:100%;">
+    </div>
+    <h1> DEV </h1>
     <div class="container">
         <img src="/images/profilepic.png">
     </div>
