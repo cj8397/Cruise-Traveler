@@ -75,5 +75,4 @@ class EventsController extends Controller
         ]);
         return redirect()->action('EventsController@GetOneEvent', [$event->id]);
     }
-
 }

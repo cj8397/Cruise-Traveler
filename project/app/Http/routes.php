@@ -20,13 +20,9 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::get('events/eventdetail/{event_id}', 'EventsController@GetOneEvent');
-
 Route::get('events/eventform/get', 'EventsController@ShowCreateForm');
-
 Route::post('events/eventform/post', 'EventsController@CreateEvent');
-
 Route::get('/events/{sailing}', 'EventsController@GetAllEvents');
-
 Route::get('/eventdetail/{event_id}', 'EventsController@GetOneEvent');
 
 Route::get('/sailings', 'SailingsController@GetAllSailings');
@@ -35,7 +31,7 @@ Route::post('/sailings/sailingform/post', 'SailingsController@CreateSailing');
 Route::get('/sailings/delete/{id}', 'SailingsController@DeleteSailing');
 Route::get('/sailings/{id}', 'SailingsController@GetSailing');
 
-Route::get('/users', 'UserController@getUser');
+Route::get('/users/userprofile', 'UserController@getUser');
 
 
 // just to see the
