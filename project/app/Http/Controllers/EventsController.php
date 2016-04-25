@@ -23,33 +23,40 @@ class EventsController extends Controller
     {
         $this->middleware('auth');
     }
-    protected function GetAllParticipantsInEvent($event_id){
-       return UserEvent::where('event_id', $event_id);
-    }
+
     protected function GetAllEvents($sailing){
         if($events = Event::where('sailing_id', $sailing)){
             return view('events.list')->with('events', $events);
-        }else{
+        } else {
             return Redirect::back();
         }
     }
 
-    protected function GetOneEvent($event_id){
-        if($event = Event::where('id', $event_id)->first()){
+    protected function GetOneEvent($event_id)
+    {
+        if ($event = Event::where('id', $event_id)->first()) {
             $members = $this->GetAllParticipantsInEvent($event_id);
             $event->start_date = Carbon::parse($event->start_date)->format('l jS \\of F Y h:i:s A');
             $event->end_date = Carbon::parse($event->end_date)->format('l jS \\of F Y h:i:s A');
             return view('events.eventdetail')->with(['event' => $event,
-            'members' => $members]);
-        }
-        else{
+                'members' => $members]);
+        } else {
             return Redirect::back();
         }
     }
-    protected function ShowCreateForm(){
+
+    protected function GetAllParticipantsInEvent($event_id)
+    {
+        return UserEvent::where('event_id', $event_id);
+    }
+
+    protected function ShowCreateForm()
+    {
         return view('events.createEventForm');
     }
-    protected function CreateEvent(EventRequest $request){
+
+    protected function CreateEvent(EventRequest $request)
+    {
 
         $start = Carbon::parse($request->start);
         $end = Carbon::parse($request->end);
@@ -62,11 +69,11 @@ class EventsController extends Controller
             'location' => $request->location
         ]);
         $userevent = UserEvent::create([
-           'user_id' => Auth::user()->id,
+            'user_id' => Auth::user()->id,
             'event_id' => $event->id,
             'role' => 'Host'
         ]);
-           return redirect()->action('EventsController@GetOneEvent', [$event->id]);
+        return redirect()->action('EventsController@GetOneEvent', [$event->id]);
     }
 
 }
