@@ -13,8 +13,8 @@ class UserController extends Controller
     //
     public function getUser()
     {
-        return User::all();
-        //return view('users.userprofile');
+        //return User::all();
+        return view('users.userprofile');
 
     }
 }
