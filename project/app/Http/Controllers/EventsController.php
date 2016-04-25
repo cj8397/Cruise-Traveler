@@ -7,7 +7,6 @@ use App\User;
 use App\UserEvent;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Event;
@@ -24,8 +23,7 @@ class EventsController extends Controller
         $this->middleware('auth');
     }
     protected function GetAllParticipantsInEvent($event_id){
-        $usersEvents = UserEvent::all()->where('event_id', $event_id);
-       return true;
+        return $usersEvents = UserEvent::all()->where('event_id', $event_id);
     }
     protected function GetAllEvents($sailing){
         if($events = Event::where('sailing_id', $sailing)){
@@ -34,7 +32,6 @@ class EventsController extends Controller
             return Redirect::back();
         }
     }
-
     protected function GetOneEvent($event_id){
         if($event = Event::where('id', $event_id)->first()){
             $members = $this->GetAllParticipantsInEvent($event_id);
@@ -47,8 +44,8 @@ class EventsController extends Controller
             return Redirect::back();
         }
     }
-    protected function ShowCreateForm(){
-        return view('events.createEventForm');
+    protected function ShowCreateForm($sailing_id){
+        return view('events.createEventForm')->with('sailing_id', $sailing_id);
     }
     protected function CreateEvent(EventRequest $request){
 
@@ -69,7 +66,14 @@ class EventsController extends Controller
         ]);
            return redirect()->action('EventsController@GetOneEvent', [$event->id]);
     }
-protected function DeleteEvent($event_id){
-    
-}
+    protected function DeleteEvent($event_id){
+       if($event = Event::where('id', $event_id)->first()){
+           UserEvent::where('event_id',$event->id)->delete();
+           $event->delete();
+           return redirect('/sailings');
+       }
+        else{
+            return false;
+        }
+    }
 }

@@ -51,7 +51,6 @@
                     <a class="col-xs-3 col-md-3">
                         <img class="img-responsive" src="http://placehold.it/750x450" alt="">
                         <span class="label label-default label-pill">Cheng!</span>
-
                     </a>
                 </div>
             </div>
@@ -63,12 +62,12 @@
             <div class="panel panel-heading">Participants</div>
             <div class="panel panel-body">
                 <div class="row">
-                    @foreach($members as $mem)
+                    @foreach ($members as $mem)
                     <a class="col-xs-6 col-md-6">
                         <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                        <span class="label label-default label-pill">{!! $mem->event_id !!}</span>
+                        <span class="label label-default label-pill">{!! $mem->user_id !!}</span>
                     </a>
-                        @endforeach
+                    @endforeach
                 </div>
             </div>
         </div>

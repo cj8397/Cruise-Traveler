@@ -9,7 +9,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('events/eventform/post') }}">
                         {!! csrf_field() !!}
 
-                        <input type="hidden" name="sailing_id" value="1"/>
+                        <input type="hidden" name="sailing_id" value={!! $sailing_id !!}/>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Event Title</label>
