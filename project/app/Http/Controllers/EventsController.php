@@ -24,7 +24,8 @@ class EventsController extends Controller
         $this->middleware('auth');
     }
     protected function GetAllParticipantsInEvent($event_id){
-       return UserEvent::where('event_id', $event_id);
+        $usersEvents = UserEvent::all()->where('event_id', $event_id);
+       return true;
     }
     protected function GetAllEvents($sailing){
         if($events = Event::where('sailing_id', $sailing)){
@@ -61,12 +62,14 @@ class EventsController extends Controller
             'desc' => $request->desc,
             'location' => $request->location
         ]);
-        $userevent = UserEvent::create([
+        UserEvent::create([
            'user_id' => Auth::user()->id,
             'event_id' => $event->id,
             'role' => 'Host'
         ]);
            return redirect()->action('EventsController@GetOneEvent', [$event->id]);
     }
-
+protected function DeleteEvent($event_id){
+    
+}
 }

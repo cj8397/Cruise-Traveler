@@ -23,8 +23,7 @@ class EventRequest extends Request
      * @return array
      */
 
-    public function rules()
-    {
+    public function rules(){
         return [
             'sailing_id' => 'required|exists:sailings,id',
             'title' => 'bail|required|max:80',
@@ -39,7 +38,6 @@ class EventRequest extends Request
             'title.required' => 'Please assign a title to your event!',
             'start.required' => 'When is your event starting?',
             'end.required' => 'When is your event ending?'
-
         ];
     }
 }
