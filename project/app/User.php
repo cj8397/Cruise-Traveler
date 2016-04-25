@@ -13,7 +13,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password'
+        'email', 'password', 'email', 'first', 'last',
     ];
 
     /**
@@ -25,7 +25,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function events(){
+    public function events()
+    {
         return $this->belongsToMany(Event::class, 'user_events');
     }
 

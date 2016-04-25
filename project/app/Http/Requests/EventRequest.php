@@ -33,7 +33,9 @@ class EventRequest extends Request
             'location' => 'max:80'
         ];
     }
-    public function messages(){
+
+    public function messages()
+    {
         return [
             'title.required' => 'Please assign a title to your event!',
             'start.required' => 'When is your event starting?',

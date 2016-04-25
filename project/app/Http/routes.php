@@ -26,21 +26,29 @@ Route::get('events/deleteevent/{event_id}', 'EventsController@DeleteEvent');
 Route::get('events/{sailing}', 'EventsController@GetAllEvents');
 //End of Event Controller Stuff
 
+Route::get('/events/{sailing}', 'EventsController@GetAllEvents');
+
+Route::get('/eventdetail/{event_id}', 'EventsController@GetOneEvent');
+
 Route::get('/sailings', 'SailingsController@GetAllSailings');
-Route::get('/sailings/sailingform/get', 'SailingsController@ShowCreateForm');
-Route::post('/sailings/sailingform/post', 'SailingsController@CreateSailing');
+Route::get('/sailings/create', 'SailingsController@ShowCreateForm');
+Route::post('/sailings/create/post', 'SailingsController@CreateSailing');
 Route::get('/sailings/delete/{id}', 'SailingsController@DeleteSailing');
 Route::get('/sailings/{id}', 'SailingsController@GetSailing');
 
-// just to see the
-Route::get('/testsailing/{user_id}/{sailing_id}', function($user_id, $sailing_id) {
-    return view('sailingtest', compact('user_id', 'sailing_id'));
-});
+Route::get('/users', 'UserController@getUser');
 
 Route::get('/joinsailing/{user_id}/{sailing_id}', 'UserSailingsController@JoinSailing');
 
-Route::get('/leavesailing/{user_id}/{sailing_id}', 'UserSailingsController@LeaveSailing');
+// dont use user_id in the route, can get it in your code using
+// also dont think you need to call it saiding id here?
+Route::get('/joinsailing/{sailing_id}', 'UserSailingsController@JoinSailing');
+Route::get('/leavesailing/{sailing_id}', 'UserSailingsController@LeaveSailing');
+Route::get('/sailingusers/{sailing_id}', 'UserSailingsController@GetAllUsers');
+Route::get('/usersailings', 'UserSailingsController@GetAllSailings');
 
-Route::get('/allsailingusers/{user_id}', 'UserSailingsController@GetAllUsers');
-
-Route::get('/allusersailings/{user_id}', 'UserSailingsController@GetAllSailings');
+//
+Route::get('/joinevent/{event_id}', 'UserEventsController@JoinEvent');
+Route::get('/leaveevent/{event_id}', 'UserEventsController@LeaveEvent');
+Route::get('/eventusers/{event_id}', 'UserEventsController@GetAllUsers');
+Route::get('/userevents', 'UserEventsController@GetAllEvents');

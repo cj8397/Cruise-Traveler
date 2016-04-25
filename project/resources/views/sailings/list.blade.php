@@ -3,7 +3,7 @@
 @section('content')
         <!-- Page Content -->
 <div class="container">
-        <div class="container">
+    <div class="container">
     <!-- Page Heading -->
     <div class="row">
         <img class="img-responsive" src="/images/searchBar.png" alt="">
@@ -17,11 +17,11 @@
     <!-- Projects Row -->
 
     <div class="row">
-    @foreach ($sailings as $sailing)
-        <div class="col-md-3 portfolio-item">
-          <h2>{{$sailing->id}} {{$sailing->cruise_line}} {{$sailing->title}}</h2>
-            <a href="{{ action('SailingsController@GetSailing', [$sailing->id]) }}">
-                <img class="img-responsive" src="https://placehold.it/750x450" alt="">
+        @foreach ($sailings as $sailing)
+            <div class="col-md-3 portfolio-item">
+                <h2>{{$sailing->id}} {{$sailing->cruise_line}} {{$sailing->title}}</h2>
+                <a href="{{ action('SailingsController@GetSailing', [$sailing->id]) }}">
+                    <img class="img-responsive" src="/images/sailingInfo.png" alt="">
             </a>
             <p>200 going 80% male 20% male 12 events plan</p>
         </div>

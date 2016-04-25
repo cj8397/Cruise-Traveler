@@ -1,17 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Foundation\Auth\User;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\UserSailing;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+
 
 class UserSailingsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     // create entry in bridge table
-    public function JoinSailing($user_id, $sailing_id) {
+    public function JoinSailing($sailing_id) {
+
+        $user_id = Auth::User()->id;
         // need to check both columns....
         $userSailing = UserSailing::firstOrNew([
             'user_id' => $user_id,
@@ -23,29 +30,37 @@ class UserSailingsController extends Controller
             $userSailing->user_id = $user_id;
             $userSailing->sailing_id = $sailing_id;
             $userSailing->save();
-            $success = "sucessfully added to user_sailigns";
-            return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
+            //$success = "Joined the sailing.";
+            //return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
+            return redirect::back();
         } else {
-            $failure= "Already joined the sailing";
-            return view('sailingtest', compact('user_id', 'sailing_id', 'failure'));
+          return redirect::back();
+            //$failure= "Already joined the sailing";
+            //return view('sailingtest', compact('user_id', 'sailing_id', 'failure'));
         }
     }
 
     // remove entry from bridge table
-    public function LeaveSailing($user_id, $sailing_id) {
+    public function LeaveSailing($sailing_id) {
+        $user_id = Auth::User()->id;
         // creates key value pair based on variable names
         $conditions = compact('user_id', 'sailing_id');
         if( UserSailing::where($conditions)->exists()) {
             UserSailing::where($conditions)->delete();
-            $success = "sucessfully deleted from user_sailigns";
-            return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
+            return redirect::back();
+            //$success = "Left the sailing";
+            //return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
+        } else {
+          return redirect::back();
+            //$failure= "Already left the sailing";
+            //return view('sailingtest', compact('user_id', 'sailing_id', 'failure'));
         }
     }
 
     // getAllUsers in a sailing
     public function GetAllUsers($sailing_id) {
-        $users = UserSailing::where(['sailing_id'=>$sailing_id])->value('user_id');
-        if($users != null) {
+        $users = UserSailing::where(['sailing_id' => $sailing_id])->get();
+        if ($users != null) {
             return $users;
         } else {
             return 'no users';
@@ -53,9 +68,10 @@ class UserSailingsController extends Controller
     }
 
     // get all sailings for a user
-    public function GetAllSailings($user_id) {
-        $sailings = UserSailing::where(['user_id'=>$user_id])->value('sailing_id');
-        if($sailings != null) {
+    public function GetAllSailings() {
+        $user_id = Auth::User()->id;
+        $sailings = UserSailing::where(['user_id' => $user_id])->get();
+        if ($sailings != null) {
             return $sailings;
         } else {
             return 'no sailings';

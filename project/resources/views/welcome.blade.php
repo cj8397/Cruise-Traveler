@@ -114,7 +114,8 @@
                                     </button>
 
                                     <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your
-                                        Password?</a><p>200 going 80% male 20% male 12 events plan</p>
+                                        Password?</a>
+                                    <p>200 going 80% male 20% male 12 events plan</p>
                                 </div>
                             </div>
                         </form>
@@ -127,7 +128,8 @@
                 <div class="col-md-4 col-xs-4">
                     <a href="/sailings">
                         <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-                    </a><p>200 going 80% male 20% male 12 events plan</p>
+                    </a>
+                    <p>200 going 80% male 20% male 12 events plan</p>
                     <h2>
                         Caribbean
                     </h2>
@@ -135,7 +137,8 @@
                 <div class="col-md-4 col-xs-4">
                     <a href="/sailings">
                         <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-                    </a><p>200 going 80% male 20% male 12 events plan</p>
+                    </a>
+                    <p>200 going 80% male 20% male 12 events plan</p>
                     <h2>
                         Mediterranean
                     </h2>
@@ -143,7 +146,8 @@
                 <div class="col-md-4 col-xs-4">
                     <a href="/sailings">
                         <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-                    </a><p>200 going 80% male 20% male 12 events plan</p>
+                    </a>
+                    <p>200 going 80% male 20% male 12 events plan</p>
                     <h2>
                         Alaska
                     </h2>

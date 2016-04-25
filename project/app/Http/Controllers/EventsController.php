@@ -28,7 +28,7 @@ class EventsController extends Controller
     protected function GetAllEvents($sailing){
         if($events = Event::where('sailing_id', $sailing)){
             return view('events.list')->with('events', $events);
-        }else{
+        } else {
             return Redirect::back();
         }
     }
@@ -38,9 +38,8 @@ class EventsController extends Controller
             $event->start_date = Carbon::parse($event->start_date)->format('l jS \\of F Y h:i:s A');
             $event->end_date = Carbon::parse($event->end_date)->format('l jS \\of F Y h:i:s A');
             return view('events.eventdetail')->with(['event' => $event,
-            'members' => $members]);
-        }
-        else{
+                'members' => $members]);
+        } else {
             return Redirect::back();
         }
     }
@@ -64,7 +63,7 @@ class EventsController extends Controller
             'event_id' => $event->id,
             'role' => 'Host'
         ]);
-           return redirect()->action('EventsController@GetOneEvent', [$event->id]);
+        return redirect()->action('EventsController@GetOneEvent', [$event->id]);
     }
     protected function DeleteEvent($event_id){
        if($event = Event::where('id', $event_id)->first()){

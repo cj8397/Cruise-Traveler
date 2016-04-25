@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ URL::asset('styles/scrolling-nav.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/nav.css') }}" />
-    <link rel="stylesheet" href="{{ URL::asset('styles/custom/bootstrap-datetimepicker.min.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('styles/custom/bootstrap-datetimepicker.min.css') }}"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -91,7 +91,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Last Update: April 21th, 2016 @ 15:30 </a></li>
+                            <li><a href="#">Last Update: April 25th, 2016 @ 10:30 </a></li>
                             <li><a href="https://docs.google.com/spreadsheets/d/1KQc5cRAnqdWS55JQb59NHHYKRtqtslBXlHjbWU2QIqc/edit#gid=0">SCRUM WOKRBOOK</a></li>
                             <li><a href="https://docs.google.com/document/d/1yIuRZO1HJ71moInaR_B1Y0mb6yfwxB9oClgWSx5CTpw/edit#heading=h.tphyqzr77ydu">Design Model</a></li>
                         </ul>
