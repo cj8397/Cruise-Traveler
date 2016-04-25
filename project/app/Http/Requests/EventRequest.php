@@ -22,15 +22,16 @@ class EventRequest extends Request
      *
      * @return array
      */
+
     public function rules()
     {
         return [
             'sailing_id' => 'required|exists:sailings,id',
-            'title' => 'bail|required|max:20',
+            'title' => 'bail|required|max:80',
             'start' => 'required|date',
             'end' => 'required|date|after:start',
             'desc' => 'max:255',
-            'location' => 'max:20'
+            'location' => 'max:80'
         ];
     }
 

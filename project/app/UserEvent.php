@@ -10,6 +10,7 @@ class UserEvent extends Model
 
     protected $table = 'user_events';
     protected $fillable = [
-        'user_id', 'sailing_id', 'role'
+        'user_id', 'event_id', 'role'
     ];
+
 }
