@@ -6,6 +6,7 @@
 .env.*.php
 .env.php
 .DS_Store
+/public/images/.DS_Store
 #ERROR!
 >>>>>>> remotes/origin/master
 
