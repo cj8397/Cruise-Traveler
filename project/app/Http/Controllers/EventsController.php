@@ -24,7 +24,6 @@ class EventsController extends Controller
         if($events = Event::where('sailing_id', $sailing)){
             return view('events.list')->with('events', $events);
         }else{
-
             return Redirect::back();
         }
     }
