@@ -8,7 +8,7 @@
                     <div class="panel-heading">Register A New Sailing</div>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST"
-                              action="{{ url('sailings/sailingform/post') }}">
+                              action="{{ action('SailingsController@CreateSailing') }}">
                             {!! csrf_field() !!}
 
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
