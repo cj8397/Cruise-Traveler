@@ -6,6 +6,7 @@
 /bootstrap/compiled.php
 .env.*.php
 .env.php
+.DS_Store
 #ERROR!
 >>>>>>> remotes/origin/master
 
