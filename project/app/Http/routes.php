@@ -30,8 +30,8 @@ Route::get('/events/{sailing}', 'EventsController@GetAllEvents');
 Route::get('/eventdetail/{event_id}', 'EventsController@GetOneEvent');
 
 Route::get('/sailings', 'SailingsController@GetAllSailings');
-Route::get('/sailings/sailingform/get', 'SailingsController@ShowCreateForm');
-Route::post('/sailings/sailingform/post', 'SailingsController@CreateSailing');
+Route::get('/sailings/create', 'SailingsController@ShowCreateForm');
+Route::post('/sailings/create/post', 'SailingsController@CreateSailing');
 Route::get('/sailings/delete/{id}', 'SailingsController@DeleteSailing');
 Route::get('/sailings/{id}', 'SailingsController@GetSailing');
 
