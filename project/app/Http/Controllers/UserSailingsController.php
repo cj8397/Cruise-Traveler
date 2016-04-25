@@ -16,7 +16,8 @@ class UserSailingsController extends Controller
     }
 
     // create entry in bridge table
-    public function JoinSailing($sailing_id) {
+    public function JoinSailing($sailing_id)
+    {
 
         $user_id = Auth::User()->id;
         // need to check both columns....
@@ -39,7 +40,8 @@ class UserSailingsController extends Controller
     }
 
     // remove entry from bridge table
-    public function LeaveSailing($sailing_id) {
+    public function LeaveSailing($sailing_id)
+    {
         $user_id = Auth::User()->id;
         // creates key value pair based on variable names
         $conditions = compact('user_id', 'sailing_id');
@@ -48,7 +50,7 @@ class UserSailingsController extends Controller
             $success = "Left the sailing";
             return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
         } else {
-            $failure= "Already left the sailing";
+            $failure = "Already left the sailing";
             return view('sailingtest', compact('user_id', 'sailing_id', 'failure'));
         }
     }
@@ -64,7 +66,8 @@ class UserSailingsController extends Controller
     }
 
     // get all sailings for a user
-    public function GetAllSailings() {
+    public function GetAllSailings()
+    {
         $user_id = Auth::User()->id;
         $sailings = UserSailing::where(['user_id' => $user_id])->get();
         if ($sailings != null) {
