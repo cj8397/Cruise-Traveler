@@ -17,13 +17,7 @@ class CreateRolesTable extends Migration
             $table->string('role');
         });
 
-        Schema::create('user_roles', function (Blueprint $table) {
-            $table->integer('role_id')->unsigned();
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('role_id')->references('id')->on('roles');
-            $table->timestamps();
-        });
+
     }
 
     /**
@@ -34,7 +28,5 @@ class CreateRolesTable extends Migration
     public function down()
     {
         Schema::drop('roles');
-        Schema::drop('user_roles');
-
     }
 }
