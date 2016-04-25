@@ -9224,3 +9224,6 @@ Stack trace:
 #62 /Users/Cheng/Google Drive/SSD/Industry Project/IndustryProject/project/public/index.php(52): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #63 /Users/Cheng/Google Drive/SSD/Industry Project/IndustryProject/project/server.php(21): require_once('/Users/Cheng/Go...')
 #64 {main}  
+[2016-04-25 18:33:15] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot redeclare App\Event::$timestamps in /Users/Cheng/Google Drive/SSD/Industry Project/IndustryProject/project/app/Event.php:11
+Stack trace:
+#0 {main}  

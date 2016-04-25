@@ -7,7 +7,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Register</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/eventform/post') }}">
+                        <form class="form-horizontal" role="form" method="POST"
+                              action="{{ url('events/eventform/post') }}">
                             {!! csrf_field() !!}
 
                             <input type="hidden" name="sailing_id" value="1"/>
