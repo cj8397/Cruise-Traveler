@@ -21,6 +21,7 @@ class EventsController extends Controller
     {
         dd($event_id);
     }
+
     protected function GetAllEvents($sailing){
         if($events = Event::where('sailing_id', $sailing)){
             return view('events.list')->with('events', $events);
@@ -61,16 +62,4 @@ class EventsController extends Controller
         ]);
         return redirect()->action('EventsController@GetOneEvent', [$event->id]);
     }
-====== =
-    protected function GetOneEvent($event_id)
-    {
-        if ($event = Event::where('id', $event_id)) {
-            return view('events.eventdetail');
-
-        } else {
-            return Redirect::back();
-        }
-    }
->>>>>>> Temporary merge branch 2
-
 }

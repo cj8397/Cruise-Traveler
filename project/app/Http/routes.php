@@ -33,7 +33,7 @@ Route::get('/sailings', 'SailingsController@GetAllSailings');
 Route::get('/sailings/sailingform/get', 'SailingsController@ShowCreateForm');
 Route::post('/sailings/sailingform/post', 'SailingsController@CreateSailing');
 Route::get('/sailings/delete/{id}', 'SailingsController@DeleteSailing');
-Route::get('/sailings/{id}', 'SailingsController@GetOneSailing');
+Route::get('/sailings/{id}', 'SailingsController@GetSailing');
 
 Route::get('/users', 'UserController@getUser');
 
