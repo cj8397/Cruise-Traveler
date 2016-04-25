@@ -48,22 +48,26 @@
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/eventdetail/1">
                 <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a><p>200 going 80% male 20% male </p>
+            </a>
+            <p>200 going 80% male 20% male </p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/eventdetail/1">
                 <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a><p>200 going 80% male 20% male </p>
+            </a>
+            <p>200 going 80% male 20% male </p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/eventdetail/1">
                 <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a><p>200 going 80% male 20% male </p>
+            </a>
+            <p>200 going 80% male 20% male </p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/eventdetail/1">
                 <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a><p>200 going 80% male 20% male </p>
+            </a>
+            <p>200 going 80% male 20% male </p>
         </div>
     </div>
     <!-- /.row -->
@@ -73,22 +77,26 @@
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/eventdetail/1">
                 <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a><p>200 going 80% male 20% male </p>
+            </a>
+            <p>200 going 80% male 20% male </p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/eventdetail/1">
                 <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a><p>200 going 80% male 20% male </p>
+            </a>
+            <p>200 going 80% male 20% male </p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/eventdetail/1">
                 <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a><p>200 going 80% male 20% male </p>
+            </a>
+            <p>200 going 80% male 20% male </p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/eventdetail/1">
                 <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a><p>200 going 80% male 20% male </p>
+            </a>
+            <p>200 going 80% male 20% male </p>
         </div>
     </div>
     <!-- /.row -->

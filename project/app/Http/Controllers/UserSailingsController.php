@@ -44,8 +44,8 @@ class UserSailingsController extends Controller
 
     // getAllUsers in a sailing
     public function GetAllUsers($sailing_id) {
-        $users = UserSailing::where(['sailing_id'=>$sailing_id])->value('user_id');
-        if($users != null) {
+        $users = UserSailing::where(['sailing_id' => $sailing_id])->value('user_id');
+        if ($users != null) {
             return $users;
         } else {
             return 'no users';
@@ -54,8 +54,8 @@ class UserSailingsController extends Controller
 
     // get all sailings for a user
     public function GetAllSailings($user_id) {
-        $sailings = UserSailing::where(['user_id'=>$user_id])->value('sailing_id');
-        if($sailings != null) {
+        $sailings = UserSailing::where(['user_id' => $user_id])->value('sailing_id');
+        if ($sailings != null) {
             return $sailings;
         } else {
             return 'no sailings';

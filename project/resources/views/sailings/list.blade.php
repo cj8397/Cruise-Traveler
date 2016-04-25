@@ -45,22 +45,26 @@
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/events/1">
                 <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a><p>200 going 80% male 20% male 12 events plan</p>
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/events/1">
                 <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a><p>200 going 80% male 20% male 12 events plan</p>
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/events/1">
                 <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a><p>200 going 80% male 20% male 12 events plan</p>
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/events/1">
                 <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a><p>200 going 80% male 20% male 12 events plan</p>
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
         </div>
     </div>
     <!-- /.row -->
@@ -69,22 +73,26 @@
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/events/1">
                 <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a><p>200 going 80% male 20% male 12 events plan</p>
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/events/1">
                 <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a><p>200 going 80% male 20% male 12 events plan</p>
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/events/1">
                 <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a><p>200 going 80% male 20% male 12 events plan</p>
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/events/1">
                 <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a><p>200 going 80% male 20% male 12 events plan</p>
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
         </div>
     </div>
     <!-- /.row -->
@@ -93,28 +101,29 @@
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/events/1">
                 <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a><p>200 going 80% male 20% male 12 events plan</p>
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/events/1">
                 <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a><p>200 going 80% male 20% male 12 events plan</p>
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/events/1">
                 <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a><p>200 going 80% male 20% male 12 events plan</p>
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
         </div>
         <div class="col-xs-6 col-sm-3 portfolio-item">
             <a href="/events/1">
                 <img class="img-responsive" src="/images/sailingInfo.png" alt="">
-            </a><p>200 going 80% male 20% male 12 events plan</p>
+            </a>
+            <p>200 going 80% male 20% male 12 events plan</p>
         </div>
     </div>
     <!-- /.row -->
-
-
-
 
 
     <hr>
