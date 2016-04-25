@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\EventRequest;
 use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\UserSailingsController as UserSailings;
 
 class EventsController extends Controller
 {
