@@ -39,3 +39,7 @@ Route::get('/testsailing/{user_id}/{sailing_id}', function($user_id, $sailing_id
 Route::get('/joinsailing/{user_id}/{sailing_id}', 'UserSailingsController@JoinSailing');
 
 Route::get('/leavesailing/{user_id}/{sailing_id}', 'UserSailingsController@LeaveSailing');
+
+Route::get('/allsailingusers/{user_id}', 'UserSailingsController@GetAllUsers');
+
+Route::get('/allusersailings/{user_id}', 'UserSailingsController@GetAllSailings');
