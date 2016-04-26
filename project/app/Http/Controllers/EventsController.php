@@ -47,11 +47,12 @@ class EventsController extends Controller
         }
     }
 
+/*
     protected function GetAllParticipantsInEvent($event_id)
     {
         return UserEvent::where('event_id', $event_id);
     }
-
+*/
     protected function ShowCreateForm()
     {
         return view('events.createEventForm');

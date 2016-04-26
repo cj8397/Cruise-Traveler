@@ -6784,3 +6784,6 @@ Stack trace:
 #62 C:\Users\MarioHugo\PhpstormProjects\IndustryProject\project\public\index.php(52): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #63 C:\Users\MarioHugo\PhpstormProjects\IndustryProject\project\server.php(21): require_once('C:\\Users\\MarioH...')
 #64 {main}  
+[2016-04-26 03:24:34] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot redeclare App\Http\Controllers\EventsController::GetAllParticipantsInEvent() in /Users/Jalen/Desktop/GithubRepos/dev2/IndustryProject/project/app/Http/Controllers/EventsController.php:51
+Stack trace:
+#0 {main}  
