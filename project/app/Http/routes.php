@@ -48,3 +48,5 @@ Route::get('/joinevent/{event_id}', 'UserEventsController@JoinEvent');
 Route::get('/leaveevent/{event_id}', 'UserEventsController@LeaveEvent');
 Route::get('/eventusers/{event_id}', 'UserEventsController@GetAllUsers');
 Route::get('/userevents', 'UserEventsController@GetAllEvents');
+
+Route::get('/users/userevents', 'UserController@getUserEvents');

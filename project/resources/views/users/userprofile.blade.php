@@ -18,7 +18,7 @@
                     <li class="list-group-item"><h4>Date of Birth: </h4>{{ Auth::user()->dob }}</li>
                     {{--<li class="list-group-item">{{ Auth::user()->dob }}</li>--}}
                     <li class="list-group-item"><h4>Gender: </h4>
-                        @if (Auth::user()->sex === 1)
+                        @if (Auth::user()->sex === 0)
                             Male
                         @else
                             Female
@@ -34,32 +34,52 @@
             <div class="panel-heading">
                 <h2>Events</h2>
             </div>
+            @if(isset($userevents))
             <div class="panel-body">
-                <div class="row col-md-6 col-xs-6">
-                    <ul class="list-group">
-                        <li class="list-group-item">Party</li>
-                    </ul>
-                </div>
-                <div class="row col-md-12 col-xs-12"></div>
-                <div class="row col-md-6 col-xs-6"></div>
-                <div class="row col-md-6 col-xs-6">
-                    <ul class="list-group">
-                        <li class="list-group-item">Party</li>
-                    </ul>
-                </div>
-                <div class="row col-md-6 col-xs-6">
-                    <ul class="list-group">
-                        <li class="list-group-item">Party</li>
-                    </ul>
-                </div>
-                <div class="row col-md-12 col-xs-12"></div>
-                <div class="row col-md-6 col-xs-6"></div>
-                <div class="row col-md-6 col-xs-6">
-                    <ul class="list-group">
-                        <li class="list-group-item">Party</li>
-                    </ul>
-                </div>
+                <ul class="list-group">
+                    @foreach($userevents as $event)
+                        <div class="row col-md-12 col-xs-12"></div>
+                        <div class="row col-md-6 col-xs-6"></div>
+                        <div class="row col-md-6 col-xs-6">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <h5>Event ID</h5>
+                                    {!! $event->event_id !!}
+                                    <h5>Your Role</h5>
+                                    {!! $event->role !!}
+                                </li>
+                            </ul>
+                        </div>
+                    @endforeach
+                </ul>
             </div>
+            @endif
+            {{--<div class="panel-body">
+                <div class="row col-md-6 col-xs-6">
+                    <ul class="list-group">
+                        <li class="list-group-item">Party</li>
+                    </ul>
+                </div>
+                <div class="row col-md-12 col-xs-12"></div>
+                <div class="row col-md-6 col-xs-6"></div>
+                <div class="row col-md-6 col-xs-6">
+                    <ul class="list-group">
+                        <li class="list-group-item">Party</li>
+                    </ul>
+                </div>
+                <div class="row col-md-6 col-xs-6">
+                    <ul class="list-group">
+                        <li class="list-group-item">Party</li>
+                    </ul>
+                </div>
+                <div class="row col-md-12 col-xs-12"></div>
+                <div class="row col-md-6 col-xs-6"></div>
+                <div class="row col-md-6 col-xs-6">
+                    <ul class="list-group">
+                        <li class="list-group-item">Party</li>
+                    </ul>
+                </div>
+            </div>--}}
         </div>
     </div>
 
