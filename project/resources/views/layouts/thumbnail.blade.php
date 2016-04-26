@@ -68,7 +68,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Last Update: April 25th, 2016 @ 20:50 </a></li>
+                            <li><a href="#">Last Update: April 26th, 2016 @ 10:50 </a></li>
                             <li><a href="https://docs.google.com/spreadsheets/d/1KQc5cRAnqdWS55JQb59NHHYKRtqtslBXlHjbWU2QIqc/edit#gid=0">SCRUM WOKRBOOK</a></li>
                             <li><a href="https://docs.google.com/document/d/1yIuRZO1HJ71moInaR_B1Y0mb6yfwxB9oClgWSx5CTpw/edit#heading=h.tphyqzr77ydu">Design Model</a></li>
                         </ul>
