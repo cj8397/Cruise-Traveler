@@ -7,7 +7,11 @@ use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\EventsController;
 use App\Sailing;
+use App\Event;
+use App\UserSailing;
+use App\UserEvent;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\SailingRequest;
 use Illuminate\Support\Facades\Response;
@@ -83,5 +87,31 @@ class SailingsController extends Controller
         }else{
             return redirect('sailings');
         }
-    }
-}
+      }
+
+        protected function DeleteSailing($id){
+            if ($sailing = Sailing::find($id)) {
+
+              $events = Event::where('sailing_id', $id)->get();
+
+              foreach($events as $event){
+                UserEvent::where('event_id', $event->id)->delete();
+                $event->delete();
+              }
+
+              $userSailings = UserSailing::where('sailing_id', $id)->get();
+
+              foreach($userSailings as $userSailing){
+                $userSailing->delete();
+              }
+
+              $sailing->delete();
+
+              return redirect('sailings');
+
+            } else {
+              return redirect::back();
+            }
+
+          }
+        }
