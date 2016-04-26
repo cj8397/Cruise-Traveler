@@ -24,7 +24,7 @@
     <div class="row">
         @foreach($events as $event)
         <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/detail/".{!! $event->id !!}>
+            <a href="/events/detail/{!! $event->id !!}">
                 <img class="img-responsive" src="/images/eventInfo.png" alt="">
             </a>
             <h4> {!! ucfirst($event->title) !!}</h4>
