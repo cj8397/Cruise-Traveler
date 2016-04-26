@@ -3,7 +3,7 @@
 @section('content')
     <img class="img-responsive" src="/images/cruiseship.jpg">
     <div class="container">
-        <div class="panel panel-default row col-md-6 col-xs-12">
+        <div class="panel panel-default row col-md-3 col-xs-12">
             <div class="panel-body col-md-12 col-xs-12">
                 <img class="img-responsive img-circle" src="/images/profilepic.png" width="200" height="200">
             </div>
@@ -18,7 +18,7 @@
                     <li class="list-group-item"><h4>Date of Birth: </h4>{{ Auth::user()->dob }}</li>
                     {{--<li class="list-group-item">{{ Auth::user()->dob }}</li>--}}
                     <li class="list-group-item"><h4>Gender: </h4>
-                        @if (Auth::user()->sex === 0)
+                        @if (Auth::user()->sex === 1)
                             Male
                         @else
                             Female
@@ -30,58 +30,79 @@
             <div></div>
         </div>
 
-        <div class="panel panel-default row col-md-5 col-md-offset-1 col-xs-12">
+        <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
             <div class="panel-heading">
-                <h2>Events</h2>
+                <h2>Sailings & Events</h2>
             </div>
-            @if(isset($userevents))
-            <div class="panel-body">
-                <ul class="list-group">
-                    @foreach($userevents as $event)
-                        <div class="row col-md-12 col-xs-12"></div>
-                        <div class="row col-md-6 col-xs-6"></div>
-                        <div class="row col-md-6 col-xs-6">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <h5>Event ID</h5>
-                                    {!! $event->event_id !!}
-                                    <h5>Your Role</h5>
-                                    {!! $event->role !!}
-                                </li>
-                            </ul>
-                        </div>
-                    @endforeach
-                </ul>
-            </div>
+        </div>
+        <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
+            @if(isset($usersailings))
+                @foreach($usersailings as $sailings)
+                    @if(isset($sailingdetails))
+                        @foreach($sailingdetails as $details)
+                            <div class="panel-body col-md-6 col-xs-12">
+                                <div class="panel-heading">
+                                    <label class="label-info"><h4>{!! $details->title !!}</h4></label>
+                                </div>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <strong>Start Date: </strong>{!! $details->start_date !!}</br>
+                                        <strong>Departing Port: </strong>{!! $details->port_org !!}</br>
+                                        <strong>Destination: </strong>{!! $details->destination !!}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="panel-body col-md-6 col-xs-12">
+                                @foreach($sailingevents as $events)
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <h5>Event: {!! $events->title !!}</h5>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Location:</strong> {!! $events->location !!}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Start:</strong> {!! $events->start_date !!}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>End:</strong> {!! $events->end_date !!}
+                                        </li>
+                                    </ul>
+                                @endforeach
+                            </div>
+                        @endforeach
+                    @endif
+                @endforeach
             @endif
-            {{--<div class="panel-body">
-                <div class="row col-md-6 col-xs-6">
-                    <ul class="list-group">
-                        <li class="list-group-item">Party</li>
-                    </ul>
-                </div>
-                <div class="row col-md-12 col-xs-12"></div>
-                <div class="row col-md-6 col-xs-6"></div>
-                <div class="row col-md-6 col-xs-6">
-                    <ul class="list-group">
-                        <li class="list-group-item">Party</li>
-                    </ul>
-                </div>
-                <div class="row col-md-6 col-xs-6">
-                    <ul class="list-group">
-                        <li class="list-group-item">Party</li>
-                    </ul>
-                </div>
-                <div class="row col-md-12 col-xs-12"></div>
-                <div class="row col-md-6 col-xs-6"></div>
-                <div class="row col-md-6 col-xs-6">
-                    <ul class="list-group">
-                        <li class="list-group-item">Party</li>
-                    </ul>
-                </div>
-            </div>--}}
         </div>
     </div>
+    {{--<div class="panel-body">
+        <div class="row col-md-6 col-xs-6">
+            <ul class="list-group">
+                <li class="list-group-item">Party</li>
+            </ul>
+        </div>
+        <div class="row col-md-12 col-xs-12"></div>
+        <div class="row col-md-6 col-xs-6"></div>
+        <div class="row col-md-6 col-xs-6">
+            <ul class="list-group">
+                <li class="list-group-item">Party</li>
+            </ul>
+        </div>
+        <div class="row col-md-6 col-xs-6">
+            <ul class="list-group">
+                <li class="list-group-item">Party</li>
+            </ul>
+        </div>
+        <div class="row col-md-12 col-xs-12"></div>
+        <div class="row col-md-6 col-xs-6"></div>
+        <div class="row col-md-6 col-xs-6">
+            <ul class="list-group">
+                <li class="list-group-item">Party</li>
+            </ul>
+        </div>
+    </div>--}}
+
 
 
     {{-- <div class="container col-xs-12">
@@ -119,4 +140,4 @@
              Event Timeline
          </div>
      </div>--}}
-    @endsection
+@endsection

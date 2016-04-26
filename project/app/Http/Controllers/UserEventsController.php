@@ -69,14 +69,14 @@ class UserEventsController extends Controller
     }
 
     // get all events for a user
-    public function GetAllEvents()
-    {
-        $user_id = Auth::User()->id;
-        $events = UserEvent::where(['user_id' => $user_id])->get();
-        if ($events != null) {
-            return [$events];
-        } else {
-            return 'no events';
-        }
-    }
+    /* public function GetAllEvents()
+     {
+         $user_id = Auth::User()->id;
+         $events = UserEvent::where(['user_id' => $user_id])->get();
+         if ($events != null) {
+             return [$events];
+         } else {
+             return 'no events';
+         }
+     }*/
 }

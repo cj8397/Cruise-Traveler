@@ -68,13 +68,13 @@ class UserSailingsController extends Controller
     }
 
     // get all sailings for a user
-    public function GetAllSailings() {
-        $user_id = Auth::User()->id;
-        $sailings = UserSailing::where(['user_id' => $user_id])->get();
-        if ($sailings != null) {
-            return $sailings;
-        } else {
-            return 'no sailings';
-        }
-    }
+    /*  public function GetAllSailings() {
+          $user_id = Auth::User()->id;
+          $sailings = UserSailing::where(['user_id' => $user_id])->get();
+          if ($sailings != null) {
+              return $sailings;
+          } else {
+              return 'no sailings';
+          }
+      }*/
 }
