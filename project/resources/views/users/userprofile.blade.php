@@ -18,7 +18,7 @@
                     <li class="list-group-item"><h4>Date of Birth: </h4>{{ Auth::user()->dob }}</li>
                     {{--<li class="list-group-item">{{ Auth::user()->dob }}</li>--}}
                     <li class="list-group-item"><h4>Gender: </h4>
-                        @if (Auth::user()->sex === 0)
+                        @if (Auth::user()->sex === 1)
                             Male
                         @else
                             Female
