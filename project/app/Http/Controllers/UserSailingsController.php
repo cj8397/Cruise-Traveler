@@ -77,4 +77,17 @@ class UserSailingsController extends Controller
             return 'no sailings';
         }
     }
+
+    // female - 0, male - 1
+    public function CalulateSexPercentages($sailing_id) {
+
+        $maleConditions = [['sailing_id' => $sailing_id], 'sex' => 1 ];
+        $maleUsers = UserSailing::where($maleConditions)->count(); // return int
+
+    }
+
+    function CalculatePercentage($segment, $total) {
+        return round (($segment / $total) * 100, 0);
+    }
+
 }
