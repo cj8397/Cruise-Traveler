@@ -44,6 +44,8 @@
                                 <i class="fa fa-btn fa-user"></i>Delete Event
                             </button>
                         </a>
+                        @include('partials.buttons.joinevent')
+                        @include('partials.buttons.leaveevent')
                     </li>
                 </ul>
             </div>

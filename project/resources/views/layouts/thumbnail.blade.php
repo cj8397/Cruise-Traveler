@@ -96,6 +96,17 @@
     </div>
     <!-- /.container -->
 </nav>
+@if(isset($success))
+    <div class="alert alert-success">
+        {{$success}}
+    </div>
+@endif
+
+@if(isset($failure))
+    <div class="alert alert-danger">
+        {{$failure}}
+    </div>
+@endif
 
 @yield('content')
 
