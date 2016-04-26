@@ -18,7 +18,6 @@ class UserEventsController extends Controller
     public function JoinEvent($event_id)
     {
         $user_id = Auth::User()->id;
-        $members = UserEvent::all()->where('event_id',$event_id);
         // role = member// need to check both columns....
         $userevent = UserEvent::firstOrNew([
             'user_id' => $user_id,
@@ -33,8 +32,10 @@ class UserEventsController extends Controller
             $userevent->role = 'participant';
             $userevent->save();
             $success = "Joined the event.";
+            $members = UserEvent::all()->where('event_id',$event_id);
             return view('events.eventdetail', compact( 'members','event', 'success'));
         } else {
+            $members = UserEvent::all()->where('event_id',$event_id);
             $failure = "Already joined the event.";
             return view('events.eventdetail', compact( 'members','event', 'failure'));
         }
@@ -49,8 +50,10 @@ class UserEventsController extends Controller
         if (UserEvent::where($conditions)->exists()) {
             UserEvent::where($conditions)->delete();
             $success = "Left the event.";
+            $members = UserEvent::all()->where('event_id',$event_id);
             return view('events.eventdetail', compact( 'members','event', 'success'));
         } else {
+            $members = UserEvent::all()->where('event_id',$event_id);
             $failure = "Not Participating In Event";
             return view('events.eventdetail', compact( 'members','event', 'failure'));
         }
