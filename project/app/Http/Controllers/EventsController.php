@@ -5,39 +5,35 @@ namespace App\Http\Controllers;
 use App\Sailing;
 use App\User;
 use App\UserEvent;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use App\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\EventRequest;
-use Illuminate\Support\Facades\Response;
-use App\Http\Controllers\UserSailingsController as UserSailings;
 
 class EventsController extends Controller
 {
     //
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
+    protected function GetAllParticipantsInEvent($event_id){
+        return $usersEvents = UserEvent::all()->where('event_id', $event_id);
+    }
+
     protected function GetAllEvents($sailing){
-        if($events = Event::where('sailing_id', $sailing)){
-            return view('events.list')->with('events', $events);
+        if ($events = Event::where('sailing_id', $sailing)->get()) {
+            return view('events.list')->with(['events' => $events, 'sailing_id' => $sailing]);
         } else {
             return Redirect::back();
         }
     }
 
-    protected function GetOneEvent($event_id)
-    {
+    protected function GetOneEvent($event_id){
         if ($event = Event::where('id', $event_id)->first()) {
             $members = $this->GetAllParticipantsInEvent($event_id);
-            $event->start_date = Carbon::parse($event->start_date)->format('l jS \\of F Y h:i:s A');
-            $event->end_date = Carbon::parse($event->end_date)->format('l jS \\of F Y h:i:s A');
             return view('events.eventdetail')->with(['event' => $event,
                 'members' => $members]);
         } else {
@@ -45,43 +41,55 @@ class EventsController extends Controller
         }
     }
 
-    protected function GetAllParticipantsInEvent($event_id)
-    {
-        return $usersEvents = UserEvent::all()->where('event_id', $event_id);
+    protected function ShowCreateForm($sailing_id){
+        return view('events.createEventForm')->with('sailing_id', $sailing_id);
     }
 
-    protected function ShowCreateForm()
-    {
-        return view('events.createEventForm');
-    }
-
-    protected function CreateEvent(EventRequest $request)
-    {
-
-        $start = Carbon::parse($request->start);
-        $end = Carbon::parse($request->end);
+    protected function CreateEvent(EventRequest $request){
         $event = Event::create([
             'sailing_id' => $request->sailing_id,
             'title' => $request->title,
-            'start_date' => $start,
-            'end_date' => $end,
+            'start_date' => $request->start,
+            'end_date' => $request->end,
             'desc' => $request->desc,
             'location' => $request->location
         ]);
-        $userevent = UserEvent::create([
+        UserEvent::create([
             'user_id' => Auth::user()->id,
             'event_id' => $event->id,
             'role' => 'Host'
         ]);
         return redirect()->action('EventsController@GetOneEvent', [$event->id]);
     }
+
     protected function DeleteEvent($event_id){
-       if($event = Event::where('id', $event_id)->first()){
-           UserEvent::where('event_id',$event->id)->delete();
-           $event->delete();
-           return redirect('/sailings');
-       }
-        else{
+        if ($event = Event::where('id', $event_id)->first()) {
+            UserEvent::where('event_id', $event->id)->delete();
+            $event->delete();
+            return redirect('/sailings');
+        } else {
+            return false;
+        }
+    }
+
+    protected function UpdateEvent($event_id){
+        if ($event = Event::where('id', $event_id)->first()) {
+            return view('events.updateEventForm')->with('event', $event);
+        } else {
+            return false;
+        }
+    }
+
+    protected function SaveEvent($event_id, EventRequest $request){
+        if ($event = Event::where('id', $event_id)->first()) {
+            $event->title = $request->title;
+            $event->start_date = $request->start;
+            $event->end_date = $request->end;
+            $event->desc = $request->desc;
+            $event->location = $request->location;
+            $event->save();
+            return redirect()->action('EventsController@GetOneEvent', [$event_id]);
+        }else{
             return false;
         }
     }

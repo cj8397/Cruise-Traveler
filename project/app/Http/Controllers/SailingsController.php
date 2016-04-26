@@ -7,7 +7,11 @@ use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\EventsController;
 use App\Sailing;
+use App\Event;
+use App\UserSailing;
+use App\UserEvent;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\SailingRequest;
 use Illuminate\Support\Facades\Response;
@@ -48,7 +52,7 @@ class SailingsController extends Controller
 
         $start = Carbon::parse($request->start);
         $end = Carbon::parse($request->end);
-        $event = Sailing::create([
+        $sailing = Sailing::create([
             'title' => $request->title,
             'cruise_line' => $request->cruise_line,
             'start_date' => $start,
@@ -59,4 +63,55 @@ class SailingsController extends Controller
         ]);
         return redirect('sailings');
     }
-}
+    protected function UpdateSailing($id){
+      if ($sailing = Sailing::find($id)) {
+          return view('sailings.update', compact('sailing'));
+      } else {
+          return redirect('sailings');
+      }
+    }
+
+    protected function SaveSailing($id, SailingRequest $request){
+        if ($sailing = Sailing::find($id)) {
+            $start = Carbon::parse($request->start);
+            $end = Carbon::parse($request->end);
+            $sailing->title = $request->title;
+            $sailing->cruise_line = $request->cruise_line;
+            $sailing->start_date = $start;
+            $sailing->end_date = $end;
+            $sailing->port_org = $request->port_org;
+            $sailing->port_dest = $request->port_dest;
+            $sailing->destination = $request->destination;
+            $sailing->save();
+            return redirect()->action('SailingsController@GetSailing', [$id]);
+        }else{
+            return redirect('sailings');
+        }
+      }
+
+        protected function DeleteSailing($id){
+            if ($sailing = Sailing::find($id)) {
+
+              $events = Event::where('sailing_id', $id)->get();
+
+              foreach($events as $event){
+                UserEvent::where('event_id', $event->id)->delete();
+                $event->delete();
+              }
+
+              $userSailings = UserSailing::where('sailing_id', $id)->get();
+
+              foreach($userSailings as $userSailing){
+                $userSailing->delete();
+              }
+
+              $sailing->delete();
+
+              return redirect('sailings');
+
+            } else {
+              return redirect::back();
+            }
+
+          }
+        }
