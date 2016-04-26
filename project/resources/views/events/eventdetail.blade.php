@@ -4,11 +4,25 @@
     <img class="img-responsive" src="/426631.jpg" alt="">
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6 col-xs-12">
-        <div class="panel panel-default col-md-12 col-xs-12">
+        <div class="col-md-12 col-xs-12">
+        <div class="panel panel-default col-md-6 col-xs-12">
             <div class="panel panel-heading">{!! $event->title !!}</div>
             <div class="panel panel-body">
                 <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="{{ url('events/update/'.$event->id) }}">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-btn fa-user"></i>Update Event
+                            </button>
+                        </a>
+                        <a href="{{ url('events/delete/'.$event->id) }}">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-btn fa-user"></i>Delete Event
+                            </button>
+                        </a>
+                        @include('partials.buttons.joinevent')
+                        @include('partials.buttons.leaveevent')
+                    </li>
                     <li class="list-group-item">
                        <strong>Start Time!</strong>
                         <p class="alert alert-info center-block">
@@ -33,24 +47,10 @@
                             {!! $event->desc !!}
                         </p>
                     </li>
-                    <li class="list-group-item">
-                        <a href="{{ url('events/update/'.$event->id) }}">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-btn fa-user"></i>Update Event
-                            </button>
-                        </a>
-                        <a href="{{ url('events/delete/'.$event->id) }}">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-btn fa-user"></i>Delete Event
-                            </button>
-                        </a>
-                        @include('partials.buttons.joinevent')
-                        @include('partials.buttons.leaveevent')
-                    </li>
                 </ul>
             </div>
         </div>
-        <div class="panel panel-default col-md-12 col-xs-12">
+        <div class="panel panel-default col-md-6 col-xs-12">
             <div class="panel panel-heading">Message Boards!</div>
             <div class=" panel panel-body">
                 <div class="row">
@@ -71,6 +71,7 @@
         </div>
             </div>
     </div>
+    @if(isset($members))
     <div class="row col-md-5 col-md-offset-1 col-xs-12">
         <div class="panel panel-default col-md-12 col-xs-12">
             <div class="panel panel-heading">Participants</div>
@@ -86,5 +87,6 @@
             </div>
         </div>
     </div>
+    @endif
         </div>
 @endsection
