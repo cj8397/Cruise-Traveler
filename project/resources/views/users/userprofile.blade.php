@@ -3,7 +3,7 @@
 @section('content')
     <img class="img-responsive" src="/images/cruiseship.jpg">
     <div class="container">
-        <div class="panel panel-default row col-md-6 col-xs-12">
+        <div class="panel panel-default row col-md-3 col-xs-12">
             <div class="panel-body col-md-12 col-xs-12">
                 <img class="img-responsive img-circle" src="/images/profilepic.png" width="200" height="200">
             </div>
@@ -30,22 +30,29 @@
             <div></div>
         </div>
 
-        <div class="panel panel-default row col-md-5 col-md-offset-1 col-xs-12">
-            <div class="row col-md-12 col-xs-12">
-                <div class="panel-heading">
-                    <h2>Sailings & Events</h2>
-                </div>
-
-                @if(isset($usersailings))
-                    <div class="panel-body">
-                        <ul class="list-group">
-                            @foreach($usersailings as $sailings)
+        <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
+            <div class="panel-heading">
+                <h2>Sailings & Events</h2>
+            </div>
+        </div>
+        <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
+            @if(isset($usersailings))
+                @foreach($usersailings as $sailings)
+                    @if(isset($sailingdetails))
+                        @foreach($sailingdetails as $details)
+                            <div class="panel-body col-md-6 col-xs-12">
+                                <div class="panel-heading">
+                                    <label class="label-info"><h4>{!! $details->title !!}</h4></label>
+                                </div>
                                 <ul class="list-group">
                                     <li class="list-group-item">
-                                        <h4>Sailing ID</h4>
-                                        {!! $sailings->sailing_id !!}
+                                        <strong>Start Date: </strong>{!! $details->start_date !!}</br>
+                                        <strong>Departing Port: </strong>{!! $details->port_org !!}</br>
+                                        <strong>Destination: </strong>{!! $details->destination !!}
                                     </li>
                                 </ul>
+                            </div>
+                            <div class="panel-body col-md-6 col-xs-12">
                                 @foreach($sailingevents as $events)
                                     <ul class="list-group">
                                         <li class="list-group-item">
@@ -62,40 +69,40 @@
                                         </li>
                                     </ul>
                                 @endforeach
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            </div>
-
-            {{--<div class="panel-body">
-                <div class="row col-md-6 col-xs-6">
-                    <ul class="list-group">
-                        <li class="list-group-item">Party</li>
-                    </ul>
-                </div>
-                <div class="row col-md-12 col-xs-12"></div>
-                <div class="row col-md-6 col-xs-6"></div>
-                <div class="row col-md-6 col-xs-6">
-                    <ul class="list-group">
-                        <li class="list-group-item">Party</li>
-                    </ul>
-                </div>
-                <div class="row col-md-6 col-xs-6">
-                    <ul class="list-group">
-                        <li class="list-group-item">Party</li>
-                    </ul>
-                </div>
-                <div class="row col-md-12 col-xs-12"></div>
-                <div class="row col-md-6 col-xs-6"></div>
-                <div class="row col-md-6 col-xs-6">
-                    <ul class="list-group">
-                        <li class="list-group-item">Party</li>
-                    </ul>
-                </div>
-            </div>--}}
+                            </div>
+                        @endforeach
+                    @endif
+                @endforeach
+            @endif
         </div>
     </div>
+    {{--<div class="panel-body">
+        <div class="row col-md-6 col-xs-6">
+            <ul class="list-group">
+                <li class="list-group-item">Party</li>
+            </ul>
+        </div>
+        <div class="row col-md-12 col-xs-12"></div>
+        <div class="row col-md-6 col-xs-6"></div>
+        <div class="row col-md-6 col-xs-6">
+            <ul class="list-group">
+                <li class="list-group-item">Party</li>
+            </ul>
+        </div>
+        <div class="row col-md-6 col-xs-6">
+            <ul class="list-group">
+                <li class="list-group-item">Party</li>
+            </ul>
+        </div>
+        <div class="row col-md-12 col-xs-12"></div>
+        <div class="row col-md-6 col-xs-6"></div>
+        <div class="row col-md-6 col-xs-6">
+            <ul class="list-group">
+                <li class="list-group-item">Party</li>
+            </ul>
+        </div>
+    </div>--}}
+
 
 
     {{-- <div class="container col-xs-12">
@@ -133,4 +140,4 @@
              Event Timeline
          </div>
      </div>--}}
-    @endsection
+@endsection

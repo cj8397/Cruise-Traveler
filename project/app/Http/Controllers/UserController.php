@@ -23,15 +23,19 @@ class UserController extends Controller
         $userEvents = $this->GetAllEvents(Auth::User()->id);
         $userSailings = $this->GetAllSailings(Auth::User()->id);
 //        return $userSailings;
+        if (count($userSailings) >= 1) {
+            foreach ($userSailings as $sailing) {
+                //var_dump($sailing->sailing_id);
+                $sailingEvents = $this->GetSailingEvents($sailing->sailing_id);
+                $sailingDetails = $this->GetSailingDetail($sailing->sailing_id);
+            }
+            //return $sailingEvents;
 
-        $string = '';
-        foreach ($userSailings as $sailing) {
-            //var_dump($sailing->sailing_id);
-            $sailingEvents = $this->GetSailingEvents($sailing->sailing_id);
+            //return view('users.userprofile')->with(['userevents'=>$userEvents, 'usersailings'=>$userSailings]);
+            return view('users.userprofile')->with(['sailingevents' => $sailingEvents, 'usersailings' => $userSailings, 'sailingdetails' => $sailingDetails]);
+        } else {
+            return view('users.userprofile');
         }
-        //return $sailingEvents;
-
-        //return view('users.userprofile')->with(['userevents'=>$userEvents, 'usersailings'=>$userSailings]);
-        return view('users.userprofile')->with(['sailingevents' => $sailingEvents, 'usersailings' => $userSailings]);
     }
+
 }

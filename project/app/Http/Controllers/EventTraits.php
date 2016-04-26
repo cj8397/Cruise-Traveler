@@ -13,6 +13,7 @@ use App\UserSailing;
 use Illuminate\Support\Facades\Auth;
 use App\UserEvent;
 use App\Event;
+use App\Sailing;
 
 trait EventTraits
 {
@@ -46,5 +47,11 @@ trait EventTraits
         } else {
             return 'no events in this sailing';
         }
+    }
+
+    public function GetSailingDetail($sailing_id)
+    {
+        $sailing = Sailing::where(['id' => $sailing_id])->get();
+        return $sailing;
     }
 }
