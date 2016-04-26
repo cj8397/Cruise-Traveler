@@ -8,103 +8,36 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Events Page
-                <small>Events on Cruise Ship 1</small>
+                <small>Events on Cruise Ship {!! $sailing_id !!}</small>
+                <a href="{{ url('events/form/'.$sailing_id) }}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-btn fa-user"></i>Create an Event
+                    </button>
+                </a>
             </h1>
         </div>
     </div>
     <!-- /.row -->
 
-    <!-- Projects Row -->
-    <div class="row">
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-                <p>200 going 80% male 20% male </p>
-            </a>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-                <p>200 going 80% male 20% male </p>
-            </a>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-                <p>200 going 80% male 20% male </p>
-            </a>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-                <p>200 going 80% male 20% male </p>
-            </a>
-        </div>
-    </div>
-    <!-- /.row -->
 
     <!-- Projects Row -->
     <div class="row">
+        @foreach($events as $event)
         <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
+            <a href="/events/detail/".{!! $event->id !!}>
                 <img class="img-responsive" src="/images/eventInfo.png" alt="">
             </a>
+            <h4> {!! ucfirst($event->title) !!}</h4>
             <p>200 going 80% male 20% male </p>
         </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-    </div>
+            @endforeach
     <!-- /.row -->
 
-    <!-- Projects Row -->
-    <div class="row">
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-    </div>
-    <!-- /.row -->
 
     <hr>
     <!-- Pagination -->
     <div class="row text-center">
-        <div class="col-lg-12">
+        <div class="col-lg-12 col-md-12 col-xs-12">
             <ul class="pagination">
                 <li>
                     <a href="/eventdetail/1">&laquo;</a>
@@ -129,5 +62,7 @@
                 </li>
             </ul>
         </div>
+    </div>
+            </div>
     </div>
 @endsection
