@@ -80,6 +80,9 @@
                 <li>
                     <a href="{{ url('/sailings') }}">Sailings</a>
                 </li>
+                <li>
+                    <a href="{{ url('events/10') }}">Events</a>
+                </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -109,7 +112,9 @@
                                 <a href="{{ url('/users/userprofile') }}"><i
                                             class="glyphicon glyphicon-circle-arrow-left"></i>Profile</a>
                             </li>
-                            <li><a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Logout</a></li>
+                            <li>
+                                <a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Logout</a>
+                            </li>
                         </ul>
                     </li>
                 @endif
