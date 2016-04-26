@@ -48,7 +48,7 @@ class SailingsController extends Controller
 
         $start = Carbon::parse($request->start);
         $end = Carbon::parse($request->end);
-        $event = Sailing::create([
+        $sailing = Sailing::create([
             'title' => $request->title,
             'cruise_line' => $request->cruise_line,
             'start_date' => $start,
@@ -58,5 +58,30 @@ class SailingsController extends Controller
             'destination' => $request->destination
         ]);
         return redirect('sailings');
+    }
+    protected function UpdateSailing($id){
+      if ($sailing = Sailing::find($id)) {
+          return view('sailings.update', compact('sailing'));
+      } else {
+          return redirect('sailings');
+      }
+    }
+
+    protected function SaveSailing($id, SailingRequest $request){
+        if ($sailing = Sailing::find($id)) {
+            $start = Carbon::parse($request->start);
+            $end = Carbon::parse($request->end);
+            $sailing->title = $request->title;
+            $sailing->cruise_line = $request->cruise_line;
+            $sailing->start_date = $start;
+            $sailing->end_date = $end;
+            $sailing->port_org = $request->port_org;
+            $sailing->port_dest = $request->port_dest;
+            $sailing->destination = $request->destination;
+            $sailing->save();
+            return redirect()->action('SailingsController@GetSailing', [$id]);
+        }else{
+            return redirect('sailings');
+        }
     }
 }
