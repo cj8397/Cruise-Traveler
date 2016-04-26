@@ -25,7 +25,7 @@
                         @endif
                     </li>
                 </ul>
-                <input class="btn" type="submit" value="More Details">
+                <input class="btn" type="submit" value="More Detail">
             </div>
             <div></div>
         </div>
@@ -33,6 +33,9 @@
         <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
             <div class="panel-heading">
                 <h2>Sailings & Events</h2>
+                <div class="panel-body col-md-12 col-xs-12">
+                    <input class="btn" type="submit" value="Join Sailing">
+                </div>
             </div>
         </div>
         <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
@@ -51,6 +54,13 @@
                                         <strong>Destination: </strong>{!! $details->destination !!}
                                     </li>
                                 </ul>
+                            </div>
+                            <div class="panel-body col-md-6 col-xs-12">
+                                <a href="{{ url('events/form/'.$sailings->sailing_id) }}">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa fa-btn fa-user"></i>Create an Event
+                                    </button>
+                                </a>
                             </div>
                             <div class="panel-body col-md-6 col-xs-12">
                                 @foreach($sailingevents as $events)
