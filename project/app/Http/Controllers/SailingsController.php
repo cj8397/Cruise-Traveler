@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Response;
 
 class SailingsController extends Controller
 {
+  public function __construct()
+  {
+    $this->middleware('auth', ['except' => ['GetAllSailings', 'GetSailing']]);
+      //$this->middleware('auth');
+  }
     //
     protected function GetAllSailings(){
         if($sailings = Sailing::all()){

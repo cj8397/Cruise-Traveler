@@ -7,7 +7,6 @@ use App\User;
 use App\UserEvent;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Event;
@@ -15,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\EventRequest;
 use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\UserSailingsController as UserSailings;
 
 class EventsController extends Controller
 {
@@ -23,7 +23,9 @@ class EventsController extends Controller
     {
         $this->middleware('auth');
     }
-
+    protected function GetAllParticipantsInEvent($event_id){
+        return $usersEvents = UserEvent::all()->where('event_id', $event_id);
+    }
     protected function GetAllEvents($sailing){
         if($events = Event::where('sailing_id', $sailing)){
             return view('events.list')->with('events', $events);
@@ -74,5 +76,15 @@ class EventsController extends Controller
             'role' => 'Host'
         ]);
         return redirect()->action('EventsController@GetOneEvent', [$event->id]);
+    }
+    protected function DeleteEvent($event_id){
+       if($event = Event::where('id', $event_id)->first()){
+           UserEvent::where('event_id',$event->id)->delete();
+           $event->delete();
+           return redirect('/sailings');
+       }
+        else{
+            return false;
+        }
     }
 }

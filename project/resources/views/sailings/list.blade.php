@@ -21,7 +21,7 @@
             <div class="col-md-3 portfolio-item">
                 <h2>{{$sailing->id}} {{$sailing->cruise_line}} {{$sailing->title}}</h2>
                 <a href="{{ action('SailingsController@GetSailing', [$sailing->id]) }}">
-                    <img class="img-responsive" src="/images/sailinglist.jpg" alt="">
+                    <img class="img-responsive" src="/images/sailingInfo.png" alt="">
             </a>
             <p>200 going 80% male 20% male 12 events plan</p>
         </div>

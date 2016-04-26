@@ -16,8 +16,7 @@ class UserSailingsController extends Controller
     }
 
     // create entry in bridge table
-    public function JoinSailing($sailing_id)
-    {
+    public function JoinSailing($sailing_id) {
 
         $user_id = Auth::User()->id;
         // need to check both columns....
@@ -31,27 +30,30 @@ class UserSailingsController extends Controller
             $userSailing->user_id = $user_id;
             $userSailing->sailing_id = $sailing_id;
             $userSailing->save();
-            $success = "Joined the sailing.";
-            return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
+            //$success = "Joined the sailing.";
+            //return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
+            return redirect::back();
         } else {
-            $failure= "Already joined the sailing";
-            return view('sailingtest', compact('user_id', 'sailing_id', 'failure'));
+          return redirect::back();
+            //$failure= "Already joined the sailing";
+            //return view('sailingtest', compact('user_id', 'sailing_id', 'failure'));
         }
     }
 
     // remove entry from bridge table
-    public function LeaveSailing($sailing_id)
-    {
+    public function LeaveSailing($sailing_id) {
         $user_id = Auth::User()->id;
         // creates key value pair based on variable names
         $conditions = compact('user_id', 'sailing_id');
         if( UserSailing::where($conditions)->exists()) {
             UserSailing::where($conditions)->delete();
-            $success = "Left the sailing";
-            return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
+            return redirect::back();
+            //$success = "Left the sailing";
+            //return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
         } else {
-            $failure = "Already left the sailing";
-            return view('sailingtest', compact('user_id', 'sailing_id', 'failure'));
+          return redirect::back();
+            //$failure= "Already left the sailing";
+            //return view('sailingtest', compact('user_id', 'sailing_id', 'failure'));
         }
     }
 
@@ -66,8 +68,7 @@ class UserSailingsController extends Controller
     }
 
     // get all sailings for a user
-    public function GetAllSailings()
-    {
+    public function GetAllSailings() {
         $user_id = Auth::User()->id;
         $sailings = UserSailing::where(['user_id' => $user_id])->get();
         if ($sailings != null) {

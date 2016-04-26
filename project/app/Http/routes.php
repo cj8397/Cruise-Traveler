@@ -16,25 +16,28 @@ Route::get('/', function () {
 });
 
 Route::auth();
-
 Route::get('/home', 'HomeController@index');
 
+//EventController Stuff
 Route::get('events/eventdetail/{event_id}', 'EventsController@GetOneEvent');
-
-// think you can just have the get route, and then the form will post to controller method
-Route::get('events/eventform/get', 'EventsController@ShowCreateForm');
+Route::get('events/eventform/{sailing_id}', 'EventsController@ShowCreateForm');
 Route::post('events/eventform/post', 'EventsController@CreateEvent');
+Route::get('events/deleteevent/{event_id}', 'EventsController@DeleteEvent');
+Route::get('events/{sailing}', 'EventsController@GetAllEvents');
+//End of Event Controller Stuff
+
 Route::get('/events/{sailing}', 'EventsController@GetAllEvents');
 Route::get('/eventdetail/{event_id}', 'EventsController@GetOneEvent');
 
 Route::get('/sailings', 'SailingsController@GetAllSailings');
-Route::get('/sailings/sailingform/get', 'SailingsController@ShowCreateForm');
-Route::post('/sailings/sailingform/post', 'SailingsController@CreateSailing');
+Route::get('/sailings/create', 'SailingsController@ShowCreateForm');
+Route::post('/sailings/create/post', 'SailingsController@CreateSailing');
 Route::get('/sailings/delete/{id}', 'SailingsController@DeleteSailing');
 Route::get('/sailings/{id}', 'SailingsController@GetSailing');
 
 Route::get('/users/userprofile', 'UserController@getUser');
 
+Route::get('/joinsailing/{user_id}/{sailing_id}', 'UserSailingsController@JoinSailing');
 
 // dont use user_id in the route, can get it in your code using
 // also dont think you need to call it saiding id here?
