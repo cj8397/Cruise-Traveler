@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\UserSailing;
+use App\User;
+use Carbon\Carbon;
+use Faker\Provider\DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -58,6 +61,7 @@ class UserSailingsController extends Controller
     }
 
     // getAllUsers in a sailing
+    // to count the number of users just call this method and then count the results
     public function GetAllUsers($sailing_id) {
         $users = UserSailing::where(['sailing_id' => $sailing_id])->get();
         if ($users != null) {
@@ -79,11 +83,74 @@ class UserSailingsController extends Controller
     }
 
     // female - 0, male - 1
-    public function CalulateSexPercentages($sailing_id) {
+    // going back and forth to DB many times, need to optimize after know its working
+    public function CalculateSexPercentages($sailing_id) {
+        $userSailings = UserSailing::where(['sailing_id' => $sailing_id])->get();
+        $total = count($userSailings);
 
-        $maleConditions = [['sailing_id' => $sailing_id], 'sex' => 1 ];
-        $maleUsers = UserSailing::where($maleConditions)->count(); // return int
+        $male = 0;
+        foreach($userSailings as $userSailing) {
+            $maleConditions = ['id' => $userSailing->user_id, 'sex' => 1 ];
+            if(User::where($maleConditions)->exists()) {
+                $male += 1;
+            }
+        }
 
+        if($total != 0) {
+            $percentMale = $this->CalculatePercentage($male, $total);
+        } else {
+            return 'no users in sailing';
+        }
+        $percentFemale = 100 - $percentMale;
+        return ['male'=>$percentMale, 'female'=>$percentFemale];
+    }
+
+    public function CalculateAgePercentages($sailing_id) {
+        $userSailings = UserSailing::where(['sailing_id' => $sailing_id])->get();
+        $total = count($userSailings);
+
+        $youth = 0; // 0-18
+        $young = 0; // 18-25
+        $adult = 0; // 25-35
+        $middle = 0; // 35 - 45
+        $elder = 0; // 45 - 65
+        $senior = 0; // 65+
+
+        if($total >= 0) {
+            foreach ($userSailings as $userSailing) {
+                $userDOB = User::find($userSailing->user_id)->dob;
+                $age = Carbon::parse($userDOB)->age;
+                switch ($age) {
+                    case ($age > 65):
+                        $senior += 1;
+                        break;
+                    case ($age >= 45 && $age < 65):
+                        $elder += 1;
+                        break;
+                    case ($age >= 35 && $age < 45):
+                        $middle += 1;
+                        break;
+                    case ($age >= 25 && $age < 35):
+                        $adult += 1;
+                        break;
+                    case ($age >= 18 && $age < 25):
+                        $young += 1;
+                        break;
+                    case ($age >= 0 && $age < 18):
+                        $youth += 1;
+                        break;
+                }
+            }
+            $percentYouth = $this->CalculatePercentage($youth, $total); // 0-18
+            $percentYoung = $this->CalculatePercentage($young, $total);
+            $percentAdult = $this->CalculatePercentage($adult, $total);
+            $percentMiddle = $this->CalculatePercentage($middle, $total);
+            $percentElder = $this->CalculatePercentage($elder, $total);
+            $percentSenior = $this->CalculatePercentage($senior, $total);
+            return compact('percentYouth','percentYoung','percentAdult', 'percentMiddle', 'percentElder', 'percentSenior');
+        } else {
+            return 'nosailings';
+        }
     }
 
     function CalculatePercentage($segment, $total) {
