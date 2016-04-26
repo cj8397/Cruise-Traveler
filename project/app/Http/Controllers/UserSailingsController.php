@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\UserSailing;
+use App\Sailing;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -24,19 +25,19 @@ class UserSailingsController extends Controller
             'user_id' => $user_id,
             'sailing_id' => $sailing_id
         ]);
-
+        $sailing = Sailing::where('id', $sailing_id)->first();
         if(!$userSailing->exists) { // doesnt exist
             // need to assign properties
             $userSailing->user_id = $user_id;
             $userSailing->sailing_id = $sailing_id;
             $userSailing->save();
-            //$success = "Joined the sailing.";
-            //return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
-            return redirect::back();
+            $success = "Joined the sailing.";
+            return view('sailings.detail', compact('success', 'sailing'));
+            //return redirect::back();
         } else {
-          return redirect::back();
-            //$failure= "Already joined the sailing";
-            //return view('sailingtest', compact('user_id', 'sailing_id', 'failure'));
+          //return redirect::back();
+            $failure= "Already joined the sailing";
+            return view('sailings.detail', compact('failure', 'sailing'));
         }
     }
 
@@ -44,16 +45,17 @@ class UserSailingsController extends Controller
     public function LeaveSailing($sailing_id) {
         $user_id = Auth::User()->id;
         // creates key value pair based on variable names
+        $sailing = Sailing::where('id', $sailing_id)->first();
         $conditions = compact('user_id', 'sailing_id');
         if( UserSailing::where($conditions)->exists()) {
             UserSailing::where($conditions)->delete();
-            return redirect::back();
-            //$success = "Left the sailing";
-            //return view('sailingtest', compact('user_id', 'sailing_id', 'success'));
+            //return redirect::back();
+            $success = "Left the sailing";
+            return view('sailings.detail', compact('success', 'sailing'));
         } else {
-          return redirect::back();
-            //$failure= "Already left the sailing";
-            //return view('sailingtest', compact('user_id', 'sailing_id', 'failure'));
+          //return redirect::back();
+            $failure= "Already left the sailing";
+            return view('sailings.detail', compact('failure', 'sailing'));
         }
     }
 

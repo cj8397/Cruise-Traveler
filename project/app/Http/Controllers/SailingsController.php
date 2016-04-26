@@ -49,9 +49,6 @@ class SailingsController extends Controller
 
     protected function CreateSailing(SailingRequest $request)
     {
-
-        $start = Carbon::parse($request->start);
-        $end = Carbon::parse($request->end);
         $sailing = Sailing::create([
             'title' => $request->title,
             'cruise_line' => $request->cruise_line,
@@ -73,8 +70,6 @@ class SailingsController extends Controller
 
     protected function SaveSailing($id, SailingRequest $request){
         if ($sailing = Sailing::find($id)) {
-            $start = Carbon::parse($request->start);
-            $end = Carbon::parse($request->end);
             $sailing->title = $request->title;
             $sailing->cruise_line = $request->cruise_line;
             $sailing->start_date = $start;
