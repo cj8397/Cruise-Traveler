@@ -115,7 +115,6 @@
 
                                     <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your
                                         Password?</a>
-                                    <p>200 going 80% male 20% male 12 events plan</p>
                                 </div>
                             </div>
                         </form>
