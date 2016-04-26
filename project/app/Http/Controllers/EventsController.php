@@ -23,9 +23,7 @@ class EventsController extends Controller
     {
         $this->middleware('auth');
     }
-    protected function GetAllParticipantsInEvent($event_id){
-        return $usersEvents = UserEvent::all()->where('event_id', $event_id);
-    }
+
     protected function GetAllEvents($sailing){
         if($events = Event::where('sailing_id', $sailing)){
             return view('events.list')->with('events', $events);
@@ -49,7 +47,7 @@ class EventsController extends Controller
 
     protected function GetAllParticipantsInEvent($event_id)
     {
-        return UserEvent::where('event_id', $event_id);
+        return $usersEvents = UserEvent::all()->where('event_id', $event_id);
     }
 
     protected function ShowCreateForm()

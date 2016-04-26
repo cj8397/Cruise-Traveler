@@ -31,29 +31,43 @@
         </div>
 
         <div class="panel panel-default row col-md-5 col-md-offset-1 col-xs-12">
-            <div class="panel-heading">
-                <h2>Events</h2>
+            <div class="row col-md-12 col-xs-12">
+                <div class="panel-heading">
+                    <h2>Sailings & Events</h2>
+                </div>
+
+                @if(isset($usersailings))
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            @foreach($usersailings as $sailings)
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <h4>Sailing ID</h4>
+                                        {!! $sailings->sailing_id !!}
+                                    </li>
+                                </ul>
+                                @foreach($sailingevents as $events)
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <h5>Event: {!! $events->title !!}</h5>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Location:</strong> {!! $events->location !!}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Start:</strong> {!! $events->start_date !!}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>End:</strong> {!! $events->end_date !!}
+                                        </li>
+                                    </ul>
+                                @endforeach
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
-            @if(isset($userevents))
-            <div class="panel-body">
-                <ul class="list-group">
-                    @foreach($userevents as $event)
-                        <div class="row col-md-12 col-xs-12"></div>
-                        <div class="row col-md-6 col-xs-6"></div>
-                        <div class="row col-md-6 col-xs-6">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <h5>Event ID</h5>
-                                    {!! $event->event_id !!}
-                                    <h5>Your Role</h5>
-                                    {!! $event->role !!}
-                                </li>
-                            </ul>
-                        </div>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
+
             {{--<div class="panel-body">
                 <div class="row col-md-6 col-xs-6">
                     <ul class="list-group">
