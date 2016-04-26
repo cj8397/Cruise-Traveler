@@ -104,13 +104,12 @@
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
-
+                        <ul class="dropdown-menu" role="menu">
                             <li>
                                 <a href="{{ url('/users/userprofile') }}"><i
                                             class="glyphicon glyphicon-circle-arrow-left"></i>Profile</a>
                             </li>
                             <li><a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Logout</a></li>
-                    <ul class="dropdown-menu" role="menu">
                         </ul>
                     </li>
                 @endif
