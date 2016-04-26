@@ -31,10 +31,12 @@ Route::get('events/{sailing}', 'EventsController@GetAllEvents');
 Route::get('/sailings', 'SailingsController@GetAllSailings');
 Route::get('/sailings/create', 'SailingsController@ShowCreateForm');
 Route::post('/sailings/create/post', 'SailingsController@CreateSailing');
+Route::get('sailings/update/{id}', 'SailingsController@UpdateSailing');
+Route::post('sailings/update/save/{id}', 'SailingsController@SaveSailing');
 Route::get('/sailings/delete/{id}', 'SailingsController@DeleteSailing');
 Route::get('/sailings/{id}', 'SailingsController@GetSailing');
 
-Route::get('/users', 'UserController@getUser');
+Route::get('/users/userprofile', 'UserController@getUser');
 
 Route::get('/joinsailing/{user_id}/{sailing_id}', 'UserSailingsController@JoinSailing');
 
