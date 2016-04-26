@@ -32,10 +32,12 @@ class UserEventsController extends Controller
             $userevent->role = 'participant';
             $userevent->save();
             $success = "Joined the event.";
-            return view('events.eventdetail', compact( 'event', 'success'));
+            $members = UserEvent::all()->where('event_id',$event_id);
+            return view('events.eventdetail', compact( 'members','event', 'success'));
         } else {
+            $members = UserEvent::all()->where('event_id',$event_id);
             $failure = "Already joined the event.";
-            return view('events.eventdetail', compact( 'event', 'failure'));
+            return view('events.eventdetail', compact( 'members','event', 'failure'));
         }
     }
 
@@ -44,13 +46,16 @@ class UserEventsController extends Controller
     { $user_id = Auth::User()->id;
         $conditions = compact('user_id', 'event_id');
         $event = Event::where('id', $event_id)->first();
+        $members = UserEvent::all()->where('event_id',$event_id);
         if (UserEvent::where($conditions)->exists()) {
             UserEvent::where($conditions)->delete();
             $success = "Left the event.";
-            return view('events.eventdetail', compact( 'event', 'success'));
+            $members = UserEvent::all()->where('event_id',$event_id);
+            return view('events.eventdetail', compact( 'members','event', 'success'));
         } else {
+            $members = UserEvent::all()->where('event_id',$event_id);
             $failure = "Not Participating In Event";
-            return view('events.eventdetail', compact( 'event', 'failure'));
+            return view('events.eventdetail', compact( 'members','event', 'failure'));
         }
         }
 

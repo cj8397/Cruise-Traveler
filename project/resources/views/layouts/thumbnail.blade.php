@@ -58,6 +58,9 @@
                 <li>
                     <a href="{{ url('/sailings') }}">Sailings</a>
                 </li>
+                <li>
+                    <a href="{{ url('events/10') }}">Events</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
