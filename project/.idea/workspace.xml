@@ -288,7 +288,13 @@
       <option name="project" value="LOCAL" />
       <updated>1461691436009</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="changing routes to incude sialing id and added a delete function to events and userevents bridge table">
+      <created>1461691447878</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1461691447878</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
