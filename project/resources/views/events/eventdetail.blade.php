@@ -11,19 +11,19 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                        <strong>Start Time!</strong>
-                        <p class="label label-info center-block">
+                        <p class="alert alert-info center-block">
                             {!! $event->start_date !!}
                         </p>
                     </li>
                     <li class="list-group-item">
                         <strong>End Time!</strong>
-                        <p class="label label-info center-block">
+                        <p class="alert alert-info center-block">
                             {!! $event->end_date !!}
                         </p>
                     </li>
                     <li class="list-group-item">
                         <strong>Location!</strong>
-                        <p class="label label-info center-block">
+                        <p class="alert alert-info center-block">
                             {!! $event->location !!}
                         </p>
                     </li>
@@ -32,6 +32,18 @@
                         <p class="alert alert-info center-block">
                             {!! $event->desc !!}
                         </p>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ url('events/update/'.$event->id) }}">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-btn fa-user"></i>Update Event
+                            </button>
+                        </a>
+                        <a href="{{ url('events/delete/'.$event->id) }}">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-btn fa-user"></i>Delete Event
+                            </button>
+                        </a>
                     </li>
                 </ul>
             </div>

@@ -19,16 +19,14 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 //EventController Stuff
-Route::get('events/eventdetail/{event_id}', 'EventsController@GetOneEvent');
-Route::get('events/eventform/{sailing_id}', 'EventsController@ShowCreateForm');
-Route::post('events/eventform/post', 'EventsController@CreateEvent');
-Route::get('events/deleteevent/{event_id}', 'EventsController@DeleteEvent');
+Route::get('events/detail/{event_id}', 'EventsController@GetOneEvent');
+Route::get('events/form/{sailing_id}', 'EventsController@ShowCreateForm');
+Route::post('events/form/post', 'EventsController@CreateEvent');
+Route::get('events/delete/{event_id}', 'EventsController@DeleteEvent');
+Route::get('events/update/{event_id}', 'EventsController@UpdateEvent');
+Route::post('events/update/save/{event_id}', 'EventsController@SaveEvent');
 Route::get('events/{sailing}', 'EventsController@GetAllEvents');
 //End of Event Controller Stuff
-
-Route::get('/events/{sailing}', 'EventsController@GetAllEvents');
-
-Route::get('/eventdetail/{event_id}', 'EventsController@GetOneEvent');
 
 Route::get('/sailings', 'SailingsController@GetAllSailings');
 Route::get('/sailings/create', 'SailingsController@ShowCreateForm');

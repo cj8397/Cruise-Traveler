@@ -6,16 +6,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('events/form/post') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('events/update/save/'.$event->id) }}">
                         {!! csrf_field() !!}
 
-                        <input type="hidden" name="sailing_id" value={!! $sailing_id !!}/>
+                        <input type="hidden" name="sailing_id" value={!! $event->sailing_id !!}/>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Event Title</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="title" value="{{ old('email') }}">
+                                <input type="text" class="form-control" name="title" value="{!! $event->title !!}">
 
                                 @if ($errors->has('title'))
                                     <span class="help-block">
@@ -29,7 +29,7 @@
                             <label class="col-md-4 control-label">Start Date And Time</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control date" id="datetimepickerstart" name="start">
+                                <input type="text" class="form-control date" id="datetimepickerstart" name="start" >
 
                                 @if ($errors->has('start'))
                                     <span class="help-block">
@@ -43,7 +43,7 @@
                             <label class="col-md-4 control-label">End Date And Time</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="datetimepickersend" name="end">
+                                <input type="text" class="form-control" id="datetimepickersend" name="end" >
 
                                 @if ($errors->has('end'))
                                     <span class="help-block">
@@ -56,7 +56,7 @@
                         <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Event Description</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="desc">
+                                <input type="text" class="form-control" name="desc" value="{!! $event->desc !!}">
 
                                 @if ($errors->has('desc'))
                                     <span class="help-block">
@@ -69,7 +69,7 @@
                         <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Event Location</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="location">
+                                <input type="text" class="form-control" name="location" value="{!! $event->location !!}">
 
                                 @if ($errors->has('location'))
                                     <span class="help-block">
@@ -82,7 +82,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-user"></i>Register
+                                    <i class="fa fa-btn fa-user"></i>Update
                                 </button>
                             </div>
                         </div>
