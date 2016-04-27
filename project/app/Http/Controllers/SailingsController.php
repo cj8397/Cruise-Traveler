@@ -21,7 +21,7 @@ class SailingsController extends Controller
   public function __construct()
   {
     $this->middleware('auth', ['except' => ['GetAllSailings', 'GetSailing']]);
-      //$this->middleware('auth');
+    $this->middleware('admin', ['except' => ['GetAllSailings', 'GetSailing']]);
   }
     //
     protected function GetAllSailings(){
