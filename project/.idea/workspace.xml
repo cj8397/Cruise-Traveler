@@ -193,7 +193,7 @@
       </map>
     </option>
     <push-targets>
-      <push-target-info repo="$PROJECT_DIR$/.." source="CodeNameMaerio" target-remote="origin" target-branch="dev" />
+      <push-target-info repo="$PROJECT_DIR$/.." source="CodeNameMaerio" target-remote="origin" target-branch="CodeNameMaerio" />
     </push-targets>
   </component>
   <component name="IdeDocumentHistory">
@@ -544,7 +544,13 @@
       <option name="project" value="LOCAL" />
       <updated>1461792301753</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="added table relationships">
+      <created>1461792330656</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1461792330656</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
