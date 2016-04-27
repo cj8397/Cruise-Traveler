@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Event;
 use App\Http\Requests;
 use App\UserEvent;
 use Illuminate\Support\Facades\Auth;
@@ -14,45 +15,54 @@ class UserEventsController extends Controller
     }
 
     // create entry in bridge table
-    public function JoinEvent($event_id) {
+    public function JoinEvent($event_id)
+    {
         $user_id = Auth::User()->id;
         // role = member// need to check both columns....
         $userevent = UserEvent::firstOrNew([
             'user_id' => $user_id,
             'event_id' => $event_id,
         ]);
+        $event = Event::where('id', $event_id)->first();
 
-        if(!$userevent->exists) { // doesnt exist
+        if (!$userevent->exists) { // doesnt exist
             // need to assign properties
             $userevent->user_id = $user_id;
             $userevent->event_id = $event_id;
             $userevent->role = 'participant';
             $userevent->save();
             $success = "Joined the event.";
-            return view('eventtest', compact('user_id', 'event_id', 'success'));
+            $members = UserEvent::all()->where('event_id',$event_id);
+            return view('events.eventdetail', compact( 'members','event', 'success'));
         } else {
-            $failure= "Already joined the event.";
-            return view('eventtest', compact('user_id', 'event_id', 'failure'));
+            $members = UserEvent::all()->where('event_id',$event_id);
+            $failure = "Already joined the event.";
+            return view('events.eventdetail', compact( 'members','event', 'failure'));
         }
     }
 
     // remove entry from bridge table
-    public function LeaveEvent($event_id) {
-        $user_id = Auth::User()->id;
+    public function LeaveEvent($event_id)
+    { $user_id = Auth::User()->id;
         $conditions = compact('user_id', 'event_id');
-        if( UserEvent::where($conditions)->exists()) {
+        $event = Event::where('id', $event_id)->first();
+        $members = UserEvent::all()->where('event_id',$event_id);
+        if (UserEvent::where($conditions)->exists()) {
             UserEvent::where($conditions)->delete();
             $success = "Left the event.";
-            return view('eventtest', compact('user_id', 'event_id', 'success'));
+            $members = UserEvent::all()->where('event_id',$event_id);
+            return view('events.eventdetail', compact( 'members','event', 'success'));
         } else {
-            $failure= "Already left the event.";
-            return view('eventtest', compact('user_id', 'event_id', 'failure'));
+            $members = UserEvent::all()->where('event_id',$event_id);
+            $failure = "Not Participating In Event";
+            return view('events.eventdetail', compact( 'members','event', 'failure'));
         }
-    }
+        }
 
     // getAllUsers going to event
     // getAllUsers in a event
-    public function GetAllUsers($event_id) {
+    public function GetAllUsers($event_id)
+    {
         $users = UserEvent::where(['event_id' => $event_id])->get();
         if ($users != null) {
             return $users;
@@ -62,13 +72,14 @@ class UserEventsController extends Controller
     }
 
     // get all events for a user
-    public function GetAllEvents() {
-        $user_id = Auth::User()->id;
-        $events = UserEvent::where(['user_id' => $user_id])->get();
-        if ($events != null) {
-            return [$events];
-        } else {
-            return 'no events';
-        }
-    }
+    /* public function GetAllEvents()
+     {
+         $user_id = Auth::User()->id;
+         $events = UserEvent::where(['user_id' => $user_id])->get();
+         if ($events != null) {
+             return [$events];
+         } else {
+             return 'no events';
+         }
+     }*/
 }

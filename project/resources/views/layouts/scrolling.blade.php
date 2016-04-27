@@ -80,6 +80,9 @@
                 <li>
                     <a href="{{ url('/sailings') }}">Sailings</a>
                 </li>
+                <li>
+                    <a href="{{ url('events/10') }}">Events</a>
+                </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -91,7 +94,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Last Update: April 25th, 2016 @ 10:30 </a></li>
+                            <li><a href="#">Last Update: April 26th, 2016 @ 13:22 </a></li>
                             <li><a href="https://docs.google.com/spreadsheets/d/1KQc5cRAnqdWS55JQb59NHHYKRtqtslBXlHjbWU2QIqc/edit#gid=0">SCRUM WOKRBOOK</a></li>
                             <li><a href="https://docs.google.com/document/d/1yIuRZO1HJ71moInaR_B1Y0mb6yfwxB9oClgWSx5CTpw/edit#heading=h.tphyqzr77ydu">Design Model</a></li>
                         </ul>
@@ -104,12 +107,14 @@
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
-
+                        <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="{{ url('/users') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Profile</a>
+                                <a href="{{ url('/users/userprofile') }}"><i
+                                            class="glyphicon glyphicon-circle-arrow-left"></i>Profile</a>
                             </li>
-                            <li><a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Logout</a></li>
-                    <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Logout</a>
+                            </li>
                         </ul>
                     </li>
                 @endif
@@ -119,6 +124,17 @@
     </div>
     <!-- /.container -->
 </nav>
+@if(isset($success))
+    <div class="alert alert-success">
+        {{$success}}
+    </div>
+@endif
+
+@if(isset($failure))
+    <div class="alert alert-danger">
+        {{$failure}}
+    </div>
+@endif
 
 @yield('content')
 
