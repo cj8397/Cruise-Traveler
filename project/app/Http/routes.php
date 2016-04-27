@@ -25,6 +25,7 @@ Route::post('events/form/post', 'EventsController@CreateEvent');
 Route::get('events/delete/{event_id}', 'EventsController@DeleteEvent');
 Route::get('events/update/{event_id}', 'EventsController@UpdateEvent');
 Route::post('events/update/save/{event_id}', 'EventsController@SaveEvent');
+Route::get('events/users','EventsController@GetAllUsers');
 Route::get('events/{sailing}', 'EventsController@GetAllEvents');
 //End of Event Controller Stuff
 
@@ -48,7 +49,7 @@ Route::get('/sailingusers/{sailing_id}', 'UserSailingsController@GetAllUsers');
 Route::get('/usersailings', 'UserSailingsController@GetAllSailings');
 
 //
-Route::get('/joinevent/{event_id}', 'UserEventsController@JoinEvent');
+Route::get('/joinevent/{event_id}/{sailing_id}', 'UserEventsController@JoinEvent');
 Route::get('/leaveevent/{event_id}', 'UserEventsController@LeaveEvent');
 Route::get('/eventusers/{event_id}', 'UserEventsController@GetAllUsers');
 Route::get('/userevents', 'UserEventsController@GetAllEvents');

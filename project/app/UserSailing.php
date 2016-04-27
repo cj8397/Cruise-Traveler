@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 class UserSailing extends Model
@@ -14,4 +15,8 @@ class UserSailing extends Model
         'user_id', 'sailing_id'
     ];
 
+    public function userevent()
+    {
+        return $this->hasMany('App\UserEvent');
+    }
 }

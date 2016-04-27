@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Sailing;
 use App\User;
 use App\UserEvent;
+use App\UserSailing;
 use Carbon\Carbon;
 use App\Http\Requests;
 use App\Event;
@@ -16,7 +17,7 @@ class EventsController extends Controller
 {
     //
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => ['GetAllEvents','GetAllUsers']]);
     }
 
     protected function GetAllParticipantsInEvent($event_id){
@@ -33,7 +34,7 @@ class EventsController extends Controller
 
     protected function GetOneEvent($event_id){
         if ($event = Event::where('id', $event_id)->first()) {
-            $members = $this->GetAllParticipantsInEvent($event_id);
+            $members = UserEvent::with('event','sailing','user')->get()->where('event_id', $event_id);
             return view('events.eventdetail')->with(['event' => $event,
                 'members' => $members]);
         } else {
@@ -43,6 +44,14 @@ class EventsController extends Controller
 
     protected function ShowCreateForm($sailing_id){
         return view('events.createEventForm')->with('sailing_id', $sailing_id);
+    }
+
+    protected function GetAllUsers(){
+        $UserEvent = UserEvent::with('event','sailing','user')->get()->where('event_id', 91);
+        foreach($UserEvent as $user){
+            var_dump($user->role.$user->user->email);
+        }
+
     }
 
     protected function CreateEvent(EventRequest $request){
@@ -55,6 +64,7 @@ class EventsController extends Controller
             'location' => $request->location
         ]);
         UserEvent::create([
+            'sailing_id' => $request->sailing_id,
             'user_id' => Auth::user()->id,
             'event_id' => $event->id,
             'role' => 'Host'
