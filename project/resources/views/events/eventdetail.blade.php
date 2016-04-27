@@ -80,7 +80,7 @@
                     @foreach ($members as $mem)
                     <a class="col-xs-6 col-md-6">
                         <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                        <span class="label label-default label-pill">{!! $mem->user_id !!}</span>
+                        <span class="label label-default label-pill">{!! $mem->role." and ".$mem->user->email !!}</span>
                     </a>
                     @endforeach
                 </div>
