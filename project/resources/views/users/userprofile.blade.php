@@ -53,7 +53,8 @@
                                 <li class="list-group-item">
                                     <strong>Start Date: </strong>{!! $details[$x]->start_date !!}</br>
                                     <strong>Departing Port: </strong>{!! $details[$x]->port_org !!}</br>
-                                    <strong>Destination: </strong>{!! $details[$x]->destination !!}
+                                    <strong>Destination: </strong>{!! $details[$x]->destination !!}</br>
+                                    <strong>Sailing ID: </strong>{!! $details[$x]->id !!}
                                 </li>
                             </ul>
 
