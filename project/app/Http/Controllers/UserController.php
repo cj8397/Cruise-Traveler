@@ -19,20 +19,26 @@ class UserController extends Controller
 
     public function getEvents()
     {
-        $sailingEvents = [];
+        $userEvents = [];
         $sailingDetails = [];
+        $eventDetails = [];
         //return User::all();
-        //$userEvents = $this->GetAllEvents(Auth::User()->id);
         $userSailings = $this->GetAllSailings(Auth::User()->id);
+        //$userEvents = $this->GetAllEvents(Auth::User()->id);
 //        return $userSailings;
         if (count($userSailings) >= 1) {
             foreach ($userSailings as $sailing) {
                 $sailingDetails = array_add($sailingDetails, $sailing->sailing_id, $this->GetSailingDetail($sailing->sailing_id));
-                $sailingEvents = array_add($sailingEvents, $sailing->sailing_id, $this->GetSailingEvents($sailing->sailing_id));
+                //$sailingEvents = array_add($sailingEvents, $sailing->sailing_id, $this->GetSailingEvents($sailing->sailing_id));
+                $userEvents = array_add($userEvents, $sailing->sailing_id, $this->GetAllEvents($sailing->sailing_id, $sailing->user_id));
+                /*foreach ($userEvents as $event)
+                {
+                    $eventDetails = array_add($eventDetails, $event->event_id, $this->GetEventDetails($event->event_id));
+                }*/
             }
 
-            //return $sailingEvents[10];
-            return view('users.userprofile')->with(['sailingevents' => $sailingEvents, 'usersailings' => $userSailings, 'sailingdetails' => $sailingDetails]);
+            return $userEvents;
+            return view('users.userprofile')->with(['userevents' => $userEvents, 'usersailings' => $userSailings, 'sailingdetails' => $sailingDetails]);
         } else {
             return view('users.userprofile');
         }

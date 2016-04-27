@@ -15,7 +15,7 @@
                     {{--<li class="list-group-item">{{ Auth::user()->first }}</li>--}}
                     <li class="list-group-item"><h4>Last Name: </h4>{{ Auth::user()->last }}</li>
                     {{--<li class="list-group-item">{{ Auth::user()->last }}</li>--}}
-                    <li class="list-group-item"><h4>Date of Birth: </h4>{{ Auth::user()->dob }}</li>
+                    {{--<li class="list-group-item"><h4>Date of Birth: </h4>{{ Auth::user()->dob }}</li>--}}
                     {{--<li class="list-group-item">{{ Auth::user()->dob }}</li>--}}
                     <li class="list-group-item"><h4>Gender: </h4>
                         @if (Auth::user()->sex === 1)
@@ -34,7 +34,11 @@
             <div class="panel-heading">
                 <h2>Sailings & Events</h2>
                 <div class="panel-body col-md-12 col-xs-12">
-                    <input class="btn" type="submit" value="Join Sailing">
+                    <a href="/sailings/list">
+                        <button type="button" class="btn btn-primary btn-md">
+                            <i class="fa fa-users" aria-hidden="true"></i>Join Sailing
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -53,7 +57,8 @@
                                 <li class="list-group-item">
                                     <strong>Start Date: </strong>{!! $details[$x]->start_date !!}</br>
                                     <strong>Departing Port: </strong>{!! $details[$x]->port_org !!}</br>
-                                    <strong>Destination: </strong>{!! $details[$x]->destination !!}
+                                    <strong>Destination: </strong>{!! $details[$x]->destination !!}</br>
+                                    <strong>Sailing ID: </strong>{!! $details[$x]->id !!}
                                 </li>
                             </ul>
 
@@ -68,15 +73,16 @@
                         </div>
 
                         <div class="panel-body col-md-6 col-xs-12">
-                            @foreach($sailingevents[$details[$x]->id] as $events)
+                            @foreach($userevents[$details[$x]->id] as $events)
                                 {{--@for ($y = 0; $y < count($events); $y++)--}}
                                 <ul class="list-group">
                                     <li class="list-group-item">
-                                        <h5>Event: {!! $events->title !!}</h5>
+                                        <h5>Event: {!! $events->user_id !!}</h5>
                                     </li>
+                                    -
                                     <li class="list-group-item">
-                                        <strong>Location:</strong><br>
-                                        {!! $events->location !!}
+                                        <strong>Role:</strong><br>
+                                        {!! $events->role !!}
                                     </li>
                                     <li class="list-group-item">
                                         <strong>Start:</strong><br>
