@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent;
 
 class User extends Authenticatable
 {
@@ -27,8 +28,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function events()
+    public function userevent()
     {
-        return $this->belongsToMany(Event::class, 'events');
+        return $this->hasMany('App\UserEvent');
     }
 }

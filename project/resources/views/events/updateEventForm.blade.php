@@ -29,7 +29,10 @@
                             <label class="col-md-4 control-label">Start Date And Time</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control date" id="datetimepickerstart" name="start" value="{!! $event->start_date !!}" >
+                                    <span class="help-block">
+                                        <strong> {!! $event->start_date !!}</strong>
+                                    </span>
+                                <input type="text" class="form-control date" id="datetimepickerstart" name="start" >
 
                                 @if ($errors->has('start'))
                                     <span class="help-block">
@@ -43,7 +46,10 @@
                             <label class="col-md-4 control-label">End Date And Time</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="datetimepickersend" name="end" value="{!! $event->end_date !!}">
+                                    <span class="help-block">
+                                        <strong>{!! $event->end_date !!}</strong>
+                                    </span>
+                                <input type="text" class="form-control" id="datetimepickersend" name="end">
 
                                 @if ($errors->has('end'))
                                     <span class="help-block">
