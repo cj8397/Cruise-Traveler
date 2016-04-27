@@ -32,4 +32,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\UserEvent');
     }
+    public function isAdmin()
+    {
+      if ($admin = Admin::where('username', $this->attributes['email'])->first())
+      {
+        if($admin->username == $this->attributes['email'] && $admin->password == $this->attributes['password'])
+          return true;
+      }else{
+        return false;
+    }
+  }
 }
