@@ -52,8 +52,8 @@ class SailingsController extends Controller
         $sailing = Sailing::create([
             'title' => $request->title,
             'cruise_line' => $request->cruise_line,
-            'start_date' => $start,
-            'end_date' => $end,
+            'start_date' => $request->start,
+            'end_date' => $request->end,
             'port_org' => $request->port_org,
             'port_dest' => $request->port_dest,
             'destination' => $request->destination
