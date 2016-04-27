@@ -47,7 +47,7 @@
                         <div class="panel-body col-md-6 col-xs-12">
 
                             <div class="panel-heading">
-                                <label class="label-info"><h4>{!! $details[$x]->id !!}</h4></label>
+                                <label class="label-info"><h4>{!! $details[$x]->title !!}</h4></label>
                             </div>
                             <ul class="list-group">
                                 <li class="list-group-item">
@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="panel-body col-md-6 col-xs-12">
-                            <a href="{{ url('events/form/'.$details[$x]->id) }}">
+                            <a href="{{ url('events/form/'.($details[$x]->id)) }}">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-user"></i>Create an Event
                                 </button>
