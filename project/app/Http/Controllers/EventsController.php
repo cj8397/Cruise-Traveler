@@ -17,7 +17,7 @@ class EventsController extends Controller
 {
     //
     public function __construct(){
-        $this->middleware('auth',['except' => ['GetAllEvents','GetAllUsers']]);
+        $this->middleware('auth', ['except' => ['GetAllEvents', 'GetAllUsers']]);
     }
 
     protected function GetAllParticipantsInEvent($event_id){
@@ -34,7 +34,7 @@ class EventsController extends Controller
 
     protected function GetOneEvent($event_id){
         if ($event = Event::where('id', $event_id)->first()) {
-            $members = UserEvent::with('event','sailing','user')->get()->where('event_id', $event_id);
+            $members = UserEvent::with('event', 'sailing', 'user')->get()->where('event_id', $event_id);
             return view('events.eventdetail')->with(['event' => $event,
                 'members' => $members]);
         } else {
@@ -46,10 +46,11 @@ class EventsController extends Controller
         return view('events.createEventForm')->with('sailing_id', $sailing_id);
     }
 
-    protected function GetAllUsers(){
-        $UserEvent = UserEvent::with('event','sailing','user')->get()->where('event_id', 91);
-        foreach($UserEvent as $user){
-            var_dump($user->role.$user->user->email);
+    protected function GetAllUsers()
+    {
+        $UserEvent = UserEvent::with('event', 'sailing', 'user')->get()->where('event_id', 91);
+        foreach ($UserEvent as $user) {
+            var_dump($user->role . $user->user->email);
         }
 
     }
