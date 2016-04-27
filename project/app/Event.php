@@ -1,9 +1,10 @@
 <?php
 
 namespace App;
-
+use Illuminate\Database\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use App\User;
 
 class Event extends Model
 {
@@ -14,9 +15,9 @@ class Event extends Model
         'sailing_id', 'title', 'start_date', 'end_date', 'desc', 'location'
     ];
 
-    public function users()
+    public function userevent()
     {
-        return $this->belongsToMany(User::class, 'event_users');
+        return $this->hasMany('App\UserEvent');
     }
 
     public function getEndDateAttribute($value){
