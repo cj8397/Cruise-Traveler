@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\UserSailing;
-use App\User;
+use App\UserDetails;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -90,8 +90,8 @@ class UserSailingsController extends Controller
 
         $male = 0;
         foreach($userSailings as $userSailing) {
-            $maleConditions = ['id' => $userSailing->user_id, 'sex' => 1 ];
-            if(User::where($maleConditions)->exists()) {
+            $maleConditions = ['user_id' => $userSailing->user_id, 'sex' => 1 ];
+            if(UserDetails::where($maleConditions)->exists()) {
                 $male += 1;
             }
         }
@@ -118,8 +118,8 @@ class UserSailingsController extends Controller
 
         if($total >= 0) {
             foreach ($userSailings as $userSailing) {
-                $userDOB = User::find($userSailing->user_id)->dob;
-                $age = Carbon::parse($userDOB)->age;
+                $userDOB = UserDetails::where(['user_id' => $userSailing->user_id])->first();
+                $age = Carbon::parse($userDOB->dob)->age;
                 switch ($age) {
                     case ($age > 65):
                         $senior += 1;
