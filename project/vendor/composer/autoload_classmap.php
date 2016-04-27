@@ -538,6 +538,7 @@ return array(
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UserDetails' => $baseDir . '/database/migrations/2016_04_19_050000_user_details.php',
+    'UserDetailsTableSeeder' => $baseDir . '/database/seeds/UserDetailsTableSeeder.php',
     'UserEvents' => $baseDir . '/database/migrations/2016_04_19_190147_user_events.php',
     'UserSailings' => $baseDir . '/database/migrations/2016_04_19_151856_user_sailings.php',
     'UsersTableSeeder' => $baseDir . '/database/seeds/UsersTableSeeder.php',

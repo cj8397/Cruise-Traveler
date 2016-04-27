@@ -14,12 +14,12 @@ class SailingsTableSeeder extends Seeder
     {
         DB::table('sailings')->delete();
 
-        $cruiselines = ['Seabreeze', 'Starboard'];
+        $cruiselines = ['Seabreeze', 'Starboard', 'Bluestar'];
 
         $faker = Faker::create();
-        foreach(range(1,11) as $i) {
+        foreach(range(1,50) as $i) {
             DB::table('sailings')->insert([
-                'cruise_line' => $cruiselines[($i % 2)],
+                'cruise_line' => $cruiselines[($i % 3)],
                 'title' => 'Toms Cruise',
                 'start_date' => $faker->dateTimeBetween($startDate = '+30 days', $endDate='+60 days'),
                 'end_date' => $faker->dateTimeBetween($startDate = '+60 days', $endDate='+90 days'),

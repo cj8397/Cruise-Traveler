@@ -5,10 +5,10 @@ use App\Http\Requests;
 use App\UserSailing;
 use App\User;
 use Carbon\Carbon;
-use Faker\Provider\DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Scalar\String_;
 
 class UserSailingsController extends Controller
 {
@@ -151,6 +151,38 @@ class UserSailingsController extends Controller
         } else {
             return 'nosailings';
         }
+    }
+
+    public function CalculateLangPercentages($sailing_id) {
+
+        // $userSailings = UserSailing::where(['sailing_id' => $sailing_id]);
+        // returns language of each person in a sailing
+
+        $total = UserSailing::where(['sailing_id'=>$sailing_id])->count();
+
+        $userLangs = DB::table('user_sailings')
+                            ->where('sailing_id', '=', $sailing_id)
+                            ->join('users', 'users.id', '=', 'user_sailings.user_id')
+                            ->groupBy('users.lang')
+                            ->select('lang')
+                            ->get();
+
+        $users = DB::table('user_sailings')
+            ->where('sailing_id', '=', $sailing_id)
+            ->join('users', 'users.id', '=', 'user_sailings.user_id')
+            ->select('lang')
+            ->get();
+
+        $langs = array();
+        foreach($userLangs as $lang) {
+            if($lang->lang != "") {
+                $count = $users->items->where('lang', '=', $lang)
+                                ->count();
+                $langs[$lang->lang] = $count;
+            }
+        }
+        return $langs;
+
     }
 
     function CalculatePercentage($segment, $total) {

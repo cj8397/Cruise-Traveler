@@ -16,12 +16,6 @@ class CreateUsersTable extends Migration
 
             $table->increments('id')->unique();
             $table->string('email')->unique();
-            $table->string('first');
-            $table->string('last');
-            $table->date('dob');
-            $table->boolean('sex');
-            $table->string('lang');
-            $table->string('country');
             $table->string('password'); // hashed
 
             $table->date('created_at');
