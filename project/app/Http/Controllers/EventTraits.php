@@ -31,7 +31,7 @@ trait EventTraits
     public function GetAllSailings($user_id)
     {
         //$user_id = Auth::User()->id;
-        $sailings = UserSailing::where(['user_id' => $user_id])->get();
+        $sailings = UserSailing::all()->where('user_id', $user_id);
         if ($sailings != null) {
             return $sailings;
         } else {
@@ -41,7 +41,7 @@ trait EventTraits
 
     public function GetSailingEvents($sailing_id)
     {
-        $sailingEvents = Event::where(['sailing_id' => $sailing_id])->get();
+        $sailingEvents = Event::all()->where('sailing_id', $sailing_id);
         if ($sailingEvents != null) {
             return $sailingEvents;
         } else {
