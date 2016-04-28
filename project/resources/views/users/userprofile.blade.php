@@ -48,8 +48,7 @@
             @if(isset($sailingdetails))
                 @foreach($sailingdetails as $details)
                     @for ($x = 0; $x < count($details); $x++)
-                        <div class="panel-body col-md-6 col-xs-12">
-
+                        <div class="panel-body col-md-5 col-xs-12">
                             <div class="panel-heading">
                                 <label class="label-info"><h4>{!! $details[$x]->title !!}</h4></label>
                             </div>
@@ -61,10 +60,9 @@
                                     <strong>Sailing ID: </strong>{!! $details[$x]->id !!}
                                 </li>
                             </ul>
-
                         </div>
 
-                        <div class="panel-body col-md-6 col-xs-12">
+                        <div class="panel-body col-md-7 col-xs-12 pull-right">
                             <a href="{{ url('events/form/'.($details[$x]->id)) }}">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-user"></i>Create an Event
@@ -72,34 +70,32 @@
                             </a>
                         </div>
 
-                        <div class="panel-body col-md-6 col-xs-12">
+                        <div class="panel-body col-md-7 col-xs-12 pull-right">
                             @foreach($userevents[$details[$x]->id] as $events)
-                                {{--@for ($y = 0; $y < count($events); $y++)--}}
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <h5>Event: {!! $events->user_id !!}</h5>
-                                    </li>
-                                    -
-                                    <li class="list-group-item">
-                                        <strong>Role:</strong><br>
-                                        {!! $events->role !!}
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong>Start:</strong><br>
-                                        {!! $events->start_date !!}
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong>End:</strong><br>
-                                        {!! $events->end_date !!}
-                                    </li>
-                                </ul>
-                                {{--@endfor--}}
+                                @foreach($eventdetails[$events->event_id] as $edetail)
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <h5>Event: {!! $edetail->title !!}</h5>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Role:</strong><br>
+                                            {!! $events->role !!}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Start:</strong><br>
+                                            {!! $edetail->start_date !!}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>End:</strong><br>
+                                            {!! $edetail->end_date !!}
+                                        </li>
+                                    </ul>
+                                @endforeach
                             @endforeach
                         </div>
                     @endfor
                 @endforeach
             @endif
-
         </div>
     </div>
     {{--<div class="panel-body">
