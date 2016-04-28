@@ -19,19 +19,24 @@ class User extends Authenticatable
         'email', 'password'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function userdetails(){
+        return  $this->hasMany('App\UserDetails');
+    }
+
+    public function usersailing()
+    {
+        return $this->hasMany('App\UserSailing');
+    }
 
     public function userevent()
     {
         return $this->hasMany('App\UserEvent');
     }
+
     public function isAdmin()
     {
       if ($admin = Admin::where('username', $this->attributes['email'])->first())
