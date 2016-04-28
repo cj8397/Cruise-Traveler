@@ -37,7 +37,7 @@ class UserController extends Controller
                 }
 
             }
-
+            //return $userSailings;
 
             return view('users.userprofile')->with(['usersailings' => $userSailings, 'sailingdetails' => $sailingDetails,
                 'userevents' => $userEvents, 'eventdetails' => $eventDetails
