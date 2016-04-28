@@ -73,20 +73,19 @@ class UserSailingsController extends Controller
     // female - 0, male - 1
     // going back and forth to DB many times, need to optimize after know its working
     public function CalculateSexPercentages($sailing_id) {
-        $userSailings = UserSailing::where(['sailing_id' => $sailing_id])->with('user')->get();
+        $userSailings = UserSailing::where(['sailing_id' => $sailing_id])->with('userdetails')->get();
         $total = count($userSailings);
-        $male = 0;
-        foreach($userSailings as $userSailing) {
-            $male = $userSailing->user->with('userdetails')
-                ->find($userSailing->user_id)->userdetails
-                    ->first()->sex;
+        $count = 0;
 
-            if($male) {
-                $male += 1;
+        foreach ($userSailings as $userSailing) {
+            $male = $userSailing->userdetails->sex; //->userdetails->first()->sex;
+            if ($male) {
+                $count += 1;
             }
         }
+
         if($total != 0) {
-            $percentMale = $this->CalculatePercentage($male, $total);
+            $percentMale = $this->CalculatePercentage($count, $total);
         } else {
             return 'no users in sailing';
         }
