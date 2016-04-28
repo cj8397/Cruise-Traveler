@@ -46,13 +46,18 @@ class EventsController extends Controller
         return view('events.createEventForm')->with('sailing_id', $sailing_id);
     }
 
-    protected function GetAllUsers()
-    {
-        $UserEvent = UserEvent::with('event', 'sailing', 'user')->get()->where('event_id', 91);
-        foreach ($UserEvent as $user) {
-            var_dump($user->role . $user->user->email);
+    protected function GetAllUsers(){
+        $UserEvent = UserEvent::with('user')->get()->where('event_id', 91);
+        // list of users in a sailing
+        foreach($UserEvent as $user){
+            var_dump($user);
+            $userdetails = $user->user->with('userdetails')->find([$user->user->id]);
+            dd($userdetails);
+            // for each user in the sailing, get all their details
+            foreach( $userdetails as $userdetail){
+                var_dump($userdetail->userdetails->first()->first);
+            }
         }
-
     }
 
     protected function CreateEvent(EventRequest $request){

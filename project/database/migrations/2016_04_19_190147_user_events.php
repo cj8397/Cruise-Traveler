@@ -14,13 +14,17 @@ class UserEvents extends Migration
     {
         Schema::create('user_events', function (Blueprint $table) {
 
+            // declare type fist
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('user_id')->on('user_sailings');
+
+            // declare type fist
+            $table->integer('sailing_id')->unsigned();
+            $table->foreign('sailing_id')->references('sailing_id')->on('user_sailings');
+
             //declare type first
             $table->integer('event_id')->unsigned();
             $table->foreign('event_id')->references('id')->on('events');
-
-            // declare type fist
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('role'); // only host or member
 
