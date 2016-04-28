@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserDetails extends Model
 {
+  public $timestamps = false;
     protected $table = 'user_details';
 
-    protected $fillable = [
-        'first', 'last', 'dob', 'sex', 'lang', 'ethinicity', 'hobby', 'family', 'co_travellers', 'country', 'region',
+    protected $fillable = ['user_id',
+        'first', 'last', 'dob', 'sex', 'lang','ethinicity','hobby','family', 'co_travellers', 'country', 'region',
         'city', 'address'];
 
 
