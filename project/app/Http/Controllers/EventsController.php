@@ -49,7 +49,7 @@ class EventsController extends Controller
     protected function GetAllUsers(){
         $UserEvent = UserEvent::with('event','sailing','user')->get()->where('event_id', 91);
         foreach($UserEvent as $user){
-            var_dump($user->role.$user->user->email);
+            var_dump($user->role."  ".$user->user->email);
         }
 
     }
