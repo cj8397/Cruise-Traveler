@@ -90,6 +90,11 @@
                                             class="glyphicon glyphicon-circle-arrow-left"></i>Profile</a>
                             </li>
                             <li><a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i> Logout</a></li>
+                            @if (Auth::user()->isAdmin())
+                              <li>
+                                  <a href="{{ url('/admin/home') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Admin</a>
+                              </li>
+                            @endif
                         </ul>
                     </li>
                 @endif
