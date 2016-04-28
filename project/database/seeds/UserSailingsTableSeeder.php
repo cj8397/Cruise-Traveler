@@ -19,12 +19,11 @@ class UserSailingsTableSeeder extends Seeder
         $firstUser = User::all()->first()->id;
         $firstSailing = Sailing::all()->first()->id;
 
-        for($i = $firstSailing; $i < ($firstSailing + 25); $i++)
-         {
-             for($j = $firstUser; $j < ($firstUser + 10); $j++ ) {
+        for ($i = $firstSailing; $i < ($firstSailing + 25); $i++) {
+            for ($j = $firstUser; $j < ($firstUser + 10); $j++) {
                 DB::table('user_sailings')->insert([
-                    'user_id'=>$j,
-                    'sailing_id'=>$i
+                    'user_id' => $j,
+                    'sailing_id' => $i
                 ]);
             }
         }

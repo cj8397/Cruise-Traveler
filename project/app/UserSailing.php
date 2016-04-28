@@ -20,7 +20,8 @@ class UserSailing extends Model
         return $this->hasMany('App\UserEvent');
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('App\User');
     }
 

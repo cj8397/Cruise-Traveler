@@ -17,7 +17,7 @@ class SailingsTableSeeder extends Seeder
         $cruiselines = ['Seabreeze', 'Starboard', 'Bluestar'];
 
         $faker = Faker::create();
-        foreach(range(1,50) as $i) {
+        foreach (range(1, 50) as $i) {
             DB::table('sailings')->insert([
                 'cruise_line' => $cruiselines[($i % 3)],
                 'title' => 'Toms Cruise',

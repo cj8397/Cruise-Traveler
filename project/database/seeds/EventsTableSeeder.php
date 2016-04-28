@@ -21,7 +21,7 @@ class EventsTableSeeder extends Seeder
         $faker = Faker::create();
         // 12 sailings right now
         foreach(range($first,$last) as $i) {
-            for($j = 1; $j <= 10; $j++) {
+            for ($j = 1; $j <= 10; $j++) {
                 DB::table('events')->insert([
                     'sailing_id' => $i,
                     'title' => 'Cocktail Party',

@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
             'updated_at' => new DateTime('now'),
         ]);
 
-        foreach(range(1,100) as $i) {
+        foreach (range(1, 100) as $i) {
             DB::table('users')->insert([
                 'email' => $faker->email,
                 'password' => bcrypt('password'),

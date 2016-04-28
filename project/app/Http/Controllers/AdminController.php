@@ -18,11 +18,12 @@ use Illuminate\Support\Facades\Response;
 
 class AdminController extends Controller
 {
-  use AuthenticatesAndRegistersUsers;
-  public function __construct()
-  {
-    $this->middleware('auth');
-    $this->middleware('admin');
-  }
-  protected $redirectTo = '/admin/home';
+    use AuthenticatesAndRegistersUsers;
+    protected $redirectTo = '/admin/home';
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin');
+    }
 }
