@@ -207,6 +207,15 @@ class UserSailingsController extends Controller
         return $percent;
     }
 
+    public function GetStatsSummary($sailing_id) {
+        $fam = $this->CalculateFamilyPercentages($sailing_id);
+        $lang = $this->CalculateLangPercentages($sailing_id);
+        $sex = $this->CalculateSexPercentages($sailing_id);
+
+        $summary = compact('fam', 'lang', 'sex');
+        return $summary;
+    }
+
     function CalculatePercentage($segment, $total) {
         return round (($segment / $total) * 100, 0);
     }

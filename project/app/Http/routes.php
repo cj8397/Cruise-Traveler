@@ -52,6 +52,7 @@ Route::get('/family/{id}', 'UserSailingsController@CalculateFamilyPercentages');
 Route::get('/age/{id}', 'UserSailingsController@CalculateAgePercentages');
 Route::get('/lang/{id}', 'UserSailingsController@CalculateLangPercentages');
 Route::get('/country/{id}', 'UserSailingsController@CalculateCountryPercentages');
+Route::get('/summary/{id}', 'UserSailingsController@GetStatsSummary');
 
 //
 Route::get('/joinevent/{event_id}', 'UserEventsController@JoinEvent');

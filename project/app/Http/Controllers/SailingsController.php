@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\UserSailingsController;
 use App\Sailing;
 use App\Event;
 use App\UserSailing;
@@ -26,6 +27,11 @@ class SailingsController extends Controller
     //
     protected function GetAllSailings(){
         if($sailings = Sailing::all()){
+            $controller = new UserSailingsController();
+            $percentages = array();
+            foreach($sailings as $sailing) {
+                $percentages[$sailing->id] = $controller->CalculateSexPercentages($sailing->id);
+            }
             return view('sailings.list', compact('sailings'));
         } else {
             return redirect::back();
