@@ -25,5 +25,14 @@ class UserSailing extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function sailing()
+    {
+        return $this->belongsTo('App\Sailing');
+    }
+
+    public function event()
+    {
+        return $this->belongsTo('App\Event');
+    }
 
 }

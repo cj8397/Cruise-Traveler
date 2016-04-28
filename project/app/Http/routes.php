@@ -37,7 +37,7 @@ Route::post('sailings/update/save/{id}', 'SailingsController@SaveSailing');
 Route::get('/sailings/delete/{id}', 'SailingsController@DeleteSailing');
 Route::get('/sailings/{id}', 'SailingsController@GetSailing');
 
-Route::get('/users/userprofile', 'UserController@getEvents');
+Route::get('/users/userprofile', 'UserController@getUserSailings');
 
 Route::get('/joinsailing/{user_id}/{sailing_id}', 'UserSailingsController@JoinSailing');
 

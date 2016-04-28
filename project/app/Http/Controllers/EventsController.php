@@ -48,7 +48,13 @@ class EventsController extends Controller
 
     protected function GetAllUsers()
     {
-        $UserEvent = UserEvent::with('user')->get()->where('event_id', 91);
+        $UserEvent = UserSailing::with('event', 'sailing', 'user')->get()->where('user_id', Auth::user()->id);
+        foreach ($UserEvent as $sailing) {
+            $eventSailing = $sailing->sailing->with('event')->get();
+            foreach ($eventSailing as $ES) {
+                var_dump($ES->event);
+            }
+        }
         // list of users in a sailing
         foreach ($UserEvent as $user) {
             var_dump($user);
