@@ -52,10 +52,10 @@ class EventsController extends Controller
         foreach($UserEvent as $user){
             var_dump($user);
             $userdetails = $user->user->with('userdetails')->find([$user->user->id]);
-            dd($userdetails);
+            var_dump($userdetails);
             // for each user in the sailing, get all their details
             foreach( $userdetails as $userdetail){
-                var_dump($userdetail->userdetails->first()->first);
+                dd($userdetail->userdetails->first()->first);
             }
         }
     }

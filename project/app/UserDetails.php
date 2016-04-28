@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class UserDetails extends Model
 {
@@ -21,5 +22,9 @@ class UserDetails extends Model
     public function userevents()
     {
         return $this->hasMany('App\UserEvent');
+    }
+
+    public function getAge() {
+        return Carbon::parse($this->dob)->age;
     }
 }
