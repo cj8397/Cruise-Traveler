@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\UserDetails;
 use Hamcrest\Core\AllOf;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\UserDetailsRequest;
 
 class UserController extends Controller
 {
@@ -36,6 +39,41 @@ class UserController extends Controller
         } else {
             return view('users.userprofile');
         }
+    }
+    protected function getDetails(){
+      if($user_id = Auth::User()->id)
+      {
+        if($userDetail = UserDetails::where('user_id', $user_id)->first())
+        {
+          return view('users.detail', compact('userDetail'));
+        }else{
+          return redirect('users/create');
+        }
+      }else{
+        return redirect::back();
+      }
+    }
+    protected function showCreateForm(){
+        return view('users.createdetail');
+    }
+    protected function createUserDetails(UserDetailsRequest $request){
+      $userDetails = UserDetails::create([
+          'user_id' => Auth::user()->id,
+          'first' => $request->first,
+          'last' => $request->last,
+          'dob' => $request->dob,
+          'sex' => $request->sex,
+          'lang' => $request->lang,
+          'country' => $request->country,
+          'ethnicity' => $request->ethnicity,
+          'hobby' => $request->hobby,
+          'family' => $request->family,
+          'co_travellers' => $request->co_travellers,
+          'region' => $request->region,
+          'city' => $request->city,
+          'address' => $request->address
+      ]);
+      return redirect('users/detail');
     }
 
 }
