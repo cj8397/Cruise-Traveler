@@ -38,11 +38,11 @@ class UserEventsController extends Controller
             $userevent->save();
             $success = "Joined the event.";
             $members = UserEvent::all()->where('event_id',$event_id);
-            return view('events.eventdetail', compact( 'members','event', 'success'));
+            return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'success'));//view('events.eventdetail', );
         } else {
             $members = UserEvent::all()->where('event_id',$event_id);
             $failure = "Already joined the event.";
-            return view('events.eventdetail', compact( 'members','event', 'failure'));
+            return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'failure'));
         }
     }
 
@@ -56,11 +56,11 @@ class UserEventsController extends Controller
             UserEvent::where($conditions)->delete();
             $success = "Left the event.";
             $members = UserEvent::all()->where('event_id',$event_id);
-            return view('events.eventdetail', compact( 'members','event', 'success'));
+            return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'success'));//view('events.eventdetail', );
         } else {
             $members = UserEvent::all()->where('event_id',$event_id);
             $failure = "Not Participating In Event";
-            return view('events.eventdetail', compact( 'members','event', 'failure'));
+            return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'failure'));
         }
         }
 
