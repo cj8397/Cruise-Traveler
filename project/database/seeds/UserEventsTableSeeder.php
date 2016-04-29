@@ -21,12 +21,12 @@ class UserEventsTableSeeder extends Seeder
         $eventID = 91;
 
         //cant go up to 15
-        for($j = $firstUser; $j < ($firstUser + 10); $j++ ) {
+        for ($j = $firstUser; $j < ($firstUser + 10); $j++) {
             DB::table('user_events')->insert([
-                'user_id'=>$j,
-                'sailing_id'=>$sailingID,
-                'event_id'=>$eventID,
-                'role'=>'participant'
+                'user_id' => $j,
+                'sailing_id' => $sailingID,
+                'event_id' => $eventID,
+                'role' => 'participant'
             ]);
         }
 

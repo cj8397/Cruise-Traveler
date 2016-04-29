@@ -20,7 +20,7 @@ class UserDetailsTableSeeder extends Seeder
 
         $faker = Faker::create();
         // 12 sailings right now
-        foreach(range($first,$last) as $i) {
+        foreach (range($first, $last) as $i) {
             DB::table('user_details')->insert([
                 'user_id' => $i,
                 'first' => $faker->firstName(),

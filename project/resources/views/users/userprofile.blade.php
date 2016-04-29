@@ -15,7 +15,7 @@
                     {{--<li class="list-group-item">{{ Auth::user()->first }}</li>--}}
                     <li class="list-group-item"><h4>Last Name: </h4>{{ Auth::user()->last }}</li>
                     {{--<li class="list-group-item">{{ Auth::user()->last }}</li>--}}
-                    <li class="list-group-item"><h4>Date of Birth: </h4>{{ Auth::user()->dob }}</li>
+                    {{--<li class="list-group-item"><h4>Date of Birth: </h4>{{ Auth::user()->dob }}</li>--}}
                     {{--<li class="list-group-item">{{ Auth::user()->dob }}</li>--}}
                     <li class="list-group-item"><h4>Gender: </h4>
                         @if (Auth::user()->sex === 1)
@@ -34,34 +34,38 @@
             <div class="panel-heading">
                 <h2>Sailings & Events</h2>
                 <div class="panel-body col-md-12 col-xs-12">
-                    <input class="btn" type="submit" value="Join Sailing">
+                    <a href="/sailings/list">
+                        <button type="button" class="btn btn-primary btn-md">
+                            <i class="fa fa-users" aria-hidden="true"></i>Join Sailing
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
+
         <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
             {{--@if(isset($usersailings))--}}
             {{--@foreach($usersailings as $sailings)--}}
-            @if(isset($sailingdetails))
-                @foreach($sailingdetails as $details)
-                    @for ($x = 0; $x < count($details); $x++)
+            @if(isset($usersailings))
+                @foreach($usersailings as $sailing)
+                    {{--@for ($x = 0; $x < count($details); $x++)--}}
+                    <div class="row col-md-12 col-xs-12">
                         <div class="panel-body col-md-6 col-xs-12">
-
                             <div class="panel-heading">
-                                <label class="label-info"><h4>{!! $details[$x]->title !!}</h4></label>
-                            </div>
+                                <label class="label-info"><h4>{!! $sailing->sailing->title !!}</h4></label>
+                        </div>
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <strong>Start Date: </strong>{!! $details[$x]->start_date !!}</br>
-                                    <strong>Departing Port: </strong>{!! $details[$x]->port_org !!}</br>
-                                    <strong>Destination: </strong>{!! $details[$x]->destination !!}</br>
-                                    <strong>Sailing ID: </strong>{!! $details[$x]->id !!}
+                                    <strong>Start Date: </strong>{!! $sailing->sailing->start_date !!}</br>
+                                    <strong>Departing Port: </strong>{!! $sailing->sailing->port_org !!}</br>
+                                    <strong>Destination: </strong>{!! $sailing->sailing->destination !!}</br>
+                                    <strong>Sailing ID: </strong>{!! $sailing->sailing->id !!}
                                 </li>
                             </ul>
-
                         </div>
 
                         <div class="panel-body col-md-6 col-xs-12">
-                            <a href="{{ url('events/form/'.($details[$x]->id)) }}">
+                            <a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-user"></i>Create an Event
                                 </button>
@@ -69,32 +73,32 @@
                         </div>
 
                         <div class="panel-body col-md-6 col-xs-12">
-                            @foreach($sailingevents[$details[$x]->id] as $events)
-                                {{--@for ($y = 0; $y < count($events); $y++)--}}
+                            @foreach($userevents->where('sailing_id',$sailing->sailing->id) as $events)
+                                {{--@foreach($eventdetails[$events->event_id] as $edetail)--}}
                                 <ul class="list-group">
                                     <li class="list-group-item">
-                                        <h5>Event: {!! $events->title !!}</h5>
+                                        <h5>Event: {!! $events->event->title !!}</h5>
                                     </li>
                                     <li class="list-group-item">
-                                        <strong>Location:</strong><br>
-                                        {!! $events->location !!}
+                                        <strong>Role:</strong><br>
+                                        {!! $events->role !!}
                                     </li>
                                     <li class="list-group-item">
                                         <strong>Start:</strong><br>
-                                        {!! $events->start_date !!}
+                                        {!! $events->event->start_date !!}
                                     </li>
                                     <li class="list-group-item">
                                         <strong>End:</strong><br>
-                                        {!! $events->end_date !!}
+                                        {!! $events->event->end_date !!}
                                     </li>
                                 </ul>
-                                {{--@endfor--}}
+                                {{--@endforeach--}}
                             @endforeach
                         </div>
-                    @endfor
+                        {{--@endfor--}}
+                    </div>
                 @endforeach
             @endif
-
         </div>
     </div>
     {{--<div class="panel-body">

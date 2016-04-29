@@ -17,10 +17,11 @@ use App\Sailing;
 
 trait EventTraits
 {
-    public function GetAllEvents($user_id)
+    public function GetAllEvents($sailing_id, $user_id)
     {
 //        $user_id = Auth::User()->id;
-        $events = UserEvent::where(['user_id' => $user_id])->get();
+        $events = UserEvent::where(['sailing_id' => $sailing_id, 'user_id' => $user_id])
+            ->select('event_id', 'role')->get();
         if ($events != null) {
             return $events;
         } else {
@@ -39,19 +40,15 @@ trait EventTraits
         }
     }
 
-    public function GetSailingEvents($sailing_id)
+    public function GetEventDetails($event_id)
     {
-        $sailingEvents = Event::all()->where('sailing_id', $sailing_id);
-        if ($sailingEvents != null) {
-            return $sailingEvents;
-        } else {
-            return 'no events in this sailing';
-        }
+        $event = Event::where('id', $event_id)->get();
+        return $event;
     }
 
     public function GetSailingDetail($sailing_id)
     {
-        $sailing = Sailing::where(['id' => $sailing_id])->get();
+        $sailing = Sailing::where('id', $sailing_id)->get();
         return $sailing;
     }
 }

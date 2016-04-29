@@ -28,4 +28,10 @@ class Sailing extends Model
     public function setStartDateAttribute($value){
         $this->attributes['start_date'] = Carbon::parse($value);
     }
+
+    public function event()
+    {
+        return $this->hasMany('App\Event');
+    }
+
 }

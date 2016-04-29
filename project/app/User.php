@@ -23,8 +23,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function userdetails(){
-        return  $this->hasMany('App\UserDetails');
+    public function userdetails()
+    {
+        return $this->hasMany('App\UserDetails');
     }
 
     public function usersailing()
@@ -39,12 +40,11 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-      if ($admin = Admin::where('username', $this->attributes['email'])->first())
-      {
-        if($admin->username == $this->attributes['email'] && $admin->password == $this->attributes['password'])
-          return true;
-      }else{
-        return false;
+        if ($admin = Admin::where('username', $this->attributes['email'])->first()) {
+            if ($admin->username == $this->attributes['email'] && $admin->password == $this->attributes['password'])
+                return true;
+        } else {
+            return false;
+        }
     }
-  }
 }
