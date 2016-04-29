@@ -61,7 +61,7 @@ Route::get('/sex/{id}', 'UserSailingsController@CalculateSexPercentages');
 Route::get('/age/{id}', 'UserSailingsController@CalculateAgePercentages');
 Route::get('/lang/{id}', 'UserSailingsController@CalculateLangPercentages');
 //
-Route::get('/joinevent/{event_id}', 'UserEventsController@JoinEvent');
+Route::get('/joinevent/{event_id}/{sailing_id}', 'UserEventsController@JoinEvent');
 Route::get('/leaveevent/{event_id}', 'UserEventsController@LeaveEvent');
 Route::get('/eventusers/{event_id}', 'UserEventsController@GetAllUsers');
 Route::get('/userevents', 'UserEventsController@GetAllEvents');
