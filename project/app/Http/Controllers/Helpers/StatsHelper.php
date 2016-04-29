@@ -94,6 +94,34 @@ class StatsHelper
 
     }
 
+    public function CalculateDynamicPercentages($column, $id, $attribute) {
+        if(starts_with($column, 'sailing')) {
+            $users = UserSailing::where([$column => $id])->with('userdetails')->get();
+        }
+        if(starts_with($column, 'event')) {
+            $users = UserEvent::where([$column => $id])->with('userdetails')->get();
+        }
+        if($users != null) {
+            $langs = array();
+            foreach ($users as $user) { // dynamically create an array with counts
+                $lang = $user->userdetails->$attribute;
+                if (isset($langs[$lang])) {
+                    $langs[$lang]++;
+                } else {
+                    $langs[$lang] = 1;
+                }
+            }
+            $total = count($users);
+            $percent = array();
+            foreach ($langs as $lang => $count) {
+                $percent[$lang] = $this->CalculatePercentage($count, $total);
+            }
+            return $percent;
+        } else {
+            return 'no users';
+        }
+    }
+
     function CalculatePercentage($segment, $total) {
         return round (($segment / $total) * 100, 0);
     }

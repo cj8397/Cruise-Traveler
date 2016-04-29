@@ -30,6 +30,7 @@ class SailingsController extends Controller
             $controller = new UserSailingsController();
             $percentages = array();
             foreach($sailings as $sailing) {
+                $controller->CalculateSexPercentages($sailing->id);
                 $percentages[$sailing->id] = $controller->CalculateSexPercentages($sailing->id);
             }
             return view('sailings.list', compact('sailings'));

@@ -9,10 +9,11 @@ use App\Http\Controllers\Helpers\StatsHelper;
 
 class UserSailingsController extends Controller
 {
-
+    private $helper;
     public function __construct()
     {
         $this->middleware('auth');
+        $this->helper = new StatsHelper();
     }
 
     // create entry in bridge table
@@ -71,58 +72,25 @@ class UserSailingsController extends Controller
     // female - 0, male - 1
     // going back and forth to DB many times, need to optimize after know its working
     public function CalculateSexPercentages($sailing_id) {
-        $helper = new StatsHelper();
-        $percentages = $helper->CalculateBooleanPercentages('sailing_id', $sailing_id, 'sex');
+        $percentages = $this->helper->CalculateBooleanPercentages('sailing_id', $sailing_id, 'sex');
         return ['male'=>$percentages['true'], 'female'=>$percentages['false']];
     }
 
     public function CalculateFamilyPercentages($sailing_id) {
-        $helper = new StatsHelper();
-        $percentages = $helper->CalculateBooleanPercentages('sailing_id', $sailing_id, 'family');
+        $percentages = $this->helper->CalculateBooleanPercentages('sailing_id', $sailing_id, 'family');
         return ['family'=>$percentages['true'], 'nonfamily'=>$percentages['false']];
     }
 
     public function CalculateAgePercentages($sailing_id) {
-        $helper = new StatsHelper();
-        return $helper->CalculateAgePercentages('sailing_id', $sailing_id);
+        return $this->helper->CalculateAgePercentages('sailing_id', $sailing_id);
     }
 
     public function CalculateLangPercentages($sailing_id) {
-        $users = UserSailing::with('userdetails')->where(['sailing_id'=>$sailing_id])->get();
-        $langs = array();
-        foreach($users as $user) { // dynamically create an array with counts
-            $lang = $user->userdetails->lang;
-            if(isset($langs[$lang])) {
-                $langs[$lang]++;
-            } else {
-                $langs[$lang] = 1;
-            }
-        }
-        $total = count($users);
-        $percent = array();
-        foreach($langs as $lang => $count) {
-            $percent[$lang] = $this->CalculatePercentage($count, $total);
-        }
-        return $percent;
+        return $this->helper->CalculateDynamicPercentages('sailing_id', $sailing_id, 'lang');
     }
 
     public function CalculateCountryPercentages($sailing_id) {
-        $users = UserSailing::with('userdetails')->where(['sailing_id'=>$sailing_id])->get();
-        $countries = array();
-        foreach($users as $user) { // dynamically create an array with counts
-            $country = $user->userdetails->country;
-            if(isset($countries[$country])) {
-                $countries[$country]++;
-            } else {
-                $countries[$country] = 1;
-            }
-        }
-        $total = count($users);
-        $percent = array();
-        foreach($countries as $country => $count) {
-            $percent[$country] = $this->CalculatePercentage($count, $total);
-        }
-        return $percent;
+        return $this->helper->CalculateDynamicPercentages('sailing_id', $sailing_id, 'country');
     }
 
     public function GetStatsSummary($sailing_id) {
