@@ -6,12 +6,15 @@ use App\Http\Requests;
 use App\UserEvent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\Helpers\StatsHelper;
 
 class UserEventsController extends Controller
 {
+    private $helper;
     public function __construct()
     {
         $this->middleware('auth');
+        $this->helper = new StatsHelper();
     }
 
     // create entry in bridge table
@@ -27,7 +30,7 @@ class UserEventsController extends Controller
 
         if (!$userevent->exists) { // doesnt exist
             // need to assign properties
-            $userevent->sailing_id = $sailing_id;
+            $userevent->sailing_id = $event_id;
             $userevent->user_id = $user_id;
             $userevent->event_id = $event_id;
             $userevent->role = 'Participant';
@@ -72,15 +75,36 @@ class UserEventsController extends Controller
         }
     }
 
-    // get all events for a user
-    /* public function GetAllEvents()
-     {
-         $user_id = Auth::User()->id;
-         $events = UserEvent::where(['user_id' => $user_id])->get();
-         if ($events != null) {
-             return [$events];
-         } else {
-             return 'no events';
-         }
-     }*/
+    // female - 0, male - 1
+    // going back and forth to DB many times, need to optimize after know its working
+    public function CalculateSexPercentages($event_id) {
+        $percentages = $this->helper->CalculateBooleanPercentages('event_id', $event_id, 'sex');
+        return ['male'=>$percentages['true'], 'female'=>$percentages['false']];
+    }
+
+    public function CalculateFamilyPercentages($event_id) {
+        $percentages = $this->helper->CalculateBooleanPercentages('event_id', $event_id, 'family');
+        return ['family'=>$percentages['true'], 'nonfamily'=>$percentages['false']];
+    }
+
+    public function CalculateAgePercentages($event_id) {
+        return $this->helper->CalculateAgePercentages('event_id', $event_id);
+    }
+
+    public function CalculateLangPercentages($event_id) {
+        return $this->helper->CalculateDynamicPercentages('event_id', $event_id, 'lang');
+    }
+
+    public function CalculateCountryPercentages($event_id) {
+        return $this->helper->CalculateDynamicPercentages('event_id', $event_id, 'country');
+    }
+
+    public function GetStatsSummary($event_id) {
+        $fam = $this->CalculateFamilyPercentages($event_id);
+        $lang = $this->CalculateLangPercentages($event_id);
+        $sex = $this->CalculateSexPercentages($event_id);
+
+        $summary = compact('fam', 'lang', 'sex');
+        return $summary;
+    }
 }

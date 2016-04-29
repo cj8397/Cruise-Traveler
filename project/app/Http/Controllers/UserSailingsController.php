@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\UserSailing;
+use App\UserEvent;
+use App\Sailing;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Helpers\StatsHelper;
+use App\Http\Controllers\UserEventsController;
 
 class UserSailingsController extends Controller
 {
@@ -45,9 +48,10 @@ class UserSailingsController extends Controller
     public function LeaveSailing($sailing_id) {
         $user_id = Auth::User()->id;
         // creates key value pair based on variable names
-        $sailing = Sailing::where('id', $sailing_id)->first();
+        $sailing = Sailing::find($sailing_id);
         $conditions = compact('user_id', 'sailing_id');
         if( UserSailing::where($conditions)->exists()) {
+            UserEvent::where($conditions)->delete();
             UserSailing::where($conditions)->delete();
             //return redirect::back();
             $success = "Left the sailing";
@@ -102,7 +106,4 @@ class UserSailingsController extends Controller
         return $summary;
     }
 
-    function CalculatePercentage($segment, $total) {
-        return round (($segment / $total) * 100, 0);
-    }
 }

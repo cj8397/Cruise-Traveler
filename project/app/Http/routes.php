@@ -35,7 +35,6 @@ Route::post('events/update/save/{event_id}', 'EventsController@SaveEvent');
 Route::get('events/users', 'EventsController@GetAllUsers');
 Route::get('events/{sailing}', 'EventsController@GetAllEvents');
 //End of Event Controller Stuff
-
 Route::get('/sailings', 'SailingsController@GetAllSailings');
 Route::get('/sailings/create', 'SailingsController@ShowCreateForm');
 Route::post('/sailings/create/post', 'SailingsController@CreateSailing');
@@ -45,12 +44,11 @@ Route::get('/sailings/delete/{id}', 'SailingsController@DeleteSailing');
 Route::get('/sailings/{id}', 'SailingsController@GetSailing');
 
 Route::get('/users/userprofile', 'UserController@getUserSailings');
-Route::get('/users/userprofile', 'UserController@getEvents');
 Route::get('/users/detail', 'UserController@getDetails');
 Route::get('/users/create', 'UserController@showCreateForm');
 Route::post('/users/create/post', 'UserController@createUserDetails');
 
-Route::get('/joinsailing/{user_id}/{sailing_id}', 'UserSailingsController@JoinSailing');
+//Route::get('/joinsailing/{user_id}/{sailing_id}', 'UserSailingsController@JoinSailing');
 
 // dont use user_id in the route, can get it in your code using
 // also dont think you need to call it saiding id here?
@@ -58,6 +56,7 @@ Route::get('/joinsailing/{sailing_id}', 'UserSailingsController@JoinSailing');
 Route::get('/leavesailing/{sailing_id}', 'UserSailingsController@LeaveSailing');
 Route::get('/sailingusers/{sailing_id}', 'UserSailingsController@GetAllUsers');
 Route::get('/usersailings', 'UserSailingsController@GetAllSailings');
+
 Route::get('/sex/{id}', 'UserSailingsController@CalculateSexPercentages');
 Route::get('/family/{id}', 'UserSailingsController@CalculateFamilyPercentages');
 Route::get('/age/{id}', 'UserSailingsController@CalculateAgePercentages');
@@ -66,7 +65,7 @@ Route::get('/country/{id}', 'UserSailingsController@CalculateCountryPercentages'
 Route::get('/summary/{id}', 'UserSailingsController@GetStatsSummary');
 
 //
-Route::get('/joinevent/{event_id}', 'UserEventsController@JoinEvent');
+Route::get('/joinevent/{event_id}/{sailing_id}', 'UserEventsController@JoinEvent');
 Route::get('/leaveevent/{event_id}', 'UserEventsController@LeaveEvent');
 Route::get('/eventusers/{event_id}', 'UserEventsController@GetAllUsers');
 Route::get('/userevents', 'UserEventsController@GetAllEvents');

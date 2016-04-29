@@ -27,12 +27,12 @@ class SailingsController extends Controller
     //
     protected function GetAllSailings(){
         if($sailings = Sailing::all()){
-            $controller = new UserSailingsController();
-            $percentages = array();
-            foreach($sailings as $sailing) {
-                $controller->CalculateSexPercentages($sailing->id);
-                $percentages[$sailing->id] = $controller->CalculateSexPercentages($sailing->id);
-            }
+//            $controller = new UserSailingsController();
+//            $percentages = array();
+//            foreach($sailings as $sailing) {
+//                $controller->CalculateSexPercentages($sailing->id);
+//                $percentages[$sailing->id] = $controller->CalculateSexPercentages($sailing->id);
+//            }
             return view('sailings.list', compact('sailings'));
         } else {
             return redirect::back();

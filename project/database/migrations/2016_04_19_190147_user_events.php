@@ -28,6 +28,8 @@ class UserEvents extends Migration
 
             $table->string('role'); // only host or member
 
+            $table->primary(['user_id', 'sailing_id', 'event_id']);
+
         });
     }
 
