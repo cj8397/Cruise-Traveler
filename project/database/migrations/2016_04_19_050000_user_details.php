@@ -30,18 +30,18 @@ class UserDetails extends Migration
             $table->string('region')->nullable(); // province or state
             $table->string('city')->nullable();
             $table->string('address')->nullable();
-            $table->float('co_travellers')->nullable();
-            $table->float('0-2')->nullable();
-            $table->float('2-5')->nullable();
-            $table->float('6-12')->nullable();
-            $table->float('13-17')->nullable();
-            $table->float('18-24')->nullable();
-            $table->float('25-29')->nullable();
-            $table->float('30-39')->nullable();
-            $table->float('40-49')->nullable();
-            $table->float('50-59')->nullable();
-            $table->float('60-74')->nullable();
-            $table->float('18-75+')->nullable();
+            $table->boolean('co_travellers')->nullable();
+            $table->integer('0-2')->nullable();
+            $table->integer('3-5')->nullable();
+            $table->integer('6-12')->nullable();
+            $table->integer('13-17')->nullable();
+            $table->integer('18-24')->nullable();
+            $table->integer('25-29')->nullable();
+            $table->integer('30-39')->nullable();
+            $table->integer('40-49')->nullable();
+            $table->integer('50-59')->nullable();
+            $table->integer('60-74')->nullable();
+            $table->integer('75+')->nullable();
         });
     }
 

@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Helpers\StatsHelper;
 use App\Http\Controllers\UserEventsController;
+use Illuminate\Support\Facades\DB;
+
 
 class UserSailingsController extends Controller
 {
@@ -48,11 +50,16 @@ class UserSailingsController extends Controller
     public function LeaveSailing($sailing_id) {
         $user_id = Auth::User()->id;
         // creates key value pair based on variable names
+        $sailing_id = (int)$sailing_id;
         $sailing = Sailing::find($sailing_id);
         $conditions = compact('user_id', 'sailing_id');
         if( UserSailing::where($conditions)->exists()) {
             UserEvent::where($conditions)->delete();
+            DB::table('user_sailings')->where('user_id', '=', $user_id)
+                ->where('sailing_id', '=', $user_id)->delete();
+
             UserSailing::where($conditions)->delete();
+                // ->delete();
             //return redirect::back();
             $success = "Left the sailing";
             return view('sailings.detail', compact('success', 'sailing'));

@@ -16,11 +16,11 @@ class UserEvents extends Migration
 
             // declare type fist
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('user_id')->on('user_sailings');
+            $table->foreign('user_id')->references('id')->on('users');
 
             // declare type fist
             $table->integer('sailing_id')->unsigned();
-            $table->foreign('sailing_id')->references('sailing_id')->on('user_sailings');
+            $table->foreign('sailing_id')->references('id')->on('sailings');
 
             //declare type first
             $table->integer('event_id')->unsigned();
