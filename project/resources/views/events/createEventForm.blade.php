@@ -16,7 +16,7 @@
                                     </span>
                         @endif
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Event Title</label>
 
                             <div class="col-md-6">

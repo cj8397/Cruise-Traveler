@@ -20,6 +20,10 @@ class Event extends Model
         return $this->hasMany('App\UserEvent');
     }
 
+    public function sailing(){
+        return $this->belongsTo('App\Sailing');
+    }
+
     public function getEndDateAttribute($value){
         return Carbon::parse($value)->format('l jS \\of F Y h:i:s A');
     }

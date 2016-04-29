@@ -47,12 +47,18 @@ class EventsController extends Controller
     }
 
     protected function GetAllUsers(){
-        $UserEvent = UserEvent::with('event','sailing','user')->get()->where('event_id', 91);
+        $UserEvent = UserSailing::with('sailing')->get()->where('user_id', 1);
+        $sailEvents = Sailing::with('event')->get();
+        dd($UserEvent);
         foreach($UserEvent as $user){
-            var_dump($user->role."  ".$user->user->email);
+            $sailEvents = Sailing::with('event')->get();
+            dd($sailEvents);
+            $sailings = $user->sailing->with('event')->get();
+            foreach($sailings as $event){
+                dd($event->event->where('sailing_id', $user->sailing->id));
+            }
+            }
         }
-
-    }
 
     protected function CreateEvent(EventRequest $request){
         $event = Event::create([

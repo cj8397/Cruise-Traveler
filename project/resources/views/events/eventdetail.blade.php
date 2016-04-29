@@ -78,10 +78,12 @@
             <div class="panel panel-body">
                 <div class="row">
                     @foreach ($members as $mem)
-                    <a class="col-xs-6 col-md-6">
-                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                        <span class="label label-default label-pill">{!! $mem->role." and ".$mem->user->email !!}</span>
-                    </a>
+                        @if($mem->role == 'Host')
+                        <a class="col-xs-12 col-md-12">
+                            <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                            <span class="label label-default label-pill">{!! $mem->role." and ".$mem->user->email !!}</span>
+                        </a>
+                        @endif
                     @endforeach
                 </div>
             </div>
