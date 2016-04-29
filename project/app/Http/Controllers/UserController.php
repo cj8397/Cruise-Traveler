@@ -27,7 +27,6 @@ class UserController extends Controller
         return view('users.profiletemplate')->with(['usersailings' => $usersailings,
             'userevents' => $userevents,
             'user' => $user]);
-
     }
     public function getUserSailings()
     {

@@ -24,6 +24,11 @@ class UserEvent extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function userdetails()
+    {
+        return $this->belongsTo('App\UserDetails','user_id','user_id');
+    }
+
     public function sailing()
     {
         return $this->belongsTo('App\Sailing');

@@ -29,6 +29,13 @@ class Sailing extends Model
         $this->attributes['start_date'] = Carbon::parse($value);
     }
 
+    public function usersailings(){
+        return $this->hasMany('App\UserSailing');
+    }
+
+    public function userevents(){
+        return $this->hasMany('App\UserEvent');
+    }
     public function event()
     {
         return $this->hasMany('App\Event');

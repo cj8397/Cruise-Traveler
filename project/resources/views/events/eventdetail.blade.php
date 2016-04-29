@@ -26,10 +26,18 @@
                         @if(!isset($currentUser))
                         @include('partials.buttons.joinevent')
                         @endif
-                        @if(isset($currentUser))
+                        @if(isset($currentUser) && $currentUser->role != 'Host')
                         @include('partials.buttons.leaveevent')
                             @endif
                     </li>
+                    @if(isset($host))
+                    <li class="list-group-item">
+                        <strong>Event Host</strong>
+                        <p class="alert alert-info center-block">
+                            {!! $host->userdetails->first." ".$host->userdetails->last !!}
+                        </p>
+                    </li>
+                    @endif
                     <li class="list-group-item">
                        <strong>Start Time!</strong>
                         <p class="alert alert-info center-block">
@@ -87,12 +95,10 @@
             <div class="panel panel-body">
                 <div class="row">
                     @foreach ($members as $mem)
-                        @if($mem->role == 'Host')
                         <a class="col-xs-4 col-md-4" href="/users/{!! $mem->user_id !!}">
                             <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                            <span class="label label-default label-pill">{!! $mem->role." and ".$mem->user->email !!}</span>
+                            <span class="label label-default label-pill">{!! $mem->userdetails->first." ".$mem->userdetails->last!!}</span>
                         </a>
-                        @endif
                     @endforeach
                 </div>
             </div>

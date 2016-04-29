@@ -37,12 +37,12 @@ Route::get('events/users','EventsController@GetAllUsers');
 //End of Event Controller Stuff
 
 //
+Route::get('/sailings/delete/{id}', 'SailingsController@DeleteSailing');
 Route::get('/sailings', 'SailingsController@GetAllSailings');
 Route::get('/sailings/create', 'SailingsController@ShowCreateForm');
 Route::post('/sailings/create/post', 'SailingsController@CreateSailing');
 Route::get('sailings/update/{id}', 'SailingsController@UpdateSailing');
 Route::post('sailings/update/save/{id}', 'SailingsController@SaveSailing');
-Route::get('/sailings/delete/{id}', 'SailingsController@DeleteSailing');
 Route::get('/sailings/{id}', 'SailingsController@GetSailing');
 
 Route::get('/users/userprofile', 'UserController@getUserSailings');

@@ -18,14 +18,15 @@ use Illuminate\Support\Facades\Response;
 
 class SailingsController extends Controller
 {
-  public function __construct()
-  {
-    $this->middleware('auth', ['except' => ['GetAllSailings', 'GetSailing']]);
-      $this->middleware('admin', ['except' => ['GetAllSailings', 'GetSailing']]);
-  }
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['GetAllSailings', 'GetSailing']]);
+    }
+
     //
-    protected function GetAllSailings(){
-        if($sailings = Sailing::all()){
+    protected function GetAllSailings()
+    {
+        if ($sailings = Sailing::all()) {
             return view('sailings.list', compact('sailings'));
         } else {
             return redirect::back();
@@ -60,15 +61,18 @@ class SailingsController extends Controller
         ]);
         return redirect('sailings');
     }
-    protected function UpdateSailing($id){
-      if ($sailing = Sailing::find($id)) {
-          return view('sailings.update', compact('sailing'));
-      } else {
-          return redirect('sailings');
-      }
+
+    protected function UpdateSailing($id)
+    {
+        if ($sailing = Sailing::find($id)) {
+            return view('sailings.update', compact('sailing'));
+        } else {
+            return redirect('sailings');
+        }
     }
 
-    protected function SaveSailing($id, SailingRequest $request){
+    protected function SaveSailing($id, SailingRequest $request)
+    {
         if ($sailing = Sailing::find($id)) {
             $sailing->title = $request->title;
             $sailing->cruise_line = $request->cruise_line;
@@ -79,34 +83,18 @@ class SailingsController extends Controller
             $sailing->destination = $request->destination;
             $sailing->save();
             return redirect()->action('SailingsController@GetSailing', [$id]);
-        }else{
+        } else {
             return redirect('sailings');
         }
-      }
+    }
 
-        protected function DeleteSailing($id){
-            if ($sailing = Sailing::find($id)) {
-
-              $events = Event::where('sailing_id', $id)->get();
-
-              foreach($events as $event){
-                UserEvent::where('event_id', $event->id)->delete();
-                $event->delete();
-              }
-
-              $userSailings = UserSailing::where('sailing_id', $id)->get();
-
-              foreach($userSailings as $userSailing){
-                $userSailing->delete();
-              }
-
-              $sailing->delete();
-
-              return redirect('sailings');
-
-            } else {
-              return redirect::back();
-            }
-
-          }
-        }
+    protected function DeleteSailing($id)
+    {
+        $sailing = Sailing::with('usersailings', 'userevents')->where('id', $id)->first();
+        $events = Event::where('sailing_id', $id);
+        $events->delete();
+        $sailing->usersailings()->delete();
+        $sailing->userevents()->delete();
+        $sailing->delete();
+    }
+}
