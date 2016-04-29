@@ -71,7 +71,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Last Update: April 28th, 2016 @ 12:07 </a></li>
+                            <li><a href="#">Last Update: April 29th, 2016 @ 15:00 </a></li>
                             <li><a href="https://docs.google.com/spreadsheets/d/1KQc5cRAnqdWS55JQb59NHHYKRtqtslBXlHjbWU2QIqc/edit#gid=0">SCRUM WOKRBOOK</a></li>
                             <li><a href="https://docs.google.com/document/d/1yIuRZO1HJ71moInaR_B1Y0mb6yfwxB9oClgWSx5CTpw/edit#heading=h.tphyqzr77ydu">Design Model</a></li>
                         </ul>
@@ -80,11 +80,11 @@
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 @else
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
+                        {{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                             {{ Auth::user()->name }} <span class="caret"></span>
+                         </a>--}}
 
-                        <ul class="dropdown-menu" role="menu">
+                    {{--<ul class="dropdown-menu" role="menu">--}}
                             <li>
                                 <a href="{{ url('/users/userprofile') }}"><i
                                             class="glyphicon glyphicon-circle-arrow-left"></i>Profile</a>
@@ -95,7 +95,7 @@
                                   <a href="{{ url('/admin/home') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Admin</a>
                               </li>
                             @endif
-                        </ul>
+                            {{--</ul>--}}
                     </li>
                 @endif
             </ul>
