@@ -6,11 +6,11 @@ use App\UserSailing;
 use App\UserDetails;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Sailing;
 
 
 class UserSailingsController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');

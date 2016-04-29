@@ -1,6 +1,23 @@
 @extends('layouts.scrolling')
 
 @section('content')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        $(function () {
+
+            $('.toggle').click(function (event) {
+                event.preventDefault();
+                var target = $(this).attr('href');
+                $(target).toggleClass('hidden show');
+            });
+
+        });
+    </script>
+    <style type="text/css">
+        #credits {
+            margin-top: 5%;
+        }
+    </style>
     <img class="img-responsive" src="/images/cruiseship.jpg">
     <div class="container">
         <div class="panel panel-default row col-md-3 col-xs-12">
@@ -25,7 +42,17 @@
                         @endif
                     </li>
                 </ul>
-                <input class="btn" type="submit" value="More Detail">
+
+                <div id="credits" class="well hidden col-md-12 col-xs-12">
+
+                    <ul class="list-group">
+                        <li class="list-group-item"><h4>Date of Birth: </h4>{{ Auth::user()->dob }}</li>
+                        <li class="list-group-item"><h4>Country: </h4>{{ Auth::user()->country }}</li>
+                        <li class="list-group-item"><h4>Language: </h4>{{ Auth::user()->language }}</li>
+
+                    </ul>
+                </div>
+                <a href="#credits" class="toggle btn btn-primary">More Details</a>
             </div>
             <div></div>
         </div>
