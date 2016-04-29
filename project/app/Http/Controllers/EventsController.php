@@ -17,7 +17,7 @@ class EventsController extends Controller
 {
     //
     public function __construct(){
-        $this->middleware('auth', ['except' => ['GetAllEvents', 'GetAllUsers']]);
+        $this->middleware('auth',['except' => ['GetAllEvents','GetAllUsers']]);
     }
 
     protected function GetAllParticipantsInEvent($event_id){
@@ -34,9 +34,13 @@ class EventsController extends Controller
 
     protected function GetOneEvent($event_id){
         if ($event = Event::where('id', $event_id)->first()) {
-            $members = UserEvent::with('event', 'sailing', 'user')->get()->where('event_id', $event_id);
+            $members = UserEvent::with('userdetails')->get()->where('event_id', $event_id);
+            $host = $members->where('role', 'Host')->first();
+            $currentUser = $members->where('user_id',Auth::user()->id)->first();
             return view('events.eventdetail')->with(['event' => $event,
-                'members' => $members]);
+                'members' => $members,
+                'currentUser' => $currentUser,
+                'host' => $host]);
         } else {
             return Redirect::back();
         }
