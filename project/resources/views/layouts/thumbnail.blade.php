@@ -84,7 +84,7 @@
                              {{ Auth::user()->name }} <span class="caret"></span>
                          </a>--}}
 
-                        <ul class="dropdown-menu" role="menu">
+                    {{--<ul class="dropdown-menu" role="menu">--}}
                             <li>
                                 <a href="{{ url('/users/userprofile') }}"><i
                                             class="glyphicon glyphicon-circle-arrow-left"></i>Profile</a>
@@ -95,7 +95,7 @@
                                   <a href="{{ url('/admin/home') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Admin</a>
                               </li>
                             @endif
-                        </ul>
+                            {{--</ul>--}}
                     </li>
                 @endif
             </ul>

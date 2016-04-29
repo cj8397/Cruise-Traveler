@@ -23,46 +23,60 @@
     <!-- Projects Row -->
     <div class="row">
         @foreach($events as $event)
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/events/detail/{!! $event->id !!}">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <h4> {!! ucfirst($event->title) !!}</h4>
-            <p>200 going 80% male 20% male </p>
-        </div>
+            <div class="panel panel-default col-md-3 portfolio-item">
+
+                <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
+
+                <h4> {!! ucfirst($event->title) !!}</h4>
+                <div class="col-md-6 col-xs-6">
+                    <a href="/events/detail/{!! $event->id !!}">
+                        <button type="button" class="btn btn-primary btn-md">
+                            <i class="fa fa-users" aria-hidden="true"></i>Event Detail
+                        </button>
+                    </a>
+                </div>
+                <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                    <div class="panel-body col-md-6 col-xs-12">
+                        <p>5 People currently attending</p>
+                    </div>
+                    <div class="panel-body col-md-6 col-xs-12">
+                        <p>4 Singles</p>
+                    </div>
+                </div>
+            </div>
             @endforeach
-    <!-- /.row -->
+                    <!-- /.row -->
 
 
-    <hr>
-    <!-- Pagination -->
-    <div class="row text-center">
-        <div class="col-lg-12 col-md-12 col-xs-12">
-            <ul class="pagination">
-                <li>
-                    <a href="/eventdetail/1">&laquo;</a>
-                </li>
-                <li class="active">
-                    <a href="/eventdetail/1">1</a>
-                </li>
-                <li>
-                    <a href="/eventdetail/1">2</a>
-                </li>
-                <li>
-                    <a href="/eventdetail/1">3</a>
-                </li>
-                <li>
-                    <a href="/eventdetail/1">4</a>
-                </li>
-                <li>
-                    <a href="/eventdetail/1">5</a>
-                </li>
-                <li>
-                    <a href="/eventdetail/1">&raquo;</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+            <hr>
+            <!-- Pagination -->
+            <div class="row text-center">
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <ul class="pagination">
+                        <li>
+                            <a href="/eventdetail/1">&laquo;</a>
+                        </li>
+                        <li class="active">
+                            <a href="/eventdetail/1">1</a>
+                        </li>
+                        <li>
+                            <a href="/eventdetail/1">2</a>
+                        </li>
+                        <li>
+                            <a href="/eventdetail/1">3</a>
+                        </li>
+                        <li>
+                            <a href="/eventdetail/1">4</a>
+                        </li>
+                        <li>
+                            <a href="/eventdetail/1">5</a>
+                        </li>
+                        <li>
+                            <a href="/eventdetail/1">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
     </div>
+</div>
 @endsection
