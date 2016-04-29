@@ -88,7 +88,7 @@
                 <div class="row">
                     @foreach ($members as $mem)
                         @if($mem->role == 'Host')
-                        <a class="col-xs-4 col-md-4" href="/">
+                        <a class="col-xs-4 col-md-4" href="/users/{!! $mem->user_id !!}">
                             <img class="img-responsive" src="http://placehold.it/750x450" alt="">
                             <span class="label label-default label-pill">{!! $mem->role." and ".$mem->user->email !!}</span>
                         </a>
