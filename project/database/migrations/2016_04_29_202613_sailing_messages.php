@@ -26,7 +26,6 @@ class SailingMessages extends Migration
 
             $table->string('message');
             $table->dateTime('timestamp');
-
         });
     }
 
