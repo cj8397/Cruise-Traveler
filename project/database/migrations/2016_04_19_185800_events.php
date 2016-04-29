@@ -24,6 +24,7 @@ class Events extends Migration
             $table->datetime('end_date');
             $table->string('desc');
             $table->string('location');
+            $table->integer('max_participants')->nullable();
 
 
         });

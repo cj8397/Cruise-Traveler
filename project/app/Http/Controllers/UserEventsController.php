@@ -15,7 +15,7 @@ class UserEventsController extends Controller
     }
 
     // create entry in bridge table
-    public function JoinEvent($event_id,$sailing_id)
+    public function JoinEvent($event_id, $sailing_id)
     {
         $user_id = Auth::User()->id;
         // role = member// need to check both columns....
@@ -27,7 +27,7 @@ class UserEventsController extends Controller
 
         if (!$userevent->exists) { // doesnt exist
             // need to assign properties
-            $userevent->sailing_id= $sailing_id;
+            $userevent->sailing_id = $sailing_id;
             $userevent->user_id = $user_id;
             $userevent->event_id = $event_id;
             $userevent->role = 'Participant';

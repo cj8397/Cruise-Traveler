@@ -19,6 +19,12 @@ class UserDetails extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
+            $table->string('first')->nullable();
+            $table->string('last')->nullable();
+            $table->date('dob')->nullable();
+            $table->boolean('sex')->nullable();
+            $table->string('lang')->nullable();
+            $table->string('country')->nullable();
             $table->string('ethinicity')->nullable();
             $table->string('hobby')->nullable();
             $table->boolean('family')->nullable();

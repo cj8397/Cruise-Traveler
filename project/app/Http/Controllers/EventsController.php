@@ -17,7 +17,7 @@ class EventsController extends Controller
 {
     //
     public function __construct(){
-        $this->middleware('auth',['except' => ['GetAllEvents','GetAllUsers']]);
+        $this->middleware('auth', ['except' => ['GetAllEvents', 'GetAllUsers']]);
     }
 
     protected function GetAllParticipantsInEvent($event_id){
@@ -47,19 +47,26 @@ class EventsController extends Controller
         return view('events.createEventForm')->with('sailing_id', $sailing_id);
     }
 
-    protected function GetAllUsers(){
-        $UserEvent = UserSailing::with('sailing')->get()->where('user_id', 1);
-        $sailEvents = Sailing::with('event')->get();
-        dd($UserEvent);
-        foreach($UserEvent as $user){
-            $sailEvents = Sailing::with('event')->get();
-            dd($sailEvents);
-            $sailings = $user->sailing->with('event')->get();
-            foreach($sailings as $event){
-                dd($event->event->where('sailing_id', $user->sailing->id));
-            }
+    protected function GetAllUsers()
+    {
+        $UserEvent = UserSailing::with('event', 'sailing', 'user')->get()->where('user_id', Auth::user()->id);
+        foreach ($UserEvent as $sailing) {
+            $eventSailing = $sailing->sailing->with('event')->get();
+            foreach ($eventSailing as $ES) {
+                var_dump($ES->event);
             }
         }
+        // list of users in a sailing
+        foreach ($UserEvent as $user) {
+            var_dump($user);
+            $userdetails = $user->user->with('userdetails')->find([$user->user->id]);
+            dd($userdetails);
+            // for each user in the sailing, get all their details
+            foreach ($userdetails as $userdetail) {
+                var_dump($userdetail->userdetails->first()->first);
+            }
+        }
+    }
 
     protected function CreateEvent(EventRequest $request){
         $event = Event::create([
