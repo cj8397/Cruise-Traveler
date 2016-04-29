@@ -76,7 +76,7 @@
                         <div class="panel-body col-md-6 col-xs-12">
 
                             @foreach($userevents->where('sailing_id',$sailing->sailing->id) as $events)
-                                @if($events != null)
+                                {{--@if($events != null)--}}
                                     {{--@foreach($eventdetails[$events->event_id] as $edetail)--}}
                                     <ul class="list-group">
                                         <li class="list-group-item">
@@ -99,9 +99,9 @@
                                             {!! $events->event->end_date !!}
                                         </li>
                                     </ul>
-                                @else
-                                    <span class="label label-pill label-default">You are not participating in any events for this sailing... =(</span>
-                                @endif
+                                {{--@else--}}
+                                {{--<span class="label label-pill label-default">You are not participating in any events for this sailing... =(</span>--}}
+                                {{--@endif--}}
                             @endforeach
 
                         </div>
