@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\UserSailingsController;
 use App\Sailing;
 use App\Event;
 use App\UserSailing;
@@ -18,11 +19,11 @@ use Illuminate\Support\Facades\Response;
 
 class SailingsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth', ['except' => ['GetAllSailings', 'GetSailing']]);
-    }
-
+  public function __construct()
+  {
+    $this->middleware('auth', ['except' => ['GetAllSailings', 'GetSailing']]);
+      $this->middleware('admin', ['except' => ['GetAllSailings', 'GetSailing']]);
+  }
     //
     protected function GetAllSailings()
     {

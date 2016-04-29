@@ -80,7 +80,9 @@
                                     {{--@foreach($eventdetails[$events->event_id] as $edetail)--}}
                                     <ul class="list-group">
                                         <li class="list-group-item">
-                                            <h5>Event: {!! $events->event->title !!}</h5>
+                                            <h5>Event: <a
+                                                        href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
+                                            </h5>
                                         </li>
                                         <li class="list-group-item">
                                             <strong>Role:</strong><br>

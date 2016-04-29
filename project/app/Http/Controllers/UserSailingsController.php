@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\UserSailing;
-use App\UserDetails;
+use App\UserEvent;
+use App\Sailing;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\Helpers\StatsHelper;
+use App\Http\Controllers\UserEventsController;
+use Illuminate\Support\Facades\DB;
 
 
 class UserSailingsController extends Controller
 {
-
+    private $helper;
     public function __construct()
     {
         $this->middleware('auth');
+        $this->helper = new StatsHelper();
     }
 
     // create entry in bridge table
@@ -45,10 +50,16 @@ class UserSailingsController extends Controller
     public function LeaveSailing($sailing_id) {
         $user_id = Auth::User()->id;
         // creates key value pair based on variable names
-        $sailing = Sailing::where('id', $sailing_id)->first();
+        $sailing_id = (int)$sailing_id;
+        $sailing = Sailing::find($sailing_id);
         $conditions = compact('user_id', 'sailing_id');
         if( UserSailing::where($conditions)->exists()) {
+            UserEvent::where($conditions)->delete();
+            DB::table('user_sailings')->where('user_id', '=', $user_id)
+                ->where('sailing_id', '=', $user_id)->delete();
+
             UserSailing::where($conditions)->delete();
+                // ->delete();
             //return redirect::back();
             $success = "Left the sailing";
             return view('sailings.detail', compact('success', 'sailing'));
@@ -71,102 +82,35 @@ class UserSailingsController extends Controller
 
     // female - 0, male - 1
     // going back and forth to DB many times, need to optimize after know its working
-    public function CalculateSexPercentages($sailing_id)
-    {
-        $userSailings = UserSailing::where(['sailing_id' => $sailing_id])->get();
-        $total = count($userSailings);
-        $male = 0;
-        foreach ($userSailings as $userSailing) {
-            $maleConditions = ['user_id' => $userSailing->user_id, 'sex' => 1];
-            if (UserDetails::where($maleConditions)->exists()) {
-                $male += 1;
-            }
-        }
-        if ($total != 0) {
-            $percentMale = $this->CalculatePercentage($male, $total);
-        } else {
-            return 'no users in sailing';
-        }
-        $percentFemale = 100 - $percentMale;
-        return ['male' => $percentMale, 'female' => $percentFemale];
+    public function CalculateSexPercentages($sailing_id) {
+        $percentages = $this->helper->CalculateBooleanPercentages('sailing_id', $sailing_id, 'sex');
+        return ['male'=>$percentages['true'], 'female'=>$percentages['false']];
     }
 
-    function CalculatePercentage($segment, $total)
-    {
-        return round(($segment / $total) * 100, 0);
+    public function CalculateFamilyPercentages($sailing_id) {
+        $percentages = $this->helper->CalculateBooleanPercentages('sailing_id', $sailing_id, 'family');
+        return ['family'=>$percentages['true'], 'nonfamily'=>$percentages['false']];
     }
 
-    public function CalculateAgePercentages($sailing_id)
-    {
-        $userSailings = UserSailing::where(['sailing_id' => $sailing_id])->get();
-        $total = count($userSailings);
-        $youth = 0; // 0-18
-        $young = 0; // 18-25
-        $adult = 0; // 25-35
-        $middle = 0; // 35 - 45
-        $elder = 0; // 45 - 65
-        $senior = 0; // 65+
-        if ($total >= 0) {
-            foreach ($userSailings as $userSailing) {
-                $userDOB = UserDetails::where(['user_id' => $userSailing->user_id])->first();
-                $age = Carbon::parse($userDOB->dob)->age;
-                switch ($age) {
-                    case ($age > 65):
-                        $senior += 1;
-                        break;
-                    case ($age >= 45 && $age < 65):
-                        $elder += 1;
-                        break;
-                    case ($age >= 35 && $age < 45):
-                        $middle += 1;
-                        break;
-                    case ($age >= 25 && $age < 35):
-                        $adult += 1;
-                        break;
-                    case ($age >= 18 && $age < 25):
-                        $young += 1;
-                        break;
-                    case ($age >= 0 && $age < 18):
-                        $youth += 1;
-                        break;
-                }
-            }
-            $percentYouth = $this->CalculatePercentage($youth, $total); // 0-18
-            $percentYoung = $this->CalculatePercentage($young, $total);
-            $percentAdult = $this->CalculatePercentage($adult, $total);
-            $percentMiddle = $this->CalculatePercentage($middle, $total);
-            $percentElder = $this->CalculatePercentage($elder, $total);
-            $percentSenior = $this->CalculatePercentage($senior, $total);
-            return compact('percentYouth', 'percentYoung', 'percentAdult', 'percentMiddle', 'percentElder', 'percentSenior');
-        } else {
-            return 'nosailings';
-        }
+    public function CalculateAgePercentages($sailing_id) {
+        return $this->helper->CalculateAgePercentages('sailing_id', $sailing_id);
     }
 
-    public function CalculateLangPercentages($sailing_id)
-    {
-        // $userSailings = UserSailing::where(['sailing_id' => $sailing_id]);
-        // returns language of each person in a sailing
-        $total = UserSailing::where(['sailing_id' => $sailing_id])->count();
-        $userLangs = DB::table('user_sailings')
-            ->where('sailing_id', '=', $sailing_id)
-            ->join('users', 'users.id', '=', 'user_sailings.user_id')
-            ->groupBy('users.lang')
-            ->select('lang')
-            ->get();
-        $users = DB::table('user_sailings')
-            ->where('sailing_id', '=', $sailing_id)
-            ->join('users', 'users.id', '=', 'user_sailings.user_id')
-            ->select('lang')
-            ->get();
-        $langs = array();
-        foreach ($userLangs as $lang) {
-            if ($lang->lang != "") {
-                $count = $users->items->where('lang', '=', $lang)
-                    ->count();
-                $langs[$lang->lang] = $count;
-            }
-        }
-        return $langs;
+    public function CalculateLangPercentages($sailing_id) {
+        return $this->helper->CalculateDynamicPercentages('sailing_id', $sailing_id, 'lang');
     }
+
+    public function CalculateCountryPercentages($sailing_id) {
+        return $this->helper->CalculateDynamicPercentages('sailing_id', $sailing_id, 'country');
+    }
+
+    public function GetStatsSummary($sailing_id) {
+        $fam = $this->CalculateFamilyPercentages($sailing_id);
+        $lang = $this->CalculateLangPercentages($sailing_id);
+        $sex = $this->CalculateSexPercentages($sailing_id);
+
+        $summary = compact('fam', 'lang', 'sex');
+        return $summary;
+    }
+
 }

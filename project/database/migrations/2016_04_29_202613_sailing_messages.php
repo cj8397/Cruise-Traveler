@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EventMessages extends Migration
+class SailingMessages extends Migration
 {
     /**
      * Run the migrations.
@@ -12,29 +12,25 @@ class EventMessages extends Migration
      */
     public function up()
     {
-        Schema::create('event_messages', function (Blueprint $table) {
+        //
+        Schema::create('sailing_messages', function (Blueprint $table) {
 
             $table->increments('id')->unique();
             //declare type first
-            $table->integer('event_id')->unsigned();
-            $table->foreign('event_id')->references('event_id')->on('user_events');
+            $table->integer('sailing_id')->unsigned();
+            $table->foreign('sailing_id')->references('sailing_id')->on('user_sailings');
 
             // declare type fist
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('user_id')->on('user_events');
+            $table->foreign('user_id')->references('user_id')->on('user_sailings');
 
             $table->string('message');
             $table->dateTime('timestamp');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::drop('event_messages');
+        Schema::drop('sailing_messages');
     }
 }

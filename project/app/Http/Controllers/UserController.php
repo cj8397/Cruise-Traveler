@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\UserSailing;
 use App\UserEvent;
+use App\UserDetails;
 use Hamcrest\Core\AllOf;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -107,4 +108,3 @@ class UserController extends Controller
       return redirect('users/detail');
     }
 }
-

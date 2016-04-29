@@ -492,6 +492,7 @@ return array(
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'SailingMessages' => $baseDir . '/database/migrations/2016_04_29_202613_sailing_messages.php',
     'Sailings' => $baseDir . '/database/migrations/2016_04_19_151526_sailings.php',
     'SailingsTableSeeder' => $baseDir . '/database/seeds/SailingsTableSeeder.php',
     'SebastianBergmann\\CodeUnitReverseLookup\\Wizard' => $vendorDir . '/sebastian/code-unit-reverse-lookup/src/Wizard.php',

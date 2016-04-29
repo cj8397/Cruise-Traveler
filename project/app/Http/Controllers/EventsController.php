@@ -17,7 +17,7 @@ class EventsController extends Controller
 {
     //
     public function __construct(){
-        $this->middleware('auth', ['except' => ['GetAllEvents', 'GetAllUsers']]);
+        $this->middleware('auth',['except' => ['GetAllEvents','GetAllUsers']]);
     }
 
     protected function GetAllParticipantsInEvent($event_id){
