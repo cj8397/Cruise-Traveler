@@ -25,7 +25,6 @@ class EventMessages extends Migration
 
             $table->string('message');
             $table->dateTime('timestamp');
-
         });
     }
 
