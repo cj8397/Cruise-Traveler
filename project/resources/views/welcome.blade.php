@@ -2,6 +2,25 @@
 
 @section('content')
 
+    <style type="text/css">
+        ul {
+            list-style-type: none;
+        }
+
+        table, td, th {
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 15px;
+        }
+    </style>
         <!-- Intro Section -->
 <div class="container-fluid">
     <div class="row col-xs-5 col-md-5">
@@ -16,62 +35,6 @@
         <div class="row col-xs-5 col-xs-offset-2 col-md-offset-2 col-md-5">
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
-                <style type="text/css">
-                    /* .tg {
-                         border-collapse: collapse;
-                         border-spacing: 0;
-                     }
-
-                     .tg td {
-                         font-family: Arial, sans-serif;
-                         font-size: 14px;
-                         padding: 10px 12px;
-                         border-style: solid;
-                         border-width: 1px;
-                         overflow: hidden;
-                         word-break: normal;
-                     }
-
-                     .tg th {
-                         font-family: Arial, sans-serif;
-                         font-size: 14px;
-                         font-weight: normal;
-                         padding: 10px 12px;
-                         border-style: solid;
-                         border-width: 1px;
-                         overflow: hidden;
-                         word-break: normal;
-                     }
-
-                     .tg .tg-baqh {
-                         text-align: center;
-                         vertical-align: top
-                     }
-
-                     .tg .tg-amwm {
-                         font-weight: bold;
-                         text-align: center;
-                         vertical-align: top
-                     }*/
-
-                    ul {
-                        list-style-type: none;
-                    }
-
-                    table, td, th {
-                        border: 1px solid #ddd;
-                        text-align: left;
-                    }
-
-                    table {
-                        border-collapse: collapse;
-                        width: 100%;
-                    }
-
-                    th, td {
-                        padding: 15px;
-                    }
-                </style>
                 <table class="tg">
                     <tr>
                         <th class="tg-amwm">Username</th>
