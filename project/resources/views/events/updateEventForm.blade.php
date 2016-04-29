@@ -32,7 +32,7 @@
                                     <span class="help-block">
                                         <strong> {!! $event->start_date !!}</strong>
                                     </span>
-                                <input type="text" class="form-control date" id="datetimepickerstart" name="start" >
+                                <input type="text" class="form-control date" id="datetimepickerstart" name="start">
 
                                 @if ($errors->has('start'))
                                     <span class="help-block">

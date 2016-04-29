@@ -10,6 +10,7 @@
             <div class="panel panel-body">
                 <ul class="list-group">
                     <li class="list-group-item">
+                        @if(isset($currentUser) && $currentUser->role == 'Host')
                         <a href="{{ url('events/update/'.$event->id) }}">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fa fa-btn fa-user"></i>Update Event
@@ -20,9 +21,23 @@
                                 <i class="fa fa-btn fa-user"></i>Delete Event
                             </button>
                         </a>
+                        @endif
+
+                        @if(!isset($currentUser))
                         @include('partials.buttons.joinevent')
+                        @endif
+                        @if(isset($currentUser) && $currentUser->role != 'Host')
                         @include('partials.buttons.leaveevent')
+                            @endif
                     </li>
+                    @if(isset($host))
+                    <li class="list-group-item">
+                        <strong>Event Host</strong>
+                        <p class="alert alert-info center-block">
+                            {!! $host->userdetails->first." ".$host->userdetails->last !!}
+                        </p>
+                    </li>
+                    @endif
                     <li class="list-group-item">
                        <strong>Start Time!</strong>
                         <p class="alert alert-info center-block">
@@ -50,6 +65,7 @@
                 </ul>
             </div>
         </div>
+            @if(isset($currentUser))
         <div class="panel panel-default col-md-6 col-xs-12">
             <div class="panel panel-heading">Message Boards!</div>
             <div class=" panel panel-body">
@@ -69,19 +85,20 @@
                 </div>
             </div>
         </div>
+                @endif
             </div>
     </div>
-    @if(isset($members))
+    @if(isset($members) && isset($currentUser))
     <div class="row col-md-5 col-md-offset-1 col-xs-12">
         <div class="panel panel-default col-md-12 col-xs-12">
             <div class="panel panel-heading">Participants</div>
             <div class="panel panel-body">
                 <div class="row">
                     @foreach ($members as $mem)
-                    <a class="col-xs-6 col-md-6">
-                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                        <span class="label label-default label-pill">{!! $mem->role." and ".$mem->user->email !!}</span>
-                    </a>
+                        <a class="col-xs-4 col-md-4" href="/users/{!! $mem->user_id !!}">
+                            <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                            <span class="label label-default label-pill">{!! $mem->userdetails->first." ".$mem->userdetails->last!!}</span>
+                        </a>
                     @endforeach
                 </div>
             </div>

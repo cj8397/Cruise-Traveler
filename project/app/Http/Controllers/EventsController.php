@@ -34,9 +34,13 @@ class EventsController extends Controller
 
     protected function GetOneEvent($event_id){
         if ($event = Event::where('id', $event_id)->first()) {
-            $members = UserEvent::with('event','sailing','user')->get()->where('event_id', $event_id);
+            $members = UserEvent::with('userdetails')->get()->where('event_id', $event_id);
+            $host = $members->where('role', 'Host')->first();
+            $currentUser = $members->where('user_id',Auth::user()->id)->first();
             return view('events.eventdetail')->with(['event' => $event,
-                'members' => $members]);
+                'members' => $members,
+                'currentUser' => $currentUser,
+                'host' => $host]);
         } else {
             return Redirect::back();
         }
@@ -46,12 +50,25 @@ class EventsController extends Controller
         return view('events.createEventForm')->with('sailing_id', $sailing_id);
     }
 
-    protected function GetAllUsers(){
-        $UserEvent = UserEvent::with('event','sailing','user')->get()->where('event_id', 91);
-        foreach($UserEvent as $user){
-            var_dump($user->role.$user->user->email);
+    protected function GetAllUsers()
+    {
+        $UserEvent = UserSailing::with('event', 'sailing', 'user')->get()->where('user_id', Auth::user()->id);
+        foreach ($UserEvent as $sailing) {
+            $eventSailing = $sailing->sailing->with('event')->get();
+            foreach ($eventSailing as $ES) {
+                var_dump($ES->event);
+            }
         }
-
+        // list of users in a sailing
+        foreach ($UserEvent as $user) {
+            var_dump($user);
+            $userdetails = $user->user->with('userdetails')->find([$user->user->id]);
+            dd($userdetails);
+            // for each user in the sailing, get all their details
+            foreach ($userdetails as $userdetail) {
+                var_dump($userdetail->userdetails->first()->first);
+            }
+        }
     }
 
     protected function CreateEvent(EventRequest $request){

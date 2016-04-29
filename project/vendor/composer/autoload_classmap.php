@@ -492,6 +492,7 @@ return array(
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'SailingMessages' => $baseDir . '/database/migrations/2016_04_29_202613_sailing_messages.php',
     'Sailings' => $baseDir . '/database/migrations/2016_04_19_151526_sailings.php',
     'SailingsTableSeeder' => $baseDir . '/database/seeds/SailingsTableSeeder.php',
     'SebastianBergmann\\CodeUnitReverseLookup\\Wizard' => $vendorDir . '/sebastian/code-unit-reverse-lookup/src/Wizard.php',
@@ -538,7 +539,10 @@ return array(
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UserDetails' => $baseDir . '/database/migrations/2016_04_19_050000_user_details.php',
+    'UserDetailsTableSeeder' => $baseDir . '/database/seeds/UserDetailsTableSeeder.php',
     'UserEvents' => $baseDir . '/database/migrations/2016_04_19_190147_user_events.php',
+    'UserEventsTableSeeder' => $baseDir . '/database/seeds/UserEventsTableSeeder.php',
     'UserSailings' => $baseDir . '/database/migrations/2016_04_19_151856_user_sailings.php',
+    'UserSailingsTableSeeder' => $baseDir . '/database/seeds/UserSailingsTableSeeder.php',
     'UsersTableSeeder' => $baseDir . '/database/seeds/UsersTableSeeder.php',
 );
