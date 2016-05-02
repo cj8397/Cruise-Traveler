@@ -11,6 +11,7 @@ use App\Http\Controllers\EventsController;
 use App\Http\Controllers\UserSailingsController;
 use App\Sailing;
 use App\Event;
+use App\Stats;
 use App\UserSailing;
 use App\UserEvent;
 use Illuminate\Support\Facades\Redirect;
@@ -37,7 +38,9 @@ class SailingsController extends Controller
     protected function GetSailing($id)
     {
         if ($sailing = Sailing::find($id)) {
-            return view('sailings.detail', compact('sailing'));
+            $statsController = new UserSailingsController();
+            $stats = $statsController->GetStatsSummary($id); // should add a count in there
+            return view('sailings.detail', compact('sailing', 'stats'));
         } else {
             return redirect('sailings');
         }
