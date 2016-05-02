@@ -33,18 +33,19 @@ class UserSailingsController extends Controller
             'sailing_id' => $sailing_id
         ]);
         $sailing = Sailing::where('id', $sailing_id)->first();
+        $stats = $this->GetStatsSummary($sailing_id); // should add a count in there
         if(!$userSailing->exists) { // doesnt exist
             // need to assign properties
             $userSailing->user_id = $user_id;
             $userSailing->sailing_id = $sailing_id;
             $userSailing->save();
             $success = "Joined the sailing.";
-            return view('sailings.detail', compact('success', 'sailing'));
+            return view('sailings.detail', compact('success', 'sailing', 'stats'));
             //return redirect::back();
         } else {
           //return redirect::back();
             $failure= "Already joined the sailing";
-            return view('sailings.detail', compact('failure', 'sailing'));
+            return view('sailings.detail', compact('failure', 'sailing', 'stats'));
         }
     }
 
@@ -54,6 +55,7 @@ class UserSailingsController extends Controller
         // creates key value pair based on variable names
         $sailing_id = (int)$sailing_id;
         $sailing = Sailing::find($sailing_id);
+        $stats = $this->GetStatsSummary($sailing_id); // should add a count in there
         $conditions = compact('user_id', 'sailing_id');
         if( UserSailing::where($conditions)->exists()) {
             UserEvent::where($conditions)->delete();
@@ -64,11 +66,11 @@ class UserSailingsController extends Controller
                 // ->delete();
             //return redirect::back();
             $success = "Left the sailing";
-            return view('sailings.detail', compact('success', 'sailing'));
+            return view('sailings.detail', compact('success', 'sailing', 'stats'));
         } else {
           //return redirect::back();
             $failure= "Already left the sailing";
-            return view('sailings.detail', compact('failure', 'sailing'));
+            return view('sailings.detail', compact('failure', 'sailing', 'stats'));
         }
     }
 
