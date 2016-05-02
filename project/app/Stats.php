@@ -9,7 +9,9 @@ class Stats
     public $languages;
     public $male;
     public $female;
-    function __construct($stats) {
+
+    function __construct($stats)
+    {
 
         $this->family = $stats['fam']['family'];
         $this->nonfamily = $stats['fam']['nonfamily'];

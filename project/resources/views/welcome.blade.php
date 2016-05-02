@@ -108,7 +108,7 @@
         <div class="row">
             <div class="panel panel-default col-md-3 col-xs-12 text-center">
                 <div class="row col-md-12 col-xs-12 text-center">
-                    <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
+                    <h2>Caribbean</h2>
                 </div>
                 <div class="row col-md-12 col-xs-12 text-center">
                     <a href="/sailings">
@@ -116,16 +116,26 @@
                             <i class="fa fa-users" aria-hidden="true"></i>More Sailings
                         </button>
                     </a>
+                    <hr>
                 </div>
                 <div class="row col-md-12 col-xs-12 text-center">
-                    <h2>Caribbean</h2>
+                    <h5>
+                        {{--{!! $caribsail->id !!} | --}}
+                        {!! $caribsail->cruise_line !!}
+                    </h5>
                 </div>
+                <div class="row col-md-12 col-xs-12 text-center">
+                    <a href="{{ action('SailingsController@GetSailing', [$caribsail->id]) }}">
+                        <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
+                    </a>
+                </div>
+
                 <div class="row panel panel-default col-md-12 col-xs-12 text-center">
                     <div class="panel col-md-4 col-xs-4 text-center">
                         <ul class="list-group">
-                            <li class="list-group-item"><h5>Gender</h5></li>
-                            <li class="list-group-item">Male (67%)</li>
-                            <li class="list-group-item">Female (33%)</li>
+                            <li class="list-group-item"><h5>Companions</h5></li>
+                            <li class="list-group-item">With Family (67%)</li>
+                            <li class="list-group-item">Traveling Alone (33%)</li>
                         </ul>
                     </div>
                     <div class="panel col-md-4 col-xs-4 text-center">
@@ -134,8 +144,6 @@
                             <li class="list-group-item">Canada</li>
                             <li class="list-group-item">USA</li>
                             <li class="list-group-item">Mexico</li>
-                            <li class="list-group-item">England</li>
-                            <li class="list-group-item">France</li>
                         </ul>
                     </div>
                     <div class="panel col-md-4 col-xs-4 text-center">
@@ -144,8 +152,20 @@
                             <li class="list-group-item">English</li>
                             <li class="list-group-item">French</li>
                             <li class="list-group-item">Spanish</li>
-                            <li class="list-group-item">Chinese</li>
                         </ul>
+                    </div>
+                </div>
+
+                <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                    <h4>Events</h4>
+                    <div class="panel panel-primary col-md-4 col-xs-12">
+                        <div class="panel-heading">Matt's party</div>
+                    </div>
+                    <div class="panel panel-primary col-md-4 col-xs-12">
+                        <div class="panel-heading">Matt's party</div>
+                    </div>
+                    <div class="panel panel-primary col-md-4 col-xs-12">
+                        <div class="panel-heading">Matt's party</div>
                     </div>
                 </div>
             </div>
@@ -153,8 +173,8 @@
             <div class="col-md-1 col-xs-12"></div>
 
             <div class="panel panel-default col-md-3 col-xs-12">
-                <div class="row row-centered col-md-12 col-xs-12">
-                    <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
+                <div class="row col-md-12 col-xs-12 text-center">
+                    <h2>Mediterranean</h2>
                 </div>
                 <div class="row col-md-12 col-xs-12 text-center">
                     <a href="/sailings">
@@ -162,16 +182,26 @@
                             <i class="fa fa-users" aria-hidden="true"></i>More Sailings
                         </button>
                     </a>
+                    <hr>
                 </div>
                 <div class="row col-md-12 col-xs-12 text-center">
-                    <h2>Mediterranean</h2>
+                    <h5>
+                        {{--{!! $medsail->id !!} | --}}
+                        {!! $medsail->cruise_line !!}
+                    </h5>
                 </div>
+                <div class="row row-centered col-md-12 col-xs-12">
+                    <a href="{{ action('SailingsController@GetSailing', [$medsail->id]) }}">
+                        <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
+                    </a>
+                </div>
+
                 <div class="row panel panel-default col-md-12 col-xs-12 text-center">
                     <div class="panel col-md-4 col-xs-4">
                         <ul class="list-group">
-                            <li class="list-group-item"><h5>Gender</h5></li>
-                            <li class="list-group-item">Male (50%)</li>
-                            <li class="list-group-item">Female (50%)</li>
+                            <li class="list-group-item"><h5>Companion</h5></li>
+                            <li class="list-group-item">With family (50%)</li>
+                            <li class="list-group-item">Traveling alone (50%)</li>
                         </ul>
                     </div>
                     <div class="panel col-md-4 col-xs-4">
@@ -180,8 +210,6 @@
                             <li class="list-group-item">Spain</li>
                             <li class="list-group-item">China</li>
                             <li class="list-group-item">USA</li>
-                            <li class="list-group-item">England</li>
-                            <li class="list-group-item">Australia</li>
                         </ul>
                     </div>
                     <div class="panel col-md-4 col-xs-4">
@@ -189,18 +217,30 @@
                             <li class="list-group-item"><h5>Languages</h5></li>
                             <li class="list-group-item">English</li>
                             <li class="list-group-item">French</li>
-                            <li class="list-group-item">Porturguese</li>
-                            <li class="list-group-item">Spanish</li>
+                            <li class="list-group-item">Porturegese</li>
                         </ul>
+                    </div>
+                </div>
+
+                <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                    <h4>Events</h4>
+                    <div class="panel panel-primary col-md-4 col-xs-12">
+                        <div class="panel-heading">Matt's party</div>
+                    </div>
+                    <div class="panel panel-primary col-md-4 col-xs-12">
+                        <div class="panel-heading">Matt's party</div>
+                    </div>
+                    <div class="panel panel-primary col-md-4 col-xs-12">
+                        <div class="panel-heading">Matt's party</div>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-1 col-xs-12"></div>
 
-            <div class="panel panel-default col-md-3 col-xs-12">
-                <div class="row row-centered col-md-12 col-xs-12">
-                    <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
+            <div class="panel panel-default col-md-3 col-xs-12 text-center">
+                <div class="row col-md-12 col-xs-12 col-lg-12">
+                    <h2>Alaska</h2>
                 </div>
                 <div class="row col-md-12 col-xs-12 text-center">
                     <a href="/sailings">
@@ -208,16 +248,26 @@
                             <i class="fa fa-users" aria-hidden="true"></i>More Sailings
                         </button>
                     </a>
+                    <hr>
                 </div>
                 <div class="row col-md-12 col-xs-12 text-center">
-                    <h2>Alaska</h2>
+                    <h5>
+                        {{--{!! $alassail->id !!} |--}}
+                        {!! $alassail->cruise_line !!}
+                    </h5>
                 </div>
+                <div class="row row-centered col-md-12 col-xs-12">
+                    <a href="{{ action('SailingsController@GetSailing', [$alassail->id]) }}">
+                        <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
+                    </a>
+                </div>
+
                 <div class="row panel panel-default col-md-12 col-xs-12 text-center">
                     <div class="panel col-md-4 col-xs-4">
                         <ul class="list-group">
-                            <li class="list-group-item"><h5>Gender</h5></li>
-                            <li class="list-group-item">Male (40%)</li>
-                            <li class="list-group-item">Female (60%)</li>
+                            <li class="list-group-item"><h5>Companion</h5></li>
+                            <li class="list-group-item">With family (40%)</li>
+                            <li class="list-group-item">Traveling alone (60%)</li>
                         </ul>
                     </div>
                     <div class="panel col-md-4 col-xs-4">
@@ -226,8 +276,6 @@
                             <li class="list-group-item">China</li>
                             <li class="list-group-item">Russia</li>
                             <li class="list-group-item">Australia</li>
-                            <li class="list-group-item">Canada</li>
-                            <li class="list-group-item">Brazil</li>
                         </ul>
                     </div>
                     <div class="panel col-md-4 col-xs-4">
@@ -236,23 +284,23 @@
                             <li class="list-group-item">Chinese</li>
                             <li class="list-group-item">English</li>
                             <li class="list-group-item">Spanish</li>
-                            <li class="list-group-item">French</li>
                         </ul>
+                    </div>
+                </div>
+
+                <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                    <h4>Events</h4>
+                    <div class="panel panel-primary col-md-4 col-xs-12">
+                        <div class="panel-heading">Matt's party</div>
+                    </div>
+                    <div class="panel panel-primary col-md-4 col-xs-12">
+                        <div class="panel-heading">Matt's party</div>
+                    </div>
+                    <div class="panel panel-primary col-md-4 col-xs-12">
+                        <div class="panel-heading">Matt's party</div>
                     </div>
                 </div>
             </div>
         </div>
 </div>
-
-
-{{--<!-- Contact Section -->--}}
-{{--<section id="contact" class="contact-section">--}}
-{{--<div class="container">--}}
-{{--<div class="row">--}}
-{{--<div class="col-lg-12">--}}
-{{--<h1>Contact Section</h1>--}}
-{{--</div>--}}
-{{--</div>--}}
-{{--</div>--}}
-{{--</section>--}}
 @endsection

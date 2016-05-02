@@ -11,19 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::auth();
+
+Route::get('/', 'HomeController@index');
 
 Route::get('/admin/home', 'AdminController@index');
 Route::get('/admin/users', 'AdminController@GetAllUsers');
 Route::get('/admin/user/{id}', 'AdminController@GetUser');
 Route::get('/admin/user/{id}/update', 'AdminController@UpdateUser');
 Route::post('/admin/user/{id}/update/save', 'AdminController@SaveUser');
-
-Route::get('/home', 'HomeController@index');
 
 //EventController Stuff
 Route::get('events/detail/{event_id}', 'EventsController@GetOneEvent');

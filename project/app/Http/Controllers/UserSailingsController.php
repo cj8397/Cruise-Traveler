@@ -84,22 +84,9 @@ class UserSailingsController extends Controller
 
     // female - 0, male - 1
     // going back and forth to DB many times, need to optimize after know its working
-    public function CalculateSexPercentages($sailing_id) {
-        $percentages = $this->helper->CalculateBooleanPercentages('sailing_id', $sailing_id, 'sex');
-        return ['male'=>$percentages['true'], 'female'=>$percentages['false']];
-    }
-
-    public function CalculateFamilyPercentages($sailing_id) {
-        $percentages = $this->helper->CalculateBooleanPercentages('sailing_id', $sailing_id, 'family');
-        return ['family'=>$percentages['true'], 'nonfamily'=>$percentages['false']];
-    }
 
     public function CalculateAgePercentages($sailing_id) {
         return $this->helper->CalculateAgePercentages('sailing_id', $sailing_id);
-    }
-
-    public function CalculateLangPercentages($sailing_id) {
-        return $this->helper->CalculateDynamicPercentages('sailing_id', $sailing_id, 'lang');
     }
 
     public function CalculateCountryPercentages($sailing_id) {
@@ -114,6 +101,23 @@ class UserSailingsController extends Controller
         $summary = compact('fam', 'lang', 'sex');
         $stats = new Stats($summary);
         return $stats;
+    }
+
+    public function CalculateFamilyPercentages($sailing_id)
+    {
+        $percentages = $this->helper->CalculateBooleanPercentages('sailing_id', $sailing_id, 'family');
+        return ['family' => $percentages['true'], 'nonfamily' => $percentages['false']];
+    }
+
+    public function CalculateLangPercentages($sailing_id)
+    {
+        return $this->helper->CalculateDynamicPercentages('sailing_id', $sailing_id, 'lang');
+    }
+
+    public function CalculateSexPercentages($sailing_id)
+    {
+        $percentages = $this->helper->CalculateBooleanPercentages('sailing_id', $sailing_id, 'sex');
+        return ['male' => $percentages['true'], 'female' => $percentages['false']];
     }
 
 }

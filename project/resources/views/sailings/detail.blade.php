@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <style>
         .panel-heading {
-            margin-top:0;
+            margin-top: 0;
         }
 
         .col-xs-4 {
@@ -60,38 +60,38 @@
             </div>
             <div class="col-xs-8">
                 {{--<div class="row panel panel-default">--}}
-                    {{--<h2 class="panel-heading" >Message Board</h2>--}}
-                    {{--<div class="panel-body"><p>  Show when joined </p></div>--}}
+                {{--<h2 class="panel-heading" >Message Board</h2>--}}
+                {{--<div class="panel-body"><p>  Show when joined </p></div>--}}
                 {{--</div>--}}
                 <div class="panel panel-default">
                     <h2 class="panel-heading">Demographics</h2>
                     @if(isset($stats))
-                    <div class="panel-body">
-                        <div class="panel panel-default col-xs-12">
-                            <div class="panel-heading ">
-                                <h4> Languages </h4>
+                        <div class="panel-body">
+                            <div class="panel panel-default col-xs-12">
+                                <div class="panel-heading ">
+                                    <h4> Languages </h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="language"></div>
+                                </div>
                             </div>
-                            <div class="panel-body">
-                                <div id="language"></div>
+                            <div class="panel panel-default col-xs-6">
+                                <div class="panel-heading ">
+                                    <h4> Families </h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="families"></div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default col-xs-6">
+                                <div class="panel-heading ">
+                                    <h4> Gender </h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="sex"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="panel panel-default col-xs-6">
-                            <div class="panel-heading ">
-                                <h4> Families </h4>
-                            </div>
-                            <div class="panel-body">
-                                <div id="families"></div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default col-xs-6">
-                            <div class="panel-heading ">
-                                <h4> Gender </h4>
-                            </div>
-                            <div class="panel-body">
-                                <div id="sex"></div>
-                            </div>
-                        </div>
-                    </div>
                     @endif
                 </div>
             </div>
@@ -107,8 +107,10 @@
         Morris.Bar({
             element: 'language',
             data: [
-               @foreach( $stats->languages as $language => $percentage)
-                    { y:'{{$language}}',  a:'{{$percentage}}'},
+                    @foreach( $stats->languages as $language => $percentage)
+                {
+                    y: '{{$language}}', a: '{{$percentage}}'
+                },
                 @endforeach
             ],
             xkey: 'y',
@@ -119,16 +121,16 @@
         Morris.Donut({
             element: 'families',
             data: [
-                {label: "Family", value: "{{$stats->family}}" },
-                {label: "Non-family", value: "{{$stats->nonfamily}}" }
+                {label: "Family", value: "{{$stats->family}}"},
+                {label: "Non-family", value: "{{$stats->nonfamily}}"}
             ],
             colors: ['#FF0000', '#0000FF']
         });
         Morris.Donut({
             element: 'sex',
             data: [
-                {label: "Male", value: "{{$stats->male}}" },
-                {label: "Female", value: "{{$stats->female}}" }
+                {label: "Male", value: "{{$stats->male}}"},
+                {label: "Female", value: "{{$stats->female}}"}
             ],
             colors: ['#FF0000', '#0000FF']
         });

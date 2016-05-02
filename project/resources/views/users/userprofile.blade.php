@@ -28,14 +28,14 @@
                 <ul class="list-group">
                     <li class="list-group-item"><h4>Email: </h4>{{ Auth::user()->email }}</li>
                     {{--<li class="list-group-item">{{ Auth::user()->email }}</li>--}}
-                    <li class="list-group-item"><h4>First Name: </h4>{{ Auth::user()->first }}</li>
+                    <li class="list-group-item"><h4>First Name: </h4>{{ $userdetail->first }}</li>
                     {{--<li class="list-group-item">{{ Auth::user()->first }}</li>--}}
-                    <li class="list-group-item"><h4>Last Name: </h4>{{ Auth::user()->last }}</li>
+                    <li class="list-group-item"><h4>Last Name: </h4>{{ $userdetail->last }}</li>
                     {{--<li class="list-group-item">{{ Auth::user()->last }}</li>--}}
                     {{--<li class="list-group-item"><h4>Date of Birth: </h4>{{ Auth::user()->dob }}</li>--}}
                     {{--<li class="list-group-item">{{ Auth::user()->dob }}</li>--}}
                     <li class="list-group-item"><h4>Gender: </h4>
-                        @if (Auth::user()->sex === 1)
+                        @if ($userdetail->sex === 1)
                             Male
                         @else
                             Female
@@ -46,10 +46,11 @@
                 <div id="credits" class="well hidden col-md-12 col-xs-12">
 
                     <ul class="list-group">
-                        <li class="list-group-item"><h4>Date of Birth: </h4>{{ Auth::user()->dob }}</li>
-                        <li class="list-group-item"><h4>Country: </h4>{{ Auth::user()->country }}</li>
-                        <li class="list-group-item"><h4>Language: </h4>{{ Auth::user()->language }}</li>
-
+                        <li class="list-group-item"><h4>Date of Birth: </h4>{{ $userdetail->dob }}</li>
+                        <li class="list-group-item"><h4>City: </h4>{{ $userdetail->city }}</li>
+                        <li class="list-group-item"><h4>Region: </h4>{{ $userdetail->region }}</li>
+                        <li class="list-group-item"><h4>Country: </h4>{{ $userdetail->country }}</li>
+                        <li class="list-group-item"><h4>Language: </h4>{{ $userdetail->lang }}</li>
                     </ul>
                 </div>
                 <a href="#credits" class="toggle btn btn-primary">More Details</a>

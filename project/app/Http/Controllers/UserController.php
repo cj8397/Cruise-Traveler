@@ -28,16 +28,17 @@ class UserController extends Controller
             'userevents' => $userevents,
             'user' => $user]);
     }
+
     public function getUserSailings()
     {
-        //$userdetail =
+        $userdetail = UserDetails::where('user_id', Auth::user()->id)->first();
         $usersailings = UserSailing::with('sailing')->get()->where('user_id', Auth::user()->id);
         $userevents = UserEvent::with('event')->get()->where('user_id', Auth::user()->id);
 
         //dd($usersailings->sailing->sailing_id);
         //dd($usersailings->first()->sailing->title);
 
-        return view('users.userprofile')->with(['usersailings' => $usersailings, 'userevents' => $userevents]);
+        return view('users.userprofile')->with(['usersailings' => $usersailings, 'userevents' => $userevents, 'userdetail' => $userdetail]);
     }
 
     /*public function getEvents()
@@ -83,6 +84,7 @@ class UserController extends Controller
         return redirect::back();
       }
     }
+
     protected function showCreateForm()
     {
         return view('users.createdetail');
