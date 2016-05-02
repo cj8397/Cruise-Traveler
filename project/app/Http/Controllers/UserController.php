@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\User;
 use App\UserSailing;
 use App\UserEvent;
+use App\UserDetails;
 use Hamcrest\Core\AllOf;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\UserDetailsRequest;
+use App\UserDetails;
 
 class UserController extends Controller
 {
@@ -19,6 +21,14 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+    public function getUser($user_id){
+        $user = User::find($user_id);
+        $usersailings = UserSailing::with('sailing')->get()->where('user_id', $user_id);
+        $userevents = UserEvent::with('event')->get()->where('user_id', $user_id);
+        return view('users.profiletemplate')->with(['usersailings' => $usersailings,
+            'userevents' => $userevents,
+            'user' => $user]);
+    }
     public function getUserSailings()
     {
         //$userdetail =
@@ -99,4 +109,3 @@ class UserController extends Controller
       return redirect('users/detail');
     }
 }
-
