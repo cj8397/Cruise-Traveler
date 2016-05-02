@@ -40,7 +40,8 @@
                     </a>
                     <h4 class="panel-heading">Number of travellers</h4>
                     <div class="panel-body">
-                        <h4>3,409</h4>
+                        <h4> 1234 </h4>
+                        {{--<h4>@if(isset($stats)) {{ $stats->total }}@endif</h4>--}}
                     </div>
                     <h4 class="panel-heading">Number of Male</h4>
                     <div class="panel-body">
@@ -91,6 +92,32 @@
                                 <div id="sex"></div>
                             </div>
                         </div>
+                        <div class="panel panel-default col-xs-12">
+                            <div class="panel-heading ">
+                                <h4> Ages </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div id="ages"></div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default col-xs-6">
+                            <div class="panel-heading ">
+                                <h4> Countries </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div id="countries"></div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default col-xs-6">
+                            <div class="panel-heading ">
+                                <h4> Cities </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div id="cities"></div>
+                            </div>
+                        </div>
+
+
                     </div>
                     @endif
                 </div>
@@ -115,6 +142,40 @@
             ykeys: ['a'],
             labels: ['Percent']
         });
+
+        Morris.Donut({
+            element: 'countries',
+            data: [
+                @foreach( $stats->countries as $countries=> $percentage)
+                    { label:'{{$countries}}',  value:'{{$percentage}}'},
+                @endforeach
+            ],
+            colors: ['#FF0000', '#0000FF']
+        });
+
+        Morris.Donut({
+            element: 'cities',
+            data: [
+                    @foreach( $stats->cities as $cities=> $percentage)
+                { label:'{{$cities}}',  value:'{{$percentage}}'},
+                @endforeach
+            ],
+            colors: ['#FF0000', '#0000FF']
+        });
+        Morris.Bar({
+            element: 'ages',
+            data: [
+                @foreach( $stats->ages as $ages=> $percentage)
+                    { y:'{{$ages}}',  a:'{{$percentage}}'},
+                @endforeach
+            ],
+            xkey: 'y',
+            ykeys: ['a'],
+            labels: ['Percent']
+        });
+
+
+
 
         Morris.Donut({
             element: 'families',

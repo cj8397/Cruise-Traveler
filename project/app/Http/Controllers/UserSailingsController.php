@@ -106,14 +106,39 @@ class UserSailingsController extends Controller
         return $this->helper->CalculateDynamicPercentages('sailing_id', $sailing_id, 'country');
     }
 
-    public function GetStatsSummary($sailing_id) {
-        $fam = $this->CalculateFamilyPercentages($sailing_id);
-        $lang = $this->CalculateLangPercentages($sailing_id);
-        $sex = $this->CalculateSexPercentages($sailing_id);
+    public function CalculateCityPercentages($sailing_id) {
+        return $this->helper->CalculateDynamicPercentages('sailing_id', $sailing_id, 'city');
+    }
 
-        $summary = compact('fam', 'lang', 'sex');
+
+    public function GetStatsSummary($sailing_id) {
+
+        $fam = $this->CalculateFamilyPercentages($sailing_id);
+        $langs = $this->CalculateLangPercentages($sailing_id);
+        $sex = $this->CalculateSexPercentages($sailing_id);
+        $cities = $this->CalculateCityPercentages($sailing_id);
+        $countries = $this->CalculateCountryPercentages($sailing_id);
+        $ages = $this->CalculateAgePercentages($sailing_id);
+        $total = UserSailing::where(['sailing_id'=>$sailing_id])->count();
+
+        $summary = compact('fam', 'langs', 'sex', 'cities', 'countries', 'ages', 'total');
         $stats = new Stats($summary);
         return $stats;
     }
 
+    public function GetTop3Summary($sailing_id) {
+        $total = UserSailing::where(['sailing_id'=>$sailing_id])->count();
+        $fam = $this->CalculateFamilyPercentages($sailing_id);
+        $langs = $this->CalculateLangPercentages($sailing_id);
+        $cities = $this->CalculateCityPercentages($sailing_id);
+
+        arsort($langs);
+        $langs =array_slice($langs, 0, 3);
+        arsort($cities);
+        $cities =array_slice($cities, 0, 3);
+
+        $summary = compact('total', 'fam', 'langs', 'cities');
+        $stats = new Stats($summary);
+        return $stats;
+    }
 }
