@@ -48,7 +48,8 @@
 
         @endforeach
     </div>
-
+    <hr>
+{!! $users->render() !!}
     <hr>
     <!-- Pagination -->
     <div class="row text-center">

@@ -12,7 +12,6 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\UserDetailsRequest;
-use App\UserDetails;
 
 class UserController extends Controller
 {
