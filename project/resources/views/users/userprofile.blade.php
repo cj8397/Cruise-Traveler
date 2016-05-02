@@ -127,6 +127,10 @@
                                             <strong>End:</strong><br>
                                             {!! $events->event->end_date !!}
                                         </li>
+                                        <li class="list-group-item">
+                                            <strong>Location:</strong><br>
+                                            {!! $events->event->location !!}
+                                        </li>
                                     </ul>
                                 {{--@else--}}
                                 {{--<span class="label label-pill label-default">You are not participating in any events for this sailing... =(</span>--}}
