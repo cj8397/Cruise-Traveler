@@ -65,7 +65,7 @@
                 {{--</div>--}}
                 <div class="panel panel-default">
                     <h2 class="panel-heading">Demographics</h2>
-                    @if(isset($stats))
+                    @if(!empty($stats))
                     <div class="panel-body">
                         <div class="panel panel-default col-xs-12">
                             <div class="panel-heading ">
@@ -137,7 +137,3 @@
     </script>
 
 @endsection
-
-
-
-
