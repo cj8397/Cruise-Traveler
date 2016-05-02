@@ -5,8 +5,10 @@ use App\Http\Requests;
 use App\UserSailing;
 use App\UserEvent;
 use App\Sailing;
+use App\Stats;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Helpers\StatsHelper;
 use App\Http\Controllers\UserEventsController;
 use Illuminate\Support\Facades\DB;
@@ -110,7 +112,8 @@ class UserSailingsController extends Controller
         $sex = $this->CalculateSexPercentages($sailing_id);
 
         $summary = compact('fam', 'lang', 'sex');
-        return $summary;
+        $stats = new Stats($summary);
+        return $stats;
     }
 
 }
