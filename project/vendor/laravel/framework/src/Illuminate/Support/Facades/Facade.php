@@ -36,18 +36,6 @@ abstract class Facade
     }
 
     /**
-     * Get the registered name of the component.
-     *
-     * @return string
-     *
-     * @throws \RuntimeException
-     */
-    protected static function getFacadeAccessor()
-    {
-        throw new RuntimeException('Facade does not implement getFacadeAccessor method.');
-    }
-
-    /**
      * Initiate a mock expectation on the facade.
      *
      * @param  mixed
@@ -64,18 +52,6 @@ abstract class Facade
         }
 
         return call_user_func_array([$mock, 'shouldReceive'], func_get_args());
-    }
-
-    /**
-     * Determines whether a mock is set as the instance of the facade.
-     *
-     * @return bool
-     */
-    protected static function isMock()
-    {
-        $name = static::getFacadeAccessor();
-
-        return isset(static::$resolvedInstance[$name]) && static::$resolvedInstance[$name] instanceof MockInterface;
     }
 
     /**
@@ -111,6 +87,18 @@ abstract class Facade
     }
 
     /**
+     * Determines whether a mock is set as the instance of the facade.
+     *
+     * @return bool
+     */
+    protected static function isMock()
+    {
+        $name = static::getFacadeAccessor();
+
+        return isset(static::$resolvedInstance[$name]) && static::$resolvedInstance[$name] instanceof MockInterface;
+    }
+
+    /**
      * Get the mockable class for the bound instance.
      *
      * @return string|null
@@ -130,6 +118,18 @@ abstract class Facade
     public static function getFacadeRoot()
     {
         return static::resolveFacadeInstance(static::getFacadeAccessor());
+    }
+
+    /**
+     * Get the registered name of the component.
+     *
+     * @return string
+     *
+     * @throws \RuntimeException
+     */
+    protected static function getFacadeAccessor()
+    {
+        throw new RuntimeException('Facade does not implement getFacadeAccessor method.');
     }
 
     /**
@@ -210,6 +210,24 @@ abstract class Facade
             throw new RuntimeException('A facade root has not been set.');
         }
 
-        return $instance->$method(...$args);
+        switch (count($args)) {
+            case 0:
+                return $instance->$method();
+
+            case 1:
+                return $instance->$method($args[0]);
+
+            case 2:
+                return $instance->$method($args[0], $args[1]);
+
+            case 3:
+                return $instance->$method($args[0], $args[1], $args[2]);
+
+            case 4:
+                return $instance->$method($args[0], $args[1], $args[2], $args[3]);
+
+            default:
+                return call_user_func_array([$instance, $method], $args);
+        }
     }
 }

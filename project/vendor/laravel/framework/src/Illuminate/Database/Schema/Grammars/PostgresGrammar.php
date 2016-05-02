@@ -28,7 +28,7 @@ class PostgresGrammar extends Grammar
      */
     public function compileTableExists()
     {
-        return 'select * from information_schema.tables where table_name = ?';
+        return 'select * from information_schema.tables where table_schema = ? and table_name = ?';
     }
 
     /**
@@ -121,9 +121,7 @@ class PostgresGrammar extends Grammar
 
         $index = $this->wrap($command->index);
 
-        $algorithm = $command->algorithm ? ' using '.$command->algorithm : '';
-
-        return "create index {$index} on ".$this->wrapTable($blueprint).$algorithm." ({$columns})";
+        return "create index {$index} on ".$this->wrapTable($blueprint)." ({$columns})";
     }
 
     /**

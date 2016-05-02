@@ -39,7 +39,7 @@ class StatsHelper
 
     public function CalculateAgePercentages($column, $id) {
         if(starts_with($column, 'sailing')) {
-            $users = UserSailing::where([$column => $id])->with('userdetails')->get();
+            $users = UserSailing::where([$column => $id])->with('usgserdetails')->get();
         }
         if(starts_with($column, 'event')) {
             $users = UserEvent::where([$column => $id])->with('userdetails')->get();

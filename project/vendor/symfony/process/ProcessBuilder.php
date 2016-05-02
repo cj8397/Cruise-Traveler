@@ -167,7 +167,7 @@ class ProcessBuilder
     /**
      * Sets the input of the process.
      *
-     * @param resource|scalar|\Traversable|null $input The input content
+     * @param mixed $input The input as a string
      *
      * @return ProcessBuilder
      *
@@ -175,7 +175,7 @@ class ProcessBuilder
      */
     public function setInput($input)
     {
-        $this->input = ProcessUtils::validateInput(__METHOD__, $input);
+        $this->input = ProcessUtils::validateInput(sprintf('%s::%s', __CLASS__, __FUNCTION__), $input);
 
         return $this;
     }

@@ -129,20 +129,6 @@ class ArtisanServiceProvider extends ServiceProvider
     }
 
     /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        if ($this->app->environment('production')) {
-            return array_values($this->commands);
-        } else {
-            return array_merge(array_values($this->commands), array_values($this->devCommands));
-        }
-    }
-
-    /**
      * Register the command.
      *
      * @return void
@@ -560,5 +546,19 @@ class ArtisanServiceProvider extends ServiceProvider
         $this->app->singleton('command.policy.make', function ($app) {
             return new PolicyMakeCommand($app['files']);
         });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        if ($this->app->environment('production')) {
+            return array_values($this->commands);
+        } else {
+            return array_merge(array_values($this->commands), array_values($this->devCommands));
+        }
     }
 }
