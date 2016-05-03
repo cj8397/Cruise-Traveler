@@ -22,6 +22,15 @@ class UserEventsTableSeeder extends Seeder
 
         for($i = 1; $i < 7; $i++) {
             DB::table('user_events')->insert([
+                'user_id' => 1,
+                'sailing_id' => $sailingID,
+                'event_id' => $i,
+                'role' => 'Participant'
+            ]);
+        }
+
+        for($i = 1; $i < 7; $i++) {
+            DB::table('user_events')->insert([
                 'user_id' => 2,
                 'sailing_id' => $sailingID,
                 'event_id' => $i,
