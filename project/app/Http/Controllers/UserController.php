@@ -20,22 +20,14 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function getUser($user_id){
-        $user = User::find($user_id);
-        $usersailings = UserSailing::with('sailing')->get()->where('user_id', $user_id);
-        $userevents = UserEvent::with('event')->get()->where('user_id', $user_id);
-        return view('users.profiletemplate')->with(['usersailings' => $usersailings,
-            'userevents' => $userevents,
-            'user' => $user]);
-    }
-
     public function getUserSailings($user_id)
     {
         $userdetail = UserDetails::where('user_id', $user_id)->first();
         $usersailings = UserSailing::with('sailing')->get()->where('user_id', $user_id);
         $userevents = UserEvent::with('event')->get()->where('user_id', $user_id);
-        
-        return view('users.userprofile')->with(['usersailings' => $usersailings, 'userevents' => $userevents, 'userdetail' => $userdetail]);
+
+        return view('users.userprofile')->with(['usersailings' => $usersailings, 'userevents' => $userevents,
+            'userdetail' => $userdetail]);
     }
 
     /*public function getEvents()
@@ -77,7 +69,7 @@ class UserController extends Controller
         }else{
           return redirect('users/create');
         }
-      }else{
+      } else {
         return redirect::back();
       }
     }
@@ -86,6 +78,7 @@ class UserController extends Controller
     {
         return view('users.createdetail');
     }
+
     protected function createUserDetails(UserDetailsRequest $request)
     {
       $userDetails = UserDetails::create([
