@@ -26,7 +26,7 @@ class Stats
 
     function setTotal($stats) {
         if(!empty($stats['total'])) {
-            $this->total = $stats;
+            $this->total = $stats['total'];
         } else {
             $this->total = null;
         }

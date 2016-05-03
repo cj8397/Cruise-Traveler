@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Helpers;
 use Illuminate\Database\Eloquent\Model;
 use App\UserSailing;
 use App\UserEvent;
+use Illuminate\Support\Facades\DB;
 
 class StatsHelper
 {
@@ -92,7 +93,6 @@ class StatsHelper
         } else {
             return 'nosailings';
         }
-
     }
 
     public function CalculateDynamicPercentages($column, $id, $attribute) {

@@ -113,19 +113,46 @@ class UserSailingsController extends Controller
     }
 
 
-    public function GetStatsSummary($sailing_id) {
+//    public function GetStatsSummary($sailing_id) {
+//
+//        $fam = $this->CalculateFamilyPercentages($sailing_id);
+//        $langs = $this->CalculateLangPercentages($sailing_id);
+//        $sex = $this->CalculateSexPercentages($sailing_id);
+//        $cities = $this->CalculateCityPercentages($sailing_id);
+//        $countries = $this->CalculateCountryPercentages($sailing_id);
+//        $ages = $this->CalculateAgePercentages($sailing_id);
+//        $total = UserSailing::where(['sailing_id'=>$sailing_id])->count();
+//
+//        $summary = compact('fam', 'langs', 'sex', 'cities', 'countries', 'ages', 'total');
+//        $stats = new Stats($summary);
+//        return $stats;
+//    }
 
-        $fam = $this->CalculateFamilyPercentages($sailing_id);
-        $langs = $this->CalculateLangPercentages($sailing_id);
-        $sex = $this->CalculateSexPercentages($sailing_id);
-        $cities = $this->CalculateCityPercentages($sailing_id);
-        $countries = $this->CalculateCountryPercentages($sailing_id);
-        $ages = $this->CalculateAgePercentages($sailing_id);
-        $total = UserSailing::where(['sailing_id'=>$sailing_id])->count();
+    function GetStatsSummary($sailing_id) {
 
-        $summary = compact('fam', 'langs', 'sex', 'cities', 'countries', 'ages', 'total');
-        $stats = new Stats($summary);
-        return $stats;
+        $stats = DB::select("call event_stats_summary($sailing_id)")[0];
+
+        $total = UserSailing::where(['sailing_id' => $sailing_id])->count();
+        $ages = array();
+        $ages['0-18'] = $this->CalculatePercentage($stats->youth, $total);
+        $ages['18-25'] = $this->CalculatePercentage($stats->young, $total);
+        $ages['25-35'] = $this->CalculatePercentage($stats->adult, $total);
+        $ages['35-45'] = $this->CalculatePercentage($stats->middleaged, $total);
+        $ages['45-55'] = $this->CalculatePercentage($stats->youngelders, $total);
+        $ages['55-65'] = $this->CalculatePercentage($stats->elders, $total);
+        $ages['65+'] = $this->CalculatePercentage($stats->seniors, $total);
+
+        $fam = array();
+        $fam['family'] = $this->CalculatePercentage($stats->family, $total);
+        $fam['nonfamily'] = 100 - $fam['family'];
+
+        $sex = array();
+        $sex['male'] = $this->CalculatePercentage($stats->male, $total);
+        $sex['female'] = 100 - $sex['male'];
+
+        $summary = compact('total','fam', 'sex', 'ages');
+        $summaryStats = new Stats($summary);
+        return $summaryStats;
     }
 
     public function GetTop3Summary($sailing_id) {
@@ -142,5 +169,9 @@ class UserSailingsController extends Controller
         $summary = compact('total', 'fam', 'langs', 'cities');
         $stats = new Stats($summary);
         return $stats;
+    }
+
+    function CalculatePercentage($segment, $total) {
+        return round (($segment / $total) * 100, 0);
     }
 }

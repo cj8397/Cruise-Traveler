@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Http\Controllers\UserSailingsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -75,3 +76,8 @@ Route::get('/joinevent/{event_id}/{sailing_id}', 'UserEventsController@JoinEvent
 Route::get('/leaveevent/{event_id}', 'UserEventsController@LeaveEvent');
 Route::get('/eventusers/{event_id}', 'UserEventsController@GetAllUsers');
 Route::get('/userevents', 'UserEventsController@GetAllEvents');
+
+Route::get('/test', function() {
+    $helper = new UserSailingsController();
+    return $helper->GetStatsSummary(1);
+});
