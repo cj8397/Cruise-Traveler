@@ -112,7 +112,7 @@ class ProgressIndicator
      *
      * This method also allow you to override an existing placeholder.
      *
-     * @param string   $name     The placeholder name (including the delimiter char like %)
+     * @param string $name The placeholder name (including the delimiter char like %)
      * @param callable $callable A PHP callable
      */
     public static function setPlaceholderFormatterDefinition($name, $callable)
@@ -122,6 +122,36 @@ class ProgressIndicator
         }
 
         self::$formatters[$name] = $callable;
+    }
+
+    private static function initPlaceholderFormatters()
+    {
+        return array(
+            'indicator' => function (ProgressIndicator $indicator) {
+                return $indicator->getCurrentValue();
+            },
+            'message' => function (ProgressIndicator $indicator) {
+                return $indicator->getMessage();
+            },
+            'elapsed' => function (ProgressIndicator $indicator) {
+                return Helper::formatTime(time() - $indicator->getStartTime());
+            },
+            'memory' => function () {
+                return Helper::formatMemory(memory_get_usage(true));
+            },
+        );
+    }
+
+    /**
+     * Gets the current animated indicator character.
+     *
+     * @return string
+     *
+     * @internal for PHP 5.3 compatibility
+     */
+    public function getCurrentValue()
+    {
+        return $this->indicatorValues[$this->indicatorCurrent % count($this->indicatorValues)];
     }
 
     /**
@@ -146,6 +176,18 @@ class ProgressIndicator
         $this->message = $message;
 
         $this->display();
+    }
+
+    /**
+     * Gets the progress bar start time.
+     *
+     * @return int The progress bar start time
+     *
+     * @internal for PHP 5.3 compatibility
+     */
+    public function getStartTime()
+    {
+        return $this->startTime;
     }
 
     private function display()
@@ -209,48 +251,6 @@ class ProgressIndicator
         }
 
         return isset(self::$formatters[$name]) ? self::$formatters[$name] : null;
-    }
-
-    private static function initPlaceholderFormatters()
-    {
-        return array(
-            'indicator' => function (ProgressIndicator $indicator) {
-                return $indicator->getCurrentValue();
-            },
-            'message' => function (ProgressIndicator $indicator) {
-                return $indicator->getMessage();
-            },
-            'elapsed' => function (ProgressIndicator $indicator) {
-                return Helper::formatTime(time() - $indicator->getStartTime());
-            },
-            'memory' => function () {
-                return Helper::formatMemory(memory_get_usage(true));
-            },
-        );
-    }
-
-    /**
-     * Gets the current animated indicator character.
-     *
-     * @return string
-     *
-     * @internal for PHP 5.3 compatibility
-     */
-    public function getCurrentValue()
-    {
-        return $this->indicatorValues[$this->indicatorCurrent % count($this->indicatorValues)];
-    }
-
-    /**
-     * Gets the progress bar start time.
-     *
-     * @return int The progress bar start time
-     *
-     * @internal for PHP 5.3 compatibility
-     */
-    public function getStartTime()
-    {
-        return $this->startTime;
     }
 
     /**
