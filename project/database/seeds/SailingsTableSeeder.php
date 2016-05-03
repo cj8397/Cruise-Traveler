@@ -73,8 +73,8 @@ Norwegian Gem,20-11-2016,04-12-2016,San Juan- Puerto Rico,San Juan- Puerto Rico,
             // var_dump($sailingInfo[0]);
             DB::table('sailings')->insert([
                 'cruise_line' => $sailingInfo[0],
-                'start_date' => $sailingInfo[1],
-                'end_date' => $sailingInfo[2],
+                'start_date' => new DateTime($sailingInfo[1]),
+                'end_date' => new DateTime($sailingInfo[2]),
                 'port_org' => $sailingInfo[3],
                 'port_dest' => $sailingInfo[4],
                 'destination' => $sailingInfo[5],
