@@ -29,15 +29,12 @@ class UserController extends Controller
             'user' => $user]);
     }
 
-    public function getUserSailings()
+    public function getUserSailings($user_id)
     {
-        $userdetail = UserDetails::where('user_id', Auth::user()->id)->first();
-        $usersailings = UserSailing::with('sailing')->get()->where('user_id', Auth::user()->id);
-        $userevents = UserEvent::with('event')->get()->where('user_id', Auth::user()->id);
-
-        //dd($usersailings->sailing->sailing_id);
-        //dd($usersailings->first()->sailing->title);
-
+        $userdetail = UserDetails::where('user_id', $user_id)->first();
+        $usersailings = UserSailing::with('sailing')->get()->where('user_id', $user_id);
+        $userevents = UserEvent::with('event')->get()->where('user_id', $user_id);
+        
         return view('users.userprofile')->with(['usersailings' => $usersailings, 'userevents' => $userevents, 'userdetail' => $userdetail]);
     }
 

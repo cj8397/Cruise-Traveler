@@ -81,7 +81,7 @@
                         <hr>
                         <div class="panel-body col-md-6 col-xs-12">
                             <div class="panel-heading">
-                                <label class="label-info"><h4>{!! $sailing->sailing->title !!}</h4></label>
+                                <label class="label-info"><h4>{!! $sailing->sailing->cruise_line !!}</h4></label>
                             </div>
                             <ul class="list-group">
                                 <li class="list-group-item">

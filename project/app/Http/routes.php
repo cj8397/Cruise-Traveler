@@ -41,7 +41,7 @@ Route::get('sailings/update/{id}', 'SailingsController@UpdateSailing');
 Route::post('sailings/update/save/{id}', 'SailingsController@SaveSailing');
 Route::get('/sailings/{id}', 'SailingsController@GetSailing');
 
-Route::get('/users/userprofile', 'UserController@getUserSailings');
+Route::get('/users/userprofile/{user_id}', 'UserController@getUserSailings');
 Route::get('/users/detail', 'UserController@getDetails');
 Route::get('/users/create', 'UserController@showCreateForm');
 Route::post('/users/create/post', 'UserController@createUserDetails');
