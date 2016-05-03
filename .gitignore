@@ -59,7 +59,6 @@ storage/framework/
 .env.*.php
 .env.php
 .env
-_env
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
