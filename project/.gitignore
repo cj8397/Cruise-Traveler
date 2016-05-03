@@ -6,7 +6,6 @@
 .env.*.php
 .env.php
 .DS_Store
-/storage
 /public/images/.DS_Store
 #ERROR!
 >>>>>>> remotes/origin/master
@@ -18,19 +17,22 @@
 
 ## Directory-based project format:
 .idea/
-# if you remove the above rule, at least ignore the following:
+# if you remove the above rule, at least ignore the follwing:
 
 # User-specific stuff:
-#.idea/workspace.xml
-# .idea/tasks.xml
-# .idea/dictionaries
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
 
 # Sensitive or high-churn files:
-# .idea/dataSources.ids
-# .idea/dataSources.xml
-# .idea/sqlDataSources.xml
-# .idea/dynamic.xml
-# .idea/uiDesigner.xml
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/dataSources.local.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
 
 # Gradle:
 # .idea/gradle.xml
@@ -46,7 +48,7 @@
 ## Plugin-specific files:
 
 # IntelliJ
-out/
+/out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -56,4 +58,26 @@ atlassian-ide-plugin.xml
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
-#ERROR!
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+### Laravel template
+vendor/
+node_modules/
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 & Lumen specific
+bootstrap/cache/
+storage/
+.env.*.php
+.env.php
+.env
+_env
+
+# Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
+.rocketeer/
+
+# Created by .ignore support plugin (hsz.mobi)

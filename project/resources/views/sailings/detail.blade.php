@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <style>
         .panel-heading {
-            margin-top:0;
+            margin-top: 0;
         }
 
         .col-xs-4 {
@@ -40,8 +40,7 @@
                     </a>
                     <h4 class="panel-heading">Number of travellers</h4>
                     <div class="panel-body">
-                        <h4> 1234 </h4>
-                        {{--<h4>@if(isset($stats)) {{ $stats->total }}@endif</h4>--}}
+                        <h4>3,409</h4>
                     </div>
                     <h4 class="panel-heading">Number of Male</h4>
                     <div class="panel-body">

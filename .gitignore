@@ -49,15 +49,17 @@ node_modules/
 
 # Laravel 4 specific
 bootstrap/compiled.php
-app/storage/
+#app/storage/
 
 # Laravel 5 & Lumen specific
 bootstrap/cache/
 project/storage/
 storage/
+storage/framework/
 .env.*.php
 .env.php
 .env
+_env
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/

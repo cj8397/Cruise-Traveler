@@ -12,19 +12,15 @@
 */
 use Maatwebsite\Excel\Facades\Excel;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::auth();
+
+Route::get('/', 'HomeController@index');
 
 Route::get('/admin/home', 'AdminController@index');
 Route::get('/admin/users', 'AdminController@GetAllUsers');
 Route::get('/admin/user/{id}', 'AdminController@GetUser');
 Route::get('/admin/user/{id}/update', 'AdminController@UpdateUser');
 Route::post('/admin/user/{id}/update/save', 'AdminController@SaveUser');
-
-Route::get('/home', 'HomeController@index');
 
 //EventController Stuff
 Route::get('events/detail/{event_id}', 'EventsController@GetOneEvent');
@@ -46,7 +42,7 @@ Route::get('sailings/update/{id}', 'SailingsController@UpdateSailing');
 Route::post('sailings/update/save/{id}', 'SailingsController@SaveSailing');
 Route::get('/sailings/{id}', 'SailingsController@GetSailing');
 
-Route::get('/users/userprofile', 'UserController@getUserSailings');
+Route::get('/users/userprofile/{user_id}', 'UserController@getUserSailings');
 Route::get('/users/detail', 'UserController@getDetails');
 Route::get('/users/create', 'UserController@showCreateForm');
 Route::post('/users/create/post', 'UserController@createUserDetails');

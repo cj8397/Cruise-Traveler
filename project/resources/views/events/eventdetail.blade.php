@@ -95,7 +95,7 @@
             <div class="panel panel-body">
                 <div class="row">
                     @foreach ($members as $mem)
-                        <a class="col-xs-4 col-md-4" href="/users/{!! $mem->user_id !!}">
+                        <a class="col-xs-4 col-md-4" href="/users/userprofile/{!! $mem->user_id !!}">
                             <img class="img-responsive" src="http://placehold.it/750x450" alt="">
                             <span class="label label-default label-pill">{!! $mem->userdetails->first." ".$mem->userdetails->last!!}</span>
                         </a>
