@@ -62,7 +62,7 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 ### Laravel template
-vendor/
+
 node_modules/
 
 # Laravel 4 specific
@@ -72,8 +72,6 @@ app/storage/
 # Laravel 5 & Lumen specific
 bootstrap/cache/
 storage/
-.env.*.php
-.env.php
 .env
 _env
 

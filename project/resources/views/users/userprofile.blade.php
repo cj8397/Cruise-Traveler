@@ -75,7 +75,7 @@
             {{--@if(isset($usersailings))--}}
             {{--@foreach($usersailings as $sailings)--}}
             @if(isset($usersailings))
-                @foreach($usersailings as $sailing)
+                @foreach($usersailings->slice(0, 5) as $sailing)
                     {{--@for ($x = 0; $x < count($details); $x++)--}}
                     <div class="row col-md-12 col-xs-12">
                         <hr>
@@ -85,9 +85,9 @@
                             </div>
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <strong>Start Date: </strong>{!! $sailing->sailing->start_date !!}</br>
-                                    <strong>Departing Port: </strong>{!! $sailing->sailing->port_org !!}</br>
-                                    <strong>Destination: </strong>{!! $sailing->sailing->destination !!}</br>
+                                    <strong>Start Date: </strong>{!! $sailing->sailing->start_date !!} <br>
+                                    <strong>Departing Port: </strong>{!! $sailing->sailing->port_org !!} <br>
+                                    <strong>Destination: </strong>{!! $sailing->sailing->destination !!} <br>
                                     <strong>Sailing ID: </strong>{!! $sailing->sailing->id !!}
                                 </li>
                             </ul>
@@ -143,6 +143,29 @@
                     </div>
                 @endforeach
             @endif
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="row text-center">
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <ul class="pagination">
+                <li>
+                    <a href="../users/userprofile.blade.php/">&laquo;</a>
+                </li>
+                <li class="active">
+                    <a href="../users/userprofile.blade.php/">1</a>
+                </li>
+                <li>
+                    <a href="../users/userprofile.blade.php/">2</a>
+                </li>
+                <li>
+                    <a href="../users/userprofile.blade.php/">3</a>
+                </li>
+                <li>
+                    <a href="../users/userprofile.blade.php/">&raquo;</a>
+                </li>
+            </ul>
         </div>
     </div>
 @endsection

@@ -44,7 +44,7 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 ### Laravel template
-vendor/
+
 node_modules/
 
 # Laravel 4 specific
