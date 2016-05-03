@@ -34,7 +34,7 @@ class UserController extends Controller
         $userdetail = UserDetails::where('user_id', $user_id)->first();
         $usersailings = UserSailing::with('sailing')->get()->where('user_id', $user_id);
         $userevents = UserEvent::with('event')->get()->where('user_id', $user_id);
-        
+
         return view('users.userprofile')->with(['usersailings' => $usersailings, 'userevents' => $userevents, 'userdetail' => $userdetail]);
     }
 
