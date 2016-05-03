@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Carbon\Carbon;
 use App\User;
 
 class UserDetailsTableSeeder extends Seeder
@@ -21,11 +22,13 @@ class UserDetailsTableSeeder extends Seeder
         $faker = Faker::create();
         // 12 sailings right now
         foreach (range($first, $last) as $i) {
+            $dob =$faker->dateTimeBetween($startDate = '-90 years', $endDate = 'now');
             DB::table('user_details')->insert([
                 'user_id' => $i,
                 'first' => $faker->firstName(),
                 'last' => $faker->lastName(),
-                'dob' => $faker->dateTimeBetween($startDate = '-90 years', $endDate = 'now'),
+                'dob' => $dob,
+                'age'=> Carbon::instance($dob)->age,
                 'sex' => $faker->numberBetween($min = 0, $max = 1),
                 'lang' => $faker->languageCode(),
                 'country' => $faker->country(),
