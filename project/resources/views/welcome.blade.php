@@ -46,6 +46,21 @@
                         <td class="tg-baqh">password</td>
                         <td class="tg-baqh">Vacationer</td>
                     </tr>
+                    <tr>
+                        <td>eventhost@gmail.com</td>
+                        <td>password</td>
+                        <td>Host</td>
+                    </tr>
+                    <tr>
+                        <td>eventparticipant@gmail.com</td>
+                        <td>password</td>
+                        <td>Participant</td>
+                    </tr>
+                    <tr>
+                        <td>admin@admin.com</td>
+                        <td>password</td>
+                        <td>Admin</td>
+                    </tr>
                 </table>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
