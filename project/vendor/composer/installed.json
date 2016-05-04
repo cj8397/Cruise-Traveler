@@ -308,12 +308,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/console.git",
-            "reference": "c8fc338326817cf79b60840a802b019aa6a8588f"
+            "reference": "eac900eacbefd68a29fa1f183590568cb5f6ffd5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/console/zipball/c8fc338326817cf79b60840a802b019aa6a8588f",
-            "reference": "c8fc338326817cf79b60840a802b019aa6a8588f",
+            "url": "https://api.github.com/repos/symfony/console/zipball/eac900eacbefd68a29fa1f183590568cb5f6ffd5",
+            "reference": "eac900eacbefd68a29fa1f183590568cb5f6ffd5",
             "shasum": ""
         },
         "require": {
@@ -330,7 +330,7 @@
             "symfony/event-dispatcher": "",
             "symfony/process": ""
         },
-        "time": "2016-04-28 09:49:00",
+        "time": "2016-05-03 18:48:46",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -964,12 +964,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/http-kernel.git",
-            "reference": "c96461696143a48b7ff5d35e077bbbd09389c020"
+            "reference": "b7fff3866c15eea545f02a9b9a3b7e6db828bf79"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/http-kernel/zipball/c96461696143a48b7ff5d35e077bbbd09389c020",
-            "reference": "c96461696143a48b7ff5d35e077bbbd09389c020",
+            "url": "https://api.github.com/repos/symfony/http-kernel/zipball/b7fff3866c15eea545f02a9b9a3b7e6db828bf79",
+            "reference": "b7fff3866c15eea545f02a9b9a3b7e6db828bf79",
             "shasum": ""
         },
         "require": {
@@ -1008,7 +1008,7 @@
             "symfony/finder": "",
             "symfony/var-dumper": ""
         },
-        "time": "2016-05-03 12:24:23",
+        "time": "2016-05-03 18:48:46",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1399,12 +1399,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/laravel/framework.git",
-            "reference": "81def279eb0dc2cc3a10d04260cacd8866bc035c"
+            "reference": "91efb6daef37345994c15a6832d9e554f3e4f0a9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laravel/framework/zipball/81def279eb0dc2cc3a10d04260cacd8866bc035c",
-            "reference": "81def279eb0dc2cc3a10d04260cacd8866bc035c",
+            "url": "https://api.github.com/repos/laravel/framework/zipball/91efb6daef37345994c15a6832d9e554f3e4f0a9",
+            "reference": "91efb6daef37345994c15a6832d9e554f3e4f0a9",
             "shasum": ""
         },
         "require": {
@@ -1485,7 +1485,7 @@
             "symfony/dom-crawler": "Required to use most of the crawler integration testing tools (3.1.*).",
             "symfony/psr-http-message-bridge": "Required to psr7 bridging features (0.2.*)."
         },
-        "time": "2016-05-03 13:10:36",
+        "time": "2016-05-04 14:54:11",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2060,58 +2060,6 @@
         "keywords": [
             "export",
             "exporter"
-        ]
-    },
-    {
-        "name": "sebastian/environment",
-        "version": "1.3.5",
-        "version_normalized": "1.3.5.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sebastianbergmann/environment.git",
-            "reference": "dc7a29032cf72b54f36dac15a1ca5b3a1b6029bf"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/dc7a29032cf72b54f36dac15a1ca5b3a1b6029bf",
-            "reference": "dc7a29032cf72b54f36dac15a1ca5b3a1b6029bf",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.4"
-        },
-        "time": "2016-02-26 18:40:46",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.3.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Sebastian Bergmann",
-                "email": "sebastian@phpunit.de"
-            }
-        ],
-        "description": "Provides functionality to handle HHVM/PHP environments",
-        "homepage": "http://www.github.com/sebastianbergmann/environment",
-        "keywords": [
-            "Xdebug",
-            "environment",
-            "hhvm"
         ]
     },
     {
@@ -3291,60 +3239,55 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "laravelcollective/html",
-        "version": "v5.0.5",
-        "version_normalized": "5.0.5.0",
+        "name": "sebastian/environment",
+        "version": "1.3.6",
+        "version_normalized": "1.3.6.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/LaravelCollective/html.git",
-            "reference": "f1eddc7a7834854a3cb147a7601547394d345213"
+            "url": "https://github.com/sebastianbergmann/environment.git",
+            "reference": "2292b116f43c272ff4328083096114f84ea46a56"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/LaravelCollective/html/zipball/f1eddc7a7834854a3cb147a7601547394d345213",
-            "reference": "f1eddc7a7834854a3cb147a7601547394d345213",
+            "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/2292b116f43c272ff4328083096114f84ea46a56",
+            "reference": "2292b116f43c272ff4328083096114f84ea46a56",
             "shasum": ""
         },
         "require": {
-            "illuminate/http": "~5.1",
-            "illuminate/routing": "~5.1",
-            "illuminate/session": "~5.1",
-            "illuminate/support": "~5.1",
-            "php": ">=5.4.0"
+            "php": ">=5.3.3"
         },
         "require-dev": {
-            "mockery/mockery": "~0.9",
-            "phpunit/phpunit": "~4.0"
+            "phpunit/phpunit": "~4.4"
         },
-        "time": "2015-05-21 16:45:14",
+        "time": "2016-05-04 07:59:13",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.1-dev"
+                "dev-master": "1.3.x-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
-            "psr-4": {
-                "Collective\\Html\\": "src/"
-            },
-            "files": [
-                "src/helpers.php"
+            "classmap": [
+                "src/"
             ]
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "MIT"
+            "BSD-3-Clause"
         ],
         "authors": [
             {
-                "name": "Taylor Otwell",
-                "email": "taylorotwell@gmail.com"
-            },
-            {
-                "name": "Adam Engebretson",
-                "email": "adam@laravelcollective.com"
+                "name": "Sebastian Bergmann",
+                "email": "sebastian@phpunit.de"
             }
+        ],
+        "description": "Provides functionality to handle HHVM/PHP environments",
+        "homepage": "http://www.github.com/sebastianbergmann/environment",
+        "keywords": [
+            "Xdebug",
+            "environment",
+            "hhvm"
         ]
     }
 ]
