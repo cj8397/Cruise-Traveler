@@ -23,7 +23,8 @@ class EventRequest extends Request
      * @return array
      */
 
-    public function rules(){
+    public function rules()
+    {
         return [
             'sailing_id' => 'required|exists:sailings,id',
             'title' => 'required|max:80',

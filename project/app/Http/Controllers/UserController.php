@@ -61,17 +61,15 @@ class UserController extends Controller
     }*/
     protected function getDetails()
     {
-      if($user_id = Auth::User()->id)
-      {
-        if($userDetail = UserDetails::where('user_id', $user_id)->first())
-        {
-          return view('users.detail', compact('userDetail'));
-        }else{
-          return redirect('users/create');
+        if ($user_id = Auth::User()->id) {
+            if ($userDetail = UserDetails::where('user_id', $user_id)->first()) {
+                return view('users.detail', compact('userDetail'));
+            } else {
+                return redirect('users/create');
+            }
+        } else {
+            return redirect::back();
         }
-      } else {
-        return redirect::back();
-      }
     }
 
     protected function showCreateForm()
@@ -81,22 +79,22 @@ class UserController extends Controller
 
     protected function createUserDetails(UserDetailsRequest $request)
     {
-      $userDetails = UserDetails::create([
-          'user_id' => Auth::user()->id,
-          'first' => $request->first,
-          'last' => $request->last,
-          'dob' => $request->dob,
-          'sex' => $request->sex,
-          'lang' => $request->lang,
-          'country' => $request->country,
-          'ethnicity' => $request->ethnicity,
-          'hobby' => $request->hobby,
-          'family' => $request->family,
-          'co_travellers' => $request->co_travellers,
-          'region' => $request->region,
-          'city' => $request->city,
-          'address' => $request->address
-      ]);
-      return redirect('users/detail');
+        $userDetails = UserDetails::create([
+            'user_id' => Auth::user()->id,
+            'first' => $request->first,
+            'last' => $request->last,
+            'dob' => $request->dob,
+            'sex' => $request->sex,
+            'lang' => $request->lang,
+            'country' => $request->country,
+            'ethnicity' => $request->ethnicity,
+            'hobby' => $request->hobby,
+            'family' => $request->family,
+            'co_travellers' => $request->co_travellers,
+            'region' => $request->region,
+            'city' => $request->city,
+            'address' => $request->address
+        ]);
+        return redirect('users/detail');
     }
 }

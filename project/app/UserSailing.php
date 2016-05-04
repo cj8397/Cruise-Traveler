@@ -19,13 +19,19 @@ class UserSailing extends Model
     {
         return $this->hasMany('App\UserEvent');
     }
-    public function event(){
+
+    public function event()
+    {
         return $this->belongsTo('App\Event');
     }
-    public function user(){
+
+    public function user()
+    {
         return $this->belongsTo('App\User');
     }
-    public function sailing(){
+
+    public function sailing()
+    {
         return $this->belongsTo('App\Sailing');
     }
 
@@ -33,7 +39,8 @@ class UserSailing extends Model
 //    {
 //        return $this->belongsTo('App\Event');
 //    }
-    public function userdetails(){
+    public function userdetails()
+    {
         return $this->belongsTo('App\UserDetails', 'user_id', 'user_id');
     }
 

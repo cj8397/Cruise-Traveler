@@ -274,6 +274,182 @@ class Validator implements ValidatorContract
     }
 
     /**
+     * Merge additional rules into a given attribute(s).
+     *
+     * @param  string $attribute
+     * @param  string|array $rules
+     * @return $this
+     */
+    public function mergeRules($attribute, $rules = [])
+    {
+        if (is_array($attribute)) {
+            foreach ($attribute as $innerAttribute => $innerRules) {
+                $this->mergeRulesForAttribute($innerAttribute, $innerRules);
+            }
+
+            return $this;
+        }
+
+        return $this->mergeRulesForAttribute($attribute, $rules);
+    }
+
+    /**
+     * Merge additional rules into a given attribute.
+     *
+     * @param  string $attribute
+     * @param  string|array $rules
+     * @return $this
+     */
+    protected function mergeRulesForAttribute($attribute, $rules)
+    {
+        $current = isset($this->rules[$attribute]) ? $this->rules[$attribute] : [];
+
+        $merge = head($this->explodeRules([$rules]));
+
+        $this->rules[$attribute] = array_merge($current, $merge);
+
+        return $this;
+    }
+
+    /**
+     * Explode the rules into an array of rules.
+     *
+     * @param  string|array $rules
+     * @return array
+     */
+    protected function explodeRules($rules)
+    {
+        foreach ($rules as $key => $rule) {
+            if (Str::contains($key, '*')) {
+                $this->each($key, [$rule]);
+
+                unset($rules[$key]);
+            } else {
+                $rules[$key] = (is_string($rule)) ? explode('|', $rule) : $rule;
+            }
+        }
+
+        return $rules;
+    }
+
+    /**
+     * Define a set of rules that apply to each element in an array attribute.
+     *
+     * @param  string $attribute
+     * @param  string|array $rules
+     * @return void
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function each($attribute, $rules)
+    {
+        $data = Arr::dot($this->initializeAttributeOnData($attribute));
+
+        $pattern = str_replace('\*', '[^\.]+', preg_quote($attribute));
+
+        $data = array_merge($data, $this->extractValuesForWildcards(
+            $data, $attribute
+        ));
+
+        foreach ($data as $key => $value) {
+            if (Str::startsWith($key, $attribute) || (bool)preg_match('/^' . $pattern . '\z/', $key)) {
+                foreach ((array)$rules as $ruleKey => $ruleValue) {
+                    if (!is_string($ruleKey) || Str::endsWith($key, $ruleKey)) {
+                        $this->implicitAttributes[$attribute][] = $key;
+
+                        $this->mergeRules($key, $ruleValue);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Gather a copy of the attribute data filled with any missing attributes.
+     *
+     * @param  string $attribute
+     * @return array
+     */
+    protected function initializeAttributeOnData($attribute)
+    {
+        $explicitPath = $this->getLeadingExplicitAttributePath($attribute);
+
+        $data = $this->extractDataFromPath($explicitPath);
+
+        if (!Str::contains($attribute, '*') || Str::endsWith($attribute, '*')) {
+            return $data;
+        }
+
+        return data_fill($data, $attribute, null);
+    }
+
+    /**
+     * Get the explicit part of the attribute name.
+     *
+     * E.g. 'foo.bar.*.baz' -> 'foo.bar'
+     *
+     * Allows us to not spin through all of the flattened data for some operations.
+     *
+     * @param  string $attribute
+     * @return string
+     */
+    protected function getLeadingExplicitAttributePath($attribute)
+    {
+        return rtrim(explode('*', $attribute)[0], '.') ?: null;
+    }
+
+    /**
+     * Extract data based on the given dot-notated path.
+     *
+     * Used to extract a sub-section of the data for faster iteration.
+     *
+     * @param  string $attribute
+     * @return array
+     */
+    protected function extractDataFromPath($attribute)
+    {
+        $results = [];
+
+        $value = Arr::get($this->data, $attribute, '__missing__');
+
+        if ($value != '__missing__') {
+            Arr::set($results, $attribute, $value);
+        }
+
+        return $results;
+    }
+
+    /**
+     * Get all of the exact attribute values for a given wildcard attribute.
+     *
+     * @param  array $data
+     * @param  string $attribute
+     * @return array
+     */
+    public function extractValuesForWildcards($data, $attribute)
+    {
+        $keys = [];
+
+        $pattern = str_replace('\*', '[^\.]+', preg_quote($attribute));
+
+        foreach ($data as $key => $value) {
+            if ((bool)preg_match('/^' . $pattern . '/', $key, $matches)) {
+                $keys[] = $matches[0];
+            }
+        }
+
+        $keys = array_unique($keys);
+
+        $data = [];
+
+        foreach ($keys as $key) {
+            $data[$key] = array_get($this->data, $key);
+        }
+
+        return $data;
+    }
+
+    /**
      * Run the validator's rules against its data.
      *
      * @return void
@@ -1427,182 +1603,6 @@ class Validator implements ValidatorContract
         list($class, $method) = explode('@', $callback);
 
         return call_user_func_array([$this->container->make($class), $method], $parameters);
-    }
-
-    /**
-     * Explode the rules into an array of rules.
-     *
-     * @param  string|array $rules
-     * @return array
-     */
-    protected function explodeRules($rules)
-    {
-        foreach ($rules as $key => $rule) {
-            if (Str::contains($key, '*')) {
-                $this->each($key, [$rule]);
-
-                unset($rules[$key]);
-            } else {
-                $rules[$key] = (is_string($rule)) ? explode('|', $rule) : $rule;
-            }
-        }
-
-        return $rules;
-    }
-
-    /**
-     * Define a set of rules that apply to each element in an array attribute.
-     *
-     * @param  string $attribute
-     * @param  string|array $rules
-     * @return void
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function each($attribute, $rules)
-    {
-        $data = Arr::dot($this->initializeAttributeOnData($attribute));
-
-        $pattern = str_replace('\*', '[^\.]+', preg_quote($attribute));
-
-        $data = array_merge($data, $this->extractValuesForWildcards(
-            $data, $attribute
-        ));
-
-        foreach ($data as $key => $value) {
-            if (Str::startsWith($key, $attribute) || (bool)preg_match('/^' . $pattern . '\z/', $key)) {
-                foreach ((array)$rules as $ruleKey => $ruleValue) {
-                    if (!is_string($ruleKey) || Str::endsWith($key, $ruleKey)) {
-                        $this->implicitAttributes[$attribute][] = $key;
-
-                        $this->mergeRules($key, $ruleValue);
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Gather a copy of the attribute data filled with any missing attributes.
-     *
-     * @param  string $attribute
-     * @return array
-     */
-    protected function initializeAttributeOnData($attribute)
-    {
-        $explicitPath = $this->getLeadingExplicitAttributePath($attribute);
-
-        $data = $this->extractDataFromPath($explicitPath);
-
-        if (!Str::contains($attribute, '*') || Str::endsWith($attribute, '*')) {
-            return $data;
-        }
-
-        return data_fill($data, $attribute, null);
-    }
-
-    /**
-     * Get the explicit part of the attribute name.
-     *
-     * E.g. 'foo.bar.*.baz' -> 'foo.bar'
-     *
-     * Allows us to not spin through all of the flattened data for some operations.
-     *
-     * @param  string $attribute
-     * @return string
-     */
-    protected function getLeadingExplicitAttributePath($attribute)
-    {
-        return rtrim(explode('*', $attribute)[0], '.') ?: null;
-    }
-
-    /**
-     * Extract data based on the given dot-notated path.
-     *
-     * Used to extract a sub-section of the data for faster iteration.
-     *
-     * @param  string $attribute
-     * @return array
-     */
-    protected function extractDataFromPath($attribute)
-    {
-        $results = [];
-
-        $value = Arr::get($this->data, $attribute, '__missing__');
-
-        if ($value != '__missing__') {
-            Arr::set($results, $attribute, $value);
-        }
-
-        return $results;
-    }
-
-    /**
-     * Get all of the exact attribute values for a given wildcard attribute.
-     *
-     * @param  array $data
-     * @param  string $attribute
-     * @return array
-     */
-    public function extractValuesForWildcards($data, $attribute)
-    {
-        $keys = [];
-
-        $pattern = str_replace('\*', '[^\.]+', preg_quote($attribute));
-
-        foreach ($data as $key => $value) {
-            if ((bool)preg_match('/^' . $pattern . '/', $key, $matches)) {
-                $keys[] = $matches[0];
-            }
-        }
-
-        $keys = array_unique($keys);
-
-        $data = [];
-
-        foreach ($keys as $key) {
-            $data[$key] = array_get($this->data, $key);
-        }
-
-        return $data;
-    }
-
-    /**
-     * Merge additional rules into a given attribute(s).
-     *
-     * @param  string $attribute
-     * @param  string|array $rules
-     * @return $this
-     */
-    public function mergeRules($attribute, $rules = [])
-    {
-        if (is_array($attribute)) {
-            foreach ($attribute as $innerAttribute => $innerRules) {
-                $this->mergeRulesForAttribute($innerAttribute, $innerRules);
-            }
-
-            return $this;
-        }
-
-        return $this->mergeRulesForAttribute($attribute, $rules);
-    }
-
-    /**
-     * Merge additional rules into a given attribute.
-     *
-     * @param  string $attribute
-     * @param  string|array $rules
-     * @return $this
-     */
-    protected function mergeRulesForAttribute($attribute, $rules)
-    {
-        $current = isset($this->rules[$attribute]) ? $this->rules[$attribute] : [];
-
-        $merge = head($this->explodeRules([$rules]));
-
-        $this->rules[$attribute] = array_merge($current, $merge);
-
-        return $this;
     }
 
     /**
