@@ -17,7 +17,6 @@ use App\UserEvent;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\SailingRequest;
 use Illuminate\Support\Facades\Response;
-use App\Http\Requests\SearchRequest;
 
 class SailingsController extends Controller
 {
@@ -27,23 +26,13 @@ class SailingsController extends Controller
         $this->middleware('admin', ['except' => ['GetAllSailings', 'GetSailing']]);
     }
     //
-    protected function GetAllSailings(SearchRequest $request)
+    protected function GetAllSailings()
     {
-        if($request->sort == ""){
-            $sort = 'title';
-            $direction = 'desc';
-        }
-        else{
-            $sort = $request->sort;
-            $direction = $request->directon;
-        }
-        //
-        if($request->search != ""){
-            $sailings = Sailing::search($request);
-            return view('sailings.list', compact('sailings','oldValues'));
-
-        }
-        else if ($sailings = Sailing::orderBy($sort,$direction)->paginate(12)) {
+        if ($sailings = Sailing::all()) {
+            $statsController = new UserSailingsController();
+            for($i = 0; $i < 25; $i++) {
+                $sailings[$i]['stats'] = $statsController->GetTop3Summary($sailings[$i]->id);
+            }
             return view('sailings.list', compact('sailings'));
         } else {
             return redirect::back();

@@ -21,6 +21,7 @@ class UserDetails extends Migration
             $table->string('first')->nullable();
             $table->string('last')->nullable();
             $table->date('dob')->nullable();
+            $table->integer('age')->nullable();
             $table->boolean('sex')->nullable();
             $table->string('lang')->nullable();
             $table->string('country')->nullable();
