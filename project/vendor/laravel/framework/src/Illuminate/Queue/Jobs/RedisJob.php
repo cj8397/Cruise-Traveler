@@ -24,27 +24,19 @@ class RedisJob extends Job implements JobContract
     protected $job;
 
     /**
-     * The Redis job payload inside the reserved queue.
-     *
-     * @var string
-     */
-    protected $reserved;
-
-    /**
      * Create a new job instance.
      *
      * @param  \Illuminate\Container\Container  $container
      * @param  \Illuminate\Queue\RedisQueue  $redis
      * @param  string  $job
-     * @param  string  $reserved
      * @param  string  $queue
+     * @return void
      */
-    public function __construct(Container $container, RedisQueue $redis, $job, $reserved, $queue)
+    public function __construct(Container $container, RedisQueue $redis, $job, $queue)
     {
         $this->job = $job;
         $this->redis = $redis;
         $this->queue = $queue;
-        $this->reserved = $reserved;
         $this->container = $container;
     }
 
@@ -77,7 +69,7 @@ class RedisJob extends Job implements JobContract
     {
         parent::delete();
 
-        $this->redis->deleteReserved($this->queue, $this->reserved);
+        $this->redis->deleteReserved($this->queue, $this->job);
     }
 
     /**
@@ -90,7 +82,9 @@ class RedisJob extends Job implements JobContract
     {
         parent::release($delay);
 
-        $this->redis->deleteAndRelease($this->queue, $this->reserved, $delay);
+        $this->delete();
+
+        $this->redis->release($this->queue, $this->job, $delay, $this->attempts() + 1);
     }
 
     /**
@@ -141,15 +135,5 @@ class RedisJob extends Job implements JobContract
     public function getRedisJob()
     {
         return $this->job;
-    }
-
-    /**
-     * Get the underlying reserved Redis job.
-     *
-     * @return string
-     */
-    public function getReservedJob()
-    {
-        return $this->reserved;
     }
 }
