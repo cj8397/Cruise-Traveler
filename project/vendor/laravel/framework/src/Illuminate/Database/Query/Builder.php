@@ -589,22 +589,20 @@ class Builder
     {
         $isOperator = in_array($operator, $this->operators);
 
-        return is_null($value) && $isOperator && ! in_array($operator, ['=', '<>', '!=']);
+        return $isOperator && $operator != '=' && is_null($value);
     }
 
     /**
      * Add a raw where clause to the query.
      *
      * @param  string  $sql
-     * @param  mixed   $bindings
+     * @param  array   $bindings
      * @param  string  $boolean
      * @return $this
      */
-    public function whereRaw($sql, $bindings = [], $boolean = 'and')
+    public function whereRaw($sql, array $bindings = [], $boolean = 'and')
     {
         $type = 'raw';
-
-        $bindings = (array) $bindings;
 
         $this->wheres[] = compact('type', 'sql', 'boolean');
 
@@ -1152,13 +1150,13 @@ class Builder
     /**
      * Add a "group by" clause to the query.
      *
-     * @param  array  ...$groups
+     * @param  array|string  $column,...
      * @return $this
      */
-    public function groupBy(...$groups)
+    public function groupBy()
     {
-        foreach ($groups as $group) {
-            $this->groups = array_merge((array) $this->groups, is_array($group) ? $group : [$group]);
+        foreach (func_get_args() as $arg) {
+            $this->groups = array_merge((array) $this->groups, is_array($arg) ? $arg : [$arg]);
         }
 
         return $this;
@@ -1477,18 +1475,20 @@ class Builder
      * Execute the query and get the first result.
      *
      * @param  array   $columns
-     * @return \stdClass|array|null
+     * @return mixed|static
      */
     public function first($columns = ['*'])
     {
-        return $this->take(1)->get($columns)->first();
+        $results = $this->take(1)->get($columns);
+
+        return count($results) > 0 ? reset($results) : null;
     }
 
     /**
      * Execute the query as a "select" statement.
      *
      * @param  array  $columns
-     * @return \Illuminate\Support\Collection
+     * @return array|static[]
      */
     public function get($columns = ['*'])
     {
@@ -1502,7 +1502,7 @@ class Builder
 
         $this->columns = $original;
 
-        return collect($results);
+        return $results;
     }
 
     /**
@@ -1572,7 +1572,7 @@ class Builder
 
         $this->aggregate = ['function' => 'count', 'columns' => $this->clearSelectAliases($columns)];
 
-        $results = $this->get()->all();
+        $results = $this->get();
 
         $this->aggregate = null;
 
@@ -1649,7 +1649,7 @@ class Builder
     {
         $results = $this->forPage($page = 1, $count)->get();
 
-        while (! $results->isEmpty()) {
+        while (count($results) > 0) {
             // On each chunk result set, we will pass them to the callback and then let the
             // developer take care of everything within the callback, which allows us to
             // keep the memory low for spinning through large result sets for working.
@@ -1679,12 +1679,12 @@ class Builder
 
         $results = $this->forPageAfterId($count, 0, $column)->get();
 
-        while (! $results->isEmpty()) {
+        while (! empty($results)) {
             if (call_user_func($callback, $results) === false) {
                 return false;
             }
 
-            $lastId = $results->last()->{$column};
+            $lastId = last($results)->{$column};
 
             $results = $this->forPageAfterId($count, $lastId, $column)->get();
         }
@@ -1721,7 +1721,7 @@ class Builder
      *
      * @param  string  $column
      * @param  string|null  $key
-     * @return \Illuminate\Support\Collection
+     * @return array
      */
     public function pluck($column, $key = null)
     {
@@ -1730,10 +1730,25 @@ class Builder
         // If the columns are qualified with a table or have an alias, we cannot use
         // those directly in the "pluck" operations since the results from the DB
         // are only keyed by the column itself. We'll strip the table out here.
-        return $results->pluck(
+        return Arr::pluck(
+            $results,
             $this->stripTableForPluck($column),
             $this->stripTableForPluck($key)
         );
+    }
+
+    /**
+     * Alias for the "pluck" method.
+     *
+     * @param  string  $column
+     * @param  string|null  $key
+     * @return array
+     *
+     * @deprecated since version 5.2. Use the "pluck" method directly.
+     */
+    public function lists($column, $key = null)
+    {
+        return $this->pluck($column, $key);
     }
 
     /**
@@ -1756,7 +1771,7 @@ class Builder
      */
     public function implode($column, $glue = '')
     {
-        return $this->pluck($column)->implode($glue);
+        return implode($glue, $this->pluck($column));
     }
 
     /**
@@ -1882,7 +1897,7 @@ class Builder
 
         $this->bindings['select'] = $previousSelectBindings;
 
-        if (! $results->isEmpty()) {
+        if (isset($results[0])) {
             $result = array_change_key_case((array) $results[0]);
 
             return $result['aggregate'];

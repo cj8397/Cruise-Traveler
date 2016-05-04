@@ -44,6 +44,22 @@ if (! function_exists('array_add')) {
     }
 }
 
+if (! function_exists('array_build')) {
+    /**
+     * Build a new array using a callback.
+     *
+     * @param  array  $array
+     * @param  callable  $callback
+     * @return array
+     *
+     * @deprecated since version 5.2.
+     */
+    function array_build($array, callable $callback)
+    {
+        return Arr::build($array, $callback);
+    }
+}
+
 if (! function_exists('array_collapse')) {
     /**
      * Collapse an array of arrays into a single array.
@@ -728,7 +744,11 @@ if (! function_exists('str_replace_array')) {
      */
     function str_replace_array($search, array $replace, $subject)
     {
-        return Str::replaceArray($search, $replace, $subject);
+        foreach ($replace as $value) {
+            $subject = preg_replace('/'.$search.'/', $value, $subject, 1);
+        }
+
+        return $subject;
     }
 }
 

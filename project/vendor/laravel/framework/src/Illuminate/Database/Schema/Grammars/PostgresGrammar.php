@@ -121,9 +121,7 @@ class PostgresGrammar extends Grammar
 
         $index = $this->wrap($command->index);
 
-        $algorithm = $command->algorithm ? ' using '.$command->algorithm : '';
-
-        return "create index {$index} on ".$this->wrapTable($blueprint).$algorithm." ({$columns})";
+        return "create index {$index} on ".$this->wrapTable($blueprint)." ({$columns})";
     }
 
     /**
@@ -226,26 +224,6 @@ class PostgresGrammar extends Grammar
         $index = $this->wrap($command->index);
 
         return "alter table {$table} drop constraint {$index}";
-    }
-
-    /**
-     * Compile the command to enable foreign key constraints.
-     *
-     * @return string
-     */
-    public function compileEnableForeignKeyConstraints()
-    {
-        return 'SET CONSTRAINTS ALL IMMEDIATE;';
-    }
-
-    /**
-     * Compile the command to disable foreign key constraints.
-     *
-     * @return string
-     */
-    public function compileDisableForeignKeyConstraints()
-    {
-        return 'SET CONSTRAINTS ALL DEFERRED;';
     }
 
     /**

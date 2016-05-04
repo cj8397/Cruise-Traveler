@@ -167,9 +167,7 @@ class MySqlGrammar extends Grammar
 
         $index = $this->wrap($command->index);
 
-        $algorithm = $command->algorithm ? ' using '.$command->algorithm : '';
-
-        return "alter table {$table} add {$type} {$index}{$algorithm}($columns)";
+        return "alter table {$table} add {$type} {$index}($columns)";
     }
 
     /**
@@ -284,26 +282,6 @@ class MySqlGrammar extends Grammar
         $from = $this->wrapTable($blueprint);
 
         return "rename table {$from} to ".$this->wrapTable($command->to);
-    }
-
-    /**
-     * Compile the command to enable foreign key constraints.
-     *
-     * @return string
-     */
-    public function compileEnableForeignKeyConstraints()
-    {
-        return 'SET FOREIGN_KEY_CHECKS=1;';
-    }
-
-    /**
-     * Compile the command to disable foreign key constraints.
-     *
-     * @return string
-     */
-    public function compileDisableForeignKeyConstraints()
-    {
-        return 'SET FOREIGN_KEY_CHECKS=0;';
     }
 
     /**

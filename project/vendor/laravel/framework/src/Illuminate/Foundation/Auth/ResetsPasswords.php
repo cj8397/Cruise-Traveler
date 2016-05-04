@@ -13,18 +13,6 @@ trait ResetsPasswords
     use RedirectsUsers;
 
     /**
-     * Get the name of the guest middleware.
-     *
-     * @return string
-     */
-    protected function guestMiddleware()
-    {
-        $guard = $this->getGuard();
-
-        return $guard ? 'guest:'.$guard : 'guest';
-    }
-
-    /**
      * Display the form to request a password reset link.
      *
      * @return \Illuminate\Http\Response

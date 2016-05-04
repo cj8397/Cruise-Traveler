@@ -66,13 +66,6 @@ class Builder
     protected $scopes = [];
 
     /**
-     * Removed global scopes.
-     *
-     * @var array
-     */
-    protected $removedScopes = [];
-
-    /**
      * Create a new Eloquent query builder instance.
      *
      * @param  \Illuminate\Database\Query\Builder  $query
@@ -109,13 +102,17 @@ class Builder
      */
     public function withoutGlobalScope($scope)
     {
-        if (! is_string($scope)) {
-            $scope = get_class($scope);
+        if (is_string($scope)) {
+            unset($this->scopes[$scope]);
+
+            return $this;
         }
 
-        unset($this->scopes[$scope]);
-
-        $this->removedScopes[] = $scope;
+        foreach ($this->scopes as $key => $value) {
+            if ($scope instanceof $value) {
+                unset($this->scopes[$key]);
+            }
+        }
 
         return $this;
     }
@@ -137,16 +134,6 @@ class Builder
         }
 
         return $this;
-    }
-
-    /**
-     * Get an array of global scopes that were removed from the query.
-     *
-     * @return array
-     */
-    public function removedScopes()
-    {
-        return $this->removedScopes;
     }
 
     /**
@@ -244,16 +231,15 @@ class Builder
      * Get the first record matching the attributes or create it.
      *
      * @param  array  $attributes
-     * @param  array  $values
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function firstOrCreate(array $attributes, array $values = [])
+    public function firstOrCreate(array $attributes)
     {
         if (! is_null($instance = $this->where($attributes)->first())) {
             return $instance;
         }
 
-        $instance = $this->model->newInstance($attributes + $values);
+        $instance = $this->model->newInstance($attributes);
 
         $instance->save();
 
@@ -352,7 +338,7 @@ class Builder
     {
         $results = $this->forPage($page = 1, $count)->get();
 
-        while (! $results->isEmpty()) {
+        while (count($results) > 0) {
             // On each chunk result set, we will pass them to the callback and then let the
             // developer take care of everything within the callback, which allows us to
             // keep the memory low for spinning through large result sets for working.
@@ -431,13 +417,29 @@ class Builder
         // If the model has a mutator for the requested column, we will spin through
         // the results and mutate the values so that the mutated version of these
         // columns are returned as you would expect from these Eloquent models.
-        if (! $this->model->hasGetMutator($column)) {
-            return $results;
+        if ($this->model->hasGetMutator($column)) {
+            foreach ($results as $key => &$value) {
+                $fill = [$column => $value];
+
+                $value = $this->model->newFromBuilder($fill)->$column;
+            }
         }
 
-        return $results->map(function ($value) use ($column) {
-            return $this->model->newFromBuilder([$column => $value])->$column;
-        });
+        return collect($results);
+    }
+
+    /**
+     * Alias for the "pluck" method.
+     *
+     * @param  string  $column
+     * @param  string  $key
+     * @return \Illuminate\Support\Collection
+     *
+     * @deprecated since version 5.2. Use the "pluck" method directly.
+     */
+    public function lists($column, $key = null)
+    {
+        return $this->pluck($column, $key);
     }
 
     /**
@@ -591,7 +593,7 @@ class Builder
      */
     public function getModels($columns = ['*'])
     {
-        $results = $this->query->get($columns)->all();
+        $results = $this->query->get($columns);
 
         $connection = $this->model->getConnectionName();
 
@@ -940,13 +942,11 @@ class Builder
      */
     protected function mergeModelDefinedRelationWheresToHasQuery(Builder $hasQuery, Relation $relation)
     {
-        $removedScopes = $hasQuery->removedScopes();
-
-        $relationQuery = $relation->withoutGlobalScopes($removedScopes)->toBase();
-
         // Here we have the "has" query and the original relation. We need to copy over any
         // where clauses the developer may have put in the relationship function over to
         // the has query, and then copy the bindings from the "has" query to the main.
+        $relationQuery = $relation->toBase();
+
         $hasQuery->withoutGlobalScopes()->mergeWheres(
             $relationQuery->wheres, $relationQuery->getBindings()
         );
@@ -1134,7 +1134,7 @@ class Builder
      */
     protected function shouldNestWheresForScope(QueryBuilder $query, $originalWhereCount)
     {
-        return count($query->wheres) > $originalWhereCount;
+        return $originalWhereCount && count($query->wheres) > $originalWhereCount;
     }
 
     /**
@@ -1189,7 +1189,7 @@ class Builder
         // booleans and in this case create a nested where expression. That way
         // we don't add any unnecessary nesting thus keeping the query clean.
         if ($whereBooleans->contains('or')) {
-            $query->wheres[] = $this->nestWhereSlice($whereSlice, $whereBooleans->first());
+            $query->wheres[] = $this->nestWhereSlice($whereSlice);
         } else {
             $query->wheres = array_merge($query->wheres, $whereSlice);
         }
@@ -1199,16 +1199,15 @@ class Builder
      * Create a where array with nested where conditions.
      *
      * @param  array  $whereSlice
-     * @param  string  $boolean
      * @return array
      */
-    protected function nestWhereSlice($whereSlice, $boolean = 'and')
+    protected function nestWhereSlice($whereSlice)
     {
         $whereGroup = $this->getQuery()->forNestedWhere();
 
         $whereGroup->wheres = $whereSlice;
 
-        return ['type' => 'Nested', 'query' => $whereGroup, 'boolean' => $boolean];
+        return ['type' => 'Nested', 'query' => $whereGroup, 'boolean' => 'and'];
     }
 
     /**

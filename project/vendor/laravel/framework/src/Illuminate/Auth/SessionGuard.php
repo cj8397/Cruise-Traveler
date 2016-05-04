@@ -472,15 +472,11 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
      */
     public function loginUsingId($id, $remember = false)
     {
-        $user = $this->provider->retrieveById($id);
+        $this->session->set($this->getName(), $id);
 
-        if (! is_null($user)) {
-            $this->login($user, $remember);
+        $this->login($user = $this->provider->retrieveById($id), $remember);
 
-            return $user;
-        }
-
-        return false;
+        return $user;
     }
 
     /**
@@ -491,9 +487,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
      */
     public function onceUsingId($id)
     {
-        $user = $this->provider->retrieveById($id);
-
-        if (! is_null($user)) {
+        if (! is_null($user = $this->provider->retrieveById($id))) {
             $this->setUser($user);
 
             return true;
