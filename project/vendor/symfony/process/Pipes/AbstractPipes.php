@@ -106,7 +106,7 @@ abstract class AbstractPipes implements PipesInterface
                     if (!is_scalar($input)) {
                         throw new InvalidArgumentException(sprintf('%s yielded a value of type "%s", but only scalars and stream resources are supported', get_class($this->input), gettype($input)));
                     }
-                    $input = (string)$input;
+                    $input = (string) $input;
                 }
                 $this->inputBuffer = $input;
                 $this->input->next();
