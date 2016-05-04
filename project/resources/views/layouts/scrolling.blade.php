@@ -122,7 +122,7 @@
                         </li>
                         @endif
                         {{--</ul>--}}
-                    </li>
+                        </li>
                 @endif
             </ul>
         </div>

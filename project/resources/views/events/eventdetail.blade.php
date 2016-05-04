@@ -75,7 +75,7 @@
                                     <span class="label label-default label-pill">Cheng!</span>
                                 </a>
                                 <p class="alert alert-info col-xs-9 col-md-9">Cheng just Joined the Event! say HI!</p>
-                </div>
+                            </div>
                             <div class="row">
                                 <p class="alert alert-success col-xs-9 col-md-9">Lets get the party started!</p>
                                 <a class="col-xs-3 col-md-3">
