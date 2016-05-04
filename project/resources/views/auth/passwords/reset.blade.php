@@ -1,4 +1,4 @@
-@extends('layouts.scrollings')
+@extends('layouts.scrolling')
 
 @section('content')
 <div class="container">

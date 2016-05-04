@@ -7,13 +7,17 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Register</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST"
-                              action="{{ url('events/eventform/post') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('events/form/post')}}">
                             {!! csrf_field() !!}
 
-                            <input type="hidden" name="sailing_id" value="1"/>
+                            <input type="hidden" name="sailing_id" value={!! $sailing_id !!}/>
+                            @if ($errors->has('sailing_id'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('sailing_id') }}</strong>
+                                    </span>
+                            @endif
 
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Event Title</label>
 
                                 <div class="col-md-6">

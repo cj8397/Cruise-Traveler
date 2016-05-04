@@ -27,7 +27,7 @@ class EventRequest extends Request
     {
         return [
             'sailing_id' => 'required|exists:sailings,id',
-            'title' => 'bail|required|max:80',
+            'title' => 'required|max:80',
             'start' => 'required|date',
             'end' => 'required|date|after:start',
             'desc' => 'max:255',
@@ -40,8 +40,8 @@ class EventRequest extends Request
         return [
             'title.required' => 'Please assign a title to your event!',
             'start.required' => 'When is your event starting?',
-            'end.required' => 'When is your event ending?'
-
+            'end.required' => 'When is your event ending?',
+            'sailing_id.exists' => 'This Sailing doesn\'t exist anymore or has expired!'
         ];
     }
 }

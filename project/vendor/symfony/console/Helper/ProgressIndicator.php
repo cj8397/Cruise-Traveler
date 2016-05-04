@@ -11,6 +11,8 @@
 
 namespace Symfony\Component\Console\Helper;
 
+use Symfony\Component\Console\Exception\InvalidArgumentException;
+use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -18,6 +20,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class ProgressIndicator
 {
+    private static $formatters;
+    private static $formats;
     private $output;
     private $startTime;
     private $format;
@@ -28,9 +32,6 @@ class ProgressIndicator
     private $indicatorUpdateTime;
     private $lastMessagesLength;
     private $started = false;
-
-    private static $formatters;
-    private static $formats;
 
     /**
      * @param OutputInterface $output
@@ -53,7 +54,7 @@ class ProgressIndicator
         $indicatorValues = array_values($indicatorValues);
 
         if (2 > count($indicatorValues)) {
-            throw new \InvalidArgumentException('Must have at least 2 indicator value characters.');
+            throw new InvalidArgumentException('Must have at least 2 indicator value characters.');
         }
 
         $this->format = self::getFormatDefinition($format);
@@ -62,115 +63,18 @@ class ProgressIndicator
         $this->startTime = time();
     }
 
-    /**
-     * Sets the current indicator message.
-     *
-     * @param string|null $message
-     */
-    public function setMessage($message)
+    private function determineBestFormat()
     {
-        $this->message = $message;
-
-        $this->display();
-    }
-
-    /**
-     * Gets the current indicator message.
-     *
-     * @return string|null
-     *
-     * @internal for PHP 5.3 compatibility
-     */
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * Gets the progress bar start time.
-     *
-     * @return int The progress bar start time
-     *
-     * @internal for PHP 5.3 compatibility
-     */
-    public function getStartTime()
-    {
-        return $this->startTime;
-    }
-
-    /**
-     * Gets the current animated indicator character.
-     *
-     * @return string
-     *
-     * @internal for PHP 5.3 compatibility
-     */
-    public function getCurrentValue()
-    {
-        return $this->indicatorValues[$this->indicatorCurrent % count($this->indicatorValues)];
-    }
-
-    /**
-     * Starts the indicator output.
-     *
-     * @param $message
-     */
-    public function start($message)
-    {
-        if ($this->started) {
-            throw new \LogicException('Progress indicator already started.');
+        switch ($this->output->getVerbosity()) {
+            // OutputInterface::VERBOSITY_QUIET: display is disabled anyway
+            case OutputInterface::VERBOSITY_VERBOSE:
+                return $this->output->isDecorated() ? 'verbose' : 'verbose_no_ansi';
+            case OutputInterface::VERBOSITY_VERY_VERBOSE:
+            case OutputInterface::VERBOSITY_DEBUG:
+                return $this->output->isDecorated() ? 'very_verbose' : 'very_verbose_no_ansi';
+            default:
+                return $this->output->isDecorated() ? 'normal' : 'normal_no_ansi';
         }
-
-        $this->message = $message;
-        $this->started = true;
-        $this->lastMessagesLength = 0;
-        $this->startTime = time();
-        $this->indicatorUpdateTime = $this->getCurrentTimeInMilliseconds() + $this->indicatorChangeInterval;
-        $this->indicatorCurrent = 0;
-
-        $this->display();
-    }
-
-    /**
-     * Advances the indicator.
-     */
-    public function advance()
-    {
-        if (!$this->started) {
-            throw new \LogicException('Progress indicator has not yet been started.');
-        }
-
-        if (!$this->output->isDecorated()) {
-            return;
-        }
-
-        $currentTime = $this->getCurrentTimeInMilliseconds();
-
-        if ($currentTime < $this->indicatorUpdateTime) {
-            return;
-        }
-
-        $this->indicatorUpdateTime = $currentTime + $this->indicatorChangeInterval;
-        ++$this->indicatorCurrent;
-
-        $this->display();
-    }
-
-    /**
-     * Finish the indicator with message.
-     *
-     * @param $message
-     */
-    public function finish($message)
-    {
-        if (!$this->started) {
-            throw new \LogicException('Progress indicator has not yet been started.');
-        }
-
-        $this->message = $message;
-        $this->display();
-        $this->output->writeln('');
-        $this->started = false;
     }
 
     /**
@@ -189,12 +93,26 @@ class ProgressIndicator
         return isset(self::$formats[$name]) ? self::$formats[$name] : null;
     }
 
+    private static function initFormats()
+    {
+        return array(
+            'normal' => ' %indicator% %message%',
+            'normal_no_ansi' => ' %message%',
+
+            'verbose' => ' %indicator% %message% (%elapsed:6s%)',
+            'verbose_no_ansi' => ' %message% (%elapsed:6s%)',
+
+            'very_verbose' => ' %indicator% %message% (%elapsed:6s%, %memory:6s%)',
+            'very_verbose_no_ansi' => ' %message% (%elapsed:6s%, %memory:6s%)',
+        );
+    }
+
     /**
      * Sets a placeholder formatter for a given name.
      *
      * This method also allow you to override an existing placeholder.
      *
-     * @param string   $name     The placeholder name (including the delimiter char like %)
+     * @param string $name The placeholder name (including the delimiter char like %)
      * @param callable $callable A PHP callable
      */
     public static function setPlaceholderFormatterDefinition($name, $callable)
@@ -206,20 +124,70 @@ class ProgressIndicator
         self::$formatters[$name] = $callable;
     }
 
-    /**
-     * Gets the placeholder formatter for a given name.
-     *
-     * @param string $name The placeholder name (including the delimiter char like %)
-     *
-     * @return callable|null A PHP callable
-     */
-    public static function getPlaceholderFormatterDefinition($name)
+    private static function initPlaceholderFormatters()
     {
-        if (!self::$formatters) {
-            self::$formatters = self::initPlaceholderFormatters();
-        }
+        return array(
+            'indicator' => function (ProgressIndicator $indicator) {
+                return $indicator->getCurrentValue();
+            },
+            'message' => function (ProgressIndicator $indicator) {
+                return $indicator->getMessage();
+            },
+            'elapsed' => function (ProgressIndicator $indicator) {
+                return Helper::formatTime(time() - $indicator->getStartTime());
+            },
+            'memory' => function () {
+                return Helper::formatMemory(memory_get_usage(true));
+            },
+        );
+    }
 
-        return isset(self::$formatters[$name]) ? self::$formatters[$name] : null;
+    /**
+     * Gets the current animated indicator character.
+     *
+     * @return string
+     *
+     * @internal for PHP 5.3 compatibility
+     */
+    public function getCurrentValue()
+    {
+        return $this->indicatorValues[$this->indicatorCurrent % count($this->indicatorValues)];
+    }
+
+    /**
+     * Gets the current indicator message.
+     *
+     * @return string|null
+     *
+     * @internal for PHP 5.3 compatibility
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * Sets the current indicator message.
+     *
+     * @param string|null $message
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+        $this->display();
+    }
+
+    /**
+     * Gets the progress bar start time.
+     *
+     * @return int The progress bar start time
+     *
+     * @internal for PHP 5.3 compatibility
+     */
+    public function getStartTime()
+    {
+        return $this->startTime;
     }
 
     private function display()
@@ -237,20 +205,6 @@ class ProgressIndicator
 
             return $matches[0];
         }, $this->format));
-    }
-
-    private function determineBestFormat()
-    {
-        switch ($this->output->getVerbosity()) {
-            // OutputInterface::VERBOSITY_QUIET: display is disabled anyway
-            case OutputInterface::VERBOSITY_VERBOSE:
-                return $this->output->isDecorated() ? 'verbose' : 'verbose_no_ansi';
-            case OutputInterface::VERBOSITY_VERY_VERBOSE:
-            case OutputInterface::VERBOSITY_DEBUG:
-                return $this->output->isDecorated() ? 'very_verbose' : 'very_verbose_no_ansi';
-            default:
-                return $this->output->isDecorated() ? 'normal' : 'normal_no_ansi';
-        }
     }
 
     /**
@@ -283,40 +237,87 @@ class ProgressIndicator
         }
     }
 
+    /**
+     * Gets the placeholder formatter for a given name.
+     *
+     * @param string $name The placeholder name (including the delimiter char like %)
+     *
+     * @return callable|null A PHP callable
+     */
+    public static function getPlaceholderFormatterDefinition($name)
+    {
+        if (!self::$formatters) {
+            self::$formatters = self::initPlaceholderFormatters();
+        }
+
+        return isset(self::$formatters[$name]) ? self::$formatters[$name] : null;
+    }
+
+    /**
+     * Starts the indicator output.
+     *
+     * @param $message
+     */
+    public function start($message)
+    {
+        if ($this->started) {
+            throw new LogicException('Progress indicator already started.');
+        }
+
+        $this->message = $message;
+        $this->started = true;
+        $this->lastMessagesLength = 0;
+        $this->startTime = time();
+        $this->indicatorUpdateTime = $this->getCurrentTimeInMilliseconds() + $this->indicatorChangeInterval;
+        $this->indicatorCurrent = 0;
+
+        $this->display();
+    }
+
     private function getCurrentTimeInMilliseconds()
     {
         return round(microtime(true) * 1000);
     }
 
-    private static function initPlaceholderFormatters()
+    /**
+     * Advances the indicator.
+     */
+    public function advance()
     {
-        return array(
-            'indicator' => function (ProgressIndicator $indicator) {
-                return $indicator->getCurrentValue();
-            },
-            'message' => function (ProgressIndicator $indicator) {
-                return $indicator->getMessage();
-            },
-            'elapsed' => function (ProgressIndicator $indicator) {
-                return Helper::formatTime(time() - $indicator->getStartTime());
-            },
-            'memory' => function () {
-                return Helper::formatMemory(memory_get_usage(true));
-            },
-        );
+        if (!$this->started) {
+            throw new LogicException('Progress indicator has not yet been started.');
+        }
+
+        if (!$this->output->isDecorated()) {
+            return;
+        }
+
+        $currentTime = $this->getCurrentTimeInMilliseconds();
+
+        if ($currentTime < $this->indicatorUpdateTime) {
+            return;
+        }
+
+        $this->indicatorUpdateTime = $currentTime + $this->indicatorChangeInterval;
+        ++$this->indicatorCurrent;
+
+        $this->display();
     }
 
-    private static function initFormats()
+    /**
+     * Finish the indicator with message.
+     *
+     * @param $message
+     */
+    public function finish($message)
     {
-        return array(
-            'normal' => ' %indicator% %message%',
-            'normal_no_ansi' => ' %message%',
+        if (!$this->started) {
+            throw new LogicException('Progress indicator has not yet been started.');
+        }
 
-            'verbose' => ' %indicator% %message% (%elapsed:6s%)',
-            'verbose_no_ansi' => ' %message% (%elapsed:6s%)',
-
-            'very_verbose' => ' %indicator% %message% (%elapsed:6s%, %memory:6s%)',
-            'very_verbose_no_ansi' => ' %message% (%elapsed:6s%, %memory:6s%)',
-        );
+        $this->message = $message;
+        $this->display();
+        $this->output->writeln('');
+        $this->started = false;
     }
 }
