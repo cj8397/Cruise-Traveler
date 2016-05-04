@@ -54,12 +54,15 @@ class SparkPostTransport extends Transport
                 'content' => [
                     'html' => $message->getBody(),
                     'from' => $this->getFrom($message),
+                    'reply_to' => $this->getReplyTo($message),
                     'subject' => $message->getSubject(),
                 ],
             ],
         ];
 
-        return $this->client->post('https://api.sparkpost.com/api/v1/transmissions', $options);
+        $this->client->post('https://api.sparkpost.com/api/v1/transmissions', $options);
+
+        return $this->numberOfRecipients($message);
     }
 
     /**
@@ -72,7 +75,7 @@ class SparkPostTransport extends Transport
      */
     protected function getRecipients(Swift_Mime_Message $message)
     {
-        $to = $bcc = [];
+        $to = [];
 
         if ($message->getTo()) {
             $to = array_merge($to, array_keys($message->getTo()));
@@ -83,7 +86,7 @@ class SparkPostTransport extends Transport
         }
 
         if ($message->getBcc()) {
-            $to = array_merge($bcc, array_keys($message->getBcc()));
+            $to = array_merge($to, array_keys($message->getBcc()));
         }
 
         $recipients = array_map(function ($address) {
@@ -104,6 +107,19 @@ class SparkPostTransport extends Transport
         return array_map(function ($email, $name) {
             return compact('name', 'email');
         }, array_keys($message->getFrom()), $message->getFrom())[0];
+    }
+
+    /**
+     * Get the 'reply_to' headers and format as required by SparkPost.
+     *
+     * @param  Swift_Mime_Message  $message
+     * @return string
+     */
+    protected function getReplyTo(Swift_Mime_Message $message)
+    {
+        if (is_array($message->getReplyTo())) {
+            return current($message->getReplyTo()).' <'.key($message->getReplyTo()).'>';
+        }
     }
 
     /**
