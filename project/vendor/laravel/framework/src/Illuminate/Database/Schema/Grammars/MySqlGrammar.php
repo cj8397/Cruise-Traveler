@@ -167,9 +167,7 @@ class MySqlGrammar extends Grammar
 
         $index = $this->wrap($command->index);
 
-        $algorithm = $command->algorithm ? ' using '.$command->algorithm : '';
-
-        return "alter table {$table} add {$type} {$index}{$algorithm}($columns)";
+        return "alter table {$table} add {$type} {$index}($columns)";
     }
 
     /**

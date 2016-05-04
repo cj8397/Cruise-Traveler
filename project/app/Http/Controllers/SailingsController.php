@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
+use Cmgmyr\Messenger\Models\Thread;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\UserSailingsController;
 use App\Sailing;
 use App\Event;
+use App\Stats;
 use App\UserSailing;
 use App\UserEvent;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\SailingRequest;
 use Illuminate\Support\Facades\Response;
@@ -21,11 +24,12 @@ class SailingsController extends Controller
   public function __construct()
   {
     $this->middleware('auth', ['except' => ['GetAllSailings', 'GetSailing']]);
-      //$this->middleware('auth');
+      $this->middleware('admin', ['except' => ['GetAllSailings', 'GetSailing']]);
   }
     //
-    protected function GetAllSailings(){
-        if($sailings = Sailing::all()){
+    protected function GetAllSailings()
+    {
+        if ($sailings = Sailing::all()) {
             return view('sailings.list', compact('sailings'));
         } else {
             return redirect::back();
@@ -35,7 +39,15 @@ class SailingsController extends Controller
     protected function GetSailing($id)
     {
         if ($sailing = Sailing::find($id)) {
-            return view('sailings.detail', compact('sailing'));
+            $statsController = new UserSailingsController();
+            $stats = $statsController->GetStatsSummary($id); // should add a count in there
+            if(Auth::check() && $userSailing = UserSailing::where(['user_id' => Auth::user()->id, 'sailing_id'=> $id]))
+            {
+              $thread = Thread::where(['event_id' => null, 'sailing_id' => $id])->first();
+              return view('sailings.detail', compact('sailing', 'stats', 'thread'));
+            }else{
+              return view('sailings.detail', compact('sailing', 'stats'));
+            }
         } else {
             return redirect('sailings');
         }
@@ -49,32 +61,34 @@ class SailingsController extends Controller
 
     protected function CreateSailing(SailingRequest $request)
     {
-
-        $start = Carbon::parse($request->start);
-        $end = Carbon::parse($request->end);
         $sailing = Sailing::create([
             'title' => $request->title,
             'cruise_line' => $request->cruise_line,
-            'start_date' => $start,
-            'end_date' => $end,
+            'start_date' => $request->start,
+            'end_date' => $request->end,
             'port_org' => $request->port_org,
             'port_dest' => $request->port_dest,
             'destination' => $request->destination
         ]);
+        Thread::create([
+            'sailing_id' => $sailing->id,
+            'subject' => $sailing->title . ' Message Board'
+        ]);
         return redirect('sailings');
     }
-    protected function UpdateSailing($id){
-      if ($sailing = Sailing::find($id)) {
-          return view('sailings.update', compact('sailing'));
-      } else {
-          return redirect('sailings');
-      }
+
+    protected function UpdateSailing($id)
+    {
+        if ($sailing = Sailing::find($id)) {
+            return view('sailings.update', compact('sailing'));
+        } else {
+            return redirect('sailings');
+        }
     }
 
-    protected function SaveSailing($id, SailingRequest $request){
+    protected function SaveSailing($id, SailingRequest $request)
+    {
         if ($sailing = Sailing::find($id)) {
-            $start = Carbon::parse($request->start);
-            $end = Carbon::parse($request->end);
             $sailing->title = $request->title;
             $sailing->cruise_line = $request->cruise_line;
             $sailing->start_date = $start;
@@ -84,34 +98,19 @@ class SailingsController extends Controller
             $sailing->destination = $request->destination;
             $sailing->save();
             return redirect()->action('SailingsController@GetSailing', [$id]);
-        }else{
+        } else {
             return redirect('sailings');
         }
-      }
+    }
 
-        protected function DeleteSailing($id){
-            if ($sailing = Sailing::find($id)) {
-
-              $events = Event::where('sailing_id', $id)->get();
-
-              foreach($events as $event){
-                UserEvent::where('event_id', $event->id)->delete();
-                $event->delete();
-              }
-
-              $userSailings = UserSailing::where('sailing_id', $id)->get();
-
-              foreach($userSailings as $userSailing){
-                $userSailing->delete();
-              }
-
-              $sailing->delete();
-
-              return redirect('sailings');
-
-            } else {
-              return redirect::back();
-            }
-
-          }
-        }
+    protected function DeleteSailing($id)
+    {
+        $sailing = Sailing::with('usersailings', 'userevents')->where('id', $id)->first();
+        $events = Event::where('sailing_id', $id);
+        $events->delete();
+        $sailing->usersailings()->delete();
+        $sailing->userevents()->delete();
+        Thread::where(['event_id' => null, 'sailing_id' => $id])->delete();
+        $sailing->delete();
+    }
+}

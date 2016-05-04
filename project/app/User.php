@@ -3,9 +3,14 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent;
+use Cmgmyr\Messenger\Traits\Messagable;
 
 class User extends Authenticatable
 {
+
+  use Messagable;
+
   //public $timestamps = false;
     /**
      * The attributes that are mass assignable.
@@ -15,20 +20,35 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $fillable = [
-        'email', 'password', 'first', 'last',
+        'email', 'password'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    public function events()
+    public function userdetails()
     {
-        return $this->belongsToMany(Event::class, 'events');
+        return $this->hasMany('App\UserDetails');
+    }
+
+    public function usersailing()
+    {
+        return $this->hasMany('App\UserSailing');
+    }
+
+    public function userevent()
+    {
+        return $this->hasMany('App\UserEvent');
+    }
+
+    public function isAdmin()
+    {
+        if ($admin = Admin::where('username', $this->attributes['email'])->first()) {
+            if ($admin->username == $this->attributes['email'] && $admin->password == $this->attributes['password'])
+                return true;
+        } else {
+            return false;
+        }
     }
 }

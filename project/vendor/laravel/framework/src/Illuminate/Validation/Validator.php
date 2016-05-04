@@ -279,7 +279,11 @@ class Validator implements ValidatorContract
 
         if (call_user_func($callback, $payload)) {
             foreach ((array) $attribute as $key) {
-                $this->mergeRules($key, $rules);
+                if (Str::contains($key, '*')) {
+                    $this->explodeRules([$key => $rules]);
+                } else {
+                    $this->mergeRules($key, $rules);
+                }
             }
         }
     }
@@ -332,7 +336,7 @@ class Validator implements ValidatorContract
             return $data;
         }
 
-        return data_fill($data, $attribute, null);
+        return data_set($data, $attribute, null, true);
     }
 
     /**
@@ -417,7 +421,7 @@ class Validator implements ValidatorContract
         // the other error messages, returning true if we don't have messages.
         foreach ($this->rules as $attribute => $rules) {
             foreach ($rules as $rule) {
-                $this->validateAttribute($attribute, $rule);
+                $this->validate($attribute, $rule);
 
                 if ($this->shouldStopValidating($attribute)) {
                     break;
@@ -446,27 +450,13 @@ class Validator implements ValidatorContract
     }
 
     /**
-     * Run the validator's rules against its data.
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function validate()
-    {
-        if ($this->fails()) {
-            throw new ValidationException($this);
-        }
-    }
-
-    /**
      * Validate a given attribute against a rule.
      *
      * @param  string  $attribute
      * @param  string  $rule
      * @return void
      */
-    protected function validateAttribute($attribute, $rule)
+    protected function validate($attribute, $rule)
     {
         list($rule, $parameters) = $this->parseRule($rule);
 
@@ -848,6 +838,16 @@ class Validator implements ValidatorContract
         $data = Arr::get($this->data, $parameters[0]);
 
         $values = array_slice($parameters, 1);
+
+        if (is_bool($data)) {
+            array_walk($values, function (&$value) {
+                if ($value === 'true') {
+                    $value = true;
+                } elseif ($value === 'false') {
+                    $value = false;
+                }
+            });
+        }
 
         if (in_array($data, $values)) {
             return $this->validateRequired($attribute, $value);
