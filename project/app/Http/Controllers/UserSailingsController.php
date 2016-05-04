@@ -130,7 +130,7 @@ class UserSailingsController extends Controller
 
     function GetStatsSummary($sailing_id) {
 
-        $stats = DB::select("call event_stats_summary($sailing_id)")[0];
+        $stats = DB::select("call sailing_stats_summary($sailing_id)")[0];
 
         $total = UserSailing::where(['sailing_id' => $sailing_id])->count();
         $ages = array();
@@ -150,7 +150,11 @@ class UserSailingsController extends Controller
         $sex['male'] = $this->CalculatePercentage($stats->male, $total);
         $sex['female'] = 100 - $sex['male'];
 
-        $summary = compact('total','fam', 'sex', 'ages');
+        $cities = DB::select("call sailing_city_summary($sailing_id)")[0];
+        $countries = DB::select("call sailing_country_summary($sailing_id)")[0];
+        $langs = DB::select("call sailing_language_summary($sailing_id)")[0];
+
+        $summary = compact('total','fam', 'sex', 'ages', 'langs', 'countries', 'cities');
         $summaryStats = new Stats($summary);
         return $summaryStats;
     }

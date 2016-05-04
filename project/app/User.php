@@ -40,8 +40,14 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        if ($admin = Admin::where('username', $this->attributes['email'])->first()) {
-            if ($admin->username == $this->attributes['email'] && $admin->password == $this->attributes['password'])
+//        if ($admin = Admin::where('user_id', $this->id)->first()) {
+//            if ($admin->user_id = $this->id)
+//                return true;
+//        } else {
+//            return false;
+//        }
+        if ($admin = Admin::where('user_id', $this->attributes['id'])->first()) {
+            if ($admin->user_id = $this->attributes['id'])
                 return true;
         } else {
             return false;
