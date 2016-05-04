@@ -76,9 +76,7 @@ class MailgunTransport extends Transport
             ];
         }
 
-        $this->client->post($this->url, $options);
-
-        return $this->numberOfRecipients($message);
+        return $this->client->post($this->url, $options);
     }
 
     /**

@@ -163,6 +163,7 @@ class Validator implements ValidatorContract
     protected $implicitRules = [
         'Required', 'Filled', 'RequiredWith', 'RequiredWithAll', 'RequiredWithout', 'RequiredWithoutAll',
         'RequiredIf', 'RequiredUnless', 'Accepted', 'Present',
+        // 'Array', 'Boolean', 'Integer', 'Numeric', 'String',
     ];
 
     /**
@@ -420,7 +421,7 @@ class Validator implements ValidatorContract
         // the other error messages, returning true if we don't have messages.
         foreach ($this->rules as $attribute => $rules) {
             foreach ($rules as $rule) {
-                $this->validateAttribute($attribute, $rule);
+                $this->validate($attribute, $rule);
 
                 if ($this->shouldStopValidating($attribute)) {
                     break;
@@ -449,27 +450,13 @@ class Validator implements ValidatorContract
     }
 
     /**
-     * Run the validator's rules against its data.
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function validate()
-    {
-        if ($this->fails()) {
-            throw new ValidationException($this);
-        }
-    }
-
-    /**
      * Validate a given attribute against a rule.
      *
      * @param  string  $attribute
      * @param  string  $rule
      * @return void
      */
-    protected function validateAttribute($attribute, $rule)
+    protected function validate($attribute, $rule)
     {
         list($rule, $parameters) = $this->parseRule($rule);
 
@@ -554,7 +541,6 @@ class Validator implements ValidatorContract
     {
         return $this->presentOrRuleIsImplicit($rule, $attribute, $value) &&
                $this->passesOptionalCheck($attribute) &&
-               $this->isNotNullIfMarkedAsNullable($attribute, $value) &&
                $this->hasNotFailedPreviousRuleIfPresenceRule($rule, $attribute);
     }
 
@@ -568,7 +554,7 @@ class Validator implements ValidatorContract
      */
     protected function presentOrRuleIsImplicit($rule, $attribute, $value)
     {
-        return $this->validatePresent($attribute, $value) || $this->isImplicit($rule);
+        return $this->validateRequired($attribute, $value) || $this->isImplicit($rule);
     }
 
     /**
@@ -586,22 +572,6 @@ class Validator implements ValidatorContract
         }
 
         return true;
-    }
-
-    /**
-     * Determine if the attribute fails the nullable check.
-     *
-     * @param  string  $rule
-     * @param  mixed  $value
-     * @return bool
-     */
-    protected function isNotNullIfMarkedAsNullable($attribute, $value)
-    {
-        if (! $this->hasRule($attribute, ['Nullable'])) {
-            return true;
-        }
-
-        return ! is_null($value);
     }
 
     /**
@@ -675,18 +645,6 @@ class Validator implements ValidatorContract
     }
 
     /**
-     * "Indicate" validation should pass if value is null.
-     *
-     * Always returns true, just lets us put "nullable" in rules.
-     *
-     * @return bool
-     */
-    protected function validateNullable()
-    {
-        return true;
-    }
-
-    /**
      * "Break" on first validation fail.
      *
      * Always returns true, just lets us put "bail" in rules.
@@ -744,7 +702,7 @@ class Validator implements ValidatorContract
      */
     protected function validatePresent($attribute, $value)
     {
-        return Arr::has(array_merge($this->data, $this->files), $attribute);
+        return Arr::has($this->data, $attribute);
     }
 
     /**
@@ -1034,7 +992,11 @@ class Validator implements ValidatorContract
      */
     protected function validateArray($attribute, $value)
     {
-        return $value === '' || is_array($value);
+        if (! $this->hasAttribute($attribute)) {
+            return true;
+        }
+
+        return is_null($value) || is_array($value);
     }
 
     /**
@@ -1046,9 +1008,13 @@ class Validator implements ValidatorContract
      */
     protected function validateBoolean($attribute, $value)
     {
+        if (! $this->hasAttribute($attribute)) {
+            return true;
+        }
+
         $acceptable = [true, false, 0, 1, '0', '1'];
 
-        return $value === '' || in_array($value, $acceptable, true);
+        return is_null($value) || in_array($value, $acceptable, true);
     }
 
     /**
@@ -1060,7 +1026,11 @@ class Validator implements ValidatorContract
      */
     protected function validateInteger($attribute, $value)
     {
-        return $value === '' || filter_var($value, FILTER_VALIDATE_INT) !== false;
+        if (! $this->hasAttribute($attribute)) {
+            return true;
+        }
+
+        return is_null($value) || filter_var($value, FILTER_VALIDATE_INT) !== false;
     }
 
     /**
@@ -1072,7 +1042,11 @@ class Validator implements ValidatorContract
      */
     protected function validateNumeric($attribute, $value)
     {
-        return $value === '' || is_numeric($value);
+        if (! $this->hasAttribute($attribute)) {
+            return true;
+        }
+
+        return is_null($value) || is_numeric($value);
     }
 
     /**
@@ -1084,7 +1058,11 @@ class Validator implements ValidatorContract
      */
     protected function validateString($attribute, $value)
     {
-        return is_string($value);
+        if (! $this->hasAttribute($attribute)) {
+            return true;
+        }
+
+        return is_null($value) || is_string($value);
     }
 
     /**
@@ -1547,18 +1525,6 @@ class Validator implements ValidatorContract
         }
 
         return false;
-    }
-
-    /**
-     * Validate the given value is a valid file.
-     *
-     * @param  string  $attribute
-     * @param  mixed   $value
-     * @return bool
-     */
-    protected function validateFile($attribute, $value)
-    {
-        return $this->isAValidFileInstance($value);
     }
 
     /**

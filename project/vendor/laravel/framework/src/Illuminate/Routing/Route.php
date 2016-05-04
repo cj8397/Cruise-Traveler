@@ -581,7 +581,7 @@ class Route
      */
     protected function findCallable(array $action)
     {
-        return Arr::first($action, function ($value, $key) {
+        return Arr::first($action, function ($key, $value) {
             return is_callable($value) && is_numeric($key);
         });
     }
