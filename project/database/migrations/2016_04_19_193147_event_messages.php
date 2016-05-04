@@ -21,11 +21,10 @@ class EventMessages extends Migration
 
             // declare type fist
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('user_id')->on('user_events');
 
             $table->string('message');
             $table->dateTime('timestamp');
-
         });
     }
 

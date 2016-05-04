@@ -1,28 +1,24 @@
 @extends('layouts.scrolling')
 
 @section('content')
-    @if(isset($success))
-        <div class="alert alert-success">
-            {{$success}}
-        </div>
-    @endif
-
-    @if(isset($failure))
-        <div class="alert alert-danger">
-            {{$failure}}
-        </div>
-    @endif
-    <p> HEY! GOT RID OF .idea/workspace</p>
     <p>{{$user_id}} {{$sailing_id}} </p>
-<<<<<<< HEAD
-    <a href="/joinsailing/{{$user_id}}/{{$sailing_id}}">
-        <button type="button" class="btn btn-primary btn-md">Join</button>
+
+    @include('partials/buttons/joinsailing')
+    @include('partials/buttons/leavesailing')
+
+    <a href="/usersailings" class="btn btn-primary btn-md">
+        View all Sailings for user <i class="fa fa-arrow-right" aria-hidden="true"></i>
     </a>
-    <a href="/leavesailing/{{$user_id}}/{{$sailing_id}}">
-        <button type="button" class="btn btn-primary btn-md">Leave</button>
+
+    <a href="/sailingusers/{{$sailing_id}}">
+        <button type="button" class="btn btn-primary btn-md">
+            <i class="fa fa-users" aria-hidden="true"></i>View all User in sailing
+        </button>
     </a>
-=======
-    <a href="/joinsailing/{{$user_id}}/{{$sailing_id}}"><button type="button" class="btn btn-primary btn-md">Join</button></a>
-    <a href="/leavesailing/{{$user_id}}/{{$sailing_id}}"><button type="button" class="btn btn-primary btn-md">Leave</button></a>
->>>>>>> 9c59078fe7a0c1354e78bb50dda63768c539faca
+
+    <a href="events/eventform/{{$sailing_id}}">
+        <button type="button" class="btn btn-primary btn-md">
+            <i class="fa fa-users" aria-hidden="true"></i>Create Event in Current Sailing
+        </button>
+    </a>
 @endsection

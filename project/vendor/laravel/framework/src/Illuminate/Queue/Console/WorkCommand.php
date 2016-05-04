@@ -80,6 +80,20 @@ class WorkCommand extends Command
     }
 
     /**
+     * Determine if the worker should run in maintenance mode.
+     *
+     * @return bool
+     */
+    protected function downForMaintenance()
+    {
+        if ($this->option('force')) {
+            return false;
+        }
+
+        return $this->laravel->isDownForMaintenance();
+    }
+
+    /**
      * Run the worker instance.
      *
      * @param  string  $connection
@@ -124,20 +138,6 @@ class WorkCommand extends Command
         } else {
             $this->output->writeln('<info>['.Carbon::now()->format('Y-m-d H:i:s').'] Processed:</info> '.$job->getName());
         }
-    }
-
-    /**
-     * Determine if the worker should run in maintenance mode.
-     *
-     * @return bool
-     */
-    protected function downForMaintenance()
-    {
-        if ($this->option('force')) {
-            return false;
-        }
-
-        return $this->laravel->isDownForMaintenance();
     }
 
     /**

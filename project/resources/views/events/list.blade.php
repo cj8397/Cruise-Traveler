@@ -8,126 +8,75 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Events Page
-                <small>Events on Cruise Ship 1</small>
+                <small>Events on Cruise Ship {!! $sailing_id !!}</small>
+                <a href="{{ url('events/form/'.$sailing_id) }}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-btn fa-user"></i>Create an Event
+                    </button>
+                </a>
             </h1>
         </div>
     </div>
     <!-- /.row -->
 
-    <!-- Projects Row -->
-    <div class="row">
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-                <p>200 going 80% male 20% male </p>
-            </a>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-                <p>200 going 80% male 20% male </p>
-            </a>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-                <p>200 going 80% male 20% male </p>
-            </a>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-                <p>200 going 80% male 20% male </p>
-            </a>
-        </div>
-    </div>
-    <!-- /.row -->
 
     <!-- Projects Row -->
     <div class="row">
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-    </div>
-    <!-- /.row -->
+        @foreach($events as $event)
+            <div class="panel panel-default col-md-3 portfolio-item">
 
-    <!-- Projects Row -->
-    <div class="row">
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-        <div class="col-xs-6 col-sm-3 portfolio-item">
-            <a href="/eventdetail/1">
-                <img class="img-responsive" src="/images/eventInfo.png" alt="">
-            </a>
-            <p>200 going 80% male 20% male </p>
-        </div>
-    </div>
-    <!-- /.row -->
+                <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
 
-    <hr>
-    <!-- Pagination -->
-    <div class="row text-center">
-        <div class="col-lg-12">
-            <ul class="pagination">
-                <li>
-                    <a href="/eventdetail/1">&laquo;</a>
-                </li>
-                <li class="active">
-                    <a href="/eventdetail/1">1</a>
-                </li>
-                <li>
-                    <a href="/eventdetail/1">2</a>
-                </li>
-                <li>
-                    <a href="/eventdetail/1">3</a>
-                </li>
-                <li>
-                    <a href="/eventdetail/1">4</a>
-                </li>
-                <li>
-                    <a href="/eventdetail/1">5</a>
-                </li>
-                <li>
-                    <a href="/eventdetail/1">&raquo;</a>
-                </li>
-            </ul>
-        </div>
+                <h4> {!! ucfirst($event->title) !!}</h4>
+                <div class="col-md-6 col-xs-6">
+                    <a href="/events/detail/{!! $event->id !!}">
+                        <button type="button" class="btn btn-primary btn-md">
+                            <i class="fa fa-users" aria-hidden="true"></i>Event Detail
+                        </button>
+                    </a>
+                </div>
+                <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                    <div class="panel-body col-md-6 col-xs-12">
+                        <p>5 People currently attending</p>
+                    </div>
+                    <div class="panel-body col-md-6 col-xs-12">
+                        <p>4 Singles</p>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+                    <!-- /.row -->
+
+
+            <hr>
+            <!-- Pagination -->
+            <div class="row text-center">
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <ul class="pagination">
+                        <li>
+                            <a href="/eventdetail/1">&laquo;</a>
+                        </li>
+                        <li class="active">
+                            <a href="/eventdetail/1">1</a>
+                        </li>
+                        <li>
+                            <a href="/eventdetail/1">2</a>
+                        </li>
+                        <li>
+                            <a href="/eventdetail/1">3</a>
+                        </li>
+                        <li>
+                            <a href="/eventdetail/1">4</a>
+                        </li>
+                        <li>
+                            <a href="/eventdetail/1">5</a>
+                        </li>
+                        <li>
+                            <a href="/eventdetail/1">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
     </div>
+</div>
 @endsection
