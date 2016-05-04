@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -33,6 +34,14 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
     public function __construct()
     {
         $this->controllers = new \SplObjectStorage();
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return array(
+            KernelEvents::CONTROLLER => 'onKernelController',
+            KernelEvents::RESPONSE => 'onKernelResponse',
+        );
     }
 
     /**
@@ -75,6 +84,7 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
 
         $sessionMetadata = array();
         $sessionAttributes = array();
+        $session = null;
         $flashes = array();
         if ($request->hasSession()) {
             $session = $request->getSession();
@@ -128,33 +138,120 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
             unset($this->controllers[$request]);
         }
 
-        if ($request->hasSession() && $request->getSession()->has('sf_redirect')) {
-            $this->data['redirect'] = $request->getSession()->get('sf_redirect');
-            $request->getSession()->remove('sf_redirect');
-        }
+        if (null !== $session) {
+            if ($request->attributes->has('_redirected')) {
+                $this->data['redirect'] = $session->remove('sf_redirect');
+            }
 
-        if ($request->hasSession() && $response->isRedirect()) {
-            $request->getSession()->set('sf_redirect', array(
-                'token' => $response->headers->get('x-debug-token'),
-                'route' => $request->attributes->get('_route', 'n/a'),
-                'method' => $request->getMethod(),
-                'controller' => $this->parseController($request->attributes->get('_controller')),
-                'status_code' => $statusCode,
-                'status_text' => Response::$statusTexts[(int) $statusCode],
-            ));
-        }
-
-        if ($parentRequestAttributes = $request->attributes->get('_forwarded')) {
-            if ($parentRequestAttributes instanceof ParameterBag) {
-                $parentRequestAttributes->set('_forward_token', $response->headers->get('x-debug-token'));
+            if ($response->isRedirect()) {
+                $session->set('sf_redirect', array(
+                    'token' => $response->headers->get('x-debug-token'),
+                    'route' => $request->attributes->get('_route', 'n/a'),
+                    'method' => $request->getMethod(),
+                    'controller' => $this->parseController($request->attributes->get('_controller')),
+                    'status_code' => $statusCode,
+                    'status_text' => Response::$statusTexts[(int)$statusCode],
+                ));
             }
         }
-        if ($request->attributes->has('_forward_controller')) {
-            $this->data['forward'] = array(
-                'token' => $request->attributes->get('_forward_token'),
-                'controller' => $this->parseController($request->attributes->get('_forward_controller')),
+    }
+
+    private function getCookieHeader($name, $value, $expires, $path, $domain, $secure, $httponly)
+    {
+        $cookie = sprintf('%s=%s', $name, urlencode($value));
+
+        if (0 !== $expires) {
+            if (is_numeric($expires)) {
+                $expires = (int)$expires;
+            } elseif ($expires instanceof \DateTime) {
+                $expires = $expires->getTimestamp();
+            } else {
+                $tmp = strtotime($expires);
+                if (false === $tmp || -1 == $tmp) {
+                    throw new \InvalidArgumentException(sprintf('The "expires" cookie parameter is not valid (%s).', $expires));
+                }
+                $expires = $tmp;
+            }
+
+            $cookie .= '; expires=' . str_replace('+0000', '', \DateTime::createFromFormat('U', $expires, new \DateTimeZone('GMT'))->format('D, d-M-Y H:i:s T'));
+        }
+
+        if ($domain) {
+            $cookie .= '; domain=' . $domain;
+        }
+
+        $cookie .= '; path=' . $path;
+
+        if ($secure) {
+            $cookie .= '; secure';
+        }
+
+        if ($httponly) {
+            $cookie .= '; httponly';
+        }
+
+        return $cookie;
+    }
+
+    /**
+     * Parse a controller.
+     *
+     * @param mixed $controller The controller to parse
+     *
+     * @return array|string An array of controller data or a simple string
+     */
+    protected function parseController($controller)
+    {
+        if (is_string($controller) && false !== strpos($controller, '::')) {
+            $controller = explode('::', $controller);
+        }
+
+        if (is_array($controller)) {
+            try {
+                $r = new \ReflectionMethod($controller[0], $controller[1]);
+
+                return array(
+                    'class' => is_object($controller[0]) ? get_class($controller[0]) : $controller[0],
+                    'method' => $controller[1],
+                    'file' => $r->getFileName(),
+                    'line' => $r->getStartLine(),
+                );
+            } catch (\ReflectionException $e) {
+                if (is_callable($controller)) {
+                    // using __call or  __callStatic
+                    return array(
+                        'class' => is_object($controller[0]) ? get_class($controller[0]) : $controller[0],
+                        'method' => $controller[1],
+                        'file' => 'n/a',
+                        'line' => 'n/a',
+                    );
+                }
+            }
+        }
+
+        if ($controller instanceof \Closure) {
+            $r = new \ReflectionFunction($controller);
+
+            return array(
+                'class' => $r->getName(),
+                'method' => null,
+                'file' => $r->getFileName(),
+                'line' => $r->getStartLine(),
             );
         }
+
+        if (is_object($controller)) {
+            $r = new \ReflectionClass($controller);
+
+            return array(
+                'class' => $r->getName(),
+                'method' => null,
+                'file' => $r->getFileName(),
+                'line' => $r->getStartLine(),
+            );
+        }
+
+        return (string)$controller ?: 'n/a';
     }
 
     public function getMethod()
@@ -298,9 +395,15 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
         $this->controllers[$event->getRequest()] = $event->getController();
     }
 
-    public static function getSubscribedEvents()
+    public function onKernelResponse(FilterResponseEvent $event)
     {
-        return array(KernelEvents::CONTROLLER => 'onKernelController');
+        if (!$event->isMasterRequest() || !$event->getRequest()->hasSession()) {
+            return;
+        }
+
+        if ($event->getRequest()->getSession()->has('sf_redirect')) {
+            $event->getRequest()->attributes->set('_redirected', true);
+        }
     }
 
     /**
@@ -309,103 +412,5 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
     public function getName()
     {
         return 'request';
-    }
-
-    /**
-     * Parse a controller.
-     *
-     * @param mixed $controller The controller to parse
-     *
-     * @return array|string An array of controller data or a simple string
-     */
-    protected function parseController($controller)
-    {
-        if (is_string($controller) && false !== strpos($controller, '::')) {
-            $controller = explode('::', $controller);
-        }
-
-        if (is_array($controller)) {
-            try {
-                $r = new \ReflectionMethod($controller[0], $controller[1]);
-
-                return array(
-                    'class' => is_object($controller[0]) ? get_class($controller[0]) : $controller[0],
-                    'method' => $controller[1],
-                    'file' => $r->getFileName(),
-                    'line' => $r->getStartLine(),
-                );
-            } catch (\ReflectionException $e) {
-                if (is_callable($controller)) {
-                    // using __call or  __callStatic
-                    return array(
-                        'class' => is_object($controller[0]) ? get_class($controller[0]) : $controller[0],
-                        'method' => $controller[1],
-                        'file' => 'n/a',
-                        'line' => 'n/a',
-                    );
-                }
-            }
-        }
-
-        if ($controller instanceof \Closure) {
-            $r = new \ReflectionFunction($controller);
-
-            return array(
-                'class' => $r->getName(),
-                'method' => null,
-                'file' => $r->getFileName(),
-                'line' => $r->getStartLine(),
-            );
-        }
-
-        if (is_object($controller)) {
-            $r = new \ReflectionClass($controller);
-
-            return array(
-                'class' => $r->getName(),
-                'method' => null,
-                'file' => $r->getFileName(),
-                'line' => $r->getStartLine(),
-            );
-        }
-
-        return (string) $controller ?: 'n/a';
-    }
-
-    private function getCookieHeader($name, $value, $expires, $path, $domain, $secure, $httponly)
-    {
-        $cookie = sprintf('%s=%s', $name, urlencode($value));
-
-        if (0 !== $expires) {
-            if (is_numeric($expires)) {
-                $expires = (int) $expires;
-            } elseif ($expires instanceof \DateTime) {
-                $expires = $expires->getTimestamp();
-            } else {
-                $tmp = strtotime($expires);
-                if (false === $tmp || -1 == $tmp) {
-                    throw new \InvalidArgumentException(sprintf('The "expires" cookie parameter is not valid (%s).', $expires));
-                }
-                $expires = $tmp;
-            }
-
-            $cookie .= '; expires='.str_replace('+0000', '', \DateTime::createFromFormat('U', $expires, new \DateTimeZone('GMT'))->format('D, d-M-Y H:i:s T'));
-        }
-
-        if ($domain) {
-            $cookie .= '; domain='.$domain;
-        }
-
-        $cookie .= '; path='.$path;
-
-        if ($secure) {
-            $cookie .= '; secure';
-        }
-
-        if ($httponly) {
-            $cookie .= '; httponly';
-        }
-
-        return $cookie;
     }
 }
