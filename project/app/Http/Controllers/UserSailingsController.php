@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 class UserSailingsController extends Controller
 {
     private $helper;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,7 +25,8 @@ class UserSailingsController extends Controller
     }
 
     // create entry in bridge table
-    public function JoinSailing($sailing_id) {
+    public function JoinSailing($sailing_id)
+    {
 
         $user_id = Auth::User()->id;
         // need to check both columns....
@@ -42,14 +44,15 @@ class UserSailingsController extends Controller
             return view('sailings.detail', compact('success', 'sailing'));
             //return redirect::back();
         } else {
-          //return redirect::back();
+            //return redirect::back();
             $failure= "Already joined the sailing";
             return view('sailings.detail', compact('failure', 'sailing'));
         }
     }
 
     // remove entry from bridge table
-    public function LeaveSailing($sailing_id) {
+    public function LeaveSailing($sailing_id)
+    {
         $user_id = Auth::User()->id;
         // creates key value pair based on variable names
         $sailing_id = (int)$sailing_id;
@@ -61,13 +64,13 @@ class UserSailingsController extends Controller
                 ->where('sailing_id', '=', $user_id)->delete();
 
             UserSailing::where($conditions)->delete();
-                // ->delete();
+            // ->delete();
             //return redirect::back();
             $success = "Left the sailing";
             return view('sailings.detail', compact('success', 'sailing'));
         } else {
-          //return redirect::back();
-            $failure= "Already left the sailing";
+            //return redirect::back();
+            $failure = "Already left the sailing";
             return view('sailings.detail', compact('failure', 'sailing'));
         }
     }
@@ -85,15 +88,18 @@ class UserSailingsController extends Controller
     // female - 0, male - 1
     // going back and forth to DB many times, need to optimize after know its working
 
-    public function CalculateAgePercentages($sailing_id) {
+    public function CalculateAgePercentages($sailing_id)
+    {
         return $this->helper->CalculateAgePercentages('sailing_id', $sailing_id);
     }
 
-    public function CalculateCountryPercentages($sailing_id) {
+    public function CalculateCountryPercentages($sailing_id)
+    {
         return $this->helper->CalculateDynamicPercentages('sailing_id', $sailing_id, 'country');
     }
 
-    public function GetStatsSummary($sailing_id) {
+    public function GetStatsSummary($sailing_id)
+    {
         $fam = $this->CalculateFamilyPercentages($sailing_id);
         $lang = $this->CalculateLangPercentages($sailing_id);
         $sex = $this->CalculateSexPercentages($sailing_id);

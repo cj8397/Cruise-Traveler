@@ -133,41 +133,6 @@ abstract class Job
     abstract public function getRawBody();
 
     /**
-     * Get the name of the queued job class.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return json_decode($this->getRawBody(), true)['job'];
-    }
-
-    /**
-     * Get the name of the queue the job belongs to.
-     *
-     * @return string
-     */
-    public function getQueue()
-    {
-        return $this->queue;
-    }
-
-    /**
-     * Resolve and fire the job handler method.
-     *
-     * @param  array  $payload
-     * @return void
-     */
-    protected function resolveAndFire(array $payload)
-    {
-        list($class, $method) = $this->parseJob($payload['job']);
-
-        $this->instance = $this->resolve($class);
-
-        $this->instance->{$method}($this, $this->resolveQueueableEntities($payload['data']));
-    }
-
-    /**
      * Parse the job declaration into class and method.
      *
      * @param  string  $job
@@ -241,6 +206,41 @@ abstract class Job
     protected function getEntityResolver()
     {
         return $this->container->make('Illuminate\Contracts\Queue\EntityResolver');
+    }
+
+    /**
+     * Get the name of the queued job class.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return json_decode($this->getRawBody(), true)['job'];
+    }
+
+    /**
+     * Get the name of the queue the job belongs to.
+     *
+     * @return string
+     */
+    public function getQueue()
+    {
+        return $this->queue;
+    }
+
+    /**
+     * Resolve and fire the job handler method.
+     *
+     * @param  array $payload
+     * @return void
+     */
+    protected function resolveAndFire(array $payload)
+    {
+        list($class, $method) = $this->parseJob($payload['job']);
+
+        $this->instance = $this->resolve($class);
+
+        $this->instance->{$method}($this, $this->resolveQueueableEntities($payload['data']));
     }
 
     /**

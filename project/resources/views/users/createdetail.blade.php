@@ -119,7 +119,7 @@
                             <div class="form-group{{ $errors->has('family') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Family</label>
                                 <div class="col-md-6">
-                                  <input type="checkbox" class="" name="family">
+                                    <input type="checkbox" class="" name="family">
 
                                     @if ($errors->has('family'))
                                         <span class="help-block">
@@ -462,5 +462,5 @@
             </div>
         </div>
     </div>
-  </div>
+    </div>
 @endsection
