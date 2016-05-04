@@ -12,9 +12,7 @@
 */
 use App\Http\Controllers\UserSailingsController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 Route::auth();
 
@@ -23,8 +21,6 @@ Route::get('/admin/users', 'AdminController@GetAllUsers');
 Route::get('/admin/user/{id}', 'AdminController@GetUser');
 Route::get('/admin/user/{id}/update', 'AdminController@UpdateUser');
 Route::post('/admin/user/{id}/update/save', 'AdminController@SaveUser');
-
-Route::get('/home', 'HomeController@index');
 
 //EventController Stuff
 Route::get('events/detail/{event_id}', 'EventsController@GetOneEvent');
@@ -79,5 +75,5 @@ Route::get('/userevents', 'UserEventsController@GetAllEvents');
 
 Route::get('/test', function() {
     $helper = new UserSailingsController();
-    return $helper->GetStatsSummary(1);
+    return $helper->GetTop3Summary(1);
 });

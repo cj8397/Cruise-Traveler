@@ -1,5 +1,13 @@
 @extends('layouts.thumbnail')
 
+@section('styles')
+        <style>
+            ul {
+                list-style-type: none;
+            }
+        </style>
+@endsection
+
 @section('content')
         <!-- Page Content -->
 <div class="container">
@@ -19,7 +27,7 @@
     <div class="row">
         @foreach ($sailings as $sailing)
             <div class="panel panel-default col-md-3 portfolio-item">
-                <h2>{{$sailing->id}} {{$sailing->cruise_line}} {{$sailing->title}}</h2>
+                <h2> {{$sailing->cruise_line}} {{$sailing->title}}</h2>
                 <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
                 <div class="col-md-6 col-xs-6">
                     <a href="{{ action('SailingsController@GetSailing', [$sailing->id]) }}">
@@ -35,15 +43,42 @@
                         </button>
                     </a>
                 </div>
-                <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                    <div class="panel-body col-md-6 col-xs-12">
-                        <p>56% Passenger over 50yrs/old</p>
+                @if(!empty($sailing['stats']))
+                    <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                        <div class="panel-body col-md-6 col-xs-12">
+                            <p>Confirmed Passengers: {{$sailing['stats']->total}}  </p>
+                        </div>
+                        <div class="panel-body col-md-6 col-xs-12">
+                            <p> Percent Families: {{ $sailing['stats']->family }} %</p>
+                        </div>
+                        <div class="panel-body col-xs-12">
+                            <h4> Languages: </h4>
+                            <ul>
+                                @foreach($sailing['stats']->languages as $language => $value)
+                                    <li> <b>{{ $language }} </b> - {{ $value }} % </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="panel-body col-xs-12">
+                            <h4> Cities: </h4>
+                            <ul>
+                                @foreach($sailing['stats']->cities as $city => $value)
+                                    <li> <b>{{ $city }} </b> - {{ $value }} % </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
-                    <div class="panel-body col-md-6 col-xs-12">
-                        <p>65% Passengers are single</p>
+                @else
+                    <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                        <div class="panel-body col-md-6 col-xs-12">
+                            <p>56% Passenger over 50yrs/old</p>
+                        </div>
+                        <div class="panel-body col-md-6 col-xs-12">
+                            <p>65% Passengers are single</p>
+                        </div>
                     </div>
+                @endif
 
-                </div>
             </div>
 
         @endforeach
