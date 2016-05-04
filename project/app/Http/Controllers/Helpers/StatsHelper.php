@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Helpers;
 use Illuminate\Database\Eloquent\Model;
 use App\UserSailing;
 use App\UserEvent;
+use Illuminate\Support\Facades\DB;
 
 class StatsHelper
 {
@@ -56,8 +57,9 @@ class StatsHelper
         $youth = 0; // 0-18
         $young = 0; // 18-25
         $adult = 0; // 25-35
-        $middle = 0; // 35 - 45
-        $elder = 0; // 45 - 65
+        $middle = 0; // 35 - 44
+        $youngelder = 0; // 45 - 54
+        $elder = 0; // 55 - 65
         $senior = 0; // 65+
         if ($total >= 0) {
             foreach ($users as $user) {
@@ -70,7 +72,7 @@ class StatsHelper
                         $elder += 1;
                         break;
                     case ($age >= 45 && $age < 55):
-                        $elder += 1;
+                        $youngelder += 1;
                         break;
                     case ($age >= 35 && $age < 45):
                         $middle += 1;
@@ -89,17 +91,16 @@ class StatsHelper
             $agePercentages = array();
             $agePercentages['0-18'] = $this->CalculatePercentage($youth, $total);
             $agePercentages['18-25'] = $this->CalculatePercentage($young, $total);
-            $agePercentages['25-35'] = $this->CalculatePercentage($young, $total);
-            $agePercentages['35-45'] = $this->CalculatePercentage($young, $total);
-            $agePercentages['45-55'] = $this->CalculatePercentage($young, $total);
-            $agePercentages['55-65'] = $this->CalculatePercentage($young, $total);
-            $agePercentages['65+'] = $this->CalculatePercentage($young, $total);
+            $agePercentages['25-35'] = $this->CalculatePercentage($adult, $total);
+            $agePercentages['35-45'] = $this->CalculatePercentage($middle, $total);
+            $agePercentages['45-55'] = $this->CalculatePercentage($youngelder, $total);
+            $agePercentages['55-65'] = $this->CalculatePercentage($elder, $total);
+            $agePercentages['65+'] = $this->CalculatePercentage($senior, $total);
 
             return $agePercentages;//compact('agePercentages');
         } else {
             return 'nosailings';
         }
-
     }
 
     public function CalculateDynamicPercentages($column, $id, $attribute)

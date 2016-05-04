@@ -10,10 +10,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::auth();
+use App\Http\Controllers\UserSailingsController;
 
 Route::get('/', 'HomeController@index');
+
+Route::auth();
 
 Route::get('/admin/home', 'AdminController@index');
 Route::get('/admin/users', 'AdminController@GetAllUsers');
@@ -41,10 +42,11 @@ Route::get('sailings/update/{id}', 'SailingsController@UpdateSailing');
 Route::post('sailings/update/save/{id}', 'SailingsController@SaveSailing');
 Route::get('/sailings/{id}', 'SailingsController@GetSailing');
 
-Route::get('/users/userprofile/{user_id}', 'UserController@getUserSailings');
+Route::get('/users/userprofile/{id}', 'UserController@getUserSailings');
 Route::get('/users/detail', 'UserController@getDetails');
 Route::get('/users/create', 'UserController@showCreateForm');
 Route::post('/users/create/post', 'UserController@createUserDetails');
+Route::get('/users/{user_id}', 'UserController@getUser');
 
 Route::get('/joinsailing/{user_id}/{sailing_id}', 'UserSailingsController@JoinSailing');
 
@@ -60,10 +62,18 @@ Route::get('/family/{id}', 'UserSailingsController@CalculateFamilyPercentages');
 Route::get('/age/{id}', 'UserSailingsController@CalculateAgePercentages');
 Route::get('/lang/{id}', 'UserSailingsController@CalculateLangPercentages');
 Route::get('/country/{id}', 'UserSailingsController@CalculateCountryPercentages');
+Route::get('/city/{id}', 'UserSailingsController@CalculateCityPercentages');
+Route::get('/age/{id}', 'UserSailingsController@CalculateAgePercentages');
 Route::get('/summary/{id}', 'UserSailingsController@GetStatsSummary');
+Route::get('/top3/{sailing_id}','UserSailingsController@GetTop3Summary');
 
 //
 Route::get('/joinevent/{event_id}/{sailing_id}', 'UserEventsController@JoinEvent');
 Route::get('/leaveevent/{event_id}', 'UserEventsController@LeaveEvent');
 Route::get('/eventusers/{event_id}', 'UserEventsController@GetAllUsers');
 Route::get('/userevents', 'UserEventsController@GetAllEvents');
+
+Route::get('/test', function() {
+    $helper = new UserSailingsController();
+    return $helper->GetTop3Summary(1);
+});

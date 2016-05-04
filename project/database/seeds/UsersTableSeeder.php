@@ -22,10 +22,28 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
+            'email' => 'eventhost@gmail.com',
+            'password' => bcrypt('password'),
+            'created_at' => new DateTime('now'),
+            'updated_at' => new DateTime('now'),
+        ]);
+
+        DB::table('users')->insert([
+            'email' => 'eventparticipant@gmail.com',
+            'password' => bcrypt('password'),
+            'created_at' => new DateTime('now'),
+            'updated_at' => new DateTime('now'),
+        ]);
+
+        DB::table('users')->insert([
             'email' => 'admin@admin.com',
             'password' => bcrypt('adminpassword'),
             'created_at' => new DateTime('now'),
             'updated_at' => new DateTime('now'),
+        ]);
+
+        DB::table('admin')->insert([
+            'user_id' => 4
         ]);
 
         foreach (range(1, 100) as $i) {

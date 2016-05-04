@@ -9,7 +9,7 @@ class Admin extends Model
     //
     public $timestamps = false;
     protected $fillable = [
-        'username', 'password'
+        'user_id'
     ];
     protected $table = 'admin';
 
