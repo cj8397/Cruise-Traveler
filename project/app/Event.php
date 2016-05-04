@@ -40,4 +40,11 @@ class Event extends Model
     public function setStartDateAttribute($value){
         $this->attributes['start_date'] = Carbon::parse($value);
     }
+    public function scopeSearch($query, $search){
+        return $query->where('title','LIKE',"%$search->search%")
+            ->orWhere('desc','LIKE',"%$search->search%")
+            ->orWhere('location','LIKE',"%$search->search%")
+            ->orderBy($search->sort,$search->direction)
+            ->paginate(6);
+    }
 }

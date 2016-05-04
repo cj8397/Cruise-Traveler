@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Sailing;
 use App\User;
+use App\UserDetails;
 use App\UserEvent;
 use App\UserSailing;
 use Carbon\Carbon;
@@ -12,6 +13,7 @@ use App\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\EventRequest;
+use App\Http\Requests\SearchRequest;
 
 class EventsController extends Controller
 {
@@ -24,8 +26,22 @@ class EventsController extends Controller
         return $usersEvents = UserEvent::all()->where('event_id', $event_id);
     }
 
-    protected function GetAllEvents($sailing){
-        if ($events = Event::where('sailing_id', $sailing)->get()) {
+    protected function GetAllEvents($sailing, SearchRequest $request)
+    {
+        if($request->sort == ""){
+            $sort = 'title';
+            $direction = 'desc';
+        }
+        else{
+            $sort = $request->sort;
+            $direction = $request->directon;
+        }
+        //
+        if($request->search != ""){
+           $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request)->get();
+            return view('events.list')->with(['events' => $events, 'sailing_id' => $sailing]);
+        }
+        else if ( $events = Event::with('userevent')->where('sailing_id', $sailing)->orderBy($sort,$direction)->paginate(6)) {
             return view('events.list')->with(['events' => $events, 'sailing_id' => $sailing]);
         } else {
             return Redirect::back();

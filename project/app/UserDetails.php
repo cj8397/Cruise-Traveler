@@ -23,10 +23,11 @@ class UserDetails extends Model
 
     public function userevents()
     {
-        return $this->hasMany('App\UserEvent');
+        return $this->belongsToMany('App\UserEvent');
     }
 
     public function getAge() {
         return Carbon::parse($this->dob)->age;
     }
+
 }
