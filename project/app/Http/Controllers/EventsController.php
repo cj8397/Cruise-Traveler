@@ -17,11 +17,18 @@ use App\Http\Requests\EventRequest;
 class EventsController extends Controller
 {
     //
+<<<<<<< HEAD
     public function __construct(){
         $this->middleware('auth',['except' => ['GetAllEvents','GetAllUsers']]);
+=======
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['GetAllEvents', 'GetAllUsers']]);
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
     }
 
-    protected function GetAllParticipantsInEvent($event_id){
+    protected function GetAllParticipantsInEvent($event_id)
+    {
         return $usersEvents = UserEvent::all()->where('event_id', $event_id);
     }
 
@@ -33,8 +40,10 @@ class EventsController extends Controller
         }
     }
 
-    protected function GetOneEvent($event_id){
+    protected function GetOneEvent($event_id)
+    {
         if ($event = Event::where('id', $event_id)->first()) {
+<<<<<<< HEAD
           $members = UserEvent::with('userdetails')->get()->where('event_id', $event_id);
           $host = $members->where('role', 'Host')->first();
           $currentUser = $members->where('user_id', Auth::user()->id)->first();
@@ -49,12 +58,22 @@ class EventsController extends Controller
             }else{
             return view('events.eventdetail')->with('event', $event);
             }
+=======
+            $members = UserEvent::with('userdetails')->get()->where('event_id', $event_id);
+            $host = $members->where('role', 'Host')->first();
+            $currentUser = $members->where('user_id', Auth::user()->id)->first();
+            return view('events.eventdetail')->with(['event' => $event,
+                'members' => $members,
+                'currentUser' => $currentUser,
+                'host' => $host]);
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
         } else {
             return Redirect::back();
         }
     }
 
-    protected function ShowCreateForm($sailing_id){
+    protected function ShowCreateForm($sailing_id)
+    {
         return view('events.createEventForm')->with('sailing_id', $sailing_id);
     }
 
@@ -79,7 +98,12 @@ class EventsController extends Controller
         }
     }
 
+<<<<<<< HEAD
     protected function CreateEvent(EventRequest $request){
+=======
+    protected function CreateEvent(EventRequest $request)
+    {
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
         $event = Event::create([
             'sailing_id' => $request->sailing_id,
             'title' => $request->title,
@@ -102,7 +126,8 @@ class EventsController extends Controller
         return redirect()->action('EventsController@GetOneEvent', [$event->id]);
     }
 
-    protected function DeleteEvent($event_id){
+    protected function DeleteEvent($event_id)
+    {
         if ($event = Event::where('id', $event_id)->first()) {
             UserEvent::where('event_id', $event->id)->delete();
             Thread::where(['event_id' => $event_id, 'sailing_id' => $event->sailing_id])->delete();
@@ -113,7 +138,8 @@ class EventsController extends Controller
         }
     }
 
-    protected function UpdateEvent($event_id){
+    protected function UpdateEvent($event_id)
+    {
         if ($event = Event::where('id', $event_id)->first()) {
             return view('events.updateEventForm')->with('event', $event);
         } else {
@@ -121,7 +147,8 @@ class EventsController extends Controller
         }
     }
 
-    protected function SaveEvent($event_id, EventRequest $request){
+    protected function SaveEvent($event_id, EventRequest $request)
+    {
         if ($event = Event::where('id', $event_id)->first()) {
             $event->title = $request->title;
             $event->start_date = $request->start;
@@ -130,7 +157,7 @@ class EventsController extends Controller
             $event->location = $request->location;
             $event->save();
             return redirect()->action('EventsController@GetOneEvent', [$event_id]);
-        }else{
+        } else {
             return false;
         }
     }

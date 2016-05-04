@@ -4,7 +4,10 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent;
+<<<<<<< HEAD
 use Cmgmyr\Messenger\Traits\Messagable;
+=======
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
 
 class User extends Authenticatable
 {

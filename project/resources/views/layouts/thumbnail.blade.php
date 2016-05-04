@@ -71,7 +71,11 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+<<<<<<< HEAD
                             <li><a href="#">Last Update: May 2nd, 2016 @ 12:00 </a></li>
+=======
+                            <li><a href="#">Last Update: May 4th, 2016 @ 9:00 </a></li>
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
                             <li><a href="https://docs.google.com/spreadsheets/d/1KQc5cRAnqdWS55JQb59NHHYKRtqtslBXlHjbWU2QIqc/edit#gid=0">SCRUM WOKRBOOK</a></li>
                             <li><a href="https://docs.google.com/document/d/1yIuRZO1HJ71moInaR_B1Y0mb6yfwxB9oClgWSx5CTpw/edit#heading=h.tphyqzr77ydu">Design Model</a></li>
                         </ul>
@@ -80,15 +84,21 @@
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 @else
                     <li class="dropdown">
+<<<<<<< HEAD
                         {{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                              {{ Auth::user()->name }} <span class="caret"></span>
                          </a>--}}
+=======
+                    {{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                         {{ Auth::user()->name }} <span class="caret"></span>
+                     </a>--}}
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
 
                     {{--<ul class="dropdown-menu" role="menu">--}}
                             <li>
-                                <a href="{{ url('/users/userprofile') }}"><i
-                                            class="glyphicon glyphicon-circle-arrow-left"></i>Profile</a>
+                                <a href="{{ url('/users/userprofile/'.Auth::user()->id) }}">Profile</a>
                             </li>
+<<<<<<< HEAD
                             <li><a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i> Logout</a></li>
                             @if (Auth::user()->isAdmin())
                               <li>
@@ -96,6 +106,15 @@
                               </li>
                             @endif
                             {{--</ul>--}}
+=======
+                    <li><a href="{{ url('/logout') }}">Logout</a></li>
+                    @if (Auth::user()->isAdmin())
+                        <li>
+                            <a href="{{ url('/admin/home') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Admin</a>
+                        </li>
+                        @endif
+                        {{--</ul>--}}
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
                     </li>
                 @endif
             </ul>

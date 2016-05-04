@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Helpers;
+<<<<<<< HEAD
+=======
+
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
 use Illuminate\Database\Eloquent\Model;
 use App\UserSailing;
 use App\UserEvent;
@@ -8,6 +12,7 @@ use App\UserEvent;
 class StatsHelper
 {
 
+<<<<<<< HEAD
     public function CalculateBooleanPercentages($column, $id, $attribute) {
 
         if(starts_with($column, 'sailing')) {
@@ -17,6 +22,18 @@ class StatsHelper
             $users = UserEvent::where([$column => $id])->with('userdetails')->get();
         }
         if($users != null) {
+=======
+    public function CalculateBooleanPercentages($column, $id, $attribute)
+    {
+
+        if (starts_with($column, 'sailing')) {
+            $users = UserSailing::where([$column => $id])->with('userdetails')->get();
+        }
+        if (starts_with($column, 'event')) {
+            $users = UserEvent::where([$column => $id])->with('userdetails')->get();
+        }
+        if ($users != null) {
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
             $total = count($users);
             $count = 0;
             foreach ($users as $user) {
@@ -37,11 +54,25 @@ class StatsHelper
         }
     }
 
+<<<<<<< HEAD
     public function CalculateAgePercentages($column, $id) {
         if(starts_with($column, 'sailing')) {
             $users = UserSailing::where([$column => $id])->with('userdetails')->get();
         }
         if(starts_with($column, 'event')) {
+=======
+    function CalculatePercentage($segment, $total)
+    {
+        return round(($segment / $total) * 100, 0);
+    }
+
+    public function CalculateAgePercentages($column, $id)
+    {
+        if (starts_with($column, 'sailing')) {
+            $users = UserSailing::where([$column => $id])->with('userdetails')->get();
+        }
+        if (starts_with($column, 'event')) {
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
             $users = UserEvent::where([$column => $id])->with('userdetails')->get();
         }
         $total = count($users);
@@ -51,7 +82,11 @@ class StatsHelper
         $middle = 0; // 35 - 45
         $elder = 0; // 45 - 65
         $senior = 0; // 65+
+<<<<<<< HEAD
         if($total >= 0) {
+=======
+        if ($total >= 0) {
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
             foreach ($users as $user) {
                 $age = $user->userdetails->getAge();
                 switch ($age) {
@@ -94,6 +129,7 @@ class StatsHelper
 
     }
 
+<<<<<<< HEAD
     public function CalculateDynamicPercentages($column, $id, $attribute) {
         if(starts_with($column, 'sailing')) {
             $users = UserSailing::where([$column => $id])->with('userdetails')->get();
@@ -102,6 +138,17 @@ class StatsHelper
             $users = UserEvent::where([$column => $id])->with('userdetails')->get();
         }
         if($users != null) {
+=======
+    public function CalculateDynamicPercentages($column, $id, $attribute)
+    {
+        if (starts_with($column, 'sailing')) {
+            $users = UserSailing::where([$column => $id])->with('userdetails')->get();
+        }
+        if (starts_with($column, 'event')) {
+            $users = UserEvent::where([$column => $id])->with('userdetails')->get();
+        }
+        if ($users != null) {
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
             $langs = array();
             foreach ($users as $user) { // dynamically create an array with counts
                 $lang = $user->userdetails->$attribute;
@@ -121,8 +168,11 @@ class StatsHelper
             return 'no users';
         }
     }
+<<<<<<< HEAD
 
     function CalculatePercentage($segment, $total) {
         return round (($segment / $total) * 100, 0);
     }
+=======
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
 }

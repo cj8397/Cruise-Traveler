@@ -4,8 +4,13 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "50f47960366865c1e59f96c4eb391413",
     "content-hash": "d69cb2b64b0ee6d5b351d4cc96c67955",
+=======
+    "hash": "ad869f4694629f73623af4abdafbbeaa",
+    "content-hash": "7689aad7417a0d6679a5625f55137f9d",
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -488,6 +493,7 @@
                 "laravel"
             ],
             "time": "2016-04-27 13:02:09"
+<<<<<<< HEAD
         },
         {
             "name": "laravelcollective/html",
@@ -542,6 +548,8 @@
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "http://laravelcollective.com",
             "time": "2016-01-27 22:29:54"
+=======
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
         },
         {
             "name": "league/flysystem",

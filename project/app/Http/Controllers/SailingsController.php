@@ -21,11 +21,19 @@ use Illuminate\Support\Facades\Response;
 
 class SailingsController extends Controller
 {
+<<<<<<< HEAD
   public function __construct()
   {
     $this->middleware('auth', ['except' => ['GetAllSailings', 'GetSailing']]);
       $this->middleware('admin', ['except' => ['GetAllSailings', 'GetSailing']]);
   }
+=======
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['GetAllSailings', 'GetSailing']]);
+        $this->middleware('admin', ['except' => ['GetAllSailings', 'GetSailing']]);
+    }
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
     //
     protected function GetAllSailings()
     {
@@ -41,6 +49,7 @@ class SailingsController extends Controller
         if ($sailing = Sailing::find($id)) {
             $statsController = new UserSailingsController();
             $stats = $statsController->GetStatsSummary($id); // should add a count in there
+<<<<<<< HEAD
             if(Auth::check() && $userSailing = UserSailing::where(['user_id' => Auth::user()->id, 'sailing_id'=> $id]))
             {
               $thread = Thread::where(['event_id' => null, 'sailing_id' => $id])->first();
@@ -48,6 +57,9 @@ class SailingsController extends Controller
             }else{
               return view('sailings.detail', compact('sailing', 'stats'));
             }
+=======
+            return view('sailings.detail', compact('sailing', 'stats'));
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
         } else {
             return redirect('sailings');
         }
@@ -110,7 +122,10 @@ class SailingsController extends Controller
         $events->delete();
         $sailing->usersailings()->delete();
         $sailing->userevents()->delete();
+<<<<<<< HEAD
         Thread::where(['event_id' => null, 'sailing_id' => $id])->delete();
+=======
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
         $sailing->delete();
     }
 }

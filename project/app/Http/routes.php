@@ -11,12 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::auth();
 
+<<<<<<< HEAD
 Route::group(['prefix' => 'messages'], function () {
     Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
     Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
@@ -24,14 +21,20 @@ Route::group(['prefix' => 'messages'], function () {
     Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
     Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
 });
+=======
+Route::get('/', 'HomeController@index');
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
 
 Route::get('/admin/home', 'AdminController@index');
 Route::get('/admin/users', 'AdminController@GetAllUsers');
 Route::get('/admin/user/{id}', 'AdminController@GetUser');
 Route::get('/admin/user/{id}/update', 'AdminController@UpdateUser');
 Route::post('/admin/user/{id}/update/save', 'AdminController@SaveUser');
+<<<<<<< HEAD
 
 Route::get('/home', 'HomeController@index');
+=======
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
 
 //EventController Stuff
 Route::get('events/detail/{event_id}', 'EventsController@GetOneEvent');
@@ -41,7 +44,11 @@ Route::get('events/delete/{event_id}', 'EventsController@DeleteEvent');
 Route::get('events/update/{event_id}', 'EventsController@UpdateEvent');
 Route::post('events/update/save/{event_id}', 'EventsController@SaveEvent');
 Route::get('events/{sailing}', 'EventsController@GetAllEvents');
+<<<<<<< HEAD
 Route::get('events/users','EventsController@GetAllUsers');
+=======
+Route::get('events/users', 'EventsController@GetAllUsers');
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
 //End of Event Controller Stuff
 
 //
@@ -53,11 +60,18 @@ Route::get('sailings/update/{id}', 'SailingsController@UpdateSailing');
 Route::post('sailings/update/save/{id}', 'SailingsController@SaveSailing');
 Route::get('/sailings/{id}', 'SailingsController@GetSailing');
 
+<<<<<<< HEAD
 Route::get('/users/userprofile', 'UserController@getUserSailings');
 Route::get('/users/detail', 'UserController@getDetails');
 Route::get('/users/create', 'UserController@showCreateForm');
 Route::post('/users/create/post', 'UserController@createUserDetails');
 Route::get('/users/{user_id}', 'UserController@getUser');
+=======
+Route::get('/users/userprofile/{user_id}', 'UserController@getUserSailings');
+Route::get('/users/detail', 'UserController@getDetails');
+Route::get('/users/create', 'UserController@showCreateForm');
+Route::post('/users/create/post', 'UserController@createUserDetails');
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
 
 Route::get('/joinsailing/{user_id}/{sailing_id}', 'UserSailingsController@JoinSailing');
 

@@ -62,6 +62,79 @@ class Repository implements CacheContract, ArrayAccess
     }
 
     /**
+     * Retrieve an item from the cache and delete it.
+     *
+     * @param  string $key
+     * @param  mixed $default
+     * @return mixed
+     */
+    public function pull($key, $default = null)
+    {
+        $value = $this->get($key, $default);
+
+        $this->forget($key);
+
+        return $value;
+    }
+
+    /**
+     * Retrieve an item from the cache by key.
+     *
+     * @param  string $key
+     * @param  mixed $default
+     * @return mixed
+     */
+    public function get($key, $default = null)
+    {
+        if (is_array($key)) {
+            return $this->many($key);
+        }
+
+        $value = $this->store->get($this->itemKey($key));
+
+        if (is_null($value)) {
+            $this->fireCacheEvent('missed', [$key]);
+
+            $value = value($default);
+        } else {
+            $this->fireCacheEvent('hit', [$key, $value]);
+        }
+
+        return $value;
+    }
+
+    /**
+     * Retrieve multiple items from the cache by key.
+     *
+     * Items not found in the cache will have a null value.
+     *
+     * @param  array $keys
+     * @return array
+     */
+    public function many(array $keys)
+    {
+        $normalizedKeys = [];
+
+        foreach ($keys as $key => $value) {
+            $normalizedKeys[] = is_string($key) ? $key : $value;
+        }
+
+        $values = $this->store->many($normalizedKeys);
+
+        foreach ($values as $key => &$value) {
+            if (is_null($value)) {
+                $this->fireCacheEvent('missed', [$key]);
+
+                $value = isset($keys[$key]) ? value($keys[$key]) : null;
+            } else {
+                $this->fireCacheEvent('hit', [$key, $value]);
+            }
+        }
+
+        return $values;
+    }
+
+    /**
      * Fire an event for this cache instance.
      *
      * @param  string  $event
@@ -103,87 +176,75 @@ class Repository implements CacheContract, ArrayAccess
     }
 
     /**
-     * Determine if an item exists in the cache.
+     * Format the key for a cache item.
      *
      * @param  string  $key
+     * @return string
+     */
+    protected function itemKey($key)
+    {
+        return $key;
+    }
+
+    /**
+     * Remove an item from the cache.
+     *
+     * @param  string $key
      * @return bool
      */
-    public function has($key)
+    public function forget($key)
     {
-        return ! is_null($this->get($key));
+        $success = $this->store->forget($this->itemKey($key));
+
+        $this->fireCacheEvent('delete', [$key]);
+
+        return $success;
     }
 
     /**
-     * Retrieve an item from the cache by key.
+     * Store an item in the cache if the key does not exist.
      *
-     * @param  string  $key
-     * @param  mixed   $default
-     * @return mixed
+     * @param  string $key
+     * @param  mixed $value
+     * @param  \DateTime|int $minutes
+     * @return bool
      */
-    public function get($key, $default = null)
+    public function add($key, $value, $minutes)
     {
-        if (is_array($key)) {
-            return $this->many($key);
+        $minutes = $this->getMinutes($minutes);
+
+        if (is_null($minutes)) {
+            return false;
         }
 
-        $value = $this->store->get($this->itemKey($key));
-
-        if (is_null($value)) {
-            $this->fireCacheEvent('missed', [$key]);
-
-            $value = value($default);
-        } else {
-            $this->fireCacheEvent('hit', [$key, $value]);
+        if (method_exists($this->store, 'add')) {
+            return $this->store->add($this->itemKey($key), $value, $minutes);
         }
 
-        return $value;
+        if (is_null($this->get($key))) {
+            $this->put($key, $value, $minutes);
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
-     * Retrieve multiple items from the cache by key.
+     * Calculate the number of minutes with the given duration.
      *
-     * Items not found in the cache will have a null value.
-     *
-     * @param  array  $keys
-     * @return array
+     * @param  \DateTime|int $duration
+     * @return int|null
      */
-    public function many(array $keys)
+    protected function getMinutes($duration)
     {
-        $normalizedKeys = [];
+        if ($duration instanceof DateTime) {
+            $fromNow = Carbon::now()->diffInMinutes(Carbon::instance($duration), false);
 
-        foreach ($keys as $key => $value) {
-            $normalizedKeys[] = is_string($key) ? $key : $value;
+            return $fromNow > 0 ? $fromNow : null;
         }
 
-        $values = $this->store->many($normalizedKeys);
-
-        foreach ($values as $key => &$value) {
-            if (is_null($value)) {
-                $this->fireCacheEvent('missed', [$key]);
-
-                $value = isset($keys[$key]) ? value($keys[$key]) : null;
-            } else {
-                $this->fireCacheEvent('hit', [$key, $value]);
-            }
-        }
-
-        return $values;
-    }
-
-    /**
-     * Retrieve an item from the cache and delete it.
-     *
-     * @param  string  $key
-     * @param  mixed   $default
-     * @return mixed
-     */
-    public function pull($key, $default = null)
-    {
-        $value = $this->get($key, $default);
-
-        $this->forget($key);
-
-        return $value;
+        return is_string($duration) ? (int)$duration : $duration;
     }
 
     /**
@@ -230,6 +291,7 @@ class Repository implements CacheContract, ArrayAccess
     }
 
     /**
+<<<<<<< HEAD
      * Store an item in the cache if the key does not exist.
      *
      * @param  string  $key
@@ -270,6 +332,29 @@ class Repository implements CacheContract, ArrayAccess
         $this->store->forever($this->itemKey($key), $value);
 
         $this->fireCacheEvent('write', [$key, $value, 0]);
+=======
+     * Increment the value of an item in the cache.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return int|bool
+     */
+    public function increment($key, $value = 1)
+    {
+        return $this->store->increment($key, $value);
+    }
+
+    /**
+     * Decrement the value of an item in the cache.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return int|bool
+     */
+    public function decrement($key, $value = 1)
+    {
+        return $this->store->decrement($key, $value);
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
     }
 
     /**
@@ -328,18 +413,17 @@ class Repository implements CacheContract, ArrayAccess
     }
 
     /**
-     * Remove an item from the cache.
+     * Store an item in the cache indefinitely.
      *
      * @param  string $key
-     * @return bool
+     * @param  mixed $value
+     * @return void
      */
-    public function forget($key)
+    public function forever($key, $value)
     {
-        $success = $this->store->forget($this->itemKey($key));
+        $this->store->forever($this->itemKey($key), $value);
 
-        $this->fireCacheEvent('delete', [$key]);
-
-        return $success;
+        $this->fireCacheEvent('write', [$key, $value, 0]);
     }
 
     /**
@@ -365,17 +449,6 @@ class Repository implements CacheContract, ArrayAccess
         }
 
         throw new BadMethodCallException('This cache store does not support tagging.');
-    }
-
-    /**
-     * Format the key for a cache item.
-     *
-     * @param  string  $key
-     * @return string
-     */
-    protected function itemKey($key)
-    {
-        return $key;
     }
 
     /**
@@ -421,6 +494,17 @@ class Repository implements CacheContract, ArrayAccess
     }
 
     /**
+     * Determine if an item exists in the cache.
+     *
+     * @param  string $key
+     * @return bool
+     */
+    public function has($key)
+    {
+        return !is_null($this->get($key));
+    }
+
+    /**
      * Retrieve an item from the cache by key.
      *
      * @param  string  $key
@@ -452,23 +536,6 @@ class Repository implements CacheContract, ArrayAccess
     public function offsetUnset($key)
     {
         $this->forget($key);
-    }
-
-    /**
-     * Calculate the number of minutes with the given duration.
-     *
-     * @param  \DateTime|int  $duration
-     * @return int|null
-     */
-    protected function getMinutes($duration)
-    {
-        if ($duration instanceof DateTime) {
-            $fromNow = Carbon::now()->diffInMinutes(Carbon::instance($duration), false);
-
-            return $fromNow > 0 ? $fromNow : null;
-        }
-
-        return is_string($duration) ? (int) $duration : $duration;
     }
 
     /**

@@ -84,6 +84,18 @@ class Encrypter extends BaseEncrypter implements EncrypterContract
     }
 
     /**
+     * Create a MAC for the given value.
+     *
+     * @param  string $iv
+     * @param  string $value
+     * @return string
+     */
+    protected function hash($iv, $value)
+    {
+        return hash_hmac('sha256', $iv . $value, $this->key);
+    }
+
+    /**
      * Decrypt the given value.
      *
      * @param  string  $payload
@@ -107,7 +119,11 @@ class Encrypter extends BaseEncrypter implements EncrypterContract
     }
 
     /**
+<<<<<<< HEAD
      * Get the IV size for the cipher.
+=======
+     * Get the JSON array from the given payload.
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
      *
      * @return int
      */

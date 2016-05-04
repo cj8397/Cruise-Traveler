@@ -4,7 +4,11 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <style>
         .panel-heading {
+<<<<<<< HEAD
             margin-top:0;
+=======
+            margin-top: 0;
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
         }
 
         .col-xs-4 {
@@ -60,6 +64,7 @@
             </div>
             <div class="col-xs-8">
                 {{--<div class="row panel panel-default">--}}
+<<<<<<< HEAD
                     {{--<h2 class="panel-heading" >Message Board</h2>--}}
                     {{--<div class="panel-body"><p>  Show when joined </p></div>--}}
                 {{--</div>--}}
@@ -92,10 +97,45 @@
                             </div>
                         </div>
                     </div>
+=======
+                {{--<h2 class="panel-heading" >Message Board</h2>--}}
+                {{--<div class="panel-body"><p>  Show when joined </p></div>--}}
+                {{--</div>--}}
+                <div class="panel panel-default">
+                    <h2 class="panel-heading">Demographics</h2>
+                    @if(isset($stats))
+                        <div class="panel-body">
+                            <div class="panel panel-default col-xs-12">
+                                <div class="panel-heading ">
+                                    <h4> Languages </h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="language"></div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default col-xs-6">
+                                <div class="panel-heading ">
+                                    <h4> Families </h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="families"></div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default col-xs-6">
+                                <div class="panel-heading ">
+                                    <h4> Gender </h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="sex"></div>
+                                </div>
+                            </div>
+                        </div>
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
                     @endif
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         @if(!empty($thread))
         <div class="col-xs-12">
             <div class="row panel panel-default">
@@ -132,6 +172,8 @@
             </div>
             </div>
             @endif
+=======
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
     </div>
 @endsection
 
@@ -143,8 +185,15 @@
         Morris.Bar({
             element: 'language',
             data: [
+<<<<<<< HEAD
                @foreach( $stats->languages as $language => $percentage)
                     { y:'{{$language}}',  a:'{{$percentage}}'},
+=======
+                    @foreach( $stats->languages as $language => $percentage)
+                {
+                    y: '{{$language}}', a: '{{$percentage}}'
+                },
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
                 @endforeach
             ],
             xkey: 'y',
@@ -155,16 +204,26 @@
         Morris.Donut({
             element: 'families',
             data: [
+<<<<<<< HEAD
                 {label: "Family", value: "{{$stats->family}}" },
                 {label: "Non-family", value: "{{$stats->nonfamily}}" }
+=======
+                {label: "Family", value: "{{$stats->family}}"},
+                {label: "Non-family", value: "{{$stats->nonfamily}}"}
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
             ],
             colors: ['#FF0000', '#0000FF']
         });
         Morris.Donut({
             element: 'sex',
             data: [
+<<<<<<< HEAD
                 {label: "Male", value: "{{$stats->male}}" },
                 {label: "Female", value: "{{$stats->female}}" }
+=======
+                {label: "Male", value: "{{$stats->male}}"},
+                {label: "Female", value: "{{$stats->female}}"}
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
             ],
             colors: ['#FF0000', '#0000FF']
         });
@@ -173,3 +232,7 @@
     </script>
 
 @endsection
+
+
+
+

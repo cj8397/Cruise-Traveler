@@ -1,17 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
+<<<<<<< HEAD
+=======
+
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
 use App\Event;
 use App\Http\Requests;
 use App\UserEvent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Helpers\StatsHelper;
+<<<<<<< HEAD
 use Cmgmyr\Messenger\Models\Thread;
+=======
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
 
 class UserEventsController extends Controller
 {
     private $helper;
+<<<<<<< HEAD
+=======
+
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
     public function __construct()
     {
         $this->middleware('auth');
@@ -38,6 +49,7 @@ class UserEventsController extends Controller
             $userevent->role = 'Participant';
             $userevent->save();
             $success = "Joined the event.";
+<<<<<<< HEAD
             $members = UserEvent::all()->where('event_id',$event_id);
             $thread = Thread::where(['event_id' => $event_id, 'sailing_id' => $event->sailing_id])->first();
             return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'success, thread'));//view('events.eventdetail', );
@@ -46,6 +58,14 @@ class UserEventsController extends Controller
             $failure = "Already joined the event.";
             $thread = Thread::where(['event_id' => $event_id, 'sailing_id' => $event->sailing_id])->first();
             return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'failure', 'thread'));
+=======
+            $members = UserEvent::all()->where('event_id', $event_id);
+            return redirect()->action('EventsController@GetOneEvent', [$event_id])->with(compact('members', 'event', 'success'));//view('events.eventdetail', );
+        } else {
+            $members = UserEvent::all()->where('event_id', $event_id);
+            $failure = "Already joined the event.";
+            return redirect()->action('EventsController@GetOneEvent', [$event_id])->with(compact('members', 'event', 'failure'));
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
         }
     }
 
@@ -54,6 +74,7 @@ class UserEventsController extends Controller
     { $user_id = Auth::User()->id;
         $conditions = compact('user_id', 'event_id');
         $event = Event::where('id', $event_id)->first();
+<<<<<<< HEAD
         $members = UserEvent::all()->where('event_id',$event_id);
         if (UserEvent::where($conditions)->exists()) {
             UserEvent::where($conditions)->delete();
@@ -65,6 +86,18 @@ class UserEventsController extends Controller
             $failure = "Not Participating In Event";
             return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'failure'));
         }
+=======
+        $members = UserEvent::all()->where('event_id', $event_id);
+        if (UserEvent::where($conditions)->exists()) {
+            UserEvent::where($conditions)->delete();
+            $success = "Left the event.";
+            $members = UserEvent::all()->where('event_id', $event_id);
+            return redirect()->action('EventsController@GetOneEvent', [$event_id])->with(compact('members', 'event', 'success'));//view('events.eventdetail', );
+        } else {
+            $members = UserEvent::all()->where('event_id', $event_id);
+            $failure = "Not Participating In Event";
+            return redirect()->action('EventsController@GetOneEvent', [$event_id])->with(compact('members', 'event', 'failure'));
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
         }
 
     // getAllUsers going to event
@@ -81,6 +114,7 @@ class UserEventsController extends Controller
 
     // female - 0, male - 1
     // going back and forth to DB many times, need to optimize after know its working
+<<<<<<< HEAD
     public function CalculateSexPercentages($event_id) {
         $percentages = $this->helper->CalculateBooleanPercentages('event_id', $event_id, 'sex');
         return ['male'=>$percentages['true'], 'female'=>$percentages['false']];
@@ -104,11 +138,46 @@ class UserEventsController extends Controller
     }
 
     public function GetStatsSummary($event_id) {
+=======
+
+    public function CalculateAgePercentages($event_id)
+    {
+        return $this->helper->CalculateAgePercentages('event_id', $event_id);
+    }
+
+    public function CalculateCountryPercentages($event_id)
+    {
+        return $this->helper->CalculateDynamicPercentages('event_id', $event_id, 'country');
+    }
+
+    public function GetStatsSummary($event_id)
+    {
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
         $fam = $this->CalculateFamilyPercentages($event_id);
         $lang = $this->CalculateLangPercentages($event_id);
         $sex = $this->CalculateSexPercentages($event_id);
 
         $summary = compact('fam', 'lang', 'sex');
         return $summary;
+<<<<<<< HEAD
+=======
+    }
+
+    public function CalculateFamilyPercentages($event_id)
+    {
+        $percentages = $this->helper->CalculateBooleanPercentages('event_id', $event_id, 'family');
+        return ['family' => $percentages['true'], 'nonfamily' => $percentages['false']];
+    }
+
+    public function CalculateLangPercentages($event_id)
+    {
+        return $this->helper->CalculateDynamicPercentages('event_id', $event_id, 'lang');
+    }
+
+    public function CalculateSexPercentages($event_id)
+    {
+        $percentages = $this->helper->CalculateBooleanPercentages('event_id', $event_id, 'sex');
+        return ['male' => $percentages['true'], 'female' => $percentages['false']];
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
     }
 }

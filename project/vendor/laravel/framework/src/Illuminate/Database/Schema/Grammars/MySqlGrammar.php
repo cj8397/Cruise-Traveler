@@ -128,6 +128,27 @@ class MySqlGrammar extends Grammar
     }
 
     /**
+     * Compile an index creation command.
+     *
+     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+     * @param  \Illuminate\Support\Fluent  $command
+     * @param  string $type
+     * @return string
+     */
+    protected function compileKey(Blueprint $blueprint, Fluent $command, $type)
+    {
+        $columns = $this->columnize($command->columns);
+
+        $table = $this->wrapTable($blueprint);
+
+        $index = $this->wrap($command->index);
+
+        $algorithm = $command->algorithm ? ' using ' . $command->algorithm : '';
+
+        return "alter table {$table} add {$type} {$index}{$algorithm}($columns)";
+    }
+
+    /**
      * Compile a unique key command.
      *
      * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
@@ -148,19 +169,7 @@ class MySqlGrammar extends Grammar
      */
     public function compileIndex(Blueprint $blueprint, Fluent $command)
     {
-        return $this->compileKey($blueprint, $command, 'index');
-    }
-
-    /**
-     * Compile an index creation command.
-     *
-     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-     * @param  \Illuminate\Support\Fluent  $command
-     * @param  string  $type
-     * @return string
-     */
-    protected function compileKey(Blueprint $blueprint, Fluent $command, $type)
-    {
+<<<<<<< HEAD
         $columns = $this->columnize($command->columns);
 
         $table = $this->wrapTable($blueprint);
@@ -168,6 +177,9 @@ class MySqlGrammar extends Grammar
         $index = $this->wrap($command->index);
 
         return "alter table {$table} add {$type} {$index}($columns)";
+=======
+        return $this->compileKey($blueprint, $command, 'index');
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
     }
 
     /**

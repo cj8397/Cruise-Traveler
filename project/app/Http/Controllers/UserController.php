@@ -20,6 +20,7 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+<<<<<<< HEAD
     public function getUser($user_id){
         $user = User::find($user_id);
         $usersailings = UserSailing::with('sailing')->get()->where('user_id', $user_id);
@@ -42,6 +43,20 @@ class UserController extends Controller
 
     /*public function getEvents()
     {
+=======
+    public function getUserSailings($user_id)
+    {
+        $userdetail = UserDetails::where('user_id', $user_id)->first();
+        $usersailings = UserSailing::with('sailing')->get()->where('user_id', $user_id);
+        $userevents = UserEvent::with('event')->get()->where('user_id', $user_id);
+
+        return view('users.userprofile')->with(['usersailings' => $usersailings, 'userevents' => $userevents,
+            'userdetail' => $userdetail]);
+    }
+
+    /*public function getEvents()
+    {
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
         $userEvents = [];
         $sailingDetails = [];
         $eventDetails = [];
@@ -58,10 +73,17 @@ class UserController extends Controller
                 {
                     $eventDetails = array_add($eventDetails, $event->event_id, $this->GetEventDetails($event->event_id));
                 }
+<<<<<<< HEAD
 
             }
             //return $userSailings;
 
+=======
+
+            }
+            //return $userSailings;
+
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
             return view('users.userprofile')->with(['usersailings' => $userSailings, 'sailingdetails' => $sailingDetails,
                 'userevents' => $userEvents, 'eventdetails' => $eventDetails
             ]);
@@ -71,6 +93,7 @@ class UserController extends Controller
     }*/
     protected function getDetails()
     {
+<<<<<<< HEAD
       if($user_id = Auth::User()->id)
       {
         if($userDetail = UserDetails::where('user_id', $user_id)->first())
@@ -83,10 +106,24 @@ class UserController extends Controller
         return redirect::back();
       }
     }
+=======
+        if ($user_id = Auth::User()->id) {
+            if ($userDetail = UserDetails::where('user_id', $user_id)->first()) {
+                return view('users.detail', compact('userDetail'));
+            } else {
+                return redirect('users/create');
+            }
+        } else {
+            return redirect::back();
+        }
+    }
+
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
     protected function showCreateForm()
     {
         return view('users.createdetail');
     }
+<<<<<<< HEAD
     protected function createUserDetails(UserDetailsRequest $request)
     {
       $userDetails = UserDetails::create([
@@ -106,5 +143,27 @@ class UserController extends Controller
           'address' => $request->address
       ]);
       return redirect('users/detail');
+=======
+
+    protected function createUserDetails(UserDetailsRequest $request)
+    {
+        $userDetails = UserDetails::create([
+            'user_id' => Auth::user()->id,
+            'first' => $request->first,
+            'last' => $request->last,
+            'dob' => $request->dob,
+            'sex' => $request->sex,
+            'lang' => $request->lang,
+            'country' => $request->country,
+            'ethnicity' => $request->ethnicity,
+            'hobby' => $request->hobby,
+            'family' => $request->family,
+            'co_travellers' => $request->co_travellers,
+            'region' => $request->region,
+            'city' => $request->city,
+            'address' => $request->address
+        ]);
+        return redirect('users/detail');
+>>>>>>> efe722e354318845f7597afd2190e010bb5d188b
     }
 }
