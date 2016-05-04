@@ -40,5 +40,12 @@ class Sailing extends Model
     {
         return $this->hasMany('App\Event');
     }
+    public function scopeSearch($query, $search){
+        return $query->where('title','LIKE',"%$search->search%")
+            ->orWhere('cruise_line','LIKE',"%$search->search%")
+            ->orWhere('destination','LIKE',"%$search->search%")
+            ->orderBy($search->sort,$search->direction)
+            ->paginate(12);
+    }
 
 }

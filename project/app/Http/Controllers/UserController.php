@@ -20,14 +20,23 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function getUserSailings($user_id)
-    {
-        $userdetail = UserDetails::where('user_id', $user_id)->first();
+    public function getUser($user_id){
+        $user = User::find($user_id);
         $usersailings = UserSailing::with('sailing')->get()->where('user_id', $user_id);
         $userevents = UserEvent::with('event')->get()->where('user_id', $user_id);
+        return view('users.profiletemplate')->with(['usersailings' => $usersailings,
+            'userevents' => $userevents,
+            'user' => $user]);
+    }
+    public function getUserSailings()
+    {
+        $usersailings = UserSailing::with('sailing')->get()->where('user_id', Auth::user()->id);
+        $userevents = UserEvent::with('event')->get()->where('user_id', Auth::user()->id);
 
-        return view('users.userprofile')->with(['usersailings' => $usersailings, 'userevents' => $userevents,
-            'userdetail' => $userdetail]);
+        //dd($usersailings->sailing->sailing_id);
+        //dd($usersailings->first()->sailing->title);
+
+        return view('users.userprofile')->with(['usersailings' => $usersailings, 'userevents' => $userevents]);
     }
 
     /*public function getEvents()
@@ -69,16 +78,14 @@ class UserController extends Controller
         }else{
           return redirect('users/create');
         }
-      } else {
+      }else{
         return redirect::back();
       }
     }
-
     protected function showCreateForm()
     {
         return view('users.createdetail');
     }
-
     protected function createUserDetails(UserDetailsRequest $request)
     {
       $userDetails = UserDetails::create([
