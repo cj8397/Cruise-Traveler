@@ -105,34 +105,34 @@
 
                             @foreach($userevents->where('sailing_id',$sailing->sailing->id) as $events)
                                 {{--@if($events != null)--}}
-                                    {{--@foreach($eventdetails[$events->event_id] as $edetail)--}}
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <h5>Event: <a
-                                                        href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
-                                            </h5>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <strong>Role:</strong><br>
-                                            @if ($events->role == "host")
-                                                <span class="label label-pill label-warning">{!! $events->role !!}</span>
-                                            @else
-                                                <span class="label label-pill label-danger">{!! $events->role !!}</span>
-                                            @endif
-                                        </li>
-                                        <li class="list-group-item">
-                                            <strong>Start:</strong><br>
-                                            {!! $events->event->start_date !!}
-                                        </li>
-                                        <li class="list-group-item">
-                                            <strong>End:</strong><br>
-                                            {!! $events->event->end_date !!}
-                                        </li>
-                                        <li class="list-group-item">
-                                            <strong>Location:</strong><br>
-                                            {!! $events->event->location !!}
-                                        </li>
-                                    </ul>
+                                {{--@foreach($eventdetails[$events->event_id] as $edetail)--}}
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <h5>Event: <a
+                                                    href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
+                                        </h5>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Role:</strong><br>
+                                        @if ($events->role == "Host")
+                                            <span class="label label-pill label-warning">{!! $events->role !!}</span>
+                                        @else
+                                            <span class="label label-pill label-danger">{!! $events->role !!}</span>
+                                        @endif
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Start:</strong><br>
+                                        {!! $events->event->start_date !!}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>End:</strong><br>
+                                        {!! $events->event->end_date !!}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Location:</strong><br>
+                                        {!! $events->event->location !!}
+                                    </li>
+                                </ul>
                                 {{--@else--}}
                                 {{--<span class="label label-pill label-default">You are not participating in any events for this sailing... =(</span>--}}
                                 {{--@endif--}}

@@ -21,11 +21,11 @@ use App\Http\Requests\SearchRequest;
 
 class SailingsController extends Controller
 {
-  public function __construct()
-  {
-    $this->middleware('auth', ['except' => ['GetAllSailings', 'GetSailing']]);
-      $this->middleware('admin', ['except' => ['GetAllSailings', 'GetSailing']]);
-  }
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['GetAllSailings', 'GetSailing']]);
+        $this->middleware('admin', ['except' => ['GetAllSailings', 'GetSailing']]);
+    }
     //
     protected function GetAllSailings(SearchRequest $request)
     {

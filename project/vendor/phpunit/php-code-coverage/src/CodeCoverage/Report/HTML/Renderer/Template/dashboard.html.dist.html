@@ -158,12 +158,12 @@
                     .yAxis.tickFormat(d3.format('d'));
 
             d3.select('#classCoverageDistribution svg')
-                    .datum(getCoverageDistributionData({
+                    .datum(getCoverageDistributionData({;
             {
                 class_coverage_distribution
             }
         },
-            "Class Coverage"
+            "Class Coverage";
             ))
             .
             transition().duration(500).call(chart);
@@ -183,12 +183,12 @@
                     .yAxis.tickFormat(d3.format('d'));
 
             d3.select('#methodCoverageDistribution svg')
-                    .datum(getCoverageDistributionData({
+                    .datum(getCoverageDistributionData({;
             {
                 method_coverage_distribution
             }
         },
-            "Method Coverage"
+            "Method Coverage";
             ))
             .
             transition().duration(500).call(chart);
@@ -241,12 +241,12 @@
             chart.yAxis.axisLabel('Cyclomatic Complexity');
 
             d3.select('#classComplexity svg')
-                    .datum(getComplexityData({
+                    .datum(getComplexityData({;
             {
                 complexity_class
             }
         },
-            'Class Complexity'
+            'Class Complexity';
             ))
             .
             transition()
@@ -272,12 +272,12 @@
             chart.yAxis.axisLabel('Method Complexity');
 
             d3.select('#methodComplexity svg')
-                    .datum(getComplexityData({
+                    .datum(getComplexityData({;
             {
                 complexity_method
             }
         },
-            'Method Complexity'
+            'Method Complexity';
             ))
             .
             transition()

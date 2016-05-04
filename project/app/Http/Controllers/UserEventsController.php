@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Event;
 use App\Http\Requests;
 use App\UserEvent;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Helpers\StatsHelper;
 class UserEventsController extends Controller
 {
     private $helper;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -37,32 +39,33 @@ class UserEventsController extends Controller
             $userevent->role = 'Participant';
             $userevent->save();
             $success = "Joined the event.";
-            $members = UserEvent::all()->where('event_id',$event_id);
-            return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'success'));//view('events.eventdetail', );
+            $members = UserEvent::all()->where('event_id', $event_id);
+            return redirect()->action('EventsController@GetOneEvent', [$event_id])->with(compact('members', 'event', 'success'));//view('events.eventdetail', );
         } else {
-            $members = UserEvent::all()->where('event_id',$event_id);
+            $members = UserEvent::all()->where('event_id', $event_id);
             $failure = "Already joined the event.";
-            return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'failure'));
+            return redirect()->action('EventsController@GetOneEvent', [$event_id])->with(compact('members', 'event', 'failure'));
         }
     }
 
     // remove entry from bridge table
     public function LeaveEvent($event_id)
-    { $user_id = Auth::User()->id;
+    {
+        $user_id = Auth::User()->id;
         $conditions = compact('user_id', 'event_id');
         $event = Event::where('id', $event_id)->first();
-        $members = UserEvent::all()->where('event_id',$event_id);
+        $members = UserEvent::all()->where('event_id', $event_id);
         if (UserEvent::where($conditions)->exists()) {
             UserEvent::where($conditions)->delete();
             $success = "Left the event.";
-            $members = UserEvent::all()->where('event_id',$event_id);
-            return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'success'));//view('events.eventdetail', );
+            $members = UserEvent::all()->where('event_id', $event_id);
+            return redirect()->action('EventsController@GetOneEvent', [$event_id])->with(compact('members', 'event', 'success'));//view('events.eventdetail', );
         } else {
-            $members = UserEvent::all()->where('event_id',$event_id);
+            $members = UserEvent::all()->where('event_id', $event_id);
             $failure = "Not Participating In Event";
-            return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'failure'));
+            return redirect()->action('EventsController@GetOneEvent', [$event_id])->with(compact('members', 'event', 'failure'));
         }
-        }
+    }
 
     // getAllUsers going to event
     // getAllUsers in a event
@@ -78,34 +81,41 @@ class UserEventsController extends Controller
 
     // female - 0, male - 1
     // going back and forth to DB many times, need to optimize after know its working
-    public function CalculateSexPercentages($event_id) {
-        $percentages = $this->helper->CalculateBooleanPercentages('event_id', $event_id, 'sex');
-        return ['male'=>$percentages['true'], 'female'=>$percentages['false']];
-    }
 
-    public function CalculateFamilyPercentages($event_id) {
-        $percentages = $this->helper->CalculateBooleanPercentages('event_id', $event_id, 'family');
-        return ['family'=>$percentages['true'], 'nonfamily'=>$percentages['false']];
-    }
-
-    public function CalculateAgePercentages($event_id) {
+    public function CalculateAgePercentages($event_id)
+    {
         return $this->helper->CalculateAgePercentages('event_id', $event_id);
     }
 
-    public function CalculateLangPercentages($event_id) {
-        return $this->helper->CalculateDynamicPercentages('event_id', $event_id, 'lang');
-    }
-
-    public function CalculateCountryPercentages($event_id) {
+    public function CalculateCountryPercentages($event_id)
+    {
         return $this->helper->CalculateDynamicPercentages('event_id', $event_id, 'country');
     }
 
-    public function GetStatsSummary($event_id) {
+    public function GetStatsSummary($event_id)
+    {
         $fam = $this->CalculateFamilyPercentages($event_id);
         $lang = $this->CalculateLangPercentages($event_id);
         $sex = $this->CalculateSexPercentages($event_id);
 
         $summary = compact('fam', 'lang', 'sex');
         return $summary;
+    }
+
+    public function CalculateFamilyPercentages($event_id)
+    {
+        $percentages = $this->helper->CalculateBooleanPercentages('event_id', $event_id, 'family');
+        return ['family' => $percentages['true'], 'nonfamily' => $percentages['false']];
+    }
+
+    public function CalculateLangPercentages($event_id)
+    {
+        return $this->helper->CalculateDynamicPercentages('event_id', $event_id, 'lang');
+    }
+
+    public function CalculateSexPercentages($event_id)
+    {
+        $percentages = $this->helper->CalculateBooleanPercentages('event_id', $event_id, 'sex');
+        return ['male' => $percentages['true'], 'female' => $percentages['false']];
     }
 }
