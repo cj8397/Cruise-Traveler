@@ -58,7 +58,7 @@
                     </tr>
                     <tr>
                         <td>admin@admin.com</td>
-                        <td>password</td>
+                        <td>adminpassword</td>
                         <td>Admin</td>
                     </tr>
                 </table>
