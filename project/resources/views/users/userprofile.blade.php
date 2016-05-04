@@ -114,7 +114,7 @@
                                         </li>
                                         <li class="list-group-item">
                                             <strong>Role:</strong><br>
-                                            @if ($events->role == "host")
+                                            @if ($events->role == "Host")
                                                 <span class="label label-pill label-warning">{!! $events->role !!}</span>
                                             @else
                                                 <span class="label label-pill label-danger">{!! $events->role !!}</span>
