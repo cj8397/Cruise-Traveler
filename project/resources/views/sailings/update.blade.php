@@ -28,7 +28,8 @@
                             <div class="form-group{{ $errors->has('cruise_line') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Cruise Line</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="cruise_line" value="{{$sailing->cruise_line}}">
+                                    <input type="text" class="form-control" name="cruise_line"
+                                           value="{{$sailing->cruise_line}}">
 
                                     @if ($errors->has('cruise_line'))
                                         <span class="help-block">
@@ -42,7 +43,8 @@
                                 <label class="col-md-4 control-label">Start Date And Time</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control date" id="datetimepickerstart" name="start" value="{{$sailing->start}}">
+                                    <input type="text" class="form-control date" id="datetimepickerstart" name="start"
+                                           value="{{$sailing->start}}">
 
                                     @if ($errors->has('start'))
                                         <span class="help-block">
@@ -56,7 +58,8 @@
                                 <label class="col-md-4 control-label">End Date And Time</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="datetimepickersend" name="end" value="{{$sailing->end}}">
+                                    <input type="text" class="form-control" id="datetimepickersend" name="end"
+                                           value="{{$sailing->end}}">
 
                                     @if ($errors->has('end'))
                                         <span class="help-block">
@@ -69,7 +72,8 @@
                             <div class="form-group{{ $errors->has('port_org') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Port of Origin</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="port_org" value="{{$sailing->port_org}}">
+                                    <input type="text" class="form-control" name="port_org"
+                                           value="{{$sailing->port_org}}">
 
                                     @if ($errors->has('port_org'))
                                         <span class="help-block">
@@ -82,7 +86,8 @@
                             <div class="form-group{{ $errors->has('port_dest') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Port of Destination</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="port_dest" value="{{$sailing->port_dest}}">
+                                    <input type="text" class="form-control" name="port_dest"
+                                           value="{{$sailing->port_dest}}">
 
                                     @if ($errors->has('port_dest'))
                                         <span class="help-block">
@@ -95,7 +100,8 @@
                             <div class="form-group{{ $errors->has('destination') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Sailing Destination</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="destination" value="{{$sailing->destination}}">
+                                    <input type="text" class="form-control" name="destination"
+                                           value="{{$sailing->destination}}">
 
                                     @if ($errors->has('destination'))
                                         <span class="help-block">

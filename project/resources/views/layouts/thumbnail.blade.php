@@ -30,8 +30,6 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    @yield('styles')
-
 </head>
 <body>
 <!-- Navigation -->
@@ -73,7 +71,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Last Update: May 2nd, 2016 @ 12:00 </a></li>
+                            <li><a href="#">Last Update: May 4th, 2016 @ 9:00 </a></li>
                             <li><a href="https://docs.google.com/spreadsheets/d/1KQc5cRAnqdWS55JQb59NHHYKRtqtslBXlHjbWU2QIqc/edit#gid=0">SCRUM WOKRBOOK</a></li>
                             <li><a href="https://docs.google.com/document/d/1yIuRZO1HJ71moInaR_B1Y0mb6yfwxB9oClgWSx5CTpw/edit#heading=h.tphyqzr77ydu">Design Model</a></li>
                         </ul>
@@ -82,22 +80,21 @@
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 @else
                     <li class="dropdown">
-                        {{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                             {{ Auth::user()->name }} <span class="caret"></span>
-                         </a>--}}
+                    {{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                         {{ Auth::user()->name }} <span class="caret"></span>
+                     </a>--}}
 
                     {{--<ul class="dropdown-menu" role="menu">--}}
                             <li>
-                                <a href="{{ url('/users/userprofile') }}"><i
-                                            class="glyphicon glyphicon-circle-arrow-left"></i>Profile</a>
+                                <a href="{{ url('/users/userprofile/'.Auth::user()->id) }}">Profile</a>
                             </li>
-                            <li><a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i> Logout</a></li>
-                            @if (Auth::user()->isAdmin())
-                              <li>
-                                  <a href="{{ url('/admin/home') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Admin</a>
-                              </li>
-                            @endif
-                            {{--</ul>--}}
+                    <li><a href="{{ url('/logout') }}">Logout</a></li>
+                    @if (Auth::user()->isAdmin())
+                        <li>
+                            <a href="{{ url('/admin/home') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Admin</a>
+                        </li>
+                        @endif
+                        {{--</ul>--}}
                     </li>
                 @endif
             </ul>
@@ -135,6 +132,5 @@
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>--}}
 {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-@yield('scripts')
 </body>
 </html>

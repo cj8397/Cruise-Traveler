@@ -3,11 +3,18 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/dictionaries
-.idea/vcs.xml
-.idea/jsLibraryMappings.xml
+project/.idea/
+#.idea/workspace.xml
+#.idea/tasks.xml
+#.idea/dictionaries
+#.idea/vcs.xml
+#.idea/jsLibraryMappings.xml
+#.idea/modules.xml
+#.idea/encodings.xml
+#.idea/project.iml
+#.idea/Cruise.iml
+#.idea/blade.xml
+#.idea/copyright/
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
@@ -44,20 +51,21 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 ### Laravel template
-vendor/
+
 node_modules/
 
 # Laravel 4 specific
 bootstrap/compiled.php
-app/storage/
+#app/storage/
 
 # Laravel 5 & Lumen specific
 bootstrap/cache/
 project/storage/
-storage/
+storage/framework/
 .env.*.php
 .env.php
 .env
+_env
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/

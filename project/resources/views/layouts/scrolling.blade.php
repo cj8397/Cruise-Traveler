@@ -96,7 +96,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Last Update: May 2nd, 2016 @ 12:00 </a></li>
+                            <li><a href="#">Last Update: May 4th, 2016 @ 9:00 </a></li>
                             <li><a href="https://docs.google.com/spreadsheets/d/1KQc5cRAnqdWS55JQb59NHHYKRtqtslBXlHjbWU2QIqc/edit#gid=0">SCRUM WOKRBOOK</a></li>
                             <li><a href="https://docs.google.com/document/d/1yIuRZO1HJ71moInaR_B1Y0mb6yfwxB9oClgWSx5CTpw/edit#heading=h.tphyqzr77ydu">Design Model</a></li>
                         </ul>
@@ -111,18 +111,17 @@
 
                     <ul class="dropdown-menu" role="menu">--}}
                             <li>
-                                <a href="{{ url('/users/userprofile') }}"><i
-                                            class="glyphicon glyphicon-circle-arrow-left"></i>Profile</a>
+                                <a href="{{ url('/users/userprofile/'.Auth::user()->id) }}">Profile</a>
                             </li>
-                            <li>
-                                <a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Logout</a>
-                            </li>
-                            @if (Auth::user()->isAdmin())
-                              <li>
-                                  <a href="{{ url('/admin/home') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Admin</a>
-                              </li>
-                            @endif
-                            {{--</ul>--}}
+                    <li>
+                        <a href="{{ url('/logout') }}">Logout</a>
+                    </li>
+                    @if (Auth::user()->isAdmin())
+                        <li>
+                            <a href="{{ url('/admin/home') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Admin</a>
+                        </li>
+                        @endif
+                        {{--</ul>--}}
                     </li>
                 @endif
             </ul>
