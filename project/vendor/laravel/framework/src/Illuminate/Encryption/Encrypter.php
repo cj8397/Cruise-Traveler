@@ -3,7 +3,6 @@
 namespace Illuminate\Encryption;
 
 use RuntimeException;
-use Illuminate\Support\Str;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Contracts\Encryption\EncryptException;
 use Illuminate\Contracts\Encryption\Encrypter as EncrypterContract;
@@ -36,10 +35,6 @@ class Encrypter implements EncrypterContract
     public function __construct($key, $cipher = 'AES-128-CBC')
     {
         $key = (string) $key;
-
-        if (Str::startsWith($key, 'base64:')) {
-            $key = base64_decode(substr($key, 7));
-        }
 
         if (static::supported($key, $cipher)) {
             $this->key = $key;
@@ -96,18 +91,6 @@ class Encrypter implements EncrypterContract
     }
 
     /**
-     * Create a MAC for the given value.
-     *
-     * @param  string $iv
-     * @param  string $value
-     * @return string
-     */
-    protected function hash($iv, $value)
-    {
-        return hash_hmac('sha256', $iv . $value, $this->key);
-    }
-
-    /**
      * Decrypt the given value.
      *
      * @param  string  $payload
@@ -128,6 +111,18 @@ class Encrypter implements EncrypterContract
         }
 
         return unserialize($decrypted);
+    }
+
+    /**
+     * Create a MAC for the given value.
+     *
+     * @param  string  $iv
+     * @param  string  $value
+     * @return string
+     */
+    protected function hash($iv, $value)
+    {
+        return hash_hmac('sha256', $iv.$value, $this->key);
     }
 
     /**

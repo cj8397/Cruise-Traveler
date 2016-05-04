@@ -43,17 +43,6 @@ class CacheManager implements FactoryContract
     }
 
     /**
-     * Get a cache driver instance.
-     *
-     * @param  string $driver
-     * @return mixed
-     */
-    public function driver($driver = null)
-    {
-        return $this->store($driver);
-    }
-
-    /**
      * Get a cache store instance by name.
      *
      * @param  string|null  $name
@@ -67,13 +56,14 @@ class CacheManager implements FactoryContract
     }
 
     /**
-     * Get the default cache driver name.
+     * Get a cache driver instance.
      *
-     * @return string
+     * @param  string  $driver
+     * @return mixed
      */
-    public function getDefaultDriver()
+    public function driver($driver = null)
     {
-        return $this->app['config']['cache.default'];
+        return $this->store($driver);
     }
 
     /**
@@ -117,17 +107,6 @@ class CacheManager implements FactoryContract
     }
 
     /**
-     * Get the cache connection configuration.
-     *
-     * @param  string $name
-     * @return array
-     */
-    protected function getConfig($name)
-    {
-        return $this->app['config']["cache.stores.{$name}"];
-    }
-
-    /**
      * Call a custom driver creator.
      *
      * @param  array  $config
@@ -136,43 +115,6 @@ class CacheManager implements FactoryContract
     protected function callCustomCreator(array $config)
     {
         return $this->customCreators[$config['driver']]($this->app, $config);
-    }
-
-    /**
-     * Set the default cache driver name.
-     *
-     * @param  string $name
-     * @return void
-     */
-    public function setDefaultDriver($name)
-    {
-        $this->app['config']['cache.default'] = $name;
-    }
-
-    /**
-     * Register a custom driver creator Closure.
-     *
-     * @param  string $driver
-     * @param  \Closure $callback
-     * @return $this
-     */
-    public function extend($driver, Closure $callback)
-    {
-        $this->customCreators[$driver] = $callback;
-
-        return $this;
-    }
-
-    /**
-     * Dynamically call the default driver instance.
-     *
-     * @param  string $method
-     * @param  array $parameters
-     * @return mixed
-     */
-    public function __call($method, $parameters)
-    {
-        return call_user_func_array([$this->store(), $method], $parameters);
     }
 
     /**
@@ -189,14 +131,86 @@ class CacheManager implements FactoryContract
     }
 
     /**
-     * Get the cache prefix.
+     * Create an instance of the array cache driver.
+     *
+     * @return \Illuminate\Cache\ArrayStore
+     */
+    protected function createArrayDriver()
+    {
+        return $this->repository(new ArrayStore);
+    }
+
+    /**
+     * Create an instance of the file cache driver.
      *
      * @param  array  $config
-     * @return string
+     * @return \Illuminate\Cache\FileStore
      */
-    protected function getPrefix(array $config)
+    protected function createFileDriver(array $config)
     {
-        return Arr::get($config, 'prefix') ?: $this->app['config']['cache.prefix'];
+        return $this->repository(new FileStore($this->app['files'], $config['path']));
+    }
+
+    /**
+     * Create an instance of the Memcached cache driver.
+     *
+     * @param  array  $config
+     * @return \Illuminate\Cache\MemcachedStore
+     */
+    protected function createMemcachedDriver(array $config)
+    {
+        $prefix = $this->getPrefix($config);
+
+        $memcached = $this->app['memcached.connector']->connect(
+            $config['servers'],
+            array_get($config, 'persistent_id'),
+            array_get($config, 'options', []),
+            array_filter(array_get($config, 'sasl', []))
+        );
+
+        return $this->repository(new MemcachedStore($memcached, $prefix));
+    }
+
+    /**
+     * Create an instance of the Null cache driver.
+     *
+     * @return \Illuminate\Cache\NullStore
+     */
+    protected function createNullDriver()
+    {
+        return $this->repository(new NullStore);
+    }
+
+    /**
+     * Create an instance of the Redis cache driver.
+     *
+     * @param  array  $config
+     * @return \Illuminate\Cache\RedisStore
+     */
+    protected function createRedisDriver(array $config)
+    {
+        $redis = $this->app['redis'];
+
+        $connection = Arr::get($config, 'connection', 'default');
+
+        return $this->repository(new RedisStore($redis, $this->getPrefix($config), $connection));
+    }
+
+    /**
+     * Create an instance of the database cache driver.
+     *
+     * @param  array  $config
+     * @return \Illuminate\Cache\DatabaseStore
+     */
+    protected function createDatabaseDriver(array $config)
+    {
+        $connection = $this->app['db']->connection(Arr::get($config, 'connection'));
+
+        return $this->repository(
+            new DatabaseStore(
+                $connection, $this->app['encrypter'], $config['table'], $this->getPrefix($config)
+            )
+        );
     }
 
     /**
@@ -219,80 +233,71 @@ class CacheManager implements FactoryContract
     }
 
     /**
-     * Create an instance of the array cache driver.
+     * Get the cache prefix.
      *
-     * @return \Illuminate\Cache\ArrayStore
+     * @param  array  $config
+     * @return string
      */
-    protected function createArrayDriver()
+    protected function getPrefix(array $config)
     {
-        return $this->repository(new ArrayStore);
+        return Arr::get($config, 'prefix') ?: $this->app['config']['cache.prefix'];
     }
 
     /**
-     * Create an instance of the file cache driver.
+     * Get the cache connection configuration.
      *
-     * @param  array $config
-     * @return \Illuminate\Cache\FileStore
+     * @param  string  $name
+     * @return array
      */
-    protected function createFileDriver(array $config)
+    protected function getConfig($name)
     {
-        return $this->repository(new FileStore($this->app['files'], $config['path']));
+        return $this->app['config']["cache.stores.{$name}"];
     }
 
     /**
-     * Create an instance of the Memcached cache driver.
+     * Get the default cache driver name.
      *
-     * @param  array $config
-     * @return \Illuminate\Cache\MemcachedStore
+     * @return string
      */
-    protected function createMemcachedDriver(array $config)
+    public function getDefaultDriver()
     {
-        $prefix = $this->getPrefix($config);
-
-        $memcached = $this->app['memcached.connector']->connect($config['servers']);
-
-        return $this->repository(new MemcachedStore($memcached, $prefix));
+        return $this->app['config']['cache.default'];
     }
 
     /**
-     * Create an instance of the Null cache driver.
+     * Set the default cache driver name.
      *
-     * @return \Illuminate\Cache\NullStore
+     * @param  string  $name
+     * @return void
      */
-    protected function createNullDriver()
+    public function setDefaultDriver($name)
     {
-        return $this->repository(new NullStore);
+        $this->app['config']['cache.default'] = $name;
     }
 
     /**
-     * Create an instance of the Redis cache driver.
+     * Register a custom driver creator Closure.
      *
-     * @param  array $config
-     * @return \Illuminate\Cache\RedisStore
+     * @param  string    $driver
+     * @param  \Closure  $callback
+     * @return $this
      */
-    protected function createRedisDriver(array $config)
+    public function extend($driver, Closure $callback)
     {
-        $redis = $this->app['redis'];
+        $this->customCreators[$driver] = $callback;
 
-        $connection = Arr::get($config, 'connection', 'default');
-
-        return $this->repository(new RedisStore($redis, $this->getPrefix($config), $connection));
+        return $this;
     }
 
     /**
-     * Create an instance of the database cache driver.
+     * Dynamically call the default driver instance.
      *
-     * @param  array $config
-     * @return \Illuminate\Cache\DatabaseStore
+     * @param  string  $method
+     * @param  array   $parameters
+     * @return mixed
      */
-    protected function createDatabaseDriver(array $config)
+    public function __call($method, $parameters)
     {
-        $connection = $this->app['db']->connection(Arr::get($config, 'connection'));
-
-        return $this->repository(
-            new DatabaseStore(
-                $connection, $this->app['encrypter'], $config['table'], $this->getPrefix($config)
-            )
-        );
+        return call_user_func_array([$this->store(), $method], $parameters);
     }
 }

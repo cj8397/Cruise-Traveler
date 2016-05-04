@@ -30,7 +30,6 @@ class UserController extends Controller
     }
     public function getUserSailings()
     {
-        $userdetail =
         $usersailings = UserSailing::with('sailing')->get()->where('user_id', Auth::user()->id);
         $userevents = UserEvent::with('event')->get()->where('user_id', Auth::user()->id);
 

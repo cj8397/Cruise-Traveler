@@ -96,29 +96,6 @@ class Worker
     }
 
     /**
-     * Get the last queue restart timestamp, or null.
-     *
-     * @return int|null
-     */
-    protected function getTimestampOfLastQueueRestart()
-    {
-        if ($this->cache) {
-            return $this->cache->get('illuminate:queue:restart');
-        }
-    }
-
-    /**
-     * Determine if the daemon should process on this iteration.
-     *
-     * @return bool
-     */
-    protected function daemonShouldRun()
-    {
-        return $this->manager->isDownForMaintenance()
-            ? false : $this->events->until('illuminate.queue.looping') !== false;
-    }
-
-    /**
      * Run the next job for the daemon worker.
      *
      * @param  string  $connectionName
@@ -141,6 +118,17 @@ class Worker
                 $this->exceptions->report(new FatalThrowableError($e));
             }
         }
+    }
+
+    /**
+     * Determine if the daemon should process on this iteration.
+     *
+     * @return bool
+     */
+    protected function daemonShouldRun()
+    {
+        return $this->manager->isDownForMaintenance()
+                    ? false : $this->events->until('illuminate.queue.looping') !== false;
     }
 
     /**
@@ -229,6 +217,82 @@ class Worker
     }
 
     /**
+     * Handle an exception that occured while the job was running.
+     *
+     * @param  string  $connection
+     * @param  \Illuminate\Contracts\Queue\Job  $job
+     * @param  int  $delay
+     * @param  \Throwable  $e
+     * @return void
+     */
+    protected function handleJobException($connection, Job $job, $delay, $e)
+    {
+        // If we catch an exception, we will attempt to release the job back onto
+        // the queue so it is not lost. This will let is be retried at a later
+        // time by another listener (or the same one). We will do that here.
+        try {
+            $this->raiseExceptionOccurredJobEvent(
+                $connection, $job, $e
+            );
+        } finally {
+            if (! $job->isDeleted()) {
+                $job->release($delay);
+            }
+        }
+
+        throw $e;
+    }
+
+    /**
+     * Raise the before queue job event.
+     *
+     * @param  string  $connection
+     * @param  \Illuminate\Contracts\Queue\Job  $job
+     * @return void
+     */
+    protected function raiseBeforeJobEvent($connection, Job $job)
+    {
+        if ($this->events) {
+            $data = json_decode($job->getRawBody(), true);
+
+            $this->events->fire(new Events\JobProcessing($connection, $job, $data));
+        }
+    }
+
+    /**
+     * Raise the after queue job event.
+     *
+     * @param  string  $connection
+     * @param  \Illuminate\Contracts\Queue\Job  $job
+     * @return void
+     */
+    protected function raiseAfterJobEvent($connection, Job $job)
+    {
+        if ($this->events) {
+            $data = json_decode($job->getRawBody(), true);
+
+            $this->events->fire(new Events\JobProcessed($connection, $job, $data));
+        }
+    }
+
+    /**
+     * Raise the exception occurred queue job event.
+     *
+     * @param  string  $connection
+     * @param  \Illuminate\Contracts\Queue\Job  $job
+     * @param  \Throwable  $exception
+     * @return void
+     */
+    protected function raiseExceptionOccurredJobEvent($connection, Job $job, $exception)
+    {
+        if ($this->events) {
+            $data = json_decode($job->getRawBody(), true);
+
+            $this->events->fire(new Events\JobExceptionOccurred($connection, $job, $data, $exception));
+        }
+    }
+
+    /**
      * Log a failed job into storage.
      *
      * @param  string  $connection
@@ -267,79 +331,26 @@ class Worker
     }
 
     /**
-     * Raise the before queue job event.
+     * Determine if the memory limit has been exceeded.
      *
-     * @param  string  $connection
-     * @param  \Illuminate\Contracts\Queue\Job  $job
-     * @return void
+     * @param  int   $memoryLimit
+     * @return bool
      */
-    protected function raiseBeforeJobEvent($connection, Job $job)
+    public function memoryExceeded($memoryLimit)
     {
-        if ($this->events) {
-            $data = json_decode($job->getRawBody(), true);
-
-            $this->events->fire(new Events\JobProcessing($connection, $job, $data));
-        }
+        return (memory_get_usage() / 1024 / 1024) >= $memoryLimit;
     }
 
     /**
-     * Raise the after queue job event.
+     * Stop listening and bail out of the script.
      *
-     * @param  string  $connection
-     * @param  \Illuminate\Contracts\Queue\Job  $job
      * @return void
      */
-    protected function raiseAfterJobEvent($connection, Job $job)
+    public function stop()
     {
-        if ($this->events) {
-            $data = json_decode($job->getRawBody(), true);
+        $this->events->fire(new Events\WorkerStopping);
 
-            $this->events->fire(new Events\JobProcessed($connection, $job, $data));
-        }
-    }
-
-    /**
-     * Handle an exception that occured while the job was running.
-     *
-     * @param  string  $connection
-     * @param  \Illuminate\Contracts\Queue\Job  $job
-     * @param  int $delay
-     * @param  \Throwable $e
-     * @return void
-     */
-    protected function handleJobException($connection, Job $job, $delay, $e)
-    {
-        // If we catch an exception, we will attempt to release the job back onto
-        // the queue so it is not lost. This will let is be retried at a later
-        // time by another listener (or the same one). We will do that here.
-        try {
-            $this->raiseExceptionOccurredJobEvent(
-                $connection, $job, $e
-            );
-        } finally {
-            if (!$job->isDeleted()) {
-                $job->release($delay);
-            }
-        }
-
-        throw $e;
-    }
-
-    /**
-     * Raise the exception occurred queue job event.
-     *
-     * @param  string  $connection
-     * @param  \Illuminate\Contracts\Queue\Job  $job
-     * @param  \Throwable $exception
-     * @return void
-     */
-    protected function raiseExceptionOccurredJobEvent($connection, Job $job, $exception)
-    {
-        if ($this->events) {
-            $data = json_decode($job->getRawBody(), true);
-
-            $this->events->fire(new Events\JobExceptionOccurred($connection, $job, $data, $exception));
-        }
+        die;
     }
 
     /**
@@ -354,14 +365,15 @@ class Worker
     }
 
     /**
-     * Determine if the memory limit has been exceeded.
+     * Get the last queue restart timestamp, or null.
      *
-     * @param  int $memoryLimit
-     * @return bool
+     * @return int|null
      */
-    public function memoryExceeded($memoryLimit)
+    protected function getTimestampOfLastQueueRestart()
     {
-        return (memory_get_usage() / 1024 / 1024) >= $memoryLimit;
+        if ($this->cache) {
+            return $this->cache->get('illuminate:queue:restart');
+        }
     }
 
     /**
@@ -373,18 +385,6 @@ class Worker
     protected function queueShouldRestart($lastRestart)
     {
         return $this->getTimestampOfLastQueueRestart() != $lastRestart;
-    }
-
-    /**
-     * Stop listening and bail out of the script.
-     *
-     * @return void
-     */
-    public function stop()
-    {
-        $this->events->fire(new Events\WorkerStopping);
-
-        die;
     }
 
     /**

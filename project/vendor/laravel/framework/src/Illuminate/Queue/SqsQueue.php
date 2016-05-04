@@ -80,23 +80,6 @@ class SqsQueue extends Queue implements QueueContract
     }
 
     /**
-     * Get the queue or return the default.
-     *
-     * @param  string|null $queue
-     * @return string
-     */
-    public function getQueue($queue)
-    {
-        $queue = $queue ?: $this->default;
-
-        if (filter_var($queue, FILTER_VALIDATE_URL) !== false) {
-            return $queue;
-        }
-
-        return rtrim($this->prefix, '/') . '/' . ($queue);
-    }
-
-    /**
      * Push a new job onto the queue after a delay.
      *
      * @param  \DateTime|int  $delay
@@ -152,6 +135,23 @@ class SqsQueue extends Queue implements QueueContract
         $this->jobCreator = $callback;
 
         return $this;
+    }
+
+    /**
+     * Get the queue or return the default.
+     *
+     * @param  string|null  $queue
+     * @return string
+     */
+    public function getQueue($queue)
+    {
+        $queue = $queue ?: $this->default;
+
+        if (filter_var($queue, FILTER_VALIDATE_URL) !== false) {
+            return $queue;
+        }
+
+        return rtrim($this->prefix, '/').'/'.($queue);
     }
 
     /**

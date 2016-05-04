@@ -60,27 +60,6 @@ abstract class Job
     }
 
     /**
-     * Release the job back into the queue.
-     *
-     * @param  int $delay
-     * @return void
-     */
-    public function release($delay = 0)
-    {
-        $this->released = true;
-    }
-
-    /**
-     * Determine if the job has been deleted or released.
-     *
-     * @return bool
-     */
-    public function isDeletedOrReleased()
-    {
-        return $this->isDeleted() || $this->isReleased();
-    }
-
-    /**
      * Determine if the job has been deleted.
      *
      * @return bool
@@ -88,6 +67,17 @@ abstract class Job
     public function isDeleted()
     {
         return $this->deleted;
+    }
+
+    /**
+     * Release the job back into the queue.
+     *
+     * @param  int   $delay
+     * @return void
+     */
+    public function release($delay = 0)
+    {
+        $this->released = true;
     }
 
     /**
@@ -101,6 +91,16 @@ abstract class Job
     }
 
     /**
+     * Determine if the job has been deleted or released.
+     *
+     * @return bool
+     */
+    public function isDeletedOrReleased()
+    {
+        return $this->isDeleted() || $this->isReleased();
+    }
+
+    /**
      * Get the number of times the job has been attempted.
      *
      * @return int
@@ -108,49 +108,11 @@ abstract class Job
     abstract public function attempts();
 
     /**
-     * Call the failed method on the job instance.
-     *
-     * @return void
-     */
-    public function failed()
-    {
-        $payload = json_decode($this->getRawBody(), true);
-
-        list($class, $method) = $this->parseJob($payload['job']);
-
-        $this->instance = $this->resolve($class);
-
-        if (method_exists($this->instance, 'failed')) {
-            $this->instance->failed($this->resolveQueueableEntities($payload['data']));
-        }
-    }
-
-    /**
      * Get the raw body string for the job.
      *
      * @return string
      */
     abstract public function getRawBody();
-
-    /**
-     * Get the name of the queued job class.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return json_decode($this->getRawBody(), true)['job'];
-    }
-
-    /**
-     * Get the name of the queue the job belongs to.
-     *
-     * @return string
-     */
-    public function getQueue()
-    {
-        return $this->queue;
-    }
 
     /**
      * Resolve and fire the job handler method.
@@ -234,6 +196,24 @@ abstract class Job
     }
 
     /**
+     * Call the failed method on the job instance.
+     *
+     * @return void
+     */
+    public function failed()
+    {
+        $payload = json_decode($this->getRawBody(), true);
+
+        list($class, $method) = $this->parseJob($payload['job']);
+
+        $this->instance = $this->resolve($class);
+
+        if (method_exists($this->instance, 'failed')) {
+            $this->instance->failed($this->resolveQueueableEntities($payload['data']));
+        }
+    }
+
+    /**
      * Get an entity resolver instance.
      *
      * @return \Illuminate\Contracts\Queue\EntityResolver
@@ -266,5 +246,25 @@ abstract class Job
     protected function getTime()
     {
         return time();
+    }
+
+    /**
+     * Get the name of the queued job class.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return json_decode($this->getRawBody(), true)['job'];
+    }
+
+    /**
+     * Get the name of the queue the job belongs to.
+     *
+     * @return string
+     */
+    public function getQueue()
+    {
+        return $this->queue;
     }
 }

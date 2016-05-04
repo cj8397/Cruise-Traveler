@@ -50,6 +50,16 @@ class BelongsTo extends Relation
     }
 
     /**
+     * Get the results of the relationship.
+     *
+     * @return mixed
+     */
+    public function getResults()
+    {
+        return $this->query->first();
+    }
+
+    /**
      * Set the base constraints on the relation query.
      *
      * @return void
@@ -119,16 +129,6 @@ class BelongsTo extends Relation
     }
 
     /**
-     * Get the fully qualified foreign key of the relationship.
-     *
-     * @return string
-     */
-    public function getQualifiedForeignKey()
-    {
-        return $this->parent->getTable() . '.' . $this->foreignKey;
-    }
-
-    /**
      * Set the constraints for an eager load of the relation.
      *
      * @param  array  $models
@@ -163,11 +163,11 @@ class BelongsTo extends Relation
             }
         }
 
-        // If there are no keys that were not null we will just return an array with 0 in
-        // it so the query doesn't fail, but will not return any results, which should
-        // be what this developer is expecting in a case where this happens to them.
-        if (count($keys) == 0) {
-            return [0];
+        // If there are no keys that were not null we will just return an array with either
+        // null or 0 in (depending on if incrementing keys are in use) so the query wont
+        // fail plus returns zero results, which should be what the developer expects.
+        if (count($keys) === 0) {
+            return [$this->related->incrementing ? 0 : null];
         }
 
         return array_values(array_unique($keys));
@@ -269,16 +269,6 @@ class BelongsTo extends Relation
     }
 
     /**
-     * Get the results of the relationship.
-     *
-     * @return mixed
-     */
-    public function getResults()
-    {
-        return $this->query->first();
-    }
-
-    /**
      * Get the foreign key of the relationship.
      *
      * @return string
@@ -286,6 +276,16 @@ class BelongsTo extends Relation
     public function getForeignKey()
     {
         return $this->foreignKey;
+    }
+
+    /**
+     * Get the fully qualified foreign key of the relationship.
+     *
+     * @return string
+     */
+    public function getQualifiedForeignKey()
+    {
+        return $this->parent->getTable().'.'.$this->foreignKey;
     }
 
     /**
