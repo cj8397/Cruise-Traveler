@@ -100,16 +100,31 @@ class UserSailingsController extends Controller
         return $this->helper->CalculateAgePercentages('sailing_id', $sailing_id);
     }
 
-    public function CalculateLangPercentages($sailing_id) {
-        return $this->helper->CalculateDynamicPercentages('sailing_id', $sailing_id, 'lang');
+    public function CalculateLangPercentages($sailing_id, $total) {
+        $langsDB = DB::select("call sailing_language_summary($sailing_id)");
+        $langs = array();
+        for($i = 0; $i < count($langsDB); $i ++) {
+            $langs[$langsDB[$i]->language] = $this->CalculatePercentage($langsDB[$i]->count,$total);
+        }
+        return $langs;
     }
 
-    public function CalculateCountryPercentages($sailing_id) {
-        return $this->helper->CalculateDynamicPercentages('sailing_id', $sailing_id, 'country');
+    public function CalculateCountryPercentages($sailing_id, $total) {
+        $countriesDB = DB::select("call sailing_country_summary($sailing_id)");
+        $countries = array();
+        for($i = 0; $i < count($countriesDB); $i ++) {
+            $countries[$countriesDB[$i]->country] = $this->CalculatePercentage($countriesDB[$i]->count,$total);
+        }
+        return $countries;
     }
 
-    public function CalculateCityPercentages($sailing_id) {
-        return $this->helper->CalculateDynamicPercentages('sailing_id', $sailing_id, 'city');
+    public function CalculateCityPercentages($sailing_id, $total) {
+        $citiesDB = DB::select("call sailing_city_summary($sailing_id)");
+        $cities = array();
+        for($i = 0; $i < count($citiesDB); $i ++) {
+            $cities[$citiesDB[$i]->city] = $this->CalculatePercentage($citiesDB[$i]->count,$total);
+        }
+        return $cities;
     }
 
 
@@ -150,9 +165,9 @@ class UserSailingsController extends Controller
         $sex['male'] = $this->CalculatePercentage($stats->male, $total);
         $sex['female'] = 100 - $sex['male'];
 
-        $cities = DB::select("call sailing_city_summary($sailing_id)")[0];
-        $countries = DB::select("call sailing_country_summary($sailing_id)")[0];
-        $langs = DB::select("call sailing_language_summary($sailing_id)")[0];
+        $cities = $this->CalculateCityPercentages($sailing_id, $total);
+        $countries = $this->CalculateCountryPercentages($sailing_id, $total);
+        $langs = $this->CalculateLangPercentages($sailing_id, $total);
 
         $summary = compact('total','fam', 'sex', 'ages', 'langs', 'countries', 'cities');
         $summaryStats = new Stats($summary);

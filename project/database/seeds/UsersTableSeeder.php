@@ -42,6 +42,10 @@ class UsersTableSeeder extends Seeder
             'updated_at' => new DateTime('now'),
         ]);
 
+        DB::table('admin')->insert([
+            'user_id' => 4
+        ]);
+
         foreach (range(1, 100) as $i) {
             DB::table('users')->insert([
                 'email' => $faker->email,
