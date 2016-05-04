@@ -14,8 +14,7 @@ class Admin extends Migration
     {
         Schema::create('admin', function (Blueprint $table) {
 
-            $table->string('username')->unique(); // only host or member
-            $table->string('password'); // hashed
+            $table->string('user_id')->unique(); // only host or member
 
         });
     }
