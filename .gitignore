@@ -3,17 +3,17 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/
+project/.idea/
 #.idea/workspace.xml
-.idea/tasks.xml
-.idea/dictionaries
+#.idea/tasks.xml
+#.idea/dictionaries
 #.idea/vcs.xml
-.idea/jsLibraryMappings.xml
-.idea/modules.xml
+#.idea/jsLibraryMappings.xml
+#.idea/modules.xml
 #.idea/encodings.xml
-.idea/project.iml
-.idea/Cruise.iml
-.idea/blade.xml
+#.idea/project.iml
+#.idea/Cruise.iml
+#.idea/blade.xml
 #.idea/copyright/
 
 # Sensitive or high-churn files:
@@ -61,7 +61,6 @@ bootstrap/compiled.php
 # Laravel 5 & Lumen specific
 bootstrap/cache/
 project/storage/
-storage/
 storage/framework/
 .env.*.php
 .env.php
