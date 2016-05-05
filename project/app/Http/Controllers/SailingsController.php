@@ -17,6 +17,7 @@ use App\UserEvent;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\SailingRequest;
+use App\Http\Requests\SearchRequest;
 use Illuminate\Support\Facades\Response;
 use Cmgmyr\Messenger\Models\Thread;
 
@@ -28,35 +29,34 @@ class SailingsController extends Controller
         $this->middleware('admin', ['except' => ['GetAllSailings', 'GetSailing']]);
     }
     //
-    protected function GetAllSailings()
+    protected function GetAllSailings(SearchRequest $request)
     {
-        if ($sailings = Sailing::all()) {
-            $statsController = new UserSailingsController();
-            for($i = 0; $i < 25; $i++) {
-                $sailings[$i]['stats'] = $statsController->GetTop3Summary($sailings[$i]->id);
-            }
+        if ($sailings = Sailing::search($request)) {
+//            $statsController = new UserSailingsController();
+//            for($i = 0; $i < 25; $i++) {
+//                $sailings[$i]['stats'] = $statsController->GetTop3Summary($sailings[$i]->id);
+//            }
             return view('sailings.list', compact('sailings'));
         } else {
             return redirect::back();
         }
     }
 
-    protected function GetSailing($id)
+    protected function GetSailing( $id)
     {
-        if ($sailing = Sailing::find($id)) {
-            $statsController = new UserSailingsController();
-            $stats = $statsController->GetStatsSummary($id); // should add a count in there
-            if(Auth::check() && $userSailing = UserSailing::where(['user_id' => Auth::user()->id, 'sailing_id'=> $id]))
-            {
-              $thread = Thread::where(['event_id' => null, 'sailing_id' => $id])->first();
-              return view('sailings.detail', compact('sailing', 'stats', 'thread'));
-            }else{
-              return view('sailings.detail', compact('sailing', 'stats'));
+            if ($sailing = Sailing::find($id)) {
+                $statsController = new UserSailingsController();
+                $stats = $statsController->GetStatsSummary($id); // should add a count in there
+                if(Auth::check() && $userSailing = UserSailing::where(['user_id' => Auth::user()->id, 'sailing_id'=> $id]))
+                {
+                    $thread = Thread::where(['event_id' => null, 'sailing_id' => $id])->first();
+                    return view('sailings.detail', compact('sailing', 'stats', 'thread'));
+                }else{
+                    return view('sailings.detail', compact('sailing', 'stats'));
+                }
+            } else {
+                return redirect('sailings');
             }
-        } else {
-            return redirect('sailings');
-        }
-
     }
 
     protected function ShowCreateForm()

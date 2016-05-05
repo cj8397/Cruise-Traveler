@@ -41,7 +41,7 @@ class EventsController extends Controller
         }
         //
         if($request->search != ""){
-           $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request)->get();
+           $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request);
             return view('events.list')->with(['events' => $events, 'sailing_id' => $sailing]);
         }
         else if ( $events = Event::with('userevent')->where('sailing_id', $sailing)->orderBy($sort,$direction)->paginate(6)) {
