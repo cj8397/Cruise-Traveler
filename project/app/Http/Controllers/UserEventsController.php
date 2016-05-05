@@ -25,12 +25,13 @@ class UserEventsController extends Controller
     {
         $user_id = Auth::User()->id;
         // role = member// need to check both columns....
-        UserEvent::firstOrNew([
+        $userE = UserEvent::firstOrNew([
             'sailing_id' => $sailing_id,
             'user_id' => $user_id,
             'event_id' => $event_id,
             'role' => 'Participant'
         ]);
+        $userE->save();
             return redirect()->action('EventsController@GetOneEvent',[$event_id]);
     }
 
