@@ -54,19 +54,22 @@ class EventsController extends Controller
     protected function GetOneEvent($event_id)
     {
         if ($event = Event::where('id', $event_id)->first()) {
-            $members = UserEvent::with('userdetails')->get()->where('event_id', $event_id);
+            $members = UserEvent::with('userdetails')->where('event_id', $event_id);
             $host = $members->where('role', 'Host')->first();
             $currentUser = $members->where('user_id', Auth::user()->id)->first();
-            if($userEvent = UserEvent::where(['user_id' => Auth::user()->id, 'event_id'=> $event_id]))
+            if($userEvent = UserEvent::where(['user_id' => Auth::user()->id, 'event_id'=> $event_id])->first())
             {
               $thread = Thread::where(['event_id' => $event_id, 'sailing_id' => $event->sailing_id])->first();
-              return view('events.eventdetail')->with(['event' => $event,
+
+              return view('events.eventdetail')->with([
+                  'event' => $event,
                   'members' => $members,
                   'currentUser' => $currentUser,
                   'host' => $host,
                   'thread' => $thread]);
             }else{
-            return view('events.eventdetail')->with(['event' => $event,
+            return view('events.eventdetail')->with([
+                'event' => $event,
                 'members' => $members,
                 'currentUser' => $currentUser,
                 'host' => $host]);
@@ -128,10 +131,11 @@ class EventsController extends Controller
 
     protected function DeleteEvent($event_id)
     {
-        if ($event = Event::where('id', $event_id)->first()) {
-            UserEvent::where('event_id', $event->id)->delete();
-            Thread::where(['event_id' => $event_id, 'sailing_id' => $event->sailing_id])->delete();
-            $event->delete();
+        if ($uEvent = Event::with('userevent')->where('id', $event_id)->first()) {
+           // Thread::where(['event_id' => $event_id])->first()->delete();
+            foreach($uEvent->userevent as $event){
+                var_dump($event);
+            }
             return redirect('/sailings');
         } else {
             return false;

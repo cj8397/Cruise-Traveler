@@ -25,28 +25,13 @@ class UserEventsController extends Controller
     {
         $user_id = Auth::User()->id;
         // role = member// need to check both columns....
-        $userevent = UserEvent::firstOrNew([
+        UserEvent::firstOrNew([
             'sailing_id' => $sailing_id,
             'user_id' => $user_id,
             'event_id' => $event_id,
+            'role' => 'Participant'
         ]);
-        $event = Event::where('id', $event_id)->first();
-        $thread = Thread::where(['event_id' => $event_id, 'sailing_id' => $event->sailing_id])->first();
-        if (!$userevent->exists) { // doesnt exist
-            // need to assign properties
-            $userevent->sailing_id = $event_id;
-            $userevent->user_id = $user_id;
-            $userevent->event_id = $event_id;
-            $userevent->role = 'Participant';
-            $userevent->save();
-            $success = "Joined the event.";
-            $members = UserEvent::all()->where('event_id', $event_id);
-            return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'success, thread'));//view('events.eventdetail', );
-        } else {
-            $members = UserEvent::all()->where('event_id', $event_id);
-            $failure = "Already joined the event.";
-            return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'success, thread'));
-        }
+            return redirect()->action('EventsController@GetOneEvent',[$event_id]);
     }
 
     // remove entry from bridge table
@@ -54,17 +39,11 @@ class UserEventsController extends Controller
     {
         $user_id = Auth::User()->id;
         $conditions = compact('user_id', 'event_id');
-        $event = Event::where('id', $event_id)->first();
-        $members = UserEvent::all()->where('event_id', $event_id);
         if (UserEvent::where($conditions)->exists()) {
             UserEvent::where($conditions)->delete();
-            $success = "Left the event.";
-            $members = UserEvent::all()->where('event_id', $event_id);
-            return redirect()->action('EventsController@GetOneEvent', [$event_id])->with(compact('members', 'event', 'success'));//view('events.eventdetail', );
+            return redirect()->action('EventsController@GetOneEvent', [$event_id]);//view('events.eventdetail', );
         } else {
-            $members = UserEvent::all()->where('event_id', $event_id);
-            $failure = "Not Participating In Event";
-            return redirect()->action('EventsController@GetOneEvent', [$event_id])->with(compact('members', 'event', 'failure'));
+            return redirect()->action('EventsController@GetOneEvent', [$event_id]);
         }
     }
 
