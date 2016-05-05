@@ -12,8 +12,8 @@ class UserDetails extends Model
 
     protected $fillable = ['user_id',
         'first', 'last', 'dob', 'age', 'sex', 'lang','ethinicity','hobby','family','country', 'region',
-        'city', 'address', 'co_travellers', '0-2', '3-5', '6-12', '13-17', '18-24', '25-29', '30-39',
-        '40-49', '50-59', '60-74', '75+' ];
+        'city', 'address', 'co_travellers', 'two', 'five', 'twelve', 'seventeen', 'twentyfour', 'twentynine', 'thirtynine',
+        'fourtynine', 'fiftynine', 'seventyfour', 'seventyfive' ];
 
 
     public function usersailings()
