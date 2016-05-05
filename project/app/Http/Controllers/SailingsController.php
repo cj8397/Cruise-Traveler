@@ -38,7 +38,7 @@ class SailingsController extends Controller
             }
             return view('sailings.list', compact('sailings'));
         } else {
-            return redirect::back();
+             return redirect::back();
         }
     }
 
