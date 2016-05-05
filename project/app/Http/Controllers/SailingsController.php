@@ -32,10 +32,10 @@ class SailingsController extends Controller
     protected function GetAllSailings(SearchRequest $request)
     {
         if ($sailings = Sailing::search($request)) {
-//            $statsController = new UserSailingsController();
-//            for($i = 0; $i < 25; $i++) {
-//                $sailings[$i]['stats'] = $statsController->GetTop3Summary($sailings[$i]->id);
-//            }
+            $statsController = new UserSailingsController();
+            for($i = 0; $i < 25; $i++) {
+                $sailings[$i]['stats'] = $statsController->GetTop3Summary($sailings[$i]->id);
+            }
             return view('sailings.list', compact('sailings'));
         } else {
             return redirect::back();
