@@ -35,6 +35,7 @@ class UserSailingsController extends Controller
             'user_id' => $user_id,
             'sailing_id' => $sailing_id
         ]);
+        $userSailing->save();
         $sailing = Sailing::where('id', $sailing_id)->first();
         $stats = $this->GetStatsSummary($sailing_id); // should add a count in there
         if(!$userSailing->exists) { // doesnt exist
