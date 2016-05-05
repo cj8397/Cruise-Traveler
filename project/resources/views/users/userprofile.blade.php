@@ -72,11 +72,54 @@
         </div>
 
         <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
-            {{--@if(isset($usersailings))--}}
-            {{--@foreach($usersailings as $sailings)--}}
+            <div class="row col-md-6 col-xs-6">
+                @if(isset($usersailings))
+                    @foreach($usersailings->slice(0, 5) as $sailing)
+                        <div class="panel-body col-md-12 col-xs-12">
+                            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">
+                                <h4>{!! $sailing->sailing->cruise_line !!}</h4>
+                            </button>
+                            <p>{!! $sailing->sailing->start_date !!}</p>
+                        </div>
+                    @endforeach
+                @else
+                    <p>You currently do not belong to any sailings!</p>
+                    <p>Please click on Join Sailing button above</p>
+                @endif
+            </div>
+
+            <div class="row col-md-5 col-md-offset-1 col-xs-12">
+                <h3>Events</h3>
+                <hr>
+                <div class="panel panel-default col-md-12 col-xs-12">
+                    <div id="demo" class="collapse">
+                        @foreach($usersailings as $sailing)
+                            @foreach($userevents->where('sailing_id',$sailing->sailing->id) as $events)
+
+                                <h5>Event: <a
+                                            href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
+                                </h5>
+
+
+                            @endforeach
+                        @endforeach
+                        <div class="panel-body col-md-6 col-xs-12">
+                            <a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-user"></i>Create an Event
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{--<div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
+            --}}{{--@if(isset($usersailings))--}}{{--
+            --}}{{--@foreach($usersailings as $sailings)--}}{{--
             @if(isset($usersailings))
                 @foreach($usersailings->slice(0, 5) as $sailing)
-                    {{--@for ($x = 0; $x < count($details); $x++)--}}
+                    --}}{{--@for ($x = 0; $x < count($details); $x++)--}}{{--
                     <div class="row col-md-12 col-xs-12">
                         <hr>
                         <div class="panel-body col-md-6 col-xs-12">
@@ -104,8 +147,8 @@
                         <div class="panel-body col-md-6 col-xs-12">
 
                             @foreach($userevents->where('sailing_id',$sailing->sailing->id) as $events)
-                                {{--@if($events != null)--}}
-                                {{--@foreach($eventdetails[$events->event_id] as $edetail)--}}
+                                --}}{{--@if($events != null)--}}{{--
+                                --}}{{--@foreach($eventdetails[$events->event_id] as $edetail)--}}{{--
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <h5>Event: <a
@@ -133,17 +176,17 @@
                                         {!! $events->event->location !!}
                                     </li>
                                 </ul>
-                                {{--@else--}}
-                                {{--<span class="label label-pill label-default">You are not participating in any events for this sailing... =(</span>--}}
-                                {{--@endif--}}
+                                --}}{{--@else--}}{{--
+                                --}}{{--<span class="label label-pill label-default">You are not participating in any events for this sailing... =(</span>--}}{{--
+                                --}}{{--@endif--}}{{--
                             @endforeach
 
                         </div>
-                        {{--@endfor--}}
+                        --}}{{--@endfor--}}{{--
                     </div>
                 @endforeach
             @endif
-        </div>
+        </div>--}}
     </div>
 
     <!-- Pagination -->
@@ -164,7 +207,6 @@
                 </li>
                 <li>
                     <a href="../users/userprofile.blade.php/">&raquo;</a>
-                </li>
             </ul>
         </div>
     </div>
