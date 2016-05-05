@@ -31,8 +31,11 @@
             <div class="col-xs-4">
                 <div class="row panel panel-default">
                     <h2 class="panel-heading">{{$sailing->title}} {{$sailing->cruise_line}} </h2>
+                    @if(!isset($currentUser))
                     @include('partials/buttons/joinsailing')
+                    @else
                     @include('partials/buttons/leavesailing')
+                    @endif
                     <a href="{{ action('EventsController@GetAllEvents', [$sailing->id]) }}">
                         <button type="button" class="btn btn-primary btn-md">
                             <i class="fa fa-users" aria-hidden="true"></i>View Events
@@ -57,7 +60,7 @@
                 {{--</div>--}}
                 <div class="panel panel-default">
                     <h2 class="panel-heading">Demographics</h2>
-                    @if(!empty($stats))
+                    @if(!empty($stats) && isset($currentUser))
                     <div class="panel-body">
                         <div class="panel panel-default col-xs-12">
                             <div class="panel-heading ">
@@ -107,9 +110,13 @@
                                 <div id="cities"></div>
                             </div>
                         </div>
-
-
                     </div>
+                    @else
+                        <div class="panel panel-default ">
+                            <div class="panel-body">
+                                <h2> Please Join To See Demographics Of A Sailing</h2>
+                            </div>
+                        </div>
                     @endif
                 </div>
             </div>
