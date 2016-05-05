@@ -41,12 +41,12 @@ class UserSailingsController extends Controller
             $userSailing->sailing_id = $sailing_id;
             $userSailing->save();
             $success = "Joined the sailing.";
-            return view('sailings.detail', compact('success', 'sailing', 'stats'));
+            return view('sailings.detail', compact('success', 'sailing', 'stats', 'thread'));
             //return redirect::back();
         } else {
           //return redirect::back();
             $failure= "Already joined the sailing";
-            return view('sailings.detail', compact('failure', 'sailing', 'stats'));
+            return view('sailings.detail', compact('success', 'sailing', 'stats', 'thread'));
         }
     }
 

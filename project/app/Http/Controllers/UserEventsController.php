@@ -31,7 +31,7 @@ class UserEventsController extends Controller
             'event_id' => $event_id,
         ]);
         $event = Event::where('id', $event_id)->first();
-
+        $thread = Thread::where(['event_id' => $event_id, 'sailing_id' => $event->sailing_id])->first();
         if (!$userevent->exists) { // doesnt exist
             // need to assign properties
             $userevent->sailing_id = $event_id;
@@ -41,11 +41,11 @@ class UserEventsController extends Controller
             $userevent->save();
             $success = "Joined the event.";
             $members = UserEvent::all()->where('event_id', $event_id);
-            return redirect()->action('EventsController@GetOneEvent', [$event_id])->with(compact('members', 'event', 'success'));//view('events.eventdetail', );
+            return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'success, thread'));//view('events.eventdetail', );
         } else {
             $members = UserEvent::all()->where('event_id', $event_id);
             $failure = "Already joined the event.";
-            return redirect()->action('EventsController@GetOneEvent', [$event_id])->with(compact('members', 'event', 'failure'));
+            return redirect()->action('EventsController@GetOneEvent',[$event_id])->with(compact( 'members','event', 'success, thread'));
         }
     }
 
