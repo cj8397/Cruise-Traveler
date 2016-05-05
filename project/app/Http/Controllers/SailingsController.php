@@ -48,7 +48,7 @@ class SailingsController extends Controller
                 $currentUser = UserSailing::where(['sailing_id' => $id, 'user_id'=> Auth::user()->id]);
                 $statsController = new UserSailingsController();
                 $stats = $statsController->GetStatsSummary($id); // should add a count in there
-                if(Auth::check() && $userSailing = UserSailing::where(['user_id' => Auth::user()->id, 'sailing_id'=> $id]))
+                if(Auth::check() && UserSailing::where(['user_id' => Auth::user()->id, 'sailing_id'=> $id])->exists())
                 {
                     $thread = Thread::where(['event_id' => null, 'sailing_id' => $id])->first();
                     return view('sailings.detail', compact('sailing', 'stats', 'thread','currentUser'));
