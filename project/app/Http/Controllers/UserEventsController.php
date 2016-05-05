@@ -8,6 +8,7 @@ use App\UserEvent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Helpers\StatsHelper;
+use Cmgmyr\Messenger\Models\Thread;
 
 class UserEventsController extends Controller
 {

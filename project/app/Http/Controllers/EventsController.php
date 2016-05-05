@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\EventRequest;
 use App\Http\Requests\SearchRequest;
+use Cmgmyr\Messenger\Models\Thread;
 
 class EventsController extends Controller
 {
@@ -56,10 +57,20 @@ class EventsController extends Controller
             $members = UserEvent::with('userdetails')->get()->where('event_id', $event_id);
             $host = $members->where('role', 'Host')->first();
             $currentUser = $members->where('user_id', Auth::user()->id)->first();
+            if($userEvent = UserEvent::where(['user_id' => Auth::user()->id, 'event_id'=> $event_id]))
+            {
+              $thread = Thread::where(['event_id' => $event_id, 'sailing_id' => $event->sailing_id])->first();
+              return view('events.eventdetail')->with(['event' => $event,
+                  'members' => $members,
+                  'currentUser' => $currentUser,
+                  'host' => $host,
+                  'thread' => $thread]);
+            }else{
             return view('events.eventdetail')->with(['event' => $event,
                 'members' => $members,
                 'currentUser' => $currentUser,
                 'host' => $host]);
+              }
         } else {
             return Redirect::back();
         }
@@ -101,6 +112,11 @@ class EventsController extends Controller
             'desc' => $request->desc,
             'location' => $request->location
         ]);
+        Thread::create([
+            'event_id' => $event->id,
+            'sailing_id' => $event->sailing_id,
+            'subject' => $event->title . ' Message Board'
+        ]);
         UserEvent::create([
             'sailing_id' => $request->sailing_id,
             'user_id' => Auth::user()->id,
@@ -114,6 +130,7 @@ class EventsController extends Controller
     {
         if ($event = Event::where('id', $event_id)->first()) {
             UserEvent::where('event_id', $event->id)->delete();
+            Thread::where(['event_id' => $event_id, 'sailing_id' => $event->sailing_id])->delete();
             $event->delete();
             return redirect('/sailings');
         } else {

@@ -15,8 +15,10 @@ use App\Stats;
 use App\UserSailing;
 use App\UserEvent;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\SailingRequest;
 use Illuminate\Support\Facades\Response;
+use Cmgmyr\Messenger\Models\Thread;
 
 class SailingsController extends Controller
 {
@@ -44,7 +46,13 @@ class SailingsController extends Controller
         if ($sailing = Sailing::find($id)) {
             $statsController = new UserSailingsController();
             $stats = $statsController->GetStatsSummary($id); // should add a count in there
-            return view('sailings.detail', compact('sailing', 'stats'));
+            if(Auth::check() && $userSailing = UserSailing::where(['user_id' => Auth::user()->id, 'sailing_id'=> $id]))
+            {
+              $thread = Thread::where(['event_id' => null, 'sailing_id' => $id])->first();
+              return view('sailings.detail', compact('sailing', 'stats', 'thread'));
+            }else{
+              return view('sailings.detail', compact('sailing', 'stats'));
+            }
         } else {
             return redirect('sailings');
         }
@@ -66,6 +74,10 @@ class SailingsController extends Controller
             'port_org' => $request->port_org,
             'port_dest' => $request->port_dest,
             'destination' => $request->destination
+        ]);
+        Thread::create([
+            'sailing_id' => $sailing->id,
+            'subject' => $sailing->title . ' Message Board'
         ]);
         return redirect('sailings');
     }
@@ -103,6 +115,7 @@ class SailingsController extends Controller
         $events->delete();
         $sailing->usersailings()->delete();
         $sailing->userevents()->delete();
+        Thread::where(['event_id' => null, 'sailing_id' => $id])->delete();
         $sailing->delete();
     }
 }

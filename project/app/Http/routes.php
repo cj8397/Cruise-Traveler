@@ -16,6 +16,14 @@ Route::get('/', 'HomeController@index');
 
 Route::auth();
 
+Route::group(['prefix' => 'messages'], function () {
+    Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+    Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+    Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+    Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+    Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+});
+
 Route::get('/admin/home', 'AdminController@index');
 Route::get('/admin/users', 'AdminController@GetAllUsers');
 Route::get('/admin/user/{id}', 'AdminController@GetUser');

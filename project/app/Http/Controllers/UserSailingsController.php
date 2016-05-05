@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Helpers\StatsHelper;
 use App\Http\Controllers\UserEventsController;
 use Illuminate\Support\Facades\DB;
+use Cmgmyr\Messenger\Models\Thread;
 
 
 class UserSailingsController extends Controller
