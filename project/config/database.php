@@ -54,11 +54,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'brown.mysitehosted.com'),
+            'host' => env('DB_HOST', 'notewith.me'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'cruise_app_db'),
             'username' => env('DB_USERNAME', 'cruise_user'),
-            'password' => env('DB_PASSWORD', 'tomcruisin'),
+            'password' => env('DB_PASSWORD', 'ssd21'),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',

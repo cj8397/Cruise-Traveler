@@ -53,14 +53,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">About Us</a>
-                </li>
-                <li>
                     <a href="{{ url('/sailings') }}">Sailings</a>
                 </li>
-                <li>
-                    <a href="{{ url('events/10') }}">Events</a>
-                </li>
+                @if (!Auth::guest())
+                    <li>
+                        <a href="{{ url('events/10') }}">Events</a>
+                    </li>
+                @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->

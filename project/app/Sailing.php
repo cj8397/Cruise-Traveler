@@ -49,6 +49,11 @@ class Sailing extends Model
         return $this->hasMany('App\Event');
     }
     public function scopeSearch($query, $search){
+        if($search->sort == null){
+            $search->search = "";
+            $search->sort = 'title';
+            $search->direction = 'asc';
+        }
         return $query->where('title','LIKE',"%$search->search%")
             ->orWhere('cruise_line','LIKE',"%$search->search%")
             ->orWhere('destination','LIKE',"%$search->search%")

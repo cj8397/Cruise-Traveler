@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Helpers\StatsHelper;
 use App\Http\Controllers\UserEventsController;
 use Illuminate\Support\Facades\DB;
+use Cmgmyr\Messenger\Models\Thread;
 
 
 class UserSailingsController extends Controller
@@ -40,12 +41,12 @@ class UserSailingsController extends Controller
             $userSailing->sailing_id = $sailing_id;
             $userSailing->save();
             $success = "Joined the sailing.";
-            return view('sailings.detail', compact('success', 'sailing', 'stats'));
+            return view('sailings.detail', compact('success', 'sailing', 'stats', 'thread'));
             //return redirect::back();
         } else {
           //return redirect::back();
             $failure= "Already joined the sailing";
-            return view('sailings.detail', compact('failure', 'sailing', 'stats'));
+            return view('sailings.detail', compact('success', 'sailing', 'stats', 'thread'));
         }
     }
 

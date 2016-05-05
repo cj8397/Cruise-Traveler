@@ -31,7 +31,7 @@ class StatsHelper
             if ($total != 0) {
                 $percentTrue = $this->CalculatePercentage($count, $total);
             } else {
-                return 'no users in sailing';
+                return ['true' => 'no users in sailing', 'false' => 'nousers in sailing'];
             }
             $percentFalse = 100 - $percentTrue;
             return ['true' => $percentTrue, 'false' => $percentFalse];

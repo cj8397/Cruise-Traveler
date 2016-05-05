@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSailingsTableSeeder::class);
         $this->call(EventsTableSeeder::class);
         $this->call(UserEventsTableSeeder::class);
+        $this->call(ThreadsTableSeeder::class);
         // Model::regaurd();
     }
 }

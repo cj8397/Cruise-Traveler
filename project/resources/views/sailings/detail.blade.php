@@ -31,8 +31,11 @@
             <div class="col-xs-4">
                 <div class="row panel panel-default">
                     <h2 class="panel-heading">{{$sailing->title}} {{$sailing->cruise_line}} </h2>
+                    @if(!isset($currentUser))
                     @include('partials/buttons/joinsailing')
+                    @else
                     @include('partials/buttons/leavesailing')
+                    @endif
                     <a href="{{ action('EventsController@GetAllEvents', [$sailing->id]) }}">
                         <button type="button" class="btn btn-primary btn-md">
                             <i class="fa fa-users" aria-hidden="true"></i>View Events
@@ -57,7 +60,7 @@
                 {{--</div>--}}
                 <div class="panel panel-default">
                     <h2 class="panel-heading">Demographics</h2>
-                    @if(!empty($stats))
+                    @if(!empty($stats) && isset($currentUser))
                     <div class="panel-body">
                         <div class="panel panel-default col-xs-12">
                             <div class="panel-heading ">
@@ -107,13 +110,53 @@
                                 <div id="cities"></div>
                             </div>
                         </div>
-
-
                     </div>
+                    @else
+                        <div class="panel panel-default ">
+                            <div class="panel-body">
+                                <h2> Please Join To See Demographics Of A Sailing</h2>
+                            </div>
+                        </div>
                     @endif
                 </div>
             </div>
         </div>
+        @if(!empty($thread))
+        <div class="col-xs-12">
+            <div class="row panel panel-default">
+              <div class="panel-heading">
+                <h2>{!! $thread->subject !!}</h2>
+              </div>
+              <div class="panel panel-default">
+                @foreach($thread->messages as $message)
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                            <img src="//www.gravatar.com/avatar/{!! md5($message->user->email) !!}?s=64" alt="{!! $message->user->email !!}" class="img-circle">
+                        </a>
+                        <div class="media-body">
+                            <h5 class="media-heading">{!! $message->user->email !!}</h5>
+                            <p>{!! $message->body !!}</p>
+                            <div class="text-muted"><small>Posted {!! $message->created_at->diffForHumans() !!}</small></div>
+                        </div>
+                    </div>
+                @endforeach
+                </div>
+                <h3>Add a new message</h3>
+                {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
+                <!-- Message Form Input -->
+                <div class="form-group">
+                    {!! Form::textarea('message', null, ['class' => 'form-control']) !!}
+                </div>
+
+                <!-- Submit Form Input -->
+                <div class="form-group">
+                    {!! Form::submit('Submit', ['class' => 'btn btn-primary form-control']) !!}
+                </div>
+                {!! Form::close() !!}
+
+            </div>
+            </div>
+            @endif
     </div>
 @endsection
 

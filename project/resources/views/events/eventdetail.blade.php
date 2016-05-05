@@ -65,26 +65,41 @@
                         </ul>
                     </div>
                 </div>
-                @if(isset($currentUser))
-                    <div class="panel panel-default col-md-6 col-xs-12">
-                        <div class="panel panel-heading">Message Boards!</div>
-                        <div class=" panel panel-body">
-                            <div class="row">
-                                <a class="col-xs-3 col-md-3">
-                                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                                    <span class="label label-default label-pill">Cheng!</span>
-                                </a>
-                                <p class="alert alert-info col-xs-9 col-md-9">Cheng just Joined the Event! say HI!</p>
-                </div>
-                            <div class="row">
-                                <p class="alert alert-success col-xs-9 col-md-9">Lets get the party started!</p>
-                                <a class="col-xs-3 col-md-3">
-                                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                                    <span class="label label-default label-pill">Cheng!</span>
-                                </a>
+                @if(isset($thread))
+            <div class="col-xs-12">
+                <div class="row panel panel-default">
+                  <div class="panel-heading">
+                    <h2>{!! $thread->subject !!}</h2>
+                  </div>
+                  <div class="panel panel-default">
+                    @foreach($thread->messages as $message)
+                        <div class="media">
+                            <a class="pull-left" href="#">
+                                <img src="//www.gravatar.com/avatar/{!! md5($message->user->email) !!}?s=64" alt="{!! $message->user->email !!}" class="img-circle">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="media-heading">{!! $message->user->email !!}</h5>
+                                <p>{!! $message->body !!}</p>
+                                <div class="text-muted"><small>Posted {!! $message->created_at->diffForHumans() !!}</small></div>
                             </div>
-            </div>
-        </div>
+                        </div>
+                    @endforeach
+                    </div>
+                    <h3>Add a new message</h3>
+                    {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
+                    <!-- Message Form Input -->
+                    <div class="form-group">
+                        {!! Form::textarea('message', null, ['class' => 'form-control']) !!}
+                    </div>
+
+                    <!-- Submit Form Input -->
+                    <div class="form-group">
+                        {!! Form::submit('Submit', ['class' => 'btn btn-primary form-control']) !!}
+                    </div>
+                    {!! Form::close() !!}
+
+                </div>
+                </div>
                 @endif
             </div>
         </div>

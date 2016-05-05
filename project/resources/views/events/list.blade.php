@@ -77,7 +77,6 @@
                         <p>{!! $males."% Males ".$females."% Females"!!}</p>
                     </li>
                     <li class="list-group-item">
-                        <p>{!! 'languages' !!}</p>
                     </li>
                     </ul>
             </div>
