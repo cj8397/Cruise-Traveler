@@ -20,6 +20,39 @@
                                 <th>Hobby</th>
                                 <th>Family</th>
                                 <th>CoTravellers</th>
+                                @if(userDetails->two)
+                                  <th>0-2</th>
+                                @endif
+                                @if(userDetails->five)
+                                  <th>3-5</th>
+                                @endif
+                                @if(userDetails->twelve)
+                                  <th>6-12</th>
+                                @endif
+                                @if(userDetails->seventeen)
+                                  <th>12-17</th>
+                                @endif
+                                @if(userDetails->twentyfour)
+                                  <th>17-24</th>
+                                @endif
+                                @if(userDetails->twentynine)
+                                  <th>24-29</th>
+                                @endif
+                                @if(userDetails->thirtynine)
+                                  <th>30-39</th>
+                                @endif
+                                @if(userDetails->fortynine)
+                                  <th>40-49</th>
+                                @endif
+                                @if(userDetails->fiftynine)
+                                  <th>50-59</th>
+                                @endif
+                                @if(userDetails->seventyfour)
+                                  <th>60-74</th>
+                                @endif
+                                @if(userDetails->seventyfive)
+                                  <th>75+</th>
+                                @endif
                                 <th>Region</th>
                                 <th>City</th>
                                 <th>Address</th>
@@ -35,6 +68,42 @@
                             <td>{{$userDetail->hobby}}</td>
                             <td>{{$userDetail->family}}</td>
                             <td>{{$userDetail->co_travellers}}</td>
+                            @if(userDetails->two)
+                              <td>{{userDetail->two}}</td>
+                            @endif
+                            @if(userDetails->two)
+                              <td>{{userDetail->two}}</td>
+                            @endif
+                            @if(userDetails->five)
+                              <td>{{userDetail->five}}</td>
+                            @endif
+                            @if(userDetails->twelve)
+                              <td>{{userDetail->twelve}}</td>
+                            @endif
+                            @if(userDetails->seventeen)
+                              <td>{{userDetail->seventeen}}</td>
+                            @endif
+                            @if(userDetails->twentyfour)
+                              <td>{{userDetail->twentyfour}}</td>
+                            @endif
+                            @if(userDetails->twentynine)
+                              <td>{{userDetail->twentynine}}</td>
+                            @endif
+                            @if(userDetails->thirtynine)
+                              <td>{{userDetail->thirtynine}}</td>
+                            @endif
+                            @if(userDetails->fourtynine)
+                              <td>{{userDetail->fourtynine}}</td>
+                            @endif
+                            @if(userDetails->fiftynine)
+                              <td>{{userDetail->fiftynine}}</td>
+                            @endif
+                            @if(userDetails->seventyfour)
+                              <td>{{userDetail->seventyfour}}</td>
+                            @endif
+                            @if(userDetails->seventyfive)
+                              <td>{{userDetail->seventyfive}}</td>
+                            @endif
                             <td>{{$userDetail->region}}</td>
                             <td>{{$userDetail->city}}</td>
                             <td>{{$userDetail->address}}</td>
