@@ -41,7 +41,7 @@ class EventsController extends Controller
         }
         //
         if($request->search != ""){
-           $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request)->get();
+           $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request);
             return view('events.list')->with(['events' => $events, 'sailing_id' => $sailing]);
         }
         else if ( $events = Event::with('userevent')->where('sailing_id', $sailing)->orderBy($sort,$direction)->paginate(6)) {
@@ -54,19 +54,22 @@ class EventsController extends Controller
     protected function GetOneEvent($event_id)
     {
         if ($event = Event::where('id', $event_id)->first()) {
-            $members = UserEvent::with('userdetails')->get()->where('event_id', $event_id);
+            $members = UserEvent::with('userdetails')->where('event_id', $event_id)->get();
             $host = $members->where('role', 'Host')->first();
             $currentUser = $members->where('user_id', Auth::user()->id)->first();
-            if($userEvent = UserEvent::where(['user_id' => Auth::user()->id, 'event_id'=> $event_id]))
+            if($userEvent = UserEvent::where(['user_id' => Auth::user()->id, 'event_id'=> $event_id])->first())
             {
               $thread = Thread::where(['event_id' => $event_id, 'sailing_id' => $event->sailing_id])->first();
-              return view('events.eventdetail')->with(['event' => $event,
+
+              return view('events.eventdetail')->with([
+                  'event' => $event,
                   'members' => $members,
                   'currentUser' => $currentUser,
                   'host' => $host,
                   'thread' => $thread]);
             }else{
-            return view('events.eventdetail')->with(['event' => $event,
+            return view('events.eventdetail')->with([
+                'event' => $event,
                 'members' => $members,
                 'currentUser' => $currentUser,
                 'host' => $host]);
@@ -128,11 +131,13 @@ class EventsController extends Controller
 
     protected function DeleteEvent($event_id)
     {
-        if ($event = Event::where('id', $event_id)->first()) {
-            UserEvent::where('event_id', $event->id)->delete();
-            Thread::where(['event_id' => $event_id, 'sailing_id' => $event->sailing_id])->delete();
-            $event->delete();
-            return redirect('/sailings');
+        if ($uEvent = Event::with('userevent')->where('id', $event_id)->first()) {
+           Thread::where(['event_id' => $event_id])->first()->delete();
+            foreach($uEvent->userevent->all() as $uE) {
+                $uE->where('event_id',$event_id)->delete();
+                }
+            $uEvent->delete();
+            return redirect('/sailings/'.$uEvent->sailing_id);
         } else {
             return false;
         }

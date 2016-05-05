@@ -1,29 +1,38 @@
 @extends('layouts.thumbnail')
 
-@section('styles')
-        <style>
-            ul {
-                list-style-type: none;
-            }
-        </style>
-@endsection
-
 @section('content')
         <!-- Page Content -->
+        <div class="row">
 <div class="container">
+    <form url="sailings/" class="form navbar-form navbar-right searchform">
+        <input type="text" name="search" class="form-control" placeholder="Search by cruise line and name!">
+        <select name="sort" class="form-control" >
+            <option value="title">Title</option>
+            <option value="cruise_line">Cruise Line</option>
+            <option value="start_date">End Date</option>
+            <option value="end_date">Start Date</option>
+            <option value="port_org">Original Port</option>
+            <option value="port_dest">Destination Port</option>
+            <option value="destination">Destination</option>
+        </select>
+        <select name="direction" class="form-control">
+            <option value="desc">Descending</option>
+            <option value="asc">Ascending</option>
+        </select>
+        <input type="submit" value="Search" class="btn btn-default">
+    </form>
+</div>
     <div class="container">
     <!-- Page Heading -->
-    <div class="row">
-        <img class="img-responsive" src="/images/searchBar.png" alt="">
-        <div class="col-lg-12">
-            <h1 class="page-header">All Sailings
-            </h1>
-        </div>
-    </div>
     <!-- /.row -->
 
     <!-- Projects Row -->
 
+        @if($sailings->count()<1 )
+            <div class="row">
+                <div class="jumbotron"> <h1>No Results Were Found</h1></div>
+            </div>
+        @endif
     <div class="row">
         @foreach ($sailings as $sailing)
             <div class="panel panel-default col-md-3 portfolio-item">
@@ -71,10 +80,10 @@
                 @else
                     <div class="row panel panel-default col-md-12 col-xs-12 text-center">
                         <div class="panel-body col-md-6 col-xs-12">
-                            <p>56% Passenger over 50yrs/old</p>
+                            <p>No stats found for this sailing</p>
                         </div>
                         <div class="panel-body col-md-6 col-xs-12">
-                            <p>65% Passengers are single</p>
+                            <p>No stats found for this sailing</p>
                         </div>
                     </div>
                 @endif
@@ -86,31 +95,9 @@
 
     <hr>
     <!-- Pagination -->
-    <div class="row text-center">
-        <div class="col-lg-12">
-            <ul class="pagination">
-                <li>
-                    <a href="/events/1">&laquo;</a>
-                </li>
-                <li class="active">
-                    <a href="/events/1">1</a>
-                </li>
-                <li>
-                    <a href="/events/1">2</a>
-                </li>
-                <li>
-                    <a href="/events/1">3</a>
-                </li>
-                <li>
-                    <a href="/events/1">4</a>
-                </li>
-                <li>
-                    <a href="/events/1">5</a>
-                </li>
-                <li>
-                    <a href="/events/1">&raquo;</a>
-                </li>
-            </ul>
+        <div class="row text-center">
+            <div class="col-lg-12 col-md-12 col-xs-12">
+                {{$sailings->links()}}
+            </div>
         </div>
-    </div>
 @endsection
