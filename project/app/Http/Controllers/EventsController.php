@@ -132,11 +132,12 @@ class EventsController extends Controller
     protected function DeleteEvent($event_id)
     {
         if ($uEvent = Event::with('userevent')->where('id', $event_id)->first()) {
-           // Thread::where(['event_id' => $event_id])->first()->delete();
-            foreach($uEvent->userevent as $event){
-                var_dump($event);
-            }
-            return redirect('/sailings');
+           Thread::where(['event_id' => $event_id])->first()->delete();
+            foreach($uEvent->userevent->all() as $uE) {
+                $uE->where('event_id',$event_id)->delete();
+                }
+            $uEvent->delete();
+            return redirect('/sailings/'.$uEvent->sailing_id);
         } else {
             return false;
         }
