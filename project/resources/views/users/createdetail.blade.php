@@ -134,7 +134,7 @@
                             <div class="form-group{{ $errors->has('co_travellers') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Co-Travellers</label>
                                 <div class="col-md-6">
-                                  <input type="text" class="" name="co_travellers" value="0">
+                                  <input type="hidden" class="" name="co_travellers" value="0">
                                     <input type="checkbox" class="" name="co_travellers" value="1">
 
                                     @if ($errors->has('co_travellers'))
