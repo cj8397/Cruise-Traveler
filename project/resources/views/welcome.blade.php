@@ -145,44 +145,65 @@
                     </a>
                 </div>
 
-                    <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                        <div class="panel col-md-4 col-xs-4 text-center">
-                            <ul class="list-group">
-                                <li class="list-group-item"><h5>Companions</h5></li>
-                                <li class="list-group-item">With Family (67%)</li>
-                                <li class="list-group-item">Traveling Alone (33%)</li>
-                            </ul>
+                    @if(!empty($caribsail['stats']))
+                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                            <div class="panel-body col-md-6 col-xs-12">
+                                <p>Confirmed Passengers: {{$caribsail['stats']->total}}  </p>
+                            </div>
+                            <div class="panel-body col-md-6 col-xs-12">
+                                <p> Percent Families: {{ $caribsail['stats']->family }} %</p>
+                            </div>
+                            <div class="panel-body col-xs-12">
+                                <h4> Languages: </h4>
+                                <ul>
+                                    @foreach($caribsail['stats']->languages as $language => $value)
+                                        <li> <b>{{ $language }} </b> - {{ $value }} % </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="panel-body col-xs-12">
+                                <h4> Cities: </h4>
+                                <ul>
+                                    @foreach($caribsail['stats']->cities as $city => $value)
+                                        <li> <b>{{ $city }} </b> - {{ $value }} % </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
-                        <div class="panel col-md-4 col-xs-4 text-center">
-                            <ul class="list-group">
-                                <li class="list-group-item"><h5>Countries</h5></li>
-                                <li class="list-group-item">Canada</li>
-                                <li class="list-group-item">USA</li>
-                                <li class="list-group-item">Mexico</li>
-                            </ul>
+                    @else
+                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                            <div class="panel-body col-md-6 col-xs-12">
+                                <p>56% Passenger over 50yrs/old</p>
+                            </div>
+                            <div class="panel-body col-md-6 col-xs-12">
+                                <p>65% Passengers are single</p>
+                            </div>
                         </div>
-                        <div class="panel col-md-4 col-xs-4 text-center">
-                            <ul class="list-group">
-                                <li class="list-group-item"><h5>Languages</h5></li>
-                                <li class="list-group-item">English</li>
-                                <li class="list-group-item">French</li>
-                                <li class="list-group-item">Spanish</li>
-                            </ul>
-                        </div>
-                    </div>
+                    @endif
 
-                    <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                        <h4>Events</h4>
-                        <div class="panel panel-primary col-md-4 col-xs-12">
-                            <div class="panel-heading">Matt's party</div>
+                    @if(!empty($caribsail['stats']))
+                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                            <h4>Events</h4>
+                            @foreach($caribsail['events'] as $event)
+                                <div class="panel panel-primary col-md-4 col-xs-12">
+                                    <div class="panel-heading">{{ $event->title }}</div>
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="panel panel-primary col-md-4 col-xs-12">
-                            <div class="panel-heading">Matt's party</div>
+                    @else
+                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                            <h4>Events</h4>
+                            <div class="panel panel-primary col-md-4 col-xs-12">
+                                <div class="panel-heading">Matt's party</div>
+                            </div>
+                            <div class="panel panel-primary col-md-4 col-xs-12">
+                                <div class="panel-heading">Matt's party</div>
+                            </div>
+                            <div class="panel panel-primary col-md-4 col-xs-12">
+                                <div class="panel-heading">Matt's party</div>
+                            </div>
                         </div>
-                        <div class="panel panel-primary col-md-4 col-xs-12">
-                            <div class="panel-heading">Matt's party</div>
-                        </div>
-                    </div>
+                    @endif
                 </div>
 
                 <div class="col-md-1 col-xs-12"></div>
@@ -211,44 +232,64 @@
                         </a>
                     </div>
 
-                    <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                        <div class="panel col-md-4 col-xs-4">
-                            <ul class="list-group">
-                                <li class="list-group-item"><h5>Companion</h5></li>
-                                <li class="list-group-item">With family (50%)</li>
-                                <li class="list-group-item">Traveling alone (50%)</li>
-                            </ul>
+                    @if(!empty($medsail['stats']))
+                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                            <div class="panel-body col-md-6 col-xs-12">
+                                <p>Confirmed Passengers: {{$medsail['stats']->total}}  </p>
+                            </div>
+                            <div class="panel-body col-md-6 col-xs-12">
+                                <p> Percent Families: {{ $medsail['stats']->family }} %</p>
+                            </div>
+                            <div class="panel-body col-xs-12">
+                                <h4> Languages: </h4>
+                                <ul>
+                                    @foreach($medsail['stats']->languages as $language => $value)
+                                        <li> <b>{{ $language }} </b> - {{ $value }} % </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="panel-body col-xs-12">
+                                <h4> Cities: </h4>
+                                <ul>
+                                    @foreach($medsail['stats']->cities as $city => $value)
+                                        <li> <b>{{ $city }} </b> - {{ $value }} % </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
-                        <div class="panel col-md-4 col-xs-4">
-                            <ul class="list-group">
-                                <li class="list-group-item"><h5>Countries</h5></li>
-                                <li class="list-group-item">Spain</li>
-                                <li class="list-group-item">China</li>
-                                <li class="list-group-item">USA</li>
-                            </ul>
+                    @else
+                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                            <div class="panel-body col-md-6 col-xs-12">
+                                <p>56% Passenger over 50yrs/old</p>
+                            </div>
+                            <div class="panel-body col-md-6 col-xs-12">
+                                <p>65% Passengers are single</p>
+                            </div>
                         </div>
-                        <div class="panel col-md-4 col-xs-4">
-                            <ul class="list-group">
-                                <li class="list-group-item"><h5>Languages</h5></li>
-                                <li class="list-group-item">English</li>
-                                <li class="list-group-item">French</li>
-                                <li class="list-group-item">Porturegese</li>
-                            </ul>
+                    @endif
+                    @if(!empty($medsail['stats']))
+                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                            <h4>Events</h4>
+                                @foreach($medsail['events'] as $event)
+                                    <div class="panel panel-primary col-md-4 col-xs-12">
+                                        <div class="panel-heading">{{ $event->title }}</div>
+                                    </div>
+                                @endforeach
+                         </div>
+                    @else
+                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                            <h4>Events</h4>
+                            <div class="panel panel-primary col-md-4 col-xs-12">
+                                <div class="panel-heading">Matt's party</div>
+                            </div>
+                            <div class="panel panel-primary col-md-4 col-xs-12">
+                                <div class="panel-heading">Matt's party</div>
+                            </div>
+                            <div class="panel panel-primary col-md-4 col-xs-12">
+                                <div class="panel-heading">Matt's party</div>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                        <h4>Events</h4>
-                        <div class="panel panel-primary col-md-4 col-xs-12">
-                            <div class="panel-heading">Matt's party</div>
-                        </div>
-                        <div class="panel panel-primary col-md-4 col-xs-12">
-                            <div class="panel-heading">Matt's party</div>
-                        </div>
-                        <div class="panel panel-primary col-md-4 col-xs-12">
-                            <div class="panel-heading">Matt's party</div>
-                        </div>
-                    </div>
+                    @endif
             </div>
 
                 <div class="col-md-1 col-xs-12"></div>
@@ -313,18 +354,29 @@
                         </div>
                     @endif
 
-                    <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                        <h4>Events</h4>
-                        <div class="panel panel-primary col-md-4 col-xs-12">
-                            <div class="panel-heading">Matt's party</div>
+                    @if(!empty($alassail['stats']))
+                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                            <h4>Events</h4>
+                            @foreach($alassail['events'] as $event)
+                                <div class="panel panel-primary col-md-4 col-xs-12">
+                                    <div class="panel-heading">{{ $event->title }}</div>
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="panel panel-primary col-md-4 col-xs-12">
-                            <div class="panel-heading">Matt's party</div>
+                    @else
+                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                            <h4>Events</h4>
+                            <div class="panel panel-primary col-md-4 col-xs-12">
+                                <div class="panel-heading">Matt's party</div>
+                            </div>
+                            <div class="panel panel-primary col-md-4 col-xs-12">
+                                <div class="panel-heading">Matt's party</div>
+                            </div>
+                            <div class="panel panel-primary col-md-4 col-xs-12">
+                                <div class="panel-heading">Matt's party</div>
+                            </div>
                         </div>
-                        <div class="panel panel-primary col-md-4 col-xs-12">
-                            <div class="panel-heading">Matt's party</div>
-                        </div>
-                    </div>
+                    @endif
                 </div>
             </div>
     </div>
