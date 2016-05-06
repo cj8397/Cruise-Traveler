@@ -16,6 +16,9 @@
                                 <th>Sex</th>
                                 <th>Language</th>
                                 <th>Country</th>
+                                <th>Region</th>
+                                <th>City</th>
+                                <th>Address</th>
                                 <th>Ethnicity</th>
                                 <th>Hobby</th>
                                 <th>Family</th>
@@ -53,9 +56,6 @@
                                 @if(userDetails->seventyfive)
                                   <th>75+</th>
                                 @endif
-                                <th>Region</th>
-                                <th>City</th>
-                                <th>Address</th>
                             </tr>
                             <tbody>
                             <td>{{$userDetail->first}}</td>
@@ -64,6 +64,9 @@
                             <td>{{$userDetail->sex}}</td>
                             <td>{{$userDetail->lang}}</td>
                             <td>{{$userDetail->country}}</td>
+                            <td>{{$userDetail->region}}</td>
+                            <td>{{$userDetail->city}}</td>
+                            <td>{{$userDetail->address}}</td>
                             <td>{{$userDetail->ethnicity}}</td>
                             <td>{{$userDetail->hobby}}</td>
                             <td>{{$userDetail->family}}</td>
@@ -104,9 +107,6 @@
                             @if(userDetails->seventyfive)
                               <td>{{userDetail->seventyfive}}</td>
                             @endif
-                            <td>{{$userDetail->region}}</td>
-                            <td>{{$userDetail->city}}</td>
-                            <td>{{$userDetail->address}}</td>
                             </tr>
                             </tbody>
                         </table>
