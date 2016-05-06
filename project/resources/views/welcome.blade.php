@@ -144,32 +144,37 @@
                             <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
                     </a>
                 </div>
-
                     @if(!empty($caribsail['stats']))
-                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                            <div class="panel-body col-md-6 col-xs-12">
-                                <p>Confirmed Passengers: {{$caribsail['stats']->total}}  </p>
+                        @if($caribsail['stats']->total != null)
+                            <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                                <div class="panel-body col-md-6 col-xs-12">
+                                    <p>Confirmed Passengers: {{$caribsail['stats']->total}}  </p>
+                                </div>
+                                <div class="panel-body col-md-6 col-xs-12">
+                                    <p> Percent Families: {{ $caribsail['stats']->family }} %</p>
+                                </div>
+                                <div class="panel-body col-xs-12">
+                                    <h4> Languages: </h4>
+                                    <ul>
+                                        @foreach($caribsail['stats']->languages as $language => $value)
+                                            <li> <b>{{ $language }} </b> - {{ $value }} % </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div class="panel-body col-xs-12">
+                                    <h4> Cities: </h4>
+                                    <ul>
+                                        @foreach($caribsail['stats']->cities as $city => $value)
+                                            <li> <b>{{ $city }} </b> - {{ $value }} % </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="panel-body col-md-6 col-xs-12">
-                                <p> Percent Families: {{ $caribsail['stats']->family }} %</p>
-                            </div>
+                        @else
                             <div class="panel-body col-xs-12">
-                                <h4> Languages: </h4>
-                                <ul>
-                                    @foreach($caribsail['stats']->languages as $language => $value)
-                                        <li> <b>{{ $language }} </b> - {{ $value }} % </li>
-                                    @endforeach
-                                </ul>
+                                <h4> No confirmed passengers</h4>
                             </div>
-                            <div class="panel-body col-xs-12">
-                                <h4> Cities: </h4>
-                                <ul>
-                                    @foreach($caribsail['stats']->cities as $city => $value)
-                                        <li> <b>{{ $city }} </b> - {{ $value }} % </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
+                        @endif
                     @else
                         <div class="row panel panel-default col-md-12 col-xs-12 text-center">
                             <div class="panel-body col-md-6 col-xs-12">
@@ -181,7 +186,7 @@
                         </div>
                     @endif
 
-                    @if(!empty($caribsail['stats']))
+                    @if(!empty($caribsail['events']))
                         <div class="row panel panel-default col-md-12 col-xs-12 text-center">
                             <h4>Events</h4>
                             @foreach($caribsail['events'] as $event)
@@ -194,20 +199,18 @@
                         <div class="row panel panel-default col-md-12 col-xs-12 text-center">
                             <h4>Events</h4>
                             <div class="panel panel-primary col-md-4 col-xs-12">
-                                <div class="panel-heading">Matt's party</div>
+                                <div class="panel-heading">Beach party</div>
                             </div>
                             <div class="panel panel-primary col-md-4 col-xs-12">
-                                <div class="panel-heading">Matt's party</div>
+                                <div class="panel-heading">Boat party</div>
                             </div>
                             <div class="panel panel-primary col-md-4 col-xs-12">
-                                <div class="panel-heading">Matt's party</div>
+                                <div class="panel-heading">Matt's Birthday</div>
                             </div>
                         </div>
                     @endif
                 </div>
-
                 <div class="col-md-1 col-xs-12"></div>
-
                 <div class="panel panel-default col-md-3 col-xs-12">
                     <div class="row col-md-12 col-xs-12 text-center">
                         <h2>Mediterranean</h2>
@@ -233,30 +236,36 @@
                     </div>
 
                     @if(!empty($medsail['stats']))
-                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                            <div class="panel-body col-md-6 col-xs-12">
-                                <p>Confirmed Passengers: {{$medsail['stats']->total}}  </p>
+                        @if($medsail['stats']->total != null)
+                            <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                                <div class="panel-body col-md-6 col-xs-12">
+                                    <p>Confirmed Passengers: {{$medsail['stats']->total}}  </p>
+                                </div>
+                                <div class="panel-body col-md-6 col-xs-12">
+                                    <p> Percent Families: {{ $medsail['stats']->family }} %</p>
+                                </div>
+                                <div class="panel-body col-xs-12">
+                                    <h4> Languages: </h4>
+                                    <ul>
+                                        @foreach($medsail['stats']->languages as $language => $value)
+                                            <li> <b>{{ $language }} </b> - {{ $value }} % </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div class="panel-body col-xs-12">
+                                    <h4> Cities: </h4>
+                                    <ul>
+                                        @foreach($medsail['stats']->cities as $city => $value)
+                                            <li> <b>{{ $city }} </b> - {{ $value }} % </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="panel-body col-md-6 col-xs-12">
-                                <p> Percent Families: {{ $medsail['stats']->family }} %</p>
-                            </div>
+                        @else
                             <div class="panel-body col-xs-12">
-                                <h4> Languages: </h4>
-                                <ul>
-                                    @foreach($medsail['stats']->languages as $language => $value)
-                                        <li> <b>{{ $language }} </b> - {{ $value }} % </li>
-                                    @endforeach
-                                </ul>
+                                <h4> No confirmed passengers</h4>
                             </div>
-                            <div class="panel-body col-xs-12">
-                                <h4> Cities: </h4>
-                                <ul>
-                                    @foreach($medsail['stats']->cities as $city => $value)
-                                        <li> <b>{{ $city }} </b> - {{ $value }} % </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
+                        @endif
                     @else
                         <div class="row panel panel-default col-md-12 col-xs-12 text-center">
                             <div class="panel-body col-md-6 col-xs-12">
@@ -267,7 +276,7 @@
                             </div>
                         </div>
                     @endif
-                    @if(!empty($medsail['stats']))
+                    @if(!empty($medsail['events']))
                         <div class="row panel panel-default col-md-12 col-xs-12 text-center">
                             <h4>Events</h4>
                                 @foreach($medsail['events'] as $event)
@@ -319,30 +328,36 @@
                     </div>
 
                     @if(!empty($alassail['stats']))
-                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                            <div class="panel-body col-md-6 col-xs-12">
-                                <p>Confirmed Passengers: {{$alassail['stats']->total}}  </p>
+                        @if($caribsail['stats']->total != null)
+                            <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                                <div class="panel-body col-md-6 col-xs-12">
+                                    <p>Confirmed Passengers: {{$alassail['stats']->total}}  </p>
+                                </div>
+                                <div class="panel-body col-md-6 col-xs-12">
+                                    <p> Percent Families: {{ $alassail['stats']->family }} %</p>
+                                </div>
+                                <div class="panel-body col-xs-12">
+                                    <h4> Languages: </h4>
+                                    <ul>
+                                        @foreach($alassail['stats']->languages as $language => $value)
+                                            <li> <b>{{ $language }} </b> - {{ $value }} % </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div class="panel-body col-xs-12">
+                                    <h4> Cities: </h4>
+                                    <ul>
+                                        @foreach($alassail['stats']->cities as $city => $value)
+                                            <li> <b>{{ $city }} </b> - {{ $value }} % </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="panel-body col-md-6 col-xs-12">
-                                <p> Percent Families: {{ $alassail['stats']->family }} %</p>
-                            </div>
+                        @else
                             <div class="panel-body col-xs-12">
-                                <h4> Languages: </h4>
-                                <ul>
-                                    @foreach($alassail['stats']->languages as $language => $value)
-                                        <li> <b>{{ $language }} </b> - {{ $value }} % </li>
-                                    @endforeach
-                                </ul>
+                                <h4> No confirmed passengers</h4>
                             </div>
-                            <div class="panel-body col-xs-12">
-                                <h4> Cities: </h4>
-                                <ul>
-                                    @foreach($alassail['stats']->cities as $city => $value)
-                                        <li> <b>{{ $city }} </b> - {{ $value }} % </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
+                        @endif
                     @else
                         <div class="row panel panel-default col-md-12 col-xs-12 text-center">
                             <div class="panel-body col-md-6 col-xs-12">
@@ -354,7 +369,7 @@
                         </div>
                     @endif
 
-                    @if(!empty($alassail['stats']))
+                    @if(!empty($alassail['events']))
                         <div class="row panel panel-default col-md-12 col-xs-12 text-center">
                             <h4>Events</h4>
                             @foreach($alassail['events'] as $event)

@@ -20,6 +20,8 @@ class UserDetailsTableSeeder extends Seeder
         $last = User::all()->last()->id;
 
         $faker = Faker::create();
+        $language = ['English', 'French', 'Cantonese', 'Mandarin', 'Spanish', 'Hungarion', 'Portugese', 'Jamacian', 'Russian', 'Croatian'];
+
         // 12 sailings right now
         foreach (range($first, $last) as $i) {
             $dob =$faker->dateTimeBetween($startDate = '-90 years', $endDate = 'now');
@@ -30,7 +32,7 @@ class UserDetailsTableSeeder extends Seeder
                 'dob' => $dob,
                 'age'=> Carbon::instance($dob)->age,
                 'sex' => $faker->numberBetween($min = 0, $max = 1),
-                'lang' => $faker->languageCode(),
+                'lang' => $language[$i % 10],
                 'country' => $faker->country(),
                 'region' => $faker->state(),
                 'city' => $faker->city(),

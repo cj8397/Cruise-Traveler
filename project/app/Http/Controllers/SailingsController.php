@@ -32,13 +32,13 @@ class SailingsController extends Controller
     protected function GetAllSailings(SearchRequest $request)
     {
         if ($sailings = Sailing::search($request)) {
-//            $statsController = new UserSailingsController();
-//            for($i = 0; $i < 25; $i++) {
-//                $sailings[$i]['stats'] = $statsController->GetTop3Summary($sailings[$i]->id);
-//            }
+            $statsController = new UserSailingsController();
+            foreach($sailings as $sailing) {
+                $sailing['stats'] = $statsController->GetTop3Summary($sailing->id);
+            }
             return view('sailings.list', compact('sailings'));
         } else {
-            return redirect::back();
+             return redirect::back();
         }
     }
 
@@ -48,7 +48,7 @@ class SailingsController extends Controller
                 $currentUser = UserSailing::where(['sailing_id' => $id, 'user_id'=> Auth::user()->id]);
                 $statsController = new UserSailingsController();
                 $stats = $statsController->GetStatsSummary($id); // should add a count in there
-                if(Auth::check() && $userSailing = UserSailing::where(['user_id' => Auth::user()->id, 'sailing_id'=> $id]))
+                if(Auth::check() && UserSailing::where(['user_id' => Auth::user()->id, 'sailing_id'=> $id])->exists())
                 {
                     $thread = Thread::where(['event_id' => null, 'sailing_id' => $id])->first();
                     return view('sailings.detail', compact('sailing', 'stats', 'thread','currentUser'));

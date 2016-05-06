@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\UserSailing;
+use App\UserDetails;
 use App\UserEvent;
 use App\Sailing;
 use App\Stats;
@@ -28,11 +29,13 @@ class UserSailingsController extends Controller
     public function JoinSailing($sailing_id) {
 
         $user_id = Auth::User()->id;
+        if ($userDetail = UserDetails::where('user_id', $user_id)->whereNotNull('dob')->first()) {
         // need to check both columns....
         $userSailing = UserSailing::firstOrNew([
             'user_id' => $user_id,
             'sailing_id' => $sailing_id
         ]);
+        $userSailing->save();
         $sailing = Sailing::where('id', $sailing_id)->first();
         $stats = $this->GetStatsSummary($sailing_id); // should add a count in there
         if(!$userSailing->exists) { // doesnt exist
@@ -48,6 +51,9 @@ class UserSailingsController extends Controller
             $failure= "Already joined the sailing";
             return view('sailings.detail', compact('success', 'sailing', 'stats', 'thread'));
         }
+      }else{
+        return redirect('users/create');
+      }
     }
 
     // remove entry from bridge table

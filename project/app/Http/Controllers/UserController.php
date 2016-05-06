@@ -62,7 +62,7 @@ class UserController extends Controller
     protected function getDetails()
     {
         if ($user_id = Auth::User()->id) {
-            if ($userDetail = UserDetails::where('user_id', $user_id)->first()) {
+            if ($userDetail = UserDetails::where('user_id', $user_id)->whereNotNull('dob')->first()) {
                 return view('users.detail', compact('userDetail'));
             } else {
                 return redirect('users/create');

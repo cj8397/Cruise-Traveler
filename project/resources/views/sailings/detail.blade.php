@@ -60,7 +60,7 @@
                 {{--</div>--}}
                 <div class="panel panel-default">
                     <h2 class="panel-heading">Demographics</h2>
-                    @if(!empty($stats) && isset($currentUser))
+                    @if(!empty($stats))
                     <div class="panel-body">
                         <div class="panel panel-default col-xs-12">
                             <div class="panel-heading ">
@@ -111,13 +111,7 @@
                             </div>
                         </div>
                     </div>
-                    @else
-                        <div class="panel panel-default ">
-                            <div class="panel-body">
-                                <h2> Please Join To See Demographics Of A Sailing</h2>
-                            </div>
-                        </div>
-                    @endif
+                        @endif
                 </div>
             </div>
         </div>
