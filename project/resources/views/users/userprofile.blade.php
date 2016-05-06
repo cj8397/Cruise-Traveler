@@ -1,5 +1,16 @@
 @extends('layouts.scrolling')
+@section('styles')
+    <style>
+        #events {
+            height: 300px;
+            overflow-y: auto;
+        }
 
+        #credits {
+            margin-top: 5%;
+        }
+    </style>
+@endsection
 @section('content')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
@@ -13,11 +24,7 @@
 
         });
     </script>
-    <style type="text/css">
-        #credits {
-            margin-top: 5%;
-        }
-    </style>
+
     <img class="img-responsive" src="/images/cruiseship.jpg">
     <div class="container">
         <div class="panel panel-default row col-md-3 col-xs-12">
@@ -90,14 +97,27 @@
 
             <div class="row col-md-6 col-md-offset-1 col-xs-12">
                 <h4>Events</h4>
-                <div class="panel panel-default col-md-12 col-xs-12">
+                <div class="panel panel-default col-md-12 col-xs-12" id="events">
                     <div id="demo" class="well hidden">
                         @foreach($usersailings as $sail)
                             @foreach($userevents->where('sailing_id', $sail->sailing_id) as $events)
-                                <h5>Event: <a
-                                            href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
-                                </h5>
-                                {!! $events->event->start_date !!}
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <h5>Event: <a
+                                                    href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
+                                        </h5>
+                                    </li>
+                                    <li class="list-group-item">{!! $events->event->start_date !!}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Role:</strong><br>
+                                        @if ($events->role == "host")
+                                            <span class="label label-pill label-warning">{!! $events->role !!}</span>
+                                        @else
+                                            <span class="label label-pill label-danger">{!! $events->role !!}</span>
+                                        @endif
+                                    </li>
+                                </ul>
                             @endforeach
 
 
