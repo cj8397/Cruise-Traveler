@@ -1,5 +1,9 @@
 @extends('layouts.scrolling')
 
+@section('styles')
+    <link rel="stylesheet" href="{{ URL::asset('styles/welcome.css') }}" />
+@endsection
+
 @section('content')
 
     <style type="text/css">
@@ -23,66 +27,53 @@
     </style>
     <!-- Intro Section -->
     <div class="container-fluid">
-        <div class="row col-xs-5 col-md-5">
-            <div class="col-md-5 col-xs-5">
-                <iframe width="400" height="300"
-                        src="https://www.youtube.com/embed/CnAUfvWlBGs"
-                        frameborder="2" allowfullscreen></iframe>
-            </div>
+        <div class="col-xs-12 col-sm-6 ">
+            <iframe src="https://www.youtube.com/embed/CnAUfvWlBGs"
+                    frameborder="2" allowfullscreen></iframe>
         </div>
-
         @if (Auth::guest())
-            <div class="row col-xs-5 col-xs-offset-2 col-md-offset-2 col-md-5">
-                <div class="panel panel-default">
+            <div class="col-xs-12 col-sm-6  login">
+            <div class="panel panel-default">
                     <div class="panel-heading">Login</div>
-                    <table class="tg">
-                        <tr>
+                    <table class="tg table table-responsive">
+                        <tr class="success">
                             <th class="tg-amwm">Username</th>
                             <th class="tg-amwm">Password</th>
-                            <th class="tg-amwm">Role</th>
                         </tr>
-                        <tr>
+                        <tr class="warning">
                             <td class="tg-baqh">vacation@gmail.com</td>
                             <td class="tg-baqh">password</td>
-                            <td class="tg-baqh">Vacationer</td>
                         </tr>
-                        <tr>
+                        <tr class="info">
                             <td>eventhost@gmail.com</td>
                             <td>password</td>
-                            <td>Host</td>
                         </tr>
-                        <tr>
+                        <tr class="danger">
                             <td>eventparticipant@gmail.com</td>
                             <td>password</td>
-                            <td>Participant</td>
                         </tr>
-                        <tr>
+                        <tr class="active">
                             <td>admin@admin.com</td>
                             <td>adminpassword</td>
-                            <td>Admin</td>
                         </tr>
                     </table>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                        <form class="form-vertical clearfix" role="form" method="POST" action="{{ url('/login') }}">
                             {!! csrf_field() !!}
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">E-Mail Address</label>
-
-                                <div class="col-md-6">
+                            <div class="col-xs-12 {{ $errors->has('email') ? ' has-error' : '' }}">
+                                <label class="col-xs-12 control-label">Email:</label>
+                                <div class="col-xs-12">
                                     <input type="email" class="form-control" name="email" value="{{ old('email') }}">
-
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                     @endif
+                                </div>
                             </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Password</label>
-
-                                <div class="col-md-6">
+                            <div class="col-xs-12 {{ $errors->has('password') ? ' has-error' : '' }}">
+                                <label class="col-xs-12 control-label">Password</label>
+                                <div class="col-xs-12">
                                     <input type="password" class="form-control" name="password">
 
                                     @if ($errors->has('password'))
@@ -90,308 +81,307 @@
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                     @endif
-                            </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="remember"> Remember Me
-                                        </label>
                                 </div>
                             </div>
+
+                            <div class="col-xs-12 buttons">
+                                <button type="submit" class="btn btn-primary col-xs-3">
+                                    <i class="fa fa-btn fa-sign-in"></i>Login
+                                </button>
+                                <div class="col-xs-5"><input type="checkbox" name="remember"> <span>Remember Me?</span></div>
+                                <div class="col-xs-4"><a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Password?</a></div>
+
+
                             </div>
 
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fa fa-btn fa-sign-in"></i>Login
-                                    </button>
-
-                                    <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your
-                                        Password?</a>
-                            </div>
-                            </div>
                         </form>
                     </div>
             </div>
-                @endif
-        </div>
-            <hr class="style-eight col-md-12 col-xs-12">
-
-            <div class="row">
-                <div class="panel panel-default col-md-3 col-xs-12 text-center">
-                    <div class="row col-md-12 col-xs-12 text-center">
-                        <h2>Caribbean</h2>
-                    </div>
-                    <div class="row col-md-12 col-xs-12 text-center">
-                    <a href="/sailings">
-                        <button type="button" class="btn btn-primary btn-md">
-                            <i class="fa fa-users" aria-hidden="true"></i>More Sailings
-                        </button>
-                    </a>
-                        <hr>
-                </div>
-                    <div class="row col-md-12 col-xs-12 text-center">
-                        <h5>
-                            {{--{!! $caribsail->id !!} | --}}
-                            {!! $caribsail->cruise_line !!}
-                        </h5>
-                    </div>
-                    <div class="row col-md-12 col-xs-12 text-center">
-                        <a href="{{ action('SailingsController@GetSailing', [$caribsail->id]) }}">
-                            <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
-                    </a>
-                </div>
-                    @if(!empty($caribsail['stats']))
-                        @if($caribsail['stats']->total != null)
-                            <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                                <div class="panel-body col-md-6 col-xs-12">
-                                    <p>Confirmed Passengers: {{$caribsail['stats']->total}}  </p>
-                                </div>
-                                <div class="panel-body col-md-6 col-xs-12">
-                                    <p> Percent Families: {{ $caribsail['stats']->family }} %</p>
-                                </div>
-                                <div class="panel-body col-xs-12">
-                                    <h4> Languages: </h4>
-                                    <ul>
-                                        @foreach($caribsail['stats']->languages as $language => $value)
-                                            <li> <b>{{ $language }} </b> - {{ $value }} % </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                <div class="panel-body col-xs-12">
-                                    <h4> Cities: </h4>
-                                    <ul>
-                                        @foreach($caribsail['stats']->cities as $city => $value)
-                                            <li> <b>{{ $city }} </b> - {{ $value }} % </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                        @else
-                            <div class="panel-body col-xs-12">
-                                <h4> No confirmed passengers</h4>
-                            </div>
-                        @endif
-                    @else
-                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                            <div class="panel-body col-md-6 col-xs-12">
-                                <p>56% Passenger over 50yrs/old</p>
-                            </div>
-                            <div class="panel-body col-md-6 col-xs-12">
-                                <p>65% Passengers are single</p>
-                            </div>
-                        </div>
-                    @endif
-
-                    @if(!empty($caribsail['events']))
-                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                            <h4>Events</h4>
-                            @foreach($caribsail['events'] as $event)
-                                <div class="panel panel-primary col-md-4 col-xs-12">
-                                    <div class="panel-heading">{{ $event->title }}</div>
-                                </div>
-                            @endforeach
-                        </div>
-                    @else
-                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                            <h4>Events</h4>
-                            <div class="panel panel-primary col-md-4 col-xs-12">
-                                <div class="panel-heading">Beach party</div>
-                            </div>
-                            <div class="panel panel-primary col-md-4 col-xs-12">
-                                <div class="panel-heading">Boat party</div>
-                            </div>
-                            <div class="panel panel-primary col-md-4 col-xs-12">
-                                <div class="panel-heading">Matt's Birthday</div>
-                            </div>
-                        </div>
-                    @endif
-                </div>
-                <div class="col-md-1 col-xs-12"></div>
-                <div class="panel panel-default col-md-3 col-xs-12">
-                    <div class="row col-md-12 col-xs-12 text-center">
-                        <h2>Mediterranean</h2>
-                    </div>
-                    <div class="row col-md-12 col-xs-12 text-center">
-                    <a href="/sailings">
-                        <button type="button" class="btn btn-primary btn-md">
-                            <i class="fa fa-users" aria-hidden="true"></i>More Sailings
-                        </button>
-                    </a>
-                        <hr>
-                </div>
-                    <div class="row col-md-12 col-xs-12 text-center">
-                        <h5>
-                            {{--{!! $medsail->id !!} | --}}
-                            {!! $medsail->cruise_line !!}
-                        </h5>
-                    </div>
-                    <div class="row row-centered col-md-12 col-xs-12">
-                        <a href="{{ action('SailingsController@GetSailing', [$medsail->id]) }}">
-                            <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
-                        </a>
-                    </div>
-
-                    @if(!empty($medsail['stats']))
-                        @if($medsail['stats']->total != null)
-                            <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                                <div class="panel-body col-md-6 col-xs-12">
-                                    <p>Confirmed Passengers: {{$medsail['stats']->total}}  </p>
-                                </div>
-                                <div class="panel-body col-md-6 col-xs-12">
-                                    <p> Percent Families: {{ $medsail['stats']->family }} %</p>
-                                </div>
-                                <div class="panel-body col-xs-12">
-                                    <h4> Languages: </h4>
-                                    <ul>
-                                        @foreach($medsail['stats']->languages as $language => $value)
-                                            <li> <b>{{ $language }} </b> - {{ $value }} % </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                <div class="panel-body col-xs-12">
-                                    <h4> Cities: </h4>
-                                    <ul>
-                                        @foreach($medsail['stats']->cities as $city => $value)
-                                            <li> <b>{{ $city }} </b> - {{ $value }} % </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                        @else
-                            <div class="panel-body col-xs-12">
-                                <h4> No confirmed passengers</h4>
-                            </div>
-                        @endif
-                    @else
-                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                            <div class="panel-body col-md-6 col-xs-12">
-                                <p>56% Passenger over 50yrs/old</p>
-                            </div>
-                            <div class="panel-body col-md-6 col-xs-12">
-                                <p>65% Passengers are single</p>
-                            </div>
-                        </div>
-                    @endif
-                    @if(!empty($medsail['events']))
-                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                            <h4>Events</h4>
-                                @foreach($medsail['events'] as $event)
-                                    <div class="panel panel-primary col-md-4 col-xs-12">
-                                        <div class="panel-heading">{{ $event->title }}</div>
-                                    </div>
-                                @endforeach
-                         </div>
-                    @else
-                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                            <h4>Events</h4>
-                            <div class="panel panel-primary col-md-4 col-xs-12">
-                                <div class="panel-heading">Matt's party</div>
-                            </div>
-                            <div class="panel panel-primary col-md-4 col-xs-12">
-                                <div class="panel-heading">Matt's party</div>
-                            </div>
-                            <div class="panel panel-primary col-md-4 col-xs-12">
-                                <div class="panel-heading">Matt's party</div>
-                            </div>
-                        </div>
-                    @endif
+        @endif
             </div>
-
-                <div class="col-md-1 col-xs-12"></div>
-
-                <div class="panel panel-default col-md-3 col-xs-12 text-center">
-                    <div class="row col-md-12 col-xs-12 col-lg-12">
-                        <h2>Alaska</h2>
-                    </div>
-                    <div class="row col-md-12 col-xs-12 text-center">
-                        <a href="/sailings">
-                            <button type="button" class="btn btn-primary btn-md">
-                                <i class="fa fa-users" aria-hidden="true"></i>More Sailings
-                            </button>
-                        </a>
-                        <hr>
-                    </div>
-                    <div class="row col-md-12 col-xs-12 text-center">
-                        <h5>
-                            {{--{!! $alassail->id !!} |--}}
-                            {!! $alassail->cruise_line !!}
-                        </h5>
-                    </div>
-                    <div class="row row-centered col-md-12 col-xs-12">
-                        <a href="{{ action('SailingsController@GetSailing', [$alassail->id]) }}">
-                            <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
-                        </a>
-                    </div>
-
-                    @if(!empty($alassail['stats']))
-                        @if($caribsail['stats']->total != null)
-                            <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                                <div class="panel-body col-md-6 col-xs-12">
-                                    <p>Confirmed Passengers: {{$alassail['stats']->total}}  </p>
+            <hr class="style-eight col-md-12 col-xs-12">
+            <div class="col-xs-12">
+                <div class="col-sm-4 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">
+                            <h2>Caribbean</h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="text-center">
+                                <h4>
+                                    {{--{!! $medsail->id !!} | --}}
+                                    {!! $caribsail->cruise_line !!}
+                                </h4>
+                            </div>
+                            <div class="text-centered col-md-12 col-xs-12">
+                                <a href="{{ action('SailingsController@GetSailing', [$caribsail->id]) }}">
+                                    <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
+                                </a>
+                            </div>
+                            @if(!empty($caribsail['stats']))
+                                @if($caribsail['stats']->total != null)
+                                    <div class="stats clearfix">
+                                        <div class="col-md-6 col-xs-12">
+                                            <p><b>Confirmed:</b> {{$caribsail['stats']->total}}  </p>
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            <p><b>Families:</b> {{ $caribsail['stats']->family }} %</p>
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            <h4> Languages: </h4>
+                                            <ul>
+                                                @foreach($caribsail['stats']->languages as $language => $value)
+                                                    <li> <b>{{ $language }}: </b> {{ $value }} % </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            <h4> Cities: </h4>
+                                            <ul>
+                                                @foreach($caribsail['stats']->cities as $city => $value)
+                                                    <li> <b>{{ $city }}: </b> {{ $value }} % </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="">
+                                        <h4> No confirmed passengers</h4>
+                                    </div>
+                                @endif
+                            @else
+                                <div class="panel panel-default col-md-12 col-xs-12 text-center">
+                                    <div class="panel-body col-md-6 col-xs-12">
+                                        <p>56% Passenger over 50yrs/old</p>
+                                    </div>
+                                    <div class="panel-body col-md-6 col-xs-12">
+                                        <p>65% Passengers are single</p>
+                                    </div>
                                 </div>
-                                <div class="panel-body col-md-6 col-xs-12">
-                                    <p> Percent Families: {{ $alassail['stats']->family }} %</p>
-                                </div>
-                                <div class="panel-body col-xs-12">
-                                    <h4> Languages: </h4>
-                                    <ul>
-                                        @foreach($alassail['stats']->languages as $language => $value)
-                                            <li> <b>{{ $language }} </b> - {{ $value }} % </li>
+                            @endif
+                            <hr />
+                            <div class="events">
+                                @if(!empty($caribsail['events']))
+                                    <div class="text-center">
+                                        <h4>Events</h4>
+                                        @foreach($caribsail['events'] as $event)
+                                            <div class="col-md-4 col-xs-12">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">{{ $event->title }}</div>
+                                                </div>
+                                            </div>
                                         @endforeach
-                                    </ul>
+                                    </div>
+                                @else
+                                    <div class="text-center">
+                                        <h4>Events</h4>
+                                        @for($i = 0; $i < 3; $i++)
+                                            <div class="col-md-4 col-xs-12">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">Cocktail Party</div>
+                                                </div>
+                                            </div>
+                                        @endfor
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="col-md-12 col-xs-12 text-center">
+                                <a href="/sailings">
+                                    <button type="button" class="btn btn-primary btn-md">
+                                        <i class="fa fa-users" aria-hidden="true"></i>More Sailings
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">
+                            <h2>Mediterranean</h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="text-center">
+                                <h4>
+                                    {{--{!! $medsail->id !!} | --}}
+                                    {!! $medsail->cruise_line !!}
+                                </h4>
+                            </div>
+                            <div class="text-centered col-md-12 col-xs-12">
+                                <a href="{{ action('SailingsController@GetSailing', [$medsail->id]) }}">
+                                    <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
+                                </a>
+                            </div>
+                            @if(!empty($medsail['stats']))
+                                @if($medsail['stats']->total != null)
+                                    <div class="stats clearfix">
+                                        <div class="col-md-6 col-xs-12">
+                                            <p><b>Confirmed:</b> {{$medsail['stats']->total}}  </p>
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            <p><b>Families:</b> {{ $medsail['stats']->family }} %</p>
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            <h4> Languages: </h4>
+                                            <ul>
+                                                @foreach($medsail['stats']->languages as $language => $value)
+                                                    <li> <b>{{ $language }}: </b> {{ $value }} % </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            <h4> Cities: </h4>
+                                            <ul>
+                                                @foreach($medsail['stats']->cities as $city => $value)
+                                                    <li> <b>{{ $city }}: </b> {{ $value }} % </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="">
+                                        <h4> No confirmed passengers</h4>
+                                    </div>
+                                @endif
+                            @else
+                                <div class="panel panel-default col-md-12 col-xs-12 text-center">
+                                    <div class="panel-body col-md-6 col-xs-12">
+                                        <p>56% Passenger over 50yrs/old</p>
+                                    </div>
+                                    <div class="panel-body col-md-6 col-xs-12">
+                                        <p>65% Passengers are single</p>
+                                    </div>
                                 </div>
-                                <div class="panel-body col-xs-12">
-                                    <h4> Cities: </h4>
-                                    <ul>
-                                        @foreach($alassail['stats']->cities as $city => $value)
-                                            <li> <b>{{ $city }} </b> - {{ $value }} % </li>
+                            @endif
+                            <hr />
+                            <div class="events">
+                                @if(!empty($medsail['events']))
+                                    <div class="text-center">
+                                        <h4>Events</h4>
+                                            @foreach($medsail['events'] as $event)
+                                                <div class="col-md-4 col-xs-12">
+                                                    <div class="panel panel-primary">
+                                                        <div class="panel-heading">{{ $event->title }}</div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                     </div>
+                                @else
+                                    <div class="text-center">
+                                        <h4>Events</h4>
+                                        @for($i = 0; $i < 3; $i++)
+                                            <div class="col-md-4 col-xs-12">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">Cocktail Party</div>
+                                                </div>
+                                            </div>
+                                        @endfor
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="col-md-12 col-xs-12 text-center">
+                                <a href="/sailings">
+                                    <button type="button" class="btn btn-primary btn-md">
+                                        <i class="fa fa-users" aria-hidden="true"></i>More Sailings
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">
+                            <h2>Alaska</h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="text-center">
+                                <h4>
+                                    {{--{!! $medsail->id !!} | --}}
+                                    {!! $alassail->cruise_line !!}
+                                </h4>
+                            </div>
+                            <div class="text-centered col-md-12 col-xs-12">
+                                <a href="{{ action('SailingsController@GetSailing', [$alassail->id]) }}">
+                                    <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
+                                </a>
+                            </div>
+                            @if(!empty($alassail['stats']))
+                                @if($alassail['stats']->total != null)
+                                    <div class="stats clearfix">
+                                        <div class="col-md-6 col-xs-12">
+                                            <p><b>Confirmed:</b> {{$alassail['stats']->total}}  </p>
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            <p><b>Families:</b> {{ $alassail['stats']->family }} %</p>
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            <h4> Languages: </h4>
+                                            <ul>
+                                                @foreach($alassail['stats']->languages as $language => $value)
+                                                    <li> <b>{{ $language }}: </b> {{ $value }} % </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            <h4> Cities: </h4>
+                                            <ul>
+                                                @foreach($alassail['stats']->cities as $city => $value)
+                                                    <li> <b>{{ $city }}: </b> {{ $value }} % </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="">
+                                        <h4> No confirmed passengers</h4>
+                                    </div>
+                                @endif
+                            @else
+                                <div class="panel panel-default col-md-12 col-xs-12 text-center">
+                                    <div class="panel-body col-md-6 col-xs-12">
+                                        <p>56% Passenger over 50yrs/old</p>
+                                    </div>
+                                    <div class="panel-body col-md-6 col-xs-12">
+                                        <p>65% Passengers are single</p>
+                                    </div>
+                                </div>
+                            @endif
+                            <hr />
+                            <div class="events">
+                                @if(!empty($alassail['events']))
+                                    <div class="text-center">
+                                        <h4>Events</h4>
+                                        @foreach($alassail['events'] as $event)
+                                            <div class="col-md-4 col-xs-12">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">{{ $event->title }}</div>
+                                                </div>
+                                            </div>
                                         @endforeach
-                                    </ul>
-                                </div>
+                                    </div>
+                                @else
+                                    <div class="text-center">
+                                        <h4>Events</h4>
+                                        @for($i = 0; $i < 3; $i++)
+                                            <div class="col-md-4 col-xs-12">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">Cocktail Party</div>
+                                                </div>
+                                            </div>
+                                        @endfor
+                                    </div>
+                                @endif
                             </div>
-                        @else
-                            <div class="panel-body col-xs-12">
-                                <h4> No confirmed passengers</h4>
-                            </div>
-                        @endif
-                    @else
-                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                            <div class="panel-body col-md-6 col-xs-12">
-                                <p>56% Passenger over 50yrs/old</p>
-                            </div>
-                            <div class="panel-body col-md-6 col-xs-12">
-                                <p>65% Passengers are single</p>
-                            </div>
-                        </div>
-                    @endif
-
-                    @if(!empty($alassail['events']))
-                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                            <h4>Events</h4>
-                            @foreach($alassail['events'] as $event)
-                                <div class="panel panel-primary col-md-4 col-xs-12">
-                                    <div class="panel-heading">{{ $event->title }}</div>
-                                </div>
-                            @endforeach
-                        </div>
-                    @else
-                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
-                            <h4>Events</h4>
-                            <div class="panel panel-primary col-md-4 col-xs-12">
-                                <div class="panel-heading">Matt's party</div>
-                            </div>
-                            <div class="panel panel-primary col-md-4 col-xs-12">
-                                <div class="panel-heading">Matt's party</div>
-                            </div>
-                            <div class="panel panel-primary col-md-4 col-xs-12">
-                                <div class="panel-heading">Matt's party</div>
+                            <div class="col-md-12 col-xs-12 text-center">
+                                <a href="/sailings">
+                                    <button type="button" class="btn btn-primary btn-md">
+                                        <i class="fa fa-users" aria-hidden="true"></i>More Sailings
+                                    </button>
+                                </a>
                             </div>
                         </div>
-                    @endif
+                    </div>
                 </div>
             </div>
     </div>
