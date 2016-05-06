@@ -45,24 +45,19 @@ class SailingsController extends Controller
     protected function GetSailing( $id)
     {
             if ($sailing = Sailing::find($id)) {
-                $currentUser = UserSailing::where(['sailing_id' => $id, 'user_id'=> Auth::user()->id])->get();
+                $currentUser = UserSailing::where(['sailing_id' => $id, 'user_id'=> Auth::user()->id]);
                 $statsController = new UserSailingsController();
                 $stats = $statsController->GetStatsSummary($id); // should add a count in there
-                if (UserSailing::where(['user_id' => Auth::user()->id, 'sailing_id' => $id])->exists()) {
+                if(Auth::check() && UserSailing::where(['user_id' => Auth::user()->id, 'sailing_id'=> $id])->exists())
+                {
                     $thread = Thread::where(['event_id' => null, 'sailing_id' => $id])->first();
-                    return view('sailings.detail', compact('sailing', 'stats', 'thread', 'currentUser'));
-                } else {
-                    return view('sailings.detail', compact('sailing', 'stats', 'currentUser'));
+                    return view('sailings.detail', compact('sailing', 'stats', 'thread','currentUser'));
+                }else{
+                    return view('sailings.detail', compact('sailing', 'stats','currentUser'));
                 }
             } else {
-                $statsController = new UserSailingsController();
-                $stats = $statsController->GetStatsSummary($id); // should add a count in there
-                return view('sailings.detail', compact('sailing', 'stats'));
+                return redirect('sailings');
             }
-
-        } else {
-            return redirect('sailings');
-        }
     }
 
     protected function ShowCreateForm()
