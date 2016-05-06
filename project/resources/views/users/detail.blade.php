@@ -19,7 +19,7 @@
                                 <th>Region</th>
                                 <th>City</th>
                                 <th>Address</th>
-                                <th>Ethnicity</th>
+                                <th>Ethinicity</th>
                                 <th>Hobby</th>
                                 <th>Family</th>
                                 <th>CoTravellers</th>
@@ -72,7 +72,7 @@
                             <td>{{$userDetail->region}}</td>
                             <td>{{$userDetail->city}}</td>
                             <td>{{$userDetail->address}}</td>
-                            <td>{{$userDetail->ethnicity}}</td>
+                            <td>{{$userDetail->ethinicity}}</td>
                             <td>{{$userDetail->hobby}}</td>
                             @if($userDetail->family == 1)
                               <td>Yes</td>

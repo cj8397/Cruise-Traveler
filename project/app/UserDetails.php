@@ -8,6 +8,7 @@ use Carbon\Carbon;
 class UserDetails extends Model
 {
   public $timestamps = false;
+  protected $primaryKey = 'user_id';
     protected $table = 'user_details';
 
     protected $fillable = ['user_id',
