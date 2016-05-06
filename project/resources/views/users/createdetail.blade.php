@@ -38,10 +38,12 @@
                                 </div>
                             </div>
 
+                            <div><h3>All data collected below will remain anonymous, and will not be shared with other users.</h3></div>
+
                             <div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Birth Date</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="dob">
+                                    <input type="text" class="form-control" name="dob">(YYYY/MM/DD)
 
                                     @if ($errors->has('dob'))
                                         <span class="help-block">
@@ -68,7 +70,18 @@
                             <div class="form-group{{ $errors->has('lang') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Primary Language</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="lang">
+                                  <select name="lang" class="form-control">
+                                    <option value="English">English</option>
+                                    <option value="French">French</option>
+                                    <option value="Cantonese">Cantonese</option>
+                                    <option value="Mandarin">Mandarin</option>
+                                    <option value="Spanish">Spanish</option>
+                                    <option value="Hungarion">Hungarion</option>
+                                    <option value="Portugese">Portugese</option>
+                                    <option value="Jamacian">Jamacian</option>
+                                    <option value="Russian">Russian</option>
+                                    <option value="Croatian">Croatian</option>
+                                  </select>
 
                                     @if ($errors->has('lang'))
                                         <span class="help-block">
@@ -91,14 +104,53 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('ethnicity') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Ethnicity</label>
+                            <div class="form-group{{ $errors->has('region') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Region</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="region">
+
+                                    @if ($errors->has('region'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('region') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">City</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="city">
+
+                                    @if ($errors->has('city'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('city') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Address</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="address">
+
+                                    @if ($errors->has('address'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('ethinicity') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Ethinicity</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="ethnicity">
 
-                                    @if ($errors->has('ethnicity'))
+                                    @if ($errors->has('ethinicity'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('ethnicity') }}</strong>
+                                        <strong>{{ $errors->first('ethinicity') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -274,45 +326,6 @@
                                     @if ($errors->has('seventyfive'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('seventyfive') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('region') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Region</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="region">
-
-                                    @if ($errors->has('region'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('region') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">City</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="city">
-
-                                    @if ($errors->has('city'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('city') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Address</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="address">
-
-                                    @if ($errors->has('address'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('address') }}</strong>
                                     </span>
                                     @endif
                                 </div>

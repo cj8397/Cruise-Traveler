@@ -79,22 +79,33 @@ class UserController extends Controller
 
     protected function createUserDetails(UserDetailsRequest $request)
     {
-        $userDetails = UserDetails::create([
-            'user_id' => Auth::user()->id,
-            'first' => $request->first,
-            'last' => $request->last,
-            'dob' => $request->dob,
-            'sex' => $request->sex,
-            'lang' => $request->lang,
-            'country' => $request->country,
-            'ethnicity' => $request->ethnicity,
-            'hobby' => $request->hobby,
-            'family' => $request->family,
-            'co_travellers' => $request->co_travellers,
-            'region' => $request->region,
-            'city' => $request->city,
-            'address' => $request->address
-        ]);
+      $user_id = Auth::User()->id;
+        $userDetails = UserDetails::where('user_id', $user_id)->first();
+            $userDetails->first = $request->first;
+            $userDetails->last = $request->last;
+            $userDetails->dob = $request->dob;
+            $userDetails->sex = $request->sex;
+            $userDetails->lang = $request->lang;
+            $userDetails->country = $request->country;
+            $userDetails->ethinicity = $request->ethnicity;
+            $userDetails->hobby = $request->hobby;
+            $userDetails->family = $request->family;
+            $userDetails->co_travellers = $request->co_travellers;
+            $userDetails->region = $request->region;
+            $userDetails->city = $request->city;
+            $userDetails->address = $request->address;
+            $userDetails->two = $request->two;
+             $userDetails->five = $request->five;
+              $userDetails->twelve = $request->twelve;
+               $userDetails->seventeen = $request->seventeen;
+                $userDetails->twentyfour = $request->twentyfour;
+                 $userDetails->twentynine = $request->twentynine;
+                  $userDetails->thirtynine = $request->thirtynine;
+            $userDetails->fourtynine = $request->fourtynine;
+             $userDetails->fiftynine = $request->fiftynine;
+              $userDetails->seventyfour = $request->seventyfour;
+               $userDetails->seventyfive = $request->seventyfive;
+        $userDetails->save();
         return redirect('users/detail');
     }
 }
