@@ -31,6 +31,7 @@ class EventsController extends Controller
 
     protected function GetAllEvents($sailing, SearchRequest $request)
     {
+
         if($request->sort == ""){
             $sort = 'title';
             $direction = 'desc';
@@ -51,6 +52,10 @@ class EventsController extends Controller
         }
     }
 
+    protected function getAllUserEvents(){
+        $userEvents = UserSailing::with('event','sailing')->where('user_id',Auth::user()->id)->get();
+        return view('events.userList')->with('userSailing',$userEvents);
+    }
     protected function GetOneEvent($event_id)
     {
         if ($event = Event::where('id', $event_id)->first()) {

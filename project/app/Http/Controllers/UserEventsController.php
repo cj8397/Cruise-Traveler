@@ -59,7 +59,7 @@ class UserEventsController extends Controller
 
     // getAllUsers going to event
     // getAllUsers in a event
-    public function GetAllUsers($event_id)
+    public function GetAllUser($event_id)
     {
         $users = UserEvent::where(['event_id' => $event_id])->get();
         if ($users != null) {
