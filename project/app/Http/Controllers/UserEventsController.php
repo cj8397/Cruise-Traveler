@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Helpers\StatsHelper;
 use Cmgmyr\Messenger\Models\Thread;
+use Laracasts\Flash\Flash;
 
 class UserEventsController extends Controller
 {
@@ -34,9 +35,11 @@ class UserEventsController extends Controller
                'role' => 'Participant'
            ]);
            $userE->save();
+           Flash::success('You Joined the EVENT!');
            return redirect()->action('EventsController@GetOneEvent',[$event_id]);
        }else{
-          return redirect()->action('EventsController@GetOneEvent', [$event_id]);
+           Flash::error('You are not registered for the sailing!');
+           return redirect()->action('EventsController@GetOneEvent', [$event_id]);
        }
     }
 
@@ -47,9 +50,11 @@ class UserEventsController extends Controller
         $conditions = compact('user_id', 'event_id');
         if (UserEvent::where($conditions)->exists()) {
             UserEvent::where($conditions)->delete();
-            return redirect()->action('EventsController@GetOneEvent', [$event_id]);//view('events.eventdetail', );
+            Flash::success('You have left the EVENT!');
+            return redirect('/sailings');//view('events.eventdetail', );
         } else {
-            return redirect()->action('EventsController@GetOneEvent', [$event_id]);
+            Flash::error('You are not registered for this Event!');
+            return redirect('/sailings');
         }
     }
 
