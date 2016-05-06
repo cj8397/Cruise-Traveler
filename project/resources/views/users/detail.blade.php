@@ -23,37 +23,37 @@
                                 <th>Hobby</th>
                                 <th>Family</th>
                                 <th>CoTravellers</th>
-                                @if(userDetails->two)
+                                @if($userDetail->two)
                                   <th>0-2</th>
                                 @endif
-                                @if(userDetails->five)
+                                @if($userDetail->five)
                                   <th>3-5</th>
                                 @endif
-                                @if(userDetails->twelve)
+                                @if($userDetail->twelve)
                                   <th>6-12</th>
                                 @endif
-                                @if(userDetails->seventeen)
+                                @if($userDetail->seventeen)
                                   <th>12-17</th>
                                 @endif
-                                @if(userDetails->twentyfour)
+                                @if($userDetail->twentyfour)
                                   <th>17-24</th>
                                 @endif
-                                @if(userDetails->twentynine)
+                                @if($userDetail->twentynine)
                                   <th>24-29</th>
                                 @endif
-                                @if(userDetails->thirtynine)
+                                @if($userDetail->thirtynine)
                                   <th>30-39</th>
                                 @endif
-                                @if(userDetails->fortynine)
+                                @if($userDetail->fortynine)
                                   <th>40-49</th>
                                 @endif
-                                @if(userDetails->fiftynine)
+                                @if($userDetail->fiftynine)
                                   <th>50-59</th>
                                 @endif
-                                @if(userDetails->seventyfour)
+                                @if($userDetail->seventyfour)
                                   <th>60-74</th>
                                 @endif
-                                @if(userDetails->seventyfive)
+                                @if($userDetail->seventyfive)
                                   <th>75+</th>
                                 @endif
                             </tr>
@@ -61,7 +61,12 @@
                             <td>{{$userDetail->first}}</td>
                             <td>{{$userDetail->last}}</td>
                             <td>{{$userDetail->dob}}</td>
-                            <td>{{$userDetail->sex}}</td>
+                            @if($userDetail->sex == 1)
+                              <td>Male</td>
+                            @endif
+                            @if($userDetail->sex == 0)
+                              <td>Female</td>
+                            @endif
                             <td>{{$userDetail->lang}}</td>
                             <td>{{$userDetail->country}}</td>
                             <td>{{$userDetail->region}}</td>
@@ -69,43 +74,50 @@
                             <td>{{$userDetail->address}}</td>
                             <td>{{$userDetail->ethnicity}}</td>
                             <td>{{$userDetail->hobby}}</td>
-                            <td>{{$userDetail->family}}</td>
-                            <td>{{$userDetail->co_travellers}}</td>
-                            @if(userDetails->two)
-                              <td>{{userDetail->two}}</td>
+                            @if($userDetail->family == 1)
+                              <td>Yes</td>
                             @endif
-                            @if(userDetails->two)
-                              <td>{{userDetail->two}}</td>
+                            @if($userDetail->family == 0)
+                              <td>No</td>
                             @endif
-                            @if(userDetails->five)
-                              <td>{{userDetail->five}}</td>
+                            @if($userDetail->co_travellers == 1)
+                              <td>Yes</td>
                             @endif
-                            @if(userDetails->twelve)
-                              <td>{{userDetail->twelve}}</td>
+                            @if($userDetail->co_travellers == 0)
+                              <td>No</td>
                             @endif
-                            @if(userDetails->seventeen)
-                              <td>{{userDetail->seventeen}}</td>
+                            @if($userDetail->two)
+                              <td>{{$userDetail->two}}</td>
                             @endif
-                            @if(userDetails->twentyfour)
-                              <td>{{userDetail->twentyfour}}</td>
+                            @if($userDetail->five)
+                              <td>{{$userDetail->five}}</td>
                             @endif
-                            @if(userDetails->twentynine)
-                              <td>{{userDetail->twentynine}}</td>
+                            @if($userDetail->twelve)
+                              <td>{{$userDetail->twelve}}</td>
                             @endif
-                            @if(userDetails->thirtynine)
-                              <td>{{userDetail->thirtynine}}</td>
+                            @if($userDetail->seventeen)
+                              <td>{{$userDetail->seventeen}}</td>
                             @endif
-                            @if(userDetails->fourtynine)
-                              <td>{{userDetail->fourtynine}}</td>
+                            @if($userDetail->twentyfour)
+                              <td>{{$userDetail->twentyfour}}</td>
                             @endif
-                            @if(userDetails->fiftynine)
-                              <td>{{userDetail->fiftynine}}</td>
+                            @if($userDetail->twentynine)
+                              <td>{{$userDetail->twentynine}}</td>
                             @endif
-                            @if(userDetails->seventyfour)
-                              <td>{{userDetail->seventyfour}}</td>
+                            @if($userDetail->thirtynine)
+                              <td>{{$userDetail->thirtynine}}</td>
                             @endif
-                            @if(userDetails->seventyfive)
-                              <td>{{userDetail->seventyfive}}</td>
+                            @if($userDetail->fourtynine)
+                              <td>{{$userDetail->fourtynine}}</td>
+                            @endif
+                            @if($userDetail->fiftynine)
+                              <td>{{$userDetail->fiftynine}}</td>
+                            @endif
+                            @if($userDetail->seventyfour)
+                              <td>{{$userDetail->seventyfour}}</td>
+                            @endif
+                            @if($userDetail->seventyfive)
+                              <td>{{$userDetail->seventyfive}}</td>
                             @endif
                             </tr>
                             </tbody>

@@ -25,8 +25,8 @@ class UserDetailsRequest extends Request
     public function rules()
     {
         return [
-            'first' => 'max:20',
-            'last' => 'max:20',
+            'first' => 'required|max:20',
+            'last' => 'required|max:20',
             'dob' => 'required|date_format:Y/m/d|max:20',
             'sex' => 'required|max:20',
             'lang' => 'required|max:20',

@@ -38,10 +38,12 @@
                                 </div>
                             </div>
 
+                            <div><h3>All data collected below will remain anonymous, and will not be shared with other users.</h3></div>
+
                             <div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Birth Date</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="dob">
+                                    <input type="text" class="form-control" name="dob">(YYYY/MM/DD)
 
                                     @if ($errors->has('dob'))
                                         <span class="help-block">
