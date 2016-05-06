@@ -71,15 +71,16 @@
         </div>
 
         <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
-            <div class="row col-md-6 col-xs-6">
+            <div class="row"><br></div>
+            <div class="row col-md-5 col-xs-5">
                 @if(isset($usersailings))
                     @foreach($usersailings->slice(0, 5) as $sailing)
-                        <div class="panel-body col-md-12 col-xs-12">
-                            <a href="#demo" class="toggle btn btn-info">
-                                {!! $sailing->sailing->cruise_line !!}
-                            </a>
-                            <p>{!! $sailing->sailing->start_date !!}</p>
-                        </div>
+
+                        <a href="#demo" class="toggle btn btn-info">
+                            {!! $sailing->sailing->cruise_line !!}
+                        </a>
+                        <p>{!! $sailing->sailing->start_date !!}</p>
+
                     @endforeach
                 @else
                     <p>You currently do not belong to any sailings!</p>
@@ -87,9 +88,8 @@
                 @endif
             </div>
 
-            <div class="row col-md-5 col-md-offset-1 col-xs-12">
-                <h3>Events</h3>
-                <hr>
+            <div class="row col-md-6 col-md-offset-1 col-xs-12">
+                <h4>Events</h4>
                 <div class="panel panel-default col-md-12 col-xs-12">
                     <div id="demo" class="well hidden">
                         @foreach($usersailings as $sail)
@@ -195,27 +195,28 @@
                 @endforeach
             @endif
         </div>--}}
-    </div>
 
-    <!-- Pagination -->
-    <div class="row text-center">
-        <div class="col-lg-12 col-md-12 col-xs-12">
-            <ul class="pagination">
-                <li>
-                    <a href="../users/userprofile.blade.php/">&laquo;</a>
-                </li>
-                <li class="active">
-                    <a href="../users/userprofile.blade.php/">1</a>
-                </li>
-                <li>
-                    <a href="../users/userprofile.blade.php/">2</a>
-                </li>
-                <li>
-                    <a href="../users/userprofile.blade.php/">3</a>
-                </li>
-                <li>
-                    <a href="../users/userprofile.blade.php/">&raquo;</a>
-            </ul>
+
+                <!-- Pagination -->
+        <div class="row text-center">
+            <div class="col-lg-12 col-md-12 col-xs-12">
+                <ul class="pagination">
+                    <li>
+                        <a href="../users/userprofile.blade.php/">&laquo;</a>
+                    </li>
+                    <li class="active">
+                        <a href="../users/userprofile.blade.php/">1</a>
+                    </li>
+                    <li>
+                        <a href="../users/userprofile.blade.php/">2</a>
+                    </li>
+                    <li>
+                        <a href="../users/userprofile.blade.php/">3</a>
+                    </li>
+                    <li>
+                        <a href="../users/userprofile.blade.php/">&raquo;</a>
+                </ul>
+            </div>
         </div>
     </div>
 @endsection
