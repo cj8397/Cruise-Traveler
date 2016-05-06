@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Event;
 use App\Http\Requests;
 use App\UserEvent;
+use App\UserSailing;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Helpers\StatsHelper;
@@ -24,15 +25,19 @@ class UserEventsController extends Controller
     public function JoinEvent($event_id, $sailing_id)
     {
         $user_id = Auth::User()->id;
-        // role = member// need to check both columns....
-        $userE = UserEvent::firstOrNew([
-            'sailing_id' => $sailing_id,
-            'user_id' => $user_id,
-            'event_id' => $event_id,
-            'role' => 'Participant'
-        ]);
-        $userE->save();
-            return redirect()->action('EventsController@GetOneEvent',[$event_id]);
+       if(UserSailing::where(['user_id'=>$user_id,'sailing_id' => $sailing_id])->first() != null ){
+           // role = member// need to check both columns....
+           $userE = UserEvent::firstOrNew([
+               'sailing_id' => $sailing_id,
+               'user_id' => $user_id,
+               'event_id' => $event_id,
+               'role' => 'Participant'
+           ]);
+           $userE->save();
+           return redirect()->action('EventsController@GetOneEvent',[$event_id]);
+       }else{
+          return redirect()->action('EventsController@GetOneEvent', [$event_id]);
+       }
     }
 
     // remove entry from bridge table

@@ -53,6 +53,7 @@
                     </div>
                 </div>
             </div>
+            @if(isset($currentUser))
             <div class="col-xs-8">
                 {{--<div class="row panel panel-default">--}}
                     {{--<h2 class="panel-heading" >Message Board</h2>--}}
@@ -114,6 +115,7 @@
                         @endif
                 </div>
             </div>
+            @endif
         </div>
         @if(!empty($thread))
         <div class="col-xs-12">

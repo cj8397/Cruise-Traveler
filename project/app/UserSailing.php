@@ -12,9 +12,10 @@ class UserSailing extends Model
 
     protected $table = 'user_sailings';
     protected $fillable = [
-        'user_id', 'sailing_id'
+        'user_id','sailing_id'
     ];
 
+    protected  $primaryKey = 'user_id';
     public function userevent()
     {
         return $this->hasMany('App\UserEvent');

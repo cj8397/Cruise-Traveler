@@ -54,7 +54,8 @@ class EventsController extends Controller
     protected function GetOneEvent($event_id)
     {
         if ($event = Event::where('id', $event_id)->first()) {
-            $members = UserEvent::with('userdetails')->where('event_id', $event_id)->get();
+            $members = UserEvent::with('userdetails')->where(['event_id' => $event_id,
+                'sailing_id' => $event->sailing_id])->get();
             $host = $members->where('role', 'Host')->first();
             $currentUser = $members->where('user_id', Auth::user()->id)->first();
             if($userEvent = UserEvent::where(['user_id' => Auth::user()->id, 'event_id'=> $event_id])->first())
@@ -81,7 +82,13 @@ class EventsController extends Controller
 
     protected function ShowCreateForm($sailing_id)
     {
+      $user_id = Auth::User()->id;
+      if(UserSailing::where(['sailing_id' => $sailing_id, 'user_id' => $user_id])->exists())
+      {
         return view('events.createEventForm')->with('sailing_id', $sailing_id);
+      }else{
+        return redirect()->action('SailingsController@GetSailing',[$sailing_id]);
+      }
     }
 
     protected function GetAllUsers()
@@ -133,8 +140,9 @@ class EventsController extends Controller
     {
         if ($uEvent = Event::with('userevent')->where('id', $event_id)->first()) {
            Thread::where(['event_id' => $event_id])->first()->delete();
-            foreach($uEvent->userevent->all() as $uE) {
-                $uE->where('event_id',$event_id)->delete();
+            foreach($uEvent->userevent->where('event_id',$event_id) as $uE) {
+
+                $uE->delete();
                 }
             $uEvent->delete();
             return redirect('/sailings/'.$uEvent->sailing_id);

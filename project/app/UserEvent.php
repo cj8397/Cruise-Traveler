@@ -13,6 +13,7 @@ class UserEvent extends Model
     protected $fillable = [
         'sailing_id', 'user_id', 'event_id', 'role'
     ];
+    protected $primaryKey = 'user_id';
 
     public function event()
     {

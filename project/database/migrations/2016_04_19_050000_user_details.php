@@ -32,17 +32,17 @@ class UserDetails extends Migration
             $table->string('city')->nullable();
             $table->string('address')->nullable();
             $table->boolean('co_travellers')->nullable();
-            $table->integer('0-2')->nullable();
-            $table->integer('3-5')->nullable();
-            $table->integer('6-12')->nullable();
-            $table->integer('13-17')->nullable();
-            $table->integer('18-24')->nullable();
-            $table->integer('25-29')->nullable();
-            $table->integer('30-39')->nullable();
-            $table->integer('40-49')->nullable();
-            $table->integer('50-59')->nullable();
-            $table->integer('60-74')->nullable();
-            $table->integer('75+')->nullable();
+            $table->integer('two')->nullable();
+            $table->integer('five')->nullable();
+            $table->integer('twelve')->nullable();
+            $table->integer('seventeen')->nullable();
+            $table->integer('twentyfour')->nullable();
+            $table->integer('twentynine')->nullable();
+            $table->integer('thirtynine')->nullable();
+            $table->integer('fourtynine')->nullable();
+            $table->integer('fiftynine')->nullable();
+            $table->integer('seventyfour')->nullable();
+            $table->integer('seventyfive')->nullable();
         });
     }
 
@@ -56,4 +56,3 @@ class UserDetails extends Migration
         Schema::drop('user_details');
     }
 }
-
