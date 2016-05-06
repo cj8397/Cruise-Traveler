@@ -81,7 +81,13 @@ class EventsController extends Controller
 
     protected function ShowCreateForm($sailing_id)
     {
+      $user_id = Auth::User()->id;
+      if(UserSailing::where(['sailing_id' => $sailing_id, 'user_id' => $user_id])->exists())
+      {
         return view('events.createEventForm')->with('sailing_id', $sailing_id);
+      }else{
+        return redirect()->action('SailingsController@GetSailing',[$sailing_id]);
+      }
     }
 
     protected function GetAllUsers()
