@@ -39,8 +39,7 @@ class UserEventsController extends Controller
            return redirect()->action('EventsController@GetOneEvent',[$event_id]);
        }else{
            Flash::error('You are not registered for the sailing!');
-           return redirect()->action('EventsController@GetOneEvent', [$event_id]);
-       }
+           return redirect('/sailings/'.$sailing_id);       }
     }
 
     // remove entry from bridge table
