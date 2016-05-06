@@ -133,8 +133,9 @@ class EventsController extends Controller
     {
         if ($uEvent = Event::with('userevent')->where('id', $event_id)->first()) {
            Thread::where(['event_id' => $event_id])->first()->delete();
-            foreach($uEvent->userevent->all() as $uE) {
-                $uE->where('event_id',$event_id)->delete();
+            foreach($uEvent->userevent->where('event_id',$event_id) as $uE) {
+
+                $uE->delete();
                 }
             $uEvent->delete();
             return redirect('/sailings/'.$uEvent->sailing_id);

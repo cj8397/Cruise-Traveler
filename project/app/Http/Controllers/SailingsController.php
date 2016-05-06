@@ -45,7 +45,7 @@ class SailingsController extends Controller
     protected function GetSailing( $id)
     {
             if ($sailing = Sailing::find($id)) {
-                $currentUser = UserSailing::where(['sailing_id' => $id, 'user_id'=> Auth::user()->id])->get();
+                $currentUser = UserSailing::where(['sailing_id' => $id, 'user_id'=> Auth::user()->id])->first();
                 $statsController = new UserSailingsController();
                 $stats = $statsController->GetStatsSummary($id); // should add a count in there
                 if (UserSailing::where(['user_id' => Auth::user()->id, 'sailing_id' => $id])->exists()) {
@@ -59,11 +59,7 @@ class SailingsController extends Controller
                 $stats = $statsController->GetStatsSummary($id); // should add a count in there
                 return view('sailings.detail', compact('sailing', 'stats'));
             }
-
-        } else {
-            return redirect('sailings');
         }
-    }
 
     protected function ShowCreateForm()
     {

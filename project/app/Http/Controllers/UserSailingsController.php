@@ -47,17 +47,18 @@ class UserSailingsController extends Controller
     public function LeaveSailing($sailing_id) {
         $user_id = Auth::User()->id;
         // creates key value pair based on variable names
-        $conditions = compact('user_id', 'sailing_id');
         $uEvent = Sailing::with('usersailings','userevents')->where('id',$sailing_id)->first();
-        $uEvent->userevents->where('user_id',$user_id)->first();
-        $sailing = $uEvent->usersailing->where('sailing_id', $sailing_id)->first()->delete();
-        foreach($uEvent->userevent  as $uE) {
-            $uE->delete();
+        foreach($uEvent->usersailings->where('user_id', $user_id) as $currentUSailing){
+            if($currentUSailing != null ){
+                  $currentUSailing->delete();
+               }
         }
-                // ->delete();
-            //return redirect::back();
-            dd('NOT FOUND');
-          //return redirect::back();
+        foreach($uEvent->userevents->where('user_id',$user_id) as $currentUEvent){
+            if($currentUEvent->count != null){
+                $currentUEvent->delete();
+            }
+        }
+        $uEvent->save();
             return redirect()->action('SailingsController@GetSailing', [$sailing_id]);
         }
     // getAllUsers in a sailing
