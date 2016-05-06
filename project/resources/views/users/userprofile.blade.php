@@ -55,7 +55,6 @@
                 </div>
                 <a href="#credits" class="toggle btn btn-primary">More Details</a>
             </div>
-            <div></div>
         </div>
 
         <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
@@ -76,9 +75,9 @@
                 @if(isset($usersailings))
                     @foreach($usersailings->slice(0, 5) as $sailing)
                         <div class="panel-body col-md-12 col-xs-12">
-                            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">
-                                <h4>{!! $sailing->sailing->cruise_line !!}</h4>
-                            </button>
+                            <a href="#demo" class="toggle btn btn-info">
+                                {!! $sailing->sailing->cruise_line !!}
+                            </a>
                             <p>{!! $sailing->sailing->start_date !!}</p>
                         </div>
                     @endforeach
@@ -92,24 +91,23 @@
                 <h3>Events</h3>
                 <hr>
                 <div class="panel panel-default col-md-12 col-xs-12">
-                    <div id="demo" class="collapse">
-                        @foreach($usersailings as $sailing)
-                            @foreach($userevents->where('sailing_id',$sailing->sailing->id) as $events)
-
+                    <div id="demo" class="well hidden">
+                        @foreach($usersailings as $sail)
+                            @foreach($userevents->where('sailing_id', $sail->sailing_id) as $events)
                                 <h5>Event: <a
                                             href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
                                 </h5>
-
-
+                                {!! $events->event->start_date !!}
                             @endforeach
-                        @endforeach
-                        <div class="panel-body col-md-6 col-xs-12">
-                            <a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
+
+
+                            {{--<a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-user"></i>Create an Event
                                 </button>
-                            </a>
-                        </div>
+                            </a>--}}
+
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -124,7 +122,9 @@
                         <hr>
                         <div class="panel-body col-md-6 col-xs-12">
                             <div class="panel-heading">
-                                <label class="label-info"><h4>{!! $sailing->sailing->cruise_line !!}</h4></label>
+                                <a href="#demo" class="toggle btn btn-info">
+                                    <label class="label-info"><h4>{!! $sailing->sailing->cruise_line !!}</h4></label>
+                                </a>
                             </div>
                             <ul class="list-group">
                                 <li class="list-group-item">
@@ -136,17 +136,17 @@
                             </ul>
                         </div>
 
-                        <div class="panel-body col-md-6 col-xs-12">
+                        --}}{{--<div class="panel-body col-md-6 col-xs-12">
                             <a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-user"></i>Create an Event
                                 </button>
                             </a>
-                        </div>
+                        </div>--}}{{--
 
                         <div class="panel-body col-md-6 col-xs-12">
-
-                            @foreach($userevents->where('sailing_id',$sailing->sailing->id) as $events)
+                            <div id="demo" class="well hidden">
+                            @foreach($userevents->where('sailing_id', $sailing->sailing_id)->slice(0, 5) as $events)
                                 --}}{{--@if($events != null)--}}{{--
                                 --}}{{--@foreach($eventdetails[$events->event_id] as $edetail)--}}{{--
                                 <ul class="list-group">
@@ -157,7 +157,7 @@
                                     </li>
                                     <li class="list-group-item">
                                         <strong>Role:</strong><br>
-                                        @if ($events->role == "Host")
+                                        @if ($events->role == "host")
                                             <span class="label label-pill label-warning">{!! $events->role !!}</span>
                                         @else
                                             <span class="label label-pill label-danger">{!! $events->role !!}</span>
@@ -175,12 +175,20 @@
                                         <strong>Location:</strong><br>
                                         {!! $events->event->location !!}
                                     </li>
+                                    <li class="list-group-item">
+                                        <strong>Sailing ID:</strong><br>
+                                        {!! $events->sailing_id !!}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Event ID:</strong><br>
+                                        {!! $events->event->id !!}
+                                    </li>
                                 </ul>
                                 --}}{{--@else--}}{{--
                                 --}}{{--<span class="label label-pill label-default">You are not participating in any events for this sailing... =(</span>--}}{{--
                                 --}}{{--@endif--}}{{--
                             @endforeach
-
+    </div>
                         </div>
                         --}}{{--@endfor--}}{{--
                     </div>
