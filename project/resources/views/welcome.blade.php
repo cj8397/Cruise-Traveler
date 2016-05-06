@@ -83,17 +83,13 @@
                                     @endif
                                 </div>
                             </div>
-
                             <div class="col-xs-12 buttons">
                                 <button type="submit" class="btn btn-primary col-xs-3">
                                     <i class="fa fa-btn fa-sign-in"></i>Login
                                 </button>
                                 <div class="col-xs-5"><input type="checkbox" name="remember"> <span>Remember Me?</span></div>
                                 <div class="col-xs-4"><a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Password?</a></div>
-
-
                             </div>
-
                         </form>
                     </div>
             </div>
@@ -115,7 +111,12 @@
                             </div>
                             <div class="text-centered col-md-12 col-xs-12">
                                 <a href="{{ action('SailingsController@GetSailing', [$caribsail->id]) }}">
-                                    <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
+                                    <img class="img-responsive" src="/images/caribbean_thumb.png" alt="">
+                                </a>
+                            </div>
+                            <div class="col-xs-12 text-center">
+                                <a href="/sailings" class="btn btn-primary btn-md">
+                                    <i class="fa fa-users" aria-hidden="true"></i>All Caribbean Sailings
                                 </a>
                             </div>
                             @if(!empty($caribsail['stats']))
@@ -125,13 +126,13 @@
                                             <p><b>Confirmed:</b> {{$caribsail['stats']->total}}  </p>
                                         </div>
                                         <div class="col-md-6 col-xs-12">
-                                            <p><b>Families:</b> {{ $caribsail['stats']->family }} %</p>
+                                            <p><b>Families:</b> {{ $caribsail['stats']->family }}%</p>
                                         </div>
                                         <div class="col-md-6 col-xs-12">
                                             <h4> Languages: </h4>
                                             <ul>
                                                 @foreach($caribsail['stats']->languages as $language => $value)
-                                                    <li> <b>{{ $language }}: </b> {{ $value }} % </li>
+                                                    <li> <b>{{ $language }}: </b> {{ $value }}% </li>
                                                 @endforeach
                                             </ul>
                                         </div>
@@ -139,7 +140,7 @@
                                             <h4> Cities: </h4>
                                             <ul>
                                                 @foreach($caribsail['stats']->cities as $city => $value)
-                                                    <li> <b>{{ $city }}: </b> {{ $value }} % </li>
+                                                    <li> <b>{{ $city }}: </b> {{ $value }}% </li>
                                                 @endforeach
                                             </ul>
                                         </div>
@@ -163,7 +164,7 @@
                             <div class="events">
                                 @if(!empty($caribsail['events']))
                                     <div class="text-center">
-                                        <h4>Events</h4>
+                                        <h4>Top Events</h4>
                                         @foreach($caribsail['events'] as $event)
                                             <div class="col-md-4 col-xs-12">
                                                 <div class="panel panel-primary">
@@ -174,7 +175,7 @@
                                     </div>
                                 @else
                                     <div class="text-center">
-                                        <h4>Events</h4>
+                                        <h4>Top Events</h4>
                                         @for($i = 0; $i < 3; $i++)
                                             <div class="col-md-4 col-xs-12">
                                                 <div class="panel panel-primary">
@@ -184,13 +185,6 @@
                                         @endfor
                                     </div>
                                 @endif
-                            </div>
-                            <div class="col-md-12 col-xs-12 text-center">
-                                <a href="/sailings">
-                                    <button type="button" class="btn btn-primary btn-md">
-                                        <i class="fa fa-users" aria-hidden="true"></i>More Sailings
-                                    </button>
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -209,7 +203,12 @@
                             </div>
                             <div class="text-centered col-md-12 col-xs-12">
                                 <a href="{{ action('SailingsController@GetSailing', [$medsail->id]) }}">
-                                    <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
+                                    <img class="img-responsive" src="/images/mediterranean_thumb.png" alt="">
+                                </a>
+                            </div>
+                            <div class="col-xs-12">
+                                <a href="/sailings" class="btn btn-primary btn-md">
+                                    <i class="fa fa-users" aria-hidden="true"></i>All Mediterranean Sailings
                                 </a>
                             </div>
                             @if(!empty($medsail['stats']))
@@ -219,13 +218,13 @@
                                             <p><b>Confirmed:</b> {{$medsail['stats']->total}}  </p>
                                         </div>
                                         <div class="col-md-6 col-xs-12">
-                                            <p><b>Families:</b> {{ $medsail['stats']->family }} %</p>
+                                            <p><b>Families:</b> {{ $medsail['stats']->family }}%</p>
                                         </div>
                                         <div class="col-md-6 col-xs-12">
                                             <h4> Languages: </h4>
                                             <ul>
                                                 @foreach($medsail['stats']->languages as $language => $value)
-                                                    <li> <b>{{ $language }}: </b> {{ $value }} % </li>
+                                                    <li> <b>{{ $language }}: </b> {{ $value }}% </li>
                                                 @endforeach
                                             </ul>
                                         </div>
@@ -233,7 +232,7 @@
                                             <h4> Cities: </h4>
                                             <ul>
                                                 @foreach($medsail['stats']->cities as $city => $value)
-                                                    <li> <b>{{ $city }}: </b> {{ $value }} % </li>
+                                                    <li> <b>{{ $city }}: </b> {{ $value }}% </li>
                                                 @endforeach
                                             </ul>
                                         </div>
@@ -257,7 +256,7 @@
                             <div class="events">
                                 @if(!empty($medsail['events']))
                                     <div class="text-center">
-                                        <h4>Events</h4>
+                                        <h4>Top Events</h4>
                                             @foreach($medsail['events'] as $event)
                                                 <div class="col-md-4 col-xs-12">
                                                     <div class="panel panel-primary">
@@ -268,7 +267,7 @@
                                      </div>
                                 @else
                                     <div class="text-center">
-                                        <h4>Events</h4>
+                                        <h4>Top Events</h4>
                                         @for($i = 0; $i < 3; $i++)
                                             <div class="col-md-4 col-xs-12">
                                                 <div class="panel panel-primary">
@@ -278,13 +277,6 @@
                                         @endfor
                                     </div>
                                 @endif
-                            </div>
-                            <div class="col-md-12 col-xs-12 text-center">
-                                <a href="/sailings">
-                                    <button type="button" class="btn btn-primary btn-md">
-                                        <i class="fa fa-users" aria-hidden="true"></i>More Sailings
-                                    </button>
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -301,9 +293,12 @@
                                     {!! $alassail->cruise_line !!}
                                 </h4>
                             </div>
-                            <div class="text-centered col-md-12 col-xs-12">
+                            <div class="text-centered col-xs-12">
                                 <a href="{{ action('SailingsController@GetSailing', [$alassail->id]) }}">
-                                    <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
+                                    <img class="img-responsive" src="/images/alaskan_thumb.png" alt="">
+                                </a>
+                                <a href="/sailings" class="btn btn-primary btn-md">
+                                    <i class="fa fa-users" aria-hidden="true"></i>All Alaskan Sailings
                                 </a>
                             </div>
                             @if(!empty($alassail['stats']))
@@ -313,13 +308,13 @@
                                             <p><b>Confirmed:</b> {{$alassail['stats']->total}}  </p>
                                         </div>
                                         <div class="col-md-6 col-xs-12">
-                                            <p><b>Families:</b> {{ $alassail['stats']->family }} %</p>
+                                            <p><b>Families:</b> {{ $alassail['stats']->family }}%</p>
                                         </div>
                                         <div class="col-md-6 col-xs-12">
                                             <h4> Languages: </h4>
                                             <ul>
                                                 @foreach($alassail['stats']->languages as $language => $value)
-                                                    <li> <b>{{ $language }}: </b> {{ $value }} % </li>
+                                                    <li> <b>{{ $language }}: </b> {{ $value }}% </li>
                                                 @endforeach
                                             </ul>
                                         </div>
@@ -327,7 +322,7 @@
                                             <h4> Cities: </h4>
                                             <ul>
                                                 @foreach($alassail['stats']->cities as $city => $value)
-                                                    <li> <b>{{ $city }}: </b> {{ $value }} % </li>
+                                                    <li> <b>{{ $city }}: </b> {{ $value }}% </li>
                                                 @endforeach
                                             </ul>
                                         </div>
@@ -351,7 +346,7 @@
                             <div class="events">
                                 @if(!empty($alassail['events']))
                                     <div class="text-center">
-                                        <h4>Events</h4>
+                                        <h4>Top Events</h4>
                                         @foreach($alassail['events'] as $event)
                                             <div class="col-md-4 col-xs-12">
                                                 <div class="panel panel-primary">
@@ -362,7 +357,7 @@
                                     </div>
                                 @else
                                     <div class="text-center">
-                                        <h4>Events</h4>
+                                        <h4>Top Events</h4>
                                         @for($i = 0; $i < 3; $i++)
                                             <div class="col-md-4 col-xs-12">
                                                 <div class="panel panel-primary">
@@ -372,13 +367,6 @@
                                         @endfor
                                     </div>
                                 @endif
-                            </div>
-                            <div class="col-md-12 col-xs-12 text-center">
-                                <a href="/sailings">
-                                    <button type="button" class="btn btn-primary btn-md">
-                                        <i class="fa fa-users" aria-hidden="true"></i>More Sailings
-                                    </button>
-                                </a>
                             </div>
                         </div>
                     </div>

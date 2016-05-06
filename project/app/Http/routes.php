@@ -82,6 +82,5 @@ Route::get('/eventusers/{event_id}', 'UserEventsController@GetAllUsers');
 Route::get('/userevents', 'UserEventsController@GetAllEvents');
 
 Route::get('/test', function() {
-    $helper = new UserSailingsController();
-    return $helper->GetTop3Summary(1);
+    return View::make('images');
 });
