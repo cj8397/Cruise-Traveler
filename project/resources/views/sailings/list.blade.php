@@ -28,7 +28,7 @@
 
     <!-- Projects Row -->
 
-        @if($sailings->count()<1 )
+        @if($sailings->count() < 1 )
             <div class="row">
                 <div class="jumbotron"> <h1>No Results Were Found</h1></div>
             </div>
@@ -53,6 +53,7 @@
                     </a>
                 </div>
                 @if(!empty($sailing['stats']))
+                    @if($sailing['stats']->total != null)
                     <div class="row panel panel-default col-md-12 col-xs-12 text-center">
                         <div class="panel-body col-md-6 col-xs-12">
                             <p>Confirmed Passengers: {{$sailing['stats']->total}}  </p>
@@ -77,6 +78,11 @@
                             </ul>
                         </div>
                     </div>
+                    @else
+                        <div class="row panel panel-default col-md-12 col-xs-12 text-center">
+                            <h4> No users in sailing </h4>
+                        </div>
+                    @endif
                 @else
                     <div class="row panel panel-default col-md-12 col-xs-12 text-center">
                         <div class="panel-body col-md-6 col-xs-12">

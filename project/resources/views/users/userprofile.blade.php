@@ -1,5 +1,16 @@
 @extends('layouts.scrolling')
+@section('styles')
+    <style>
+        #events {
+            height: 300px;
+            overflow-y: auto;
+        }
 
+        #credits {
+            margin-top: 5%;
+        }
+    </style>
+@endsection
 @section('content')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
@@ -13,11 +24,7 @@
 
         });
     </script>
-    <style type="text/css">
-        #credits {
-            margin-top: 5%;
-        }
-    </style>
+
     <img class="img-responsive" src="/images/cruiseship.jpg">
     <div class="container">
         <div class="panel panel-default row col-md-3 col-xs-12">
@@ -55,7 +62,6 @@
                 </div>
                 <a href="#credits" class="toggle btn btn-primary">More Details</a>
             </div>
-            <div></div>
         </div>
 
         <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
@@ -72,16 +78,73 @@
         </div>
 
         <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
-            {{--@if(isset($usersailings))--}}
-            {{--@foreach($usersailings as $sailings)--}}
+            <div class="row"><br></div>
+            <div class="row col-md-5 col-xs-5">
+                @if(isset($usersailings))
+                    @foreach($usersailings->slice(0, 5) as $sailing)
+
+                        <a href="#demo" class="toggle btn btn-info">
+                            {!! $sailing->sailing->cruise_line !!}
+                        </a>
+                        <p>{!! $sailing->sailing->start_date !!}</p>
+
+                    @endforeach
+                @else
+                    <p>You currently do not belong to any sailings!</p>
+                    <p>Please click on Join Sailing button above</p>
+                @endif
+            </div>
+
+            <div class="row col-md-6 col-md-offset-1 col-xs-12">
+                <h4>Events</h4>
+                <div class="panel panel-default col-md-12 col-xs-12" id="events">
+                    <div id="demo" class="well hidden">
+                        @foreach($usersailings as $sail)
+                            @foreach($userevents->where('sailing_id', $sail->sailing_id) as $events)
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <h5>Event: <a
+                                                    href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
+                                        </h5>
+                                    </li>
+                                    <li class="list-group-item">{!! $events->event->start_date !!}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Role:</strong><br>
+                                        @if ($events->role == "host")
+                                            <span class="label label-pill label-warning">{!! $events->role !!}</span>
+                                        @else
+                                            <span class="label label-pill label-danger">{!! $events->role !!}</span>
+                                        @endif
+                                    </li>
+                                </ul>
+                            @endforeach
+
+
+                            {{--<a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-user"></i>Create an Event
+                                </button>
+                            </a>--}}
+
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{--<div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
+            --}}{{--@if(isset($usersailings))--}}{{--
+            --}}{{--@foreach($usersailings as $sailings)--}}{{--
             @if(isset($usersailings))
                 @foreach($usersailings->slice(0, 5) as $sailing)
-                    {{--@for ($x = 0; $x < count($details); $x++)--}}
+                    --}}{{--@for ($x = 0; $x < count($details); $x++)--}}{{--
                     <div class="row col-md-12 col-xs-12">
                         <hr>
                         <div class="panel-body col-md-6 col-xs-12">
                             <div class="panel-heading">
-                                <label class="label-info"><h4>{!! $sailing->sailing->cruise_line !!}</h4></label>
+                                <a href="#demo" class="toggle btn btn-info">
+                                    <label class="label-info"><h4>{!! $sailing->sailing->cruise_line !!}</h4></label>
+                                </a>
                             </div>
                             <ul class="list-group">
                                 <li class="list-group-item">
@@ -93,19 +156,19 @@
                             </ul>
                         </div>
 
-                        <div class="panel-body col-md-6 col-xs-12">
+                        --}}{{--<div class="panel-body col-md-6 col-xs-12">
                             <a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-user"></i>Create an Event
                                 </button>
                             </a>
-                        </div>
+                        </div>--}}{{--
 
                         <div class="panel-body col-md-6 col-xs-12">
-
-                            @foreach($userevents->where('sailing_id',$sailing->sailing->id) as $events)
-                                {{--@if($events != null)--}}
-                                {{--@foreach($eventdetails[$events->event_id] as $edetail)--}}
+                            <div id="demo" class="well hidden">
+                            @foreach($userevents->where('sailing_id', $sailing->sailing_id)->slice(0, 5) as $events)
+                                --}}{{--@if($events != null)--}}{{--
+                                --}}{{--@foreach($eventdetails[$events->event_id] as $edetail)--}}{{--
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <h5>Event: <a
@@ -114,7 +177,7 @@
                                     </li>
                                     <li class="list-group-item">
                                         <strong>Role:</strong><br>
-                                        @if ($events->role == "Host")
+                                        @if ($events->role == "host")
                                             <span class="label label-pill label-warning">{!! $events->role !!}</span>
                                         @else
                                             <span class="label label-pill label-danger">{!! $events->role !!}</span>
@@ -132,40 +195,48 @@
                                         <strong>Location:</strong><br>
                                         {!! $events->event->location !!}
                                     </li>
+                                    <li class="list-group-item">
+                                        <strong>Sailing ID:</strong><br>
+                                        {!! $events->sailing_id !!}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Event ID:</strong><br>
+                                        {!! $events->event->id !!}
+                                    </li>
                                 </ul>
-                                {{--@else--}}
-                                {{--<span class="label label-pill label-default">You are not participating in any events for this sailing... =(</span>--}}
-                                {{--@endif--}}
+                                --}}{{--@else--}}{{--
+                                --}}{{--<span class="label label-pill label-default">You are not participating in any events for this sailing... =(</span>--}}{{--
+                                --}}{{--@endif--}}{{--
                             @endforeach
-
+    </div>
                         </div>
-                        {{--@endfor--}}
+                        --}}{{--@endfor--}}{{--
                     </div>
                 @endforeach
             @endif
-        </div>
-    </div>
+        </div>--}}
 
-    <!-- Pagination -->
-    <div class="row text-center">
-        <div class="col-lg-12 col-md-12 col-xs-12">
-            <ul class="pagination">
-                <li>
-                    <a href="../users/userprofile.blade.php/">&laquo;</a>
-                </li>
-                <li class="active">
-                    <a href="../users/userprofile.blade.php/">1</a>
-                </li>
-                <li>
-                    <a href="../users/userprofile.blade.php/">2</a>
-                </li>
-                <li>
-                    <a href="../users/userprofile.blade.php/">3</a>
-                </li>
-                <li>
-                    <a href="../users/userprofile.blade.php/">&raquo;</a>
-                </li>
-            </ul>
+
+                <!-- Pagination -->
+        <div class="row text-center">
+            <div class="col-lg-12 col-md-12 col-xs-12">
+                <ul class="pagination">
+                    <li>
+                        <a href="../users/userprofile.blade.php/">&laquo;</a>
+                    </li>
+                    <li class="active">
+                        <a href="../users/userprofile.blade.php/">1</a>
+                    </li>
+                    <li>
+                        <a href="../users/userprofile.blade.php/">2</a>
+                    </li>
+                    <li>
+                        <a href="../users/userprofile.blade.php/">3</a>
+                    </li>
+                    <li>
+                        <a href="../users/userprofile.blade.php/">&raquo;</a>
+                </ul>
+            </div>
         </div>
     </div>
 @endsection
