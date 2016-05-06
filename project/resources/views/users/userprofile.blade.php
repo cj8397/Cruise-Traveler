@@ -81,7 +81,7 @@
             <div class="row"><br></div>
             <div class="row col-md-5 col-xs-5">
                 @if(isset($usersailings))
-                    @foreach($usersailings->slice(0, 5) as $sailing)
+                    @foreach($usersailings->slice(0, 6) as $sailing)
 
                         <a href="#demo" class="toggle btn btn-info">
                             {!! $sailing->sailing->cruise_line !!}
