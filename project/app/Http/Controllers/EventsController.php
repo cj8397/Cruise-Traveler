@@ -54,7 +54,8 @@ class EventsController extends Controller
     protected function GetOneEvent($event_id)
     {
         if ($event = Event::where('id', $event_id)->first()) {
-            $members = UserEvent::with('userdetails')->where('event_id', $event_id)->get();
+            $members = UserEvent::with('userdetails')->where(['event_id' => $event_id,
+                'sailing_id' => $event->sailing_id])->get();
             $host = $members->where('role', 'Host')->first();
             $currentUser = $members->where('user_id', Auth::user()->id)->first();
             if($userEvent = UserEvent::where(['user_id' => Auth::user()->id, 'event_id'=> $event_id])->first())
