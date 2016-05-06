@@ -128,6 +128,7 @@
     </div>
     <!-- /.container -->
 </nav>
+@include('flash::message')
 @if(isset($success))
     <div class="alert alert-success">
         {{$success}}

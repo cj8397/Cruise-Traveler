@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Event;
 use App\Http\Requests;
 use App\UserEvent;
+use App\UserSailing;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Helpers\StatsHelper;
 use Cmgmyr\Messenger\Models\Thread;
+use Laracasts\Flash\Flash;
 
 class UserEventsController extends Controller
 {
@@ -24,15 +26,20 @@ class UserEventsController extends Controller
     public function JoinEvent($event_id, $sailing_id)
     {
         $user_id = Auth::User()->id;
-        // role = member// need to check both columns....
-        $userE = UserEvent::firstOrNew([
-            'sailing_id' => $sailing_id,
-            'user_id' => $user_id,
-            'event_id' => $event_id,
-            'role' => 'Participant'
-        ]);
-        $userE->save();
-            return redirect()->action('EventsController@GetOneEvent',[$event_id]);
+       if(UserSailing::where(['user_id'=>$user_id,'sailing_id' => $sailing_id])->first() != null ){
+           // role = member// need to check both columns....
+           $userE = UserEvent::firstOrNew([
+               'sailing_id' => $sailing_id,
+               'user_id' => $user_id,
+               'event_id' => $event_id,
+               'role' => 'Participant'
+           ]);
+           $userE->save();
+           Flash::success('You Joined the EVENT!');
+           return redirect()->action('EventsController@GetOneEvent',[$event_id]);
+       }else{
+           Flash::error('You are not registered for the sailing!');
+           return redirect('/sailings/'.$sailing_id);       }
     }
 
     // remove entry from bridge table
@@ -42,9 +49,11 @@ class UserEventsController extends Controller
         $conditions = compact('user_id', 'event_id');
         if (UserEvent::where($conditions)->exists()) {
             UserEvent::where($conditions)->delete();
-            return redirect()->action('EventsController@GetOneEvent', [$event_id]);//view('events.eventdetail', );
+            Flash::success('You have left the EVENT!');
+            return redirect('/sailings');//view('events.eventdetail', );
         } else {
-            return redirect()->action('EventsController@GetOneEvent', [$event_id]);
+            Flash::error('You are not registered for this Event!');
+            return redirect('/sailings');
         }
     }
 

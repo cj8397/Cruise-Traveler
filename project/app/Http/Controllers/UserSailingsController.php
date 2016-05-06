@@ -14,6 +14,7 @@ use App\Http\Controllers\Helpers\StatsHelper;
 use App\Http\Controllers\UserEventsController;
 use Illuminate\Support\Facades\DB;
 use Cmgmyr\Messenger\Models\Thread;
+use Laracasts\Flash\Flash;
 
 
 class UserSailingsController extends Controller
@@ -36,9 +37,11 @@ class UserSailingsController extends Controller
             'sailing_id' => $sailing_id
         ]);
         $userSailing->save();
+            Flash::success('Successfully joined a Sailing');
             return redirect()->action('SailingsController@GetSailing', [$sailing_id]);
 
       }else{
+            Flash::error('You have succesfully your account information');
         return redirect('users/create');
       }
     }
@@ -47,19 +50,26 @@ class UserSailingsController extends Controller
     public function LeaveSailing($sailing_id) {
         $user_id = Auth::User()->id;
         // creates key value pair based on variable names
-        $uEvent = Sailing::with('usersailings','userevents')->where('id',$sailing_id)->first();
-        foreach($uEvent->usersailings->where('user_id', $user_id) as $currentUSailing){
-            if($currentUSailing != null ){
-                  $currentUSailing->delete();
-               }
-        }
-        foreach($uEvent->userevents->where('user_id',$user_id) as $currentUEvent){
-            if($currentUEvent->count != null){
-                $currentUEvent->delete();
+        if($uEvent = Sailing::with('usersailings','userevents')->where('id',$sailing_id)->first()){
+            foreach($uEvent->usersailings->where('user_id', $user_id) as $currentUSailing){
+                if($currentUSailing != null ){
+                    $currentUSailing->delete();
+                }
             }
-        }
-        $uEvent->save();
+            foreach($uEvent->userevents->where('user_id',$user_id) as $currentUEvent){
+                if($currentUEvent->count != null){
+                    $currentUEvent->delete();
+                }
+            }
+            $uEvent->save();
+            Flash::success('Successfully left the Sailing');
             return redirect()->action('SailingsController@GetSailing', [$sailing_id]);
+        }else{
+
+            Flash::error('Wasn\'t able to find that sailing');
+            return redirect()->action('SailingsController@GetSailing', [$sailing_id]);
+
+        }
         }
     // getAllUsers in a sailing
     public function GetAllUsers($sailing_id) {
