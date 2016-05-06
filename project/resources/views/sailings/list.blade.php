@@ -4,30 +4,34 @@
         <!-- Page Content -->
         <div class="row">
 <div class="container">
-    <form url="sailings/" class="form navbar-form navbar-right searchform">
-        <input type="text" name="search" class="form-control" placeholder="Search">
-        @if(!empty($destinations))
-            <label for="destination"> Destination: </label>
-            <select name="destination" id="destination" class="form-control">
-                <option value="selected">Pick one</option>
-                @foreach($destinations as $dest)
-                    <option value="{{$dest->destination}}">{{$dest->destination}}</option>
-                @endforeach
-            </select>
-        @endif
+    <div class="col-xs-12">
+        <form url="sailings/" class="form navbar-form navbar-right searchform">
+            <input type="text" name="search" class="form-control" placeholder="Search">
+            @if(!empty($destinations))
+                <select name="destination" id="destination" class="form-control">
+                    <option value="">Destination</option>
+                    @foreach($destinations as $dest)
+                        <option value="{{$dest->destination}}">{{$dest->destination}}</option>
+                    @endforeach
+                </select>
+            @endif
 
-        @if(!empty($ports))
-            <label for="origin"> Port of Origin: </label>
-            <select name="origin" id="origin" class="form-control">
-                <option value="selected">Pick one</option>
-                @foreach($ports as $port)
-                    <option value="{{$port->port_org}}">{{$port->port_org}}</option>
-                @endforeach
+            @if(!empty($ports))
+                <select name="origin" id="origin" class="form-control">
+                    <option value="">Port of Origin</option>
+                    @foreach($ports as $port)
+                        <option value="{{$port->port_org}}">{{$port->port_org}}</option>
+                    @endforeach
+                </select>
+            @endif
+            <select name="sort" id="sort" class="form-control">
+                <option value="">Sort</option>
+                <option value="date_asc">Date: Future to past</option>
+                <option value="date_desc">Date: Past to future</option>
             </select>
-        @endif
-
-        <input type="submit" value="Search" class="btn btn-default">
-    </form>
+            <input type="submit" value="Submit" class="btn btn-default">
+        </form>
+    </div>
 </div>
     <div class="container">
     <!-- Page Heading -->
