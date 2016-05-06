@@ -45,7 +45,7 @@ class SailingsController extends Controller
     protected function GetSailing( $id)
     {
             if ($sailing = Sailing::find($id)) {
-                $currentUser = UserSailing::where(['sailing_id' => $id, 'user_id'=> Auth::user()->id]);
+                $currentUser = UserSailing::where(['sailing_id' => $id, 'user_id'=> Auth::user()->id])->get();
                 $statsController = new UserSailingsController();
                 $stats = $statsController->GetStatsSummary($id); // should add a count in there
                 if(Auth::check() && UserSailing::where(['user_id' => Auth::user()->id, 'sailing_id'=> $id])->exists())

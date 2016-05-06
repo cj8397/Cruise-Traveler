@@ -36,21 +36,8 @@ class UserSailingsController extends Controller
             'sailing_id' => $sailing_id
         ]);
         $userSailing->save();
-        $sailing = Sailing::where('id', $sailing_id)->first();
-        $stats = $this->GetStatsSummary($sailing_id); // should add a count in there
-        if(!$userSailing->exists) { // doesnt exist
-            // need to assign properties
-            $userSailing->user_id = $user_id;
-            $userSailing->sailing_id = $sailing_id;
-            $userSailing->save();
-            $success = "Joined the sailing.";
-            return view('sailings.detail', compact('success', 'sailing', 'stats', 'thread'));
-            //return redirect::back();
-        } else {
-          //return redirect::back();
-            $failure= "Already joined the sailing";
-            return view('sailings.detail', compact('success', 'sailing', 'stats', 'thread'));
-        }
+            return redirect()->action('SailingsController@GetSailing', [$sailing_id]);
+
       }else{
         return redirect('users/create');
       }
@@ -60,27 +47,19 @@ class UserSailingsController extends Controller
     public function LeaveSailing($sailing_id) {
         $user_id = Auth::User()->id;
         // creates key value pair based on variable names
-        $sailing_id = (int)$sailing_id;
-        $sailing = Sailing::find($sailing_id);
-        $stats = $this->GetStatsSummary($sailing_id); // should add a count in there
         $conditions = compact('user_id', 'sailing_id');
-        if( UserSailing::where($conditions)->exists()) {
-            UserEvent::where($conditions)->delete();
-            DB::table('user_sailings')->where('user_id', '=', $user_id)
-                ->where('sailing_id', '=', $user_id)->delete();
-
-            UserSailing::where($conditions)->delete();
+        $uEvent = Sailing::with('usersailings','userevents')->where('id',$sailing_id)->first();
+        $uEvent->userevents->where('user_id',$user_id)->first();
+        $sailing = $uEvent->usersailing->where('sailing_id', $sailing_id)->first()->delete();
+        foreach($uEvent->userevent  as $uE) {
+            $uE->delete();
+        }
                 // ->delete();
             //return redirect::back();
-            $success = "Left the sailing";
-            return view('sailings.detail', compact('success', 'sailing', 'stats'));
-        } else {
+            dd('NOT FOUND');
           //return redirect::back();
-            $failure= "Already left the sailing";
-            return view('sailings.detail', compact('failure', 'sailing', 'stats'));
+            return redirect()->action('SailingsController@GetSailing', [$sailing_id]);
         }
-    }
-
     // getAllUsers in a sailing
     public function GetAllUsers($sailing_id) {
         $users = UserSailing::where(['sailing_id' => $sailing_id])->get();
