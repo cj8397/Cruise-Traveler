@@ -93,7 +93,18 @@ class UserController extends Controller
             'co_travellers' => $request->co_travellers,
             'region' => $request->region,
             'city' => $request->city,
-            'address' => $request->address
+            'address' => $request->address,
+            'two' => $request->two,
+             'five' => $request->five,
+              'twelve' => $request->twelve,
+               'seventeen' => $request->seventeen,
+                'twentyfour' => $request->twentyfour,
+                 'twentynine' => $request->twentynine,
+                  'thirtynine' => $request->thirtynine,
+            'fourtynine' => $request->fourtynine,
+             'fiftynine' => $request->fiftynine,
+              'seventyfour' => $request->seventyfour,
+               'seventyfive' => $request->seventyfive
         ]);
         return redirect('users/detail');
     }
