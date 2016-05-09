@@ -14,6 +14,7 @@
 @section('content')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
+    @if(isset($userdetail->dob))
         $(function () {
 
             $('.toggle').click(function (event) {
@@ -23,6 +24,7 @@
             });
 
         });
+        @endif
     </script>
 
     <img class="img-responsive" src="/images/cruiseship.jpg">
@@ -60,7 +62,7 @@
                         <li class="list-group-item"><h4>Language: </h4>{{ $userdetail->lang }}</li>
                     </ul>
                 </div>
-                <a href="#credits" class="toggle btn btn-primary">More Details</a>
+                <a href="@if(isset($userdetail->dob))#credits @else{{url('users/detail')}}@endif" class="toggle btn btn-primary">More Details</a>
             </div>
         </div>
 
