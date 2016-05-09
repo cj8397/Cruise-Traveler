@@ -34,21 +34,6 @@ class FlashNotifier
     }
 
     /**
-     * Flash a general message.
-     *
-     * @param  string $message
-     * @param  string $level
-     * @return $this
-     */
-    public function message($message, $level = 'info')
-    {
-        $this->session->flash('flash_notification.message', $message);
-        $this->session->flash('flash_notification.level', $level);
-
-        return $this;
-    }
-
-    /**
      * Flash a success message.
      *
      * @param  string $message
@@ -100,6 +85,21 @@ class FlashNotifier
 
         $this->session->flash('flash_notification.overlay', true);
         $this->session->flash('flash_notification.title', $title);
+
+        return $this;
+    }
+
+    /**
+     * Flash a general message.
+     *
+     * @param  string $message
+     * @param  string $level
+     * @return $this
+     */
+    public function message($message, $level = 'info')
+    {
+        $this->session->flash('flash_notification.message', $message);
+        $this->session->flash('flash_notification.level', $level);
 
         return $this;
     }

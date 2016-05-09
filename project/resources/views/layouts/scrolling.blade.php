@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Cruise Connect</title>
 
     {{--<!-- Fonts -->--}}
     {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">--}}
@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="{{ URL::asset('styles/scrolling-nav.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/nav.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/bootstrap-datetimepicker.min.css') }}"/>
+    <link rel="stylesheet" href="{{ URL::asset('styles/custom/site.css') }}" />
 
     @yield('styles')
 
@@ -80,9 +81,7 @@
                     <a href="{{ url('/sailings') }}">Sailings</a>
                 </li>
                 @if (!Auth::guest())
-                    <li>
-                        <a href="{{ url('events/10') }}">Events</a>
-                    </li>
+                    <li><a href="{{ url('events/userevents') }}">My Ship Events</a></li>
                 @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -99,7 +98,7 @@
                             <li><a href="https://docs.google.com/document/d/1yIuRZO1HJ71moInaR_B1Y0mb6yfwxB9oClgWSx5CTpw/edit#heading=h.tphyqzr77ydu">Design Model</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 @else
                     <li class="dropdown">

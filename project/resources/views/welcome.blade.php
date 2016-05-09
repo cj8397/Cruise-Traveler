@@ -1,7 +1,7 @@
 @extends('layouts.scrolling')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ URL::asset('styles/welcome.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('styles/custom/welcome.css') }}" />
 @endsection
 
 @section('content')
@@ -24,14 +24,28 @@
         th, td {
             padding: 15px;
         }
+
+        .panel-body > a {
+            width: 100%;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        .cities {
+            overflow-x: visible;
+        }
+        .cities li {
+            white-space:nowrap;
+        }
     </style>
     <!-- Intro Section -->
     <div class="container-fluid">
-        <div class="col-xs-12 col-sm-6 ">
-            <iframe src="https://www.youtube.com/embed/CnAUfvWlBGs"
-                    frameborder="2" allowfullscreen></iframe>
-        </div>
+
         @if (Auth::guest())
+            <div class="col-xs-12 col-sm-6 ">
+                <iframe src="https://www.youtube.com/embed/CnAUfvWlBGs"
+                        frameborder="2" allowfullscreen></iframe>
+            </div>
             <div class="col-xs-12 col-sm-6  login">
             <div class="panel panel-default">
                     <div class="panel-heading">Login</div>
@@ -72,7 +86,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 {{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label class="col-xs-12 control-label">Password</label>
+                                <label class="col-xs-12 control-label">Password:</label>
                                 <div class="col-xs-12">
                                     <input type="password" class="form-control" name="password">
 
@@ -83,23 +97,19 @@
                                     @endif
                                 </div>
                             </div>
-
                             <div class="col-xs-12 buttons">
                                 <button type="submit" class="btn btn-primary col-xs-3">
                                     <i class="fa fa-btn fa-sign-in"></i>Login
                                 </button>
                                 <div class="col-xs-5"><input type="checkbox" name="remember"> <span>Remember Me?</span></div>
                                 <div class="col-xs-4"><a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Password?</a></div>
-
-
                             </div>
-
                         </form>
                     </div>
             </div>
-        @endif
             </div>
             <hr class="style-eight col-md-12 col-xs-12">
+        @endif
             <div class="col-xs-12">
                 <div class="col-sm-4 col-xs-12">
                     <div class="panel panel-default">
@@ -107,41 +117,41 @@
                             <h2>Caribbean</h2>
                         </div>
                         <div class="panel-body">
-                            <div class="text-center">
-                                <h4>
-                                    {{--{!! $medsail->id !!} | --}}
-                                    {!! $caribsail->cruise_line !!}
-                                </h4>
-                            </div>
-                            <div class="text-centered col-md-12 col-xs-12">
-                                <a href="{{ action('SailingsController@GetSailing', [$caribsail->id]) }}">
-                                    <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
-                                </a>
-                            </div>
+                            <a href="{{ action('SailingsController@GetSailing', [$caribsail->id]) }}">
+                                <h4>{!! $caribsail->cruise_line !!}</h4>
+                                <img class="img-responsive" src="/images/caribbean_thumb.png" alt="">
+                            </a>
+                            <a href="/sailings?destination=Caribbean" class="btn btn-primary btn-md">
+                                <i class="fa fa-users" aria-hidden="true"></i>View Caribbean Sailings
+                            </a>
                             @if(!empty($caribsail['stats']))
                                 @if($caribsail['stats']->total != null)
                                     <div class="stats clearfix">
-                                        <div class="col-md-6 col-xs-12">
-                                            <p><b>Confirmed:</b> {{$caribsail['stats']->total}}  </p>
+                                        <div class="col-md-5 col-xs-12">
+                                            <div>
+                                                <p><b>Confirmed:</b> {{$caribsail['stats']->total}}  </p>
+                                            </div>
+                                            <div>
+                                                <h4> Languages: </h4>
+                                                <ul>
+                                                    @foreach($caribsail['stats']->languages as $language => $value)
+                                                        <li> <b>{{ $language }}: </b> {{ $value }}% </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 col-xs-12">
-                                            <p><b>Families:</b> {{ $caribsail['stats']->family }} %</p>
-                                        </div>
-                                        <div class="col-md-6 col-xs-12">
-                                            <h4> Languages: </h4>
-                                            <ul>
-                                                @foreach($caribsail['stats']->languages as $language => $value)
-                                                    <li> <b>{{ $language }}: </b> {{ $value }} % </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6 col-xs-12">
-                                            <h4> Cities: </h4>
-                                            <ul>
-                                                @foreach($caribsail['stats']->cities as $city => $value)
-                                                    <li> <b>{{ $city }}: </b> {{ $value }} % </li>
-                                                @endforeach
-                                            </ul>
+                                        <div class="col-md-7 cities">
+                                            <div>
+                                                <p><b>Families:</b> {{ $caribsail['stats']->family }}%</p>
+                                            </div>
+                                            <div>
+                                                <h4> Cities: </h4>
+                                                <ul>
+                                                    @foreach($caribsail['stats']->cities as $city => $value)
+                                                        <li> <span><b>{{ $city }}: </b> {{ $value }}% </span></li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 @else
@@ -162,35 +172,26 @@
                             <hr />
                             <div class="events">
                                 @if(!empty($caribsail['events']))
-                                    <div class="text-center">
-                                        <h4>Events</h4>
-                                        @foreach($caribsail['events'] as $event)
-                                            <div class="col-md-4 col-xs-12">
-                                                <div class="panel panel-primary">
-                                                    <div class="panel-heading">{{ $event->title }}</div>
-                                                </div>
+                                    <h4>Events</h4>
+                                    @foreach($caribsail['events'] as $event)
+                                        <div class="col-md-4 col-xs-12">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">{{ $event->title }}</div>
                                             </div>
-                                        @endforeach
-                                    </div>
+                                        </div>
+                                    @endforeach
                                 @else
                                     <div class="text-center">
-                                        <h4>Events</h4>
+                                        <h4>Top Events</h4>
                                         @for($i = 0; $i < 3; $i++)
                                             <div class="col-md-4 col-xs-12">
-                                                <div class="panel panel-primary">
+                                                <a href="/sailings?destination=Caribbean" class="btn btn-primary btn-md">
                                                     <div class="panel-heading">Cocktail Party</div>
-                                                </div>
+                                                </a>
                                             </div>
                                         @endfor
                                     </div>
                                 @endif
-                            </div>
-                            <div class="col-md-12 col-xs-12 text-center">
-                                <a href="/sailings">
-                                    <button type="button" class="btn btn-primary btn-md">
-                                        <i class="fa fa-users" aria-hidden="true"></i>More Sailings
-                                    </button>
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -201,41 +202,41 @@
                             <h2>Mediterranean</h2>
                         </div>
                         <div class="panel-body">
-                            <div class="text-center">
-                                <h4>
-                                    {{--{!! $medsail->id !!} | --}}
-                                    {!! $medsail->cruise_line !!}
-                                </h4>
-                            </div>
-                            <div class="text-centered col-md-12 col-xs-12">
-                                <a href="{{ action('SailingsController@GetSailing', [$medsail->id]) }}">
-                                    <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
-                                </a>
-                            </div>
+                            <a href="{{ action('SailingsController@GetSailing', [$medsail->id]) }}">
+                                <h4>{!! $medsail->cruise_line !!}</h4>
+                                <img class="img-responsive" src="/images/mediterranean_thumb.png" alt="">
+                            </a>
+                            <a href="/sailings?destination=Europe/Mediterranean" class="btn btn-primary btn-md">
+                                <i class="fa fa-users" aria-hidden="true"></i>View Mediteranean Sailings
+                            </a>
                             @if(!empty($medsail['stats']))
                                 @if($medsail['stats']->total != null)
                                     <div class="stats clearfix">
-                                        <div class="col-md-6 col-xs-12">
-                                            <p><b>Confirmed:</b> {{$medsail['stats']->total}}  </p>
+                                        <div class="col-md-5 col-xs-12">
+                                            <div>
+                                                <p><b>Confirmed:</b> {{$medsail['stats']->total}}  </p>
+                                            </div>
+                                            <div>
+                                                <h4> Languages: </h4>
+                                                <ul>
+                                                    @foreach($medsail['stats']->languages as $language => $value)
+                                                        <li> <b>{{ $language }}: </b> {{ $value }}% </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 col-xs-12">
-                                            <p><b>Families:</b> {{ $medsail['stats']->family }} %</p>
-                                        </div>
-                                        <div class="col-md-6 col-xs-12">
-                                            <h4> Languages: </h4>
-                                            <ul>
-                                                @foreach($medsail['stats']->languages as $language => $value)
-                                                    <li> <b>{{ $language }}: </b> {{ $value }} % </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6 col-xs-12">
-                                            <h4> Cities: </h4>
-                                            <ul>
-                                                @foreach($medsail['stats']->cities as $city => $value)
-                                                    <li> <b>{{ $city }}: </b> {{ $value }} % </li>
-                                                @endforeach
-                                            </ul>
+                                        <div class="col-md-7 cities">
+                                            <div>
+                                                <p><b>Families:</b> {{ $medsail['stats']->family }}%</p>
+                                            </div>
+                                            <div>
+                                                <h4> Cities: </h4>
+                                                <ul>
+                                                    @foreach($medsail['stats']->cities as $city => $value)
+                                                        <li> <span><b>{{ $city }}: </b> {{ $value }}% </span></li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 @else
@@ -256,35 +257,26 @@
                             <hr />
                             <div class="events">
                                 @if(!empty($medsail['events']))
-                                    <div class="text-center">
-                                        <h4>Events</h4>
-                                            @foreach($medsail['events'] as $event)
-                                                <div class="col-md-4 col-xs-12">
-                                                    <div class="panel panel-primary">
-                                                        <div class="panel-heading">{{ $event->title }}</div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                     </div>
+                                    <h4>Events</h4>
+                                    @foreach($medsail['events'] as $event)
+                                        <div class="col-md-4 col-xs-12">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">{{ $event->title }}</div>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 @else
                                     <div class="text-center">
-                                        <h4>Events</h4>
+                                        <h4>Top Events</h4>
                                         @for($i = 0; $i < 3; $i++)
                                             <div class="col-md-4 col-xs-12">
-                                                <div class="panel panel-primary">
+                                                <a href="/sailings?destination=Caribbean" class="btn btn-primary btn-md">
                                                     <div class="panel-heading">Cocktail Party</div>
-                                                </div>
+                                                </a>
                                             </div>
                                         @endfor
                                     </div>
                                 @endif
-                            </div>
-                            <div class="col-md-12 col-xs-12 text-center">
-                                <a href="/sailings">
-                                    <button type="button" class="btn btn-primary btn-md">
-                                        <i class="fa fa-users" aria-hidden="true"></i>More Sailings
-                                    </button>
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -292,44 +284,44 @@
                 <div class="col-sm-4 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading text-center">
-                            <h2>Alaska</h2>
+                            <h2>Caribbean</h2>
                         </div>
                         <div class="panel-body">
-                            <div class="text-center">
-                                <h4>
-                                    {{--{!! $medsail->id !!} | --}}
-                                    {!! $alassail->cruise_line !!}
-                                </h4>
-                            </div>
-                            <div class="text-centered col-md-12 col-xs-12">
-                                <a href="{{ action('SailingsController@GetSailing', [$alassail->id]) }}">
-                                    <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
-                                </a>
-                            </div>
-                            @if(!empty($alassail['stats']))
-                                @if($alassail['stats']->total != null)
+                            <a href="{{ action('SailingsController@GetSailing', [$caribsail->id]) }}">
+                                <h4>{!! $caribsail->cruise_line !!}</h4>
+                                <img class="img-responsive" src="/images/alaskan_thumb.png" alt="">
+                            </a>
+                            <a href="/sailings?destination=Alaska" class="btn btn-primary btn-md">
+                                <i class="fa fa-users" aria-hidden="true"></i>View Caribbean Sailings
+                            </a>
+                            @if(!empty($caribsail['stats']))
+                                @if($caribsail['stats']->total != null)
                                     <div class="stats clearfix">
-                                        <div class="col-md-6 col-xs-12">
-                                            <p><b>Confirmed:</b> {{$alassail['stats']->total}}  </p>
+                                        <div class="col-md-5 col-xs-12">
+                                            <div>
+                                                <p><b>Confirmed:</b> {{$caribsail['stats']->total}}  </p>
+                                            </div>
+                                            <div>
+                                                <h4> Languages: </h4>
+                                                <ul>
+                                                    @foreach($caribsail['stats']->languages as $language => $value)
+                                                        <li> <b>{{ $language }}: </b> {{ $value }}% </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 col-xs-12">
-                                            <p><b>Families:</b> {{ $alassail['stats']->family }} %</p>
-                                        </div>
-                                        <div class="col-md-6 col-xs-12">
-                                            <h4> Languages: </h4>
-                                            <ul>
-                                                @foreach($alassail['stats']->languages as $language => $value)
-                                                    <li> <b>{{ $language }}: </b> {{ $value }} % </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6 col-xs-12">
-                                            <h4> Cities: </h4>
-                                            <ul>
-                                                @foreach($alassail['stats']->cities as $city => $value)
-                                                    <li> <b>{{ $city }}: </b> {{ $value }} % </li>
-                                                @endforeach
-                                            </ul>
+                                        <div class="col-md-7 cities">
+                                            <div>
+                                                <p><b>Families:</b> {{ $caribsail['stats']->family }}%</p>
+                                            </div>
+                                            <div>
+                                                <h4> Cities: </h4>
+                                                <ul>
+                                                    @foreach($caribsail['stats']->cities as $city => $value)
+                                                        <li> <span><b>{{ $city }}: </b> {{ $value }}% </span></li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 @else
@@ -349,36 +341,27 @@
                             @endif
                             <hr />
                             <div class="events">
-                                @if(!empty($alassail['events']))
-                                    <div class="text-center">
-                                        <h4>Events</h4>
-                                        @foreach($alassail['events'] as $event)
-                                            <div class="col-md-4 col-xs-12">
-                                                <div class="panel panel-primary">
-                                                    <div class="panel-heading">{{ $event->title }}</div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
+                                @if(!empty($caribsail['events']))
+                                    <h4>Events</h4>
+                                    @foreach($caribsail['events'] as $event)
+                                        <div class="col-md-4 col-xs-12">
+                                            <a href="/sailings?destination=Caribbean" class="btn btn-primary btn-md">
+                                                <div class="panel-heading">{{ $event->title }}</div>
+                                            </a>
+                                        </div>
+                                    @endforeach
                                 @else
                                     <div class="text-center">
-                                        <h4>Events</h4>
+                                        <h4>Top Events</h4>
                                         @for($i = 0; $i < 3; $i++)
                                             <div class="col-md-4 col-xs-12">
-                                                <div class="panel panel-primary">
+                                                <a href="/sailings?destination=Caribbean" class="btn btn-primary btn-md">
                                                     <div class="panel-heading">Cocktail Party</div>
-                                                </div>
+                                                </a>
                                             </div>
                                         @endfor
                                     </div>
                                 @endif
-                            </div>
-                            <div class="col-md-12 col-xs-12 text-center">
-                                <a href="/sailings">
-                                    <button type="button" class="btn btn-primary btn-md">
-                                        <i class="fa fa-users" aria-hidden="true"></i>More Sailings
-                                    </button>
-                                </a>
                             </div>
                         </div>
                     </div>

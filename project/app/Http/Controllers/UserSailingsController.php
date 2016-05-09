@@ -41,7 +41,7 @@ class UserSailingsController extends Controller
             return redirect()->action('SailingsController@GetSailing', [$sailing_id]);
 
       }else{
-            Flash::error('You have succesfully your account information');
+            Flash::error('Please update your account details!');
         return redirect('users/create');
       }
     }
@@ -57,7 +57,7 @@ class UserSailingsController extends Controller
                 }
             }
             foreach($uEvent->userevents->where('user_id',$user_id) as $currentUEvent){
-                if($currentUEvent->count != null){
+                if($currentUEvent != null){
                     $currentUEvent->delete();
                 }
             }

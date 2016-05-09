@@ -31,21 +31,8 @@ class EventsController extends Controller
 
     protected function GetAllEvents($sailing, SearchRequest $request)
     {
-
-        if($request->sort == ""){
-            $sort = 'title';
-            $direction = 'desc';
-        }
-        else{
-            $sort = $request->sort;
-            $direction = $request->directon;
-        }
         //
-        if($request->search != ""){
-           $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request);
-            return view('events.list')->with(['events' => $events, 'sailing_id' => $sailing]);
-        }
-        else if ( $events = Event::with('userevent')->where('sailing_id', $sailing)->orderBy($sort,$direction)->paginate(6)) {
+        if( $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request)){
             return view('events.list')->with(['events' => $events, 'sailing_id' => $sailing]);
         } else {
             return Redirect::back();
@@ -125,7 +112,8 @@ class EventsController extends Controller
             'start_date' => $request->start,
             'end_date' => $request->end,
             'desc' => $request->desc,
-            'location' => $request->location
+            'location' => $request->location,
+            'max_participants' => $request->max_participants
         ]);
         Thread::create([
             'event_id' => $event->id,
@@ -144,9 +132,8 @@ class EventsController extends Controller
     protected function DeleteEvent($event_id)
     {
         if ($uEvent = Event::with('userevent')->where('id', $event_id)->first()) {
-           Thread::where(['event_id' => $event_id])->first()->delete();
-            foreach($uEvent->userevent->where('event_id',$event_id) as $uE) {
-
+            //Thread::where('event_id', $event_id)->first()->delete();
+            foreach($uEvent->userevent as $uE) {
                 $uE->delete();
                 }
             $uEvent->delete();

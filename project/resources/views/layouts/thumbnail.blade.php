@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Cruise Connect</title>
 
     {{--<!-- Fonts -->--}}
     {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">--}}
@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ URL::asset('styles/4-col-portfolio.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/nav.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('styles/custom/site.css') }}" />
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -48,7 +49,6 @@
                 <img src="https://placehold.it/750x450">
             </a>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -56,9 +56,7 @@
                     <a href="{{ url('/sailings') }}">Sailings</a>
                 </li>
                 @if (!Auth::guest())
-                    <li>
-                        <a href="{{ url('events/10') }}">Events</a>
-                    </li>
+                    <li><a href="{{ url('events/userevents') }}">My Ship Events</a></li>
                 @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -75,7 +73,7 @@
                             <li><a href="https://docs.google.com/document/d/1yIuRZO1HJ71moInaR_B1Y0mb6yfwxB9oClgWSx5CTpw/edit#heading=h.tphyqzr77ydu">Design Model</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 @else
                     <li class="dropdown">
@@ -88,7 +86,7 @@
                                 <a href="{{ url('/users/userprofile/'.Auth::user()->id) }}">Profile</a>
                             </li>
                     <li><a href="{{ url('/logout') }}">Logout</a></li>
-                    @if (Auth::user()->isAdmin())
+                @if (Auth::user()->isAdmin())
                         <li>
                             <a href="{{ url('/admin/home') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Admin</a>
                         </li>

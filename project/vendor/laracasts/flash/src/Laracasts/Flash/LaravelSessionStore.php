@@ -2,8 +2,7 @@
 
 use Illuminate\Session\Store;
 
-class LaravelSessionStore implements SessionStore
-{
+class LaravelSessionStore implements SessionStore {
 
     /**
      * @var Store

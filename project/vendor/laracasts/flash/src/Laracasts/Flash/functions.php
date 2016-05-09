@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('flash')) {
+if ( ! function_exists('flash')) {
 
     /**
      * Arrange for a flash message.
@@ -12,7 +12,7 @@ if (!function_exists('flash')) {
     {
         $notifier = app('flash');
 
-        if (!is_null($message)) {
+        if ( ! is_null($message)) {
             return $notifier->info($message);
         }
 

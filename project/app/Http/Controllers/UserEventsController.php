@@ -28,15 +28,22 @@ class UserEventsController extends Controller
         $user_id = Auth::User()->id;
        if(UserSailing::where(['user_id'=>$user_id,'sailing_id' => $sailing_id])->first() != null ){
            // role = member// need to check both columns....
-           $userE = UserEvent::firstOrNew([
-               'sailing_id' => $sailing_id,
-               'user_id' => $user_id,
-               'event_id' => $event_id,
-               'role' => 'Participant'
-           ]);
-           $userE->save();
-           Flash::success('You Joined the EVENT!');
-           return redirect()->action('EventsController@GetOneEvent',[$event_id]);
+           $event = Event::with('userevent')->where('id',$event_id)->first();
+           if($event->userevent->count() >= $event->max_participants){
+               Flash::error('No longer accepting anymore participants for this event');
+               return redirect()->action('EventsController@GetOneEvent',[$event_id]);
+           }
+           elseif($event->userevent->count() < $event->max_participants){
+               $userE = UserEvent::firstOrNew([
+                   'sailing_id' => $sailing_id,
+                   'user_id' => $user_id,
+                   'event_id' => $event_id,
+                   'role' => 'Participant'
+               ]);
+               $userE->save();
+               Flash::success('You Joined the EVENT!');
+               return redirect()->action('EventsController@GetOneEvent',[$event_id]);
+           }
        }else{
            Flash::error('You are not registered for the sailing!');
            return redirect('/sailings/'.$sailing_id);       }
@@ -48,9 +55,9 @@ class UserEventsController extends Controller
         $user_id = Auth::User()->id;
         $conditions = compact('user_id', 'event_id');
         if (UserEvent::where($conditions)->exists()) {
-            UserEvent::where($conditions)->delete();
+            UserEvent::where($conditions)->first()->delete();
             Flash::success('You have left the EVENT!');
-            return redirect('/sailings');//view('events.eventdetail', );
+            return redirect('/sailings');
         } else {
             Flash::error('You are not registered for this Event!');
             return redirect('/sailings');

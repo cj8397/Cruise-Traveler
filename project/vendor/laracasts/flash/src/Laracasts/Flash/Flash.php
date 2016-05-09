@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 
-class Flash extends Facade
-{
+class Flash extends Facade {
 
     /**
      * Get the binding in the IoC container

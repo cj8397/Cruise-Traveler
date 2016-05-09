@@ -49,16 +49,32 @@ class Sailing extends Model
         return $this->hasMany('App\Event');
     }
     public function scopeSearch($query, $search){
-        if($search->sort == null){
-            $search->search = "";
-            $search->sort = 'title';
-            $search->direction = 'asc';
+        // all empty return everything
+        if($search->search == "" && $search->destination == "" && $search->origin == "" && $search->sort == "" ){
+            return $query->paginate(12);
         }
-        return $query->where('title','LIKE',"%$search->search%")
-            ->orWhere('cruise_line','LIKE',"%$search->search%")
-            ->orWhere('destination','LIKE',"%$search->search%")
-            ->orderBy($search->sort,$search->direction)
-            ->paginate(12);
+        if($search->search != "") {
+            $query->where('cruise_line','LIKE',"%$search->search%")
+                ->orWhere('port_org','LIKE',"%$search->search%")
+                ->orWhere('destination','LIKE',"%$search->search%");
+        }
+        if($search->destination == "") { // search based on destination
+            $query->where('destination','LIKE',"%$search->search%");
+        } else {
+            $query->where('destination', $search->destination );
+        }
+        if($search->origin == "") { // search base on port of origin
+            $query->where('port_org','LIKE',"%$search->search%");
+        } else {
+            $query->where('port_org','=', $search->origin);
+        }
+        if($search->sort == ""){
+                $query->orderBy('start_date','desc');
+        }elseif($search->sort != ""){
+            $query->orderBy('start_date',$search->sort);
+        }
+        //JUST NEED SORT LOGIC
+        return $query->paginate(12);
     }
 
 }
