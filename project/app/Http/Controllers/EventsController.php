@@ -112,7 +112,8 @@ class EventsController extends Controller
             'start_date' => $request->start,
             'end_date' => $request->end,
             'desc' => $request->desc,
-            'location' => $request->location
+            'location' => $request->location,
+            'max_participants' => $request->max_participants
         ]);
         Thread::create([
             'event_id' => $event->id,
@@ -131,9 +132,8 @@ class EventsController extends Controller
     protected function DeleteEvent($event_id)
     {
         if ($uEvent = Event::with('userevent')->where('id', $event_id)->first()) {
-           Thread::where(['event_id' => $event_id])->first()->delete();
-            foreach($uEvent->userevent->where('event_id',$event_id) as $uE) {
-
+            //Thread::where('event_id', $event_id)->first()->delete();
+            foreach($uEvent->userevent as $uE) {
                 $uE->delete();
                 }
             $uEvent->delete();

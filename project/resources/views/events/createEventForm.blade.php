@@ -85,6 +85,19 @@
                             </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('max_participants') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Max Participants</label>
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control" name="max_participants">
+
+                                    @if ($errors->has('max_participants'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('max_participants') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
