@@ -53,6 +53,22 @@ class Sailing extends Model
         if($search->search == "" && $search->destination == "" && $search->origin == "" && $search->sort == "" ){
             return $query->paginate(12);
         }
+        if($search->search != "") {
+            $query->where('cruise_line','LIKE',"%$search->search%");
+        }
+        if($search->destination == "") { // search based on destination
+            $query->where('destination','LIKE',"%$search->search%");
+        } else {
+            $query->where('destination', $search->destination );
+        }
+        if($search->origin == "") { // search base on port of origin
+            $query->where('port_org','LIKE',"%$search->search%");
+        } else {
+            $query->where('port_org','=', $search->origin);
+        }
+        //JUST NEED SORT LOGIC
+        return $query->paginate(12);
+
         // search based on term
         if($search->search != "" && $search->destination == "" && $search->origin == "" && $search->sort == "" ){
             return $query->where('cruise_line','LIKE',"%$search->search%")
