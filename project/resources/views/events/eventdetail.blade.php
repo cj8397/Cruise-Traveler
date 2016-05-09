@@ -67,39 +67,41 @@
                         </ul>
                     </div>
                 </div>
-                @if(isset($thread))
-            <div class="col-xs-12">
-                <div class="row panel panel-default">
-                  <div class="panel-heading">
-                    <h2>{!! $thread->subject !!}</h2>
-                  </div>
-                  <div class="panel panel-default">
-                    @foreach($thread->messages as $message)
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img src="//www.gravatar.com/avatar/{!! md5($message->user->email) !!}?s=64" alt="{!! $message->user->email !!}" class="img-circle">
-                            </a>
-                            <div class="media-body">
-                                <h5 class="media-heading">{!! $message->user->email !!}</h5>
-                                <p>{!! $message->body !!}</p>
-                                <div class="text-muted"><small>Posted {!! $message->created_at->diffForHumans() !!}</small></div>
-                            </div>
-                        </div>
-                    @endforeach
-                    </div>
-                    <h3>Add a new message</h3>
-                    {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
-                    <!-- Message Form Input -->
-                    <div class="form-group">
-                        {!! Form::textarea('message', null, ['class' => 'form-control']) !!}
-                    </div>
+                @if(!empty($thread))
+                <div class="col-xs-8">
+                    <div class="row panel panel-default">
+                      <div class="panel-heading">
+                        <h2>{!! $thread->subject !!}</h2>
+                      </div>
+                      <div class="panel-body">
+                          <div class="col-xs-12">
+                              {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
+                                  <!-- Message Form Input -->
+                                  <div class="form-group clearfix">
+                                      {!! Form::textarea('message', null, ['class' => 'col-xs-9', 'placeholder' => 'Send a message...']) !!}
+                                  </div>
+                              <div class="form-group clearfix">
+                                  {!! Form::submit('Send', ['class' => 'btn btn-primary col-xs-4']) !!}
+                              </div>
+                              {!! Form::close() !!}
 
-                    <!-- Submit Form Input -->
-                    <div class="form-group">
-                        {!! Form::submit('Send', ['class' => 'btn btn-primary form-control']) !!}
+                            @foreach($thread->messages as $message)
+                             <div class="col-xs-12 message">
+                                  <div class="media">
+                                      <a class="pull-left" href="#">
+                                          <img src="//www.gravatar.com/avatar/{!! md5($message->user->email) !!}?s=64" alt="{!! $message->user->email !!}" class="img-circle">
+                                      </a>
+                                      <div class="media-body">
+                                          <h5 class="media-heading">{!! $message->user->email !!}</h5>
+                                          <p>{!! $message->body !!}</p>
+                                          <div class="text-muted"><small>Posted {!! $message->created_at->diffForHumans() !!}</small></div>
+                                      </div>
+                                  </div>
+                             </div>
+                             @endforeach
+                          </div>
+                        </div>
                     </div>
-                    {!! Form::close() !!}
-                </div>
                 </div>
                 @endif
             </div>
