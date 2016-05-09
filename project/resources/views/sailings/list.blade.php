@@ -38,7 +38,6 @@
                     @endforeach
                 </select>
             @endif
-
             @if(!empty($ports))
                 <select name="origin" id="origin" class="form-control">
                     <option value="">Port of Origin</option>
