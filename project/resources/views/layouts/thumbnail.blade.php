@@ -56,9 +56,7 @@
                     <a href="{{ url('/sailings') }}">Sailings</a>
                 </li>
                 @if (!Auth::guest())
-                    <li>
-                        <a href="{{ url('events/10') }}">Events</a>
-                    </li>
+                    <li><a href="{{ url('events/userevents') }}">My Ship Events</a></li>
                 @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -88,7 +86,7 @@
                                 <a href="{{ url('/users/userprofile/'.Auth::user()->id) }}">Profile</a>
                             </li>
                     <li><a href="{{ url('/logout') }}">Logout</a></li>
-                    @if (Auth::user()->isAdmin())
+                @if (Auth::user()->isAdmin())
                         <li>
                             <a href="{{ url('/admin/home') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Admin</a>
                         </li>

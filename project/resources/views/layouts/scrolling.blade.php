@@ -81,9 +81,7 @@
                     <a href="{{ url('/sailings') }}">Sailings</a>
                 </li>
                 @if (!Auth::guest())
-                    <li>
-                        <a href="{{ url('events/10') }}">Events</a>
-                    </li>
+                    <li><a href="{{ url('events/userevents') }}">My Ship Events</a></li>
                 @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">

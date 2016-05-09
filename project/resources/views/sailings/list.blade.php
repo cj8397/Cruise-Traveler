@@ -26,8 +26,8 @@
             @endif
             <select name="sort" id="sort" class="form-control">
                 <option value="">Sort</option>
-                <option value="date_asc">Date: Future to past</option>
-                <option value="date_desc">Date: Past to future</option>
+                <option value="asc">Date: Future to past</option>
+                <option value="desc">Date: Past to future</option>
             </select>
             <input type="submit" value="Submit" class="btn btn-default">
         </form>
