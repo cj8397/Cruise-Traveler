@@ -57,7 +57,7 @@ class UserSailingsController extends Controller
                 }
             }
             foreach($uEvent->userevents->where('user_id',$user_id) as $currentUEvent){
-                if($currentUEvent->count != null){
+                if($currentUEvent != null){
                     $currentUEvent->delete();
                 }
             }

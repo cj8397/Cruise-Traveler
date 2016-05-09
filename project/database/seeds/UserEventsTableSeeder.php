@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-use App\Sailing;
+use App\Event;
 
 class UserEventsTableSeeder extends Seeder
 {
@@ -19,32 +19,31 @@ class UserEventsTableSeeder extends Seeder
         $hostID = User::where(['email'=>'eventhost@gmail.com'])->first()->id;
         $participantID = User::where(['email'=>'eventparticipant@gmail.com'])->first()->id;
 
-        $firstSailing = Sailing::all()->first()->id;
-        $lastSailing = Sailing::all()->last()->id;
+        $firstEvent = Event::all()->first()->id;
+        $lastEvent = Event::all()->last()->id;
 
-        for($i = $firstSailing; $i < $lastSailing; $i++) {
-            for($j = 1; $j <= 10; $j++) {
+        for($i = $firstEvent; $i < $lastEvent; $i++) {
+          $currEvent = Event::find($i);
                 DB::table('user_events')->insert([
                     'user_id' => $vacationID,
-                    'sailing_id' => $i,
-                    'event_id' => $j,
+                    'sailing_id' => $currEvent->sailing_id,
+                    'event_id' => $i,
                     'role' => 'Participant'
                 ]);
 
                 DB::table('user_events')->insert([
                     'user_id' => $hostID,
-                    'sailing_id' => $i,
-                    'event_id' => $j,
+                    'sailing_id' => $currEvent->sailing_id,
+                    'event_id' => $i,
                     'role' => 'Host'
                 ]);
 
                 DB::table('user_events')->insert([
                     'user_id' => $participantID,
-                    'sailing_id' => $i,
-                    'event_id' => $j,
+                    'sailing_id' => $currEvent->sailing_id,
+                    'event_id' => $i,
                     'role' => 'Participant'
                 ]);
-            }
         }
 
 
