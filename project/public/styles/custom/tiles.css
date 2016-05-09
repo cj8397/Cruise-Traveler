@@ -1,0 +1,74 @@
+iframe {
+    width: 100%;
+    max-width: 600px;
+    height: 300px;
+}
+
+.login {
+    min-width: 360px;
+}
+
+.buttons {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.buttons a {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: -10px;
+}
+
+.events .col-md-4, .stats .col-md-6 {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.stats p {
+    margin: 10px 0 0 0;
+}
+
+.stats ul {
+    padding-left: 0;
+}
+
+.col-xs-12 > a {
+    width: 100%;
+}
+
+
+ul {
+    list-style-type: none;
+}
+
+table, td, th {
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
+}
+
+.panel-body > a {
+    width: 100%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.cities {
+    overflow-x: visible;
+}
+.stats li, .stats p {
+    white-space:nowrap;
+}
+.events a {
+    padding-left: 0;
+    padding-right: 0;
+    white-space: pre-wrap;
+}
+
