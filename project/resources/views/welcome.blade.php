@@ -207,7 +207,7 @@
                                 <img class="img-responsive" src="/images/mediterranean_thumb.png" alt="">
                             </a>
                             <a href="/sailings?destination=Europe/Mediterranean" class="btn btn-primary btn-md">
-                                <i class="fa fa-users" aria-hidden="true"></i>View Caribbean Sailings
+                                <i class="fa fa-users" aria-hidden="true"></i>View Mediteranean Sailings
                             </a>
                             @if(!empty($medsail['stats']))
                                 @if($medsail['stats']->total != null)
@@ -345,9 +345,9 @@
                                     <h4>Events</h4>
                                     @foreach($caribsail['events'] as $event)
                                         <div class="col-md-4 col-xs-12">
-                                            <div class="panel panel-primary">
+                                            <a href="/sailings?destination=Caribbean" class="btn btn-primary btn-md">
                                                 <div class="panel-heading">{{ $event->title }}</div>
-                                            </div>
+                                            </a>
                                         </div>
                                     @endforeach
                                 @else
