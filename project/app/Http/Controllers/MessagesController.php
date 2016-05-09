@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 class MessagesController extends Controller
 {
     /**
@@ -133,6 +134,6 @@ class MessagesController extends Controller
         if (Input::has('recipients')) {
             $thread->addParticipants(Input::get('recipients'));
         }
-        return redirect('sailings/' . $id);
+        return redirect::back();
     }
 }
