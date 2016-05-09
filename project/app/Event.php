@@ -47,9 +47,9 @@ class Event extends Model
     }
     public function scopeSearch($query, $search){
         if($search->search == "" && $search->direction == "" && $search->sort == ""){
-            return $query->paginate(6);
+             $query->paginate(6);
         }else {
-            return $query->where('title', 'LIKE', "%$search->search%")
+             $query->where('title', 'LIKE', "%$search->search%")
                 ->orWhere('desc', 'LIKE', "%$search->search%")
                 ->orWhere('location', 'LIKE', "%$search->search%")
                 ->paginate(6);
