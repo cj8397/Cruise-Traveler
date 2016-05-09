@@ -66,13 +66,13 @@
             </div>
         </div>
 
-        <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
+        <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12 text-center">
             <div class="panel-heading">
                 <h2>Sailings & Events</h2>
                 <div class="panel-body col-md-12 col-xs-12">
                     <a href="/sailings/list">
                         <button type="button" class="btn btn-primary btn-md">
-                            <i class="fa fa-users" aria-hidden="true"></i>Join Sailing
+                            <i class="fa fa-users" aria-hidden="true"></i>Join Sailings
                         </button>
                     </a>
                 </div>
@@ -80,59 +80,111 @@
         </div>
 
         <div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
-            <div class="row"><br></div>
-            <div class="row col-md-5 col-xs-5">
-                @if(isset($usersailings))
-                    @foreach($usersailings->slice(0, 5) as $sailing)
-
-                        <a href="#demo" class="toggle btn btn-info">
-                            {!! $sailing->sailing->cruise_line !!}
-                        </a>
-                        <p>{!! $sailing->sailing->start_date !!}</p>
-
-                    @endforeach
-                @else
-                    <p>You currently do not belong to any sailings!</p>
-                    <p>Please click on Join Sailing button above</p>
-                @endif
+            <div class="row panel panel-heading text-center">
+                <h2>History</h2>
             </div>
-
-            <div class="row col-md-6 col-md-offset-1 col-xs-12">
-                <h4>Events</h4>
-                <div class="panel panel-default col-md-12 col-xs-12" id="events">
-                    <div id="demo" class="well hidden">
-                        @foreach($usersailings as $sail)
-                            @foreach($userevents->where('sailing_id', $sail->sailing_id) as $events)
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <h5>Event: <a
-                                                    href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
-                                        </h5>
-                                    </li>
-                                    <li class="list-group-item">{!! $events->event->start_date !!}
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong>Role:</strong><br>
-                                        @if ($events->role == "host")
-                                            <span class="label label-pill label-warning">{!! $events->role !!}</span>
-                                        @else
-                                            <span class="label label-pill label-danger">{!! $events->role !!}</span>
-                                        @endif
-                                    </li>
-                                </ul>
-                            @endforeach
-
-
-                            {{--<a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-user"></i>Create an Event
-                                </button>
-                            </a>--}}
-
-                        @endforeach
+            @if(isset($usersailings))
+                @foreach($usersailings as $sailing)
+                    <div class="panel panel-default col-md-4 col-sm-6 col-xs-12 text-center">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <label><a href="{{ action('SailingsController@GetSailing', [$sailing->sailing_id]) }}"
+                                          class=""><h4>
+                                            {!! $sailing->sailing->cruise_line !!}
+                                        </h4></a></label>
+                                <p>{!! $sailing->sailing->destination !!}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p>{!! $sailing->sailing->start_date !!}</p>
+                            </li>
+                        </ul>
+                        <br>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                data-target="#yourModal{!! $sailing->sailing_id !!}">
+                            Events
+                        </button>
                     </div>
-                </div>
-            </div>
+                @endforeach
+            @else
+                <p>You currently do not belong to any sailings!</p>
+                <p>Please click on Join Sailing button above</p>
+            @endif
+
+
+
+            {{--<div id="demo" class="well hidden">--}}
+            @foreach($usersailings as $sail)
+                @foreach($userevents->where('sailing_id', $sail->sailing_id) as $events)
+                    <div class="modal fade" id="yourModal{{$sail->sailing_id}}" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">{!! $events->event->title !!}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <h5>Event: <a
+                                                        href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
+                                            </h5>
+                                        </li>
+                                        <li class="list-group-item">{!! $events->event->start_date !!}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Role:</strong><br>
+                                            @if ($events->role == "host")
+                                                <span class="label label-pill label-warning">{!! $events->role !!}</span>
+                                            @else
+                                                <span class="label label-pill label-danger">{!! $events->role !!}</span>
+                                            @endif
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    {{--<ul class="list-group">
+                        <li class="list-group-item">
+                            <h5>Event: <a
+                                        href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
+                            </h5>
+                        </li>
+                        <li class="list-group-item">{!! $events->event->start_date !!}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Role:</strong><br>
+                            @if ($events->role == "host")
+                                <span class="label label-pill label-warning">{!! $events->role !!}</span>
+                            @else
+                                <span class="label label-pill label-danger">{!! $events->role !!}</span>
+                            @endif
+                        </li>
+                    </ul>--}}
+                @endforeach
+
+
+                {{--<a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-btn fa-user"></i>Create an Event
+                    </button>
+                </a>--}}
+
+            @endforeach
+            {{--</div>--}}
+
         </div>
         {{--<div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
             --}}{{--@if(isset($usersailings))--}}{{--
