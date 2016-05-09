@@ -46,10 +46,13 @@ class Event extends Model
         $this->attributes['start_date'] = Carbon::parse($value);
     }
     public function scopeSearch($query, $search){
-        return $query->where('title','LIKE',"%$search->search%")
-            ->orWhere('desc','LIKE',"%$search->search%")
-            ->orWhere('location','LIKE',"%$search->search%")
-            ->orderBy($search->sort,$search->direction)
-            ->paginate(6);
+        if($search->search == "" && $search->direction == "" && $search->sort == ""){
+            return $query->paginate(6);
+        }else {
+            return $query->where('title', 'LIKE', "%$search->search%")
+                ->orWhere('desc', 'LIKE', "%$search->search%")
+                ->orWhere('location', 'LIKE', "%$search->search%")
+                ->paginate(6);
+        }
     }
 }

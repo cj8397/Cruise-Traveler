@@ -7,15 +7,12 @@
     <form url="events/{!! $sailing_id !!}" class="form navbar-form navbar-right searchform">
         <input type="text" name="search" class="form-control" placeholder="Search by Event title or Event description.....">
         <select name="sort" class="form-control" >
-            <option value="title">Title</option>
             <option value="start_date">End Date</option>
             <option value="end_date">Start Date</option>
-            <option value="desc">Description</option>
-            <option value="location">Location</option>
         </select>
         <select name="direction" class="form-control">
-            <option value="desc">Descending</option>
-            <option value="asc">Ascending</option>
+            <option value="asc">Date: Future to past</option>
+            <option value="desc">Date: Past to future</option>
         </select>
         <input type="submit" value="Search" class="btn btn-default">
     </form>
@@ -77,6 +74,12 @@
                         <p>{!! $males."% Males ".$females."% Females"!!}</p>
                     </li>
                     <li class="list-group-item">
+                        <p>Event Starts:</p>
+                        <p class="alert alert-info"> {!!"Event Starts: $event->start_date" !!}</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p>Event Ends:</p>
+                        <p class="alert alert-info"> {!!"Event Starts: $event->end_date" !!}</p>
                     </li>
                     </ul>
             </div>

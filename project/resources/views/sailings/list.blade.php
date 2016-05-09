@@ -47,7 +47,7 @@
     <div class="row">
         @foreach ($sailings as $sailing)
             <div class="panel panel-default col-md-3 portfolio-item">
-                <h2> {{$sailing->cruise_line}} {{$sailing->title}}</h2>
+                <h2> {{$sailing->cruDAise_line}} {{$sailing->title}}</h2>
                 <img class="img-responsive" src="/images/imgplaceholder.png" alt="">
                 <div class="col-md-6 col-xs-6">
                     <a href="{{ action('SailingsController@GetSailing', [$sailing->id]) }}">

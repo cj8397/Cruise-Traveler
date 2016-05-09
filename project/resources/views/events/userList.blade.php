@@ -14,6 +14,11 @@
                         <i class="fa fa-btn fa-user"></i>Create an Event
                     </button>
                 </a>
+                <a href="{{ url('sailings/'.$userSail->sailing->id) }}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-btn fa-user"></i>View Sailing
+                    </button>
+                </a>
             </h1>
         </div>
     </div>

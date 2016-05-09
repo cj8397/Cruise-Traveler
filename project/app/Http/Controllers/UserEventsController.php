@@ -48,9 +48,9 @@ class UserEventsController extends Controller
         $user_id = Auth::User()->id;
         $conditions = compact('user_id', 'event_id');
         if (UserEvent::where($conditions)->exists()) {
-            UserEvent::where($conditions)->delete();
+            UserEvent::where($conditions)->first()->delete();
             Flash::success('You have left the EVENT!');
-            return redirect('/sailings');//view('events.eventdetail', );
+            return redirect('/sailings');
         } else {
             Flash::error('You are not registered for this Event!');
             return redirect('/sailings');
