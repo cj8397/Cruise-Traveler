@@ -1,0 +1,9 @@
+.img-wrapper {
+    height: 300px;
+    overflow: hidden;
+}
+
+.img-wrapper > img {
+    position: relative;
+    top: -100px;
+}

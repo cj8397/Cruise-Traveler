@@ -37,7 +37,7 @@ Route::post('events/form/post', 'EventsController@CreateEvent');
 Route::get('events/delete/{event_id}', 'EventsController@DeleteEvent');
 Route::get('events/update/{event_id}', 'EventsController@UpdateEvent');
 Route::post('events/update/save/{event_id}', 'EventsController@SaveEvent');
-Route::get('events/userEvents', 'EventsController@getAllUserEvents');
+Route::get('events/userevents', 'EventsController@getAllUserEvents');
 Route::get('events/{sailing}', 'EventsController@GetAllEvents');
 //End of Event Controller Stuff
 
@@ -82,6 +82,5 @@ Route::get('/eventusers/{event_id}', 'UserEventsController@GetAllUsers');
 Route::get('/userevents', 'UserEventsController@GetAllEvents');
 
 Route::get('/test', function() {
-    $helper = new UserSailingsController();
-    return $helper->GetTop3Summary(1);
+    return View::make('images');
 });

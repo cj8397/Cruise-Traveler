@@ -1,0 +1,25 @@
+
+.panel .message {
+     text-align: left;
+     padding: 10px;
+     border-top: 1px solid #ddd;
+}
+
+.panel-heading {
+    margin-top:0;
+}
+
+.col-xs-4 {
+    padding-left: 0;
+    margin-right: 10px;
+}
+
+.col-xs-6 {
+    padding: 0px;
+}
+
+.col-xs-8 {
+    padding-left: 10px;
+    padding-right: 0;
+    width: 65%;
+}
