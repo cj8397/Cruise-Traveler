@@ -54,7 +54,9 @@ class Sailing extends Model
             return $query->paginate(12);
         }
         if($search->search != "") {
-            $query->where('cruise_line','LIKE',"%$search->search%");
+            $query->where('cruise_line','LIKE',"%$search->search%")
+                ->orWhere('port_org','LIKE',"%$search->search%")
+                ->orWhere('destination','LIKE',"%$search->search%");
         }
         if($search->destination == "") { // search based on destination
             $query->where('destination','LIKE',"%$search->search%");
@@ -66,35 +68,13 @@ class Sailing extends Model
         } else {
             $query->where('port_org','=', $search->origin);
         }
+        if($search->sort == ""){
+                $query->orderBy('start_date','desc');
+        }elseif($search->sort != ""){
+            $query->orderBy('start_date',$search->sort);
+        }
         //JUST NEED SORT LOGIC
         return $query->paginate(12);
-
-        // search based on term
-        if($search->search != "" && $search->destination == "" && $search->origin == "" && $search->sort == "" ){
-            return $query->where('cruise_line','LIKE',"%$search->search%")
-                ->orWhere('destination','LIKE',"%$search->search%")
-                ->paginate(12);
-        }
-        // search based destination only
-        if($search->search == "" && $search->destination != "" && $search->origin == "" && $search->sort == "" ){
-            return $query->where('destination',$search->destination)
-                ->paginate(12);
-        }
-        // search based on destination and term
-        if($search->search != "" && $search->destination != "" && $search->origin == "" && $search->sort == "" ){
-            return $query->where('destination',$search->destination)
-                ->orWhere('cruise_line','LIKE',"%$search->search%")
-                ->paginate(12);
-        }
-
-        if($search->search != "" && $search->destination != "" && $search->origin != "" && $search->sort == "" ){
-            return $query->where('cruise_line','LIKE',"%$search->search%")
-                ->orWhere('destination',$search->destination)
-                ->paginate(12);
-        }
-        if($search->search == "" && $search->destination == "" && $search->origin == "" && $search->sort == "" ){
-            return $query->paginate(12);
-        }
     }
 
 }

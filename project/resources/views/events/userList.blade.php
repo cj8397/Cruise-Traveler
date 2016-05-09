@@ -8,7 +8,7 @@
     <div class="row col-md-12 col-xs-12">
         <div class="col-lg-12">
             <h1 class="page-header">All the events
-                <small>Events on Cruise Ship {!! $userSail->sailing->cruise_line07!!}</small>
+                <small>Events on Cruise Ship {!! $userSail->sailing->cruise_line!!}</small>
                 <a href="{{ url('events/form/'.$userSail->sailing->id) }}">
                     <button type="submit" class="btn btn-primary">
                         <i class="fa fa-btn fa-user"></i>Create an Event
