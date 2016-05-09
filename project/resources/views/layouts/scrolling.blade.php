@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/nav.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/bootstrap-datetimepicker.min.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/site.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('styles/custom/tiles.css') }}" />
 
     @yield('styles')
 

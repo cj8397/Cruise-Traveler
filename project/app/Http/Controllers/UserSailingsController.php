@@ -179,21 +179,4 @@ class UserSailingsController extends Controller
         return $cities;
     }
 
-//    // OLD METHOD... TAKES JUST AS LONG
-//    public function GetStatsSummary($sailing_id) {
-//
-//        $fam = $this->CalculateFamilyPercentages($sailing_id);
-//        $langs = $this->CalculateLangPercentages($sailing_id);
-//        $sex = $this->CalculateSexPercentages($sailing_id);
-//        $cities = $this->CalculateCityPercentages($sailing_id);
-//        $countries = $this->CalculateCountryPercentages($sailing_id);
-//        $ages = $this->CalculateAgePercentages($sailing_id);
-//        $total = UserSailing::where(['sailing_id'=>$sailing_id])->count();
-//
-//        $summary = compact('fam', 'langs', 'sex', 'cities', 'countries', 'ages', 'total');
-//        $stats = new Stats($summary);
-//        return $stats;
-//    }
-
-
 }

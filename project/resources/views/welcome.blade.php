@@ -1,42 +1,13 @@
 @extends('layouts.scrolling')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ URL::asset('styles/custom/welcome.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('tiles.css') }}" />
 @endsection
 
 @section('content')
 
     <style type="text/css">
-        ul {
-            list-style-type: none;
-        }
 
-        table, td, th {
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            padding: 15px;
-        }
-
-        .panel-body > a {
-            width: 100%;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
-
-        .cities {
-            overflow-x: visible;
-        }
-        .cities li {
-            white-space:nowrap;
-        }
     </style>
     <!-- Intro Section -->
     <div class="container-fluid">
@@ -140,7 +111,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="col-md-7 cities">
+                                        <div class="col-md-7 col-xs-12 cities">
                                             <div>
                                                 <p><b>Families:</b> {{ $caribsail['stats']->family }}%</p>
                                             </div>
@@ -175,9 +146,7 @@
                                     <h4>Events</h4>
                                     @foreach($caribsail['events'] as $event)
                                         <div class="col-md-4 col-xs-12">
-                                            <div class="panel panel-primary">
-                                                <div class="panel-heading">{{ $event->title }}</div>
-                                            </div>
+                                            <a href="/events/detail/{{$event->id}}" class="btn btn-primary btn-md">{{ $event->title }}</a>
                                         </div>
                                     @endforeach
                                 @else
@@ -225,7 +194,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="col-md-7 cities">
+                                        <div class="col-md-7 col-xs-12 cities">
                                             <div>
                                                 <p><b>Families:</b> {{ $medsail['stats']->family }}%</p>
                                             </div>
@@ -260,9 +229,7 @@
                                     <h4>Events</h4>
                                     @foreach($medsail['events'] as $event)
                                         <div class="col-md-4 col-xs-12">
-                                            <div class="panel panel-primary">
-                                                <div class="panel-heading">{{ $event->title }}</div>
-                                            </div>
+                                            <a href="/events/detail/{{$event->id}}" class="btn btn-primary btn-md">{{ $event->title }}</a>
                                         </div>
                                     @endforeach
                                 @else
@@ -284,40 +251,40 @@
                 <div class="col-sm-4 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading text-center">
-                            <h2>Caribbean</h2>
+                            <h2>Alaska</h2>
                         </div>
                         <div class="panel-body">
-                            <a href="{{ action('SailingsController@GetSailing', [$caribsail->id]) }}">
-                                <h4>{!! $caribsail->cruise_line !!}</h4>
+                            <a href="{{ action('SailingsController@GetSailing', [$alassail->id]) }}">
+                                <h4>{!! $alassail->cruise_line !!}</h4>
                                 <img class="img-responsive" src="/images/alaskan_thumb.png" alt="">
                             </a>
                             <a href="/sailings?destination=Alaska" class="btn btn-primary btn-md">
                                 <i class="fa fa-users" aria-hidden="true"></i>View Caribbean Sailings
                             </a>
-                            @if(!empty($caribsail['stats']))
-                                @if($caribsail['stats']->total != null)
+                            @if(!empty($alassail['stats']))
+                                @if($alassail['stats']->total != null)
                                     <div class="stats clearfix">
                                         <div class="col-md-5 col-xs-12">
                                             <div>
-                                                <p><b>Confirmed:</b> {{$caribsail['stats']->total}}  </p>
+                                                <p><b>Confirmed:</b> {{$alassail['stats']->total}}  </p>
                                             </div>
                                             <div>
                                                 <h4> Languages: </h4>
                                                 <ul>
-                                                    @foreach($caribsail['stats']->languages as $language => $value)
+                                                    @foreach($alassail['stats']->languages as $language => $value)
                                                         <li> <b>{{ $language }}: </b> {{ $value }}% </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="col-md-7 cities">
+                                        <div class="col-md-7 col-xs-12 cities">
                                             <div>
-                                                <p><b>Families:</b> {{ $caribsail['stats']->family }}%</p>
+                                                <p><b>Families:</b> {{ $alassail['stats']->family }}%</p>
                                             </div>
                                             <div>
                                                 <h4> Cities: </h4>
                                                 <ul>
-                                                    @foreach($caribsail['stats']->cities as $city => $value)
+                                                    @foreach($alassail['stats']->cities as $city => $value)
                                                         <li> <span><b>{{ $city }}: </b> {{ $value }}% </span></li>
                                                     @endforeach
                                                 </ul>
@@ -341,13 +308,11 @@
                             @endif
                             <hr />
                             <div class="events">
-                                @if(!empty($caribsail['events']))
+                                @if(!empty($alassail['events']))
                                     <h4>Events</h4>
-                                    @foreach($caribsail['events'] as $event)
+                                    @foreach($alassail['events'] as $event)
                                         <div class="col-md-4 col-xs-12">
-                                            <a href="/sailings?destination=Caribbean" class="btn btn-primary btn-md">
-                                                <div class="panel-heading">{{ $event->title }}</div>
-                                            </a>
+                                            <a href="/events/detail/{{$event->id}}" class="btn btn-primary btn-md">{{ $event->title }}</a>
                                         </div>
                                     @endforeach
                                 @else
