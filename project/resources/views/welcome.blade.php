@@ -1,7 +1,7 @@
 @extends('layouts.scrolling')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ URL::asset('styles/welcome.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('styles/custom/welcome.css') }}" />
 @endsection
 
 @section('content')
@@ -27,11 +27,12 @@
     </style>
     <!-- Intro Section -->
     <div class="container-fluid">
-        <div class="col-xs-12 col-sm-6 ">
-            <iframe src="https://www.youtube.com/embed/CnAUfvWlBGs"
-                    frameborder="2" allowfullscreen></iframe>
-        </div>
+
         @if (Auth::guest())
+            <div class="col-xs-12 col-sm-6 ">
+                <iframe src="https://www.youtube.com/embed/CnAUfvWlBGs"
+                        frameborder="2" allowfullscreen></iframe>
+            </div>
             <div class="col-xs-12 col-sm-6  login">
             <div class="panel panel-default">
                     <div class="panel-heading">Login</div>
@@ -93,9 +94,10 @@
                         </form>
                     </div>
             </div>
-        @endif
             </div>
             <hr class="style-eight col-md-12 col-xs-12">
+        @endif
+
             <div class="col-xs-12">
                 <div class="col-sm-4 col-xs-12">
                     <div class="panel panel-default">
