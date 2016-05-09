@@ -1,8 +1,10 @@
 @extends('layouts.scrolling')
 
 @section('content')
-    <img class="img-responsive" src="/426631.jpg" alt="">
     <div class="container-fluid">
+        <div class="img-wrapper">
+            <img class="img-responsive" src="/426631.jpg" alt="">
+        </div>
         <div class="row">
             <div class="col-md-12 col-xs-12">
                 <div class="panel panel-default col-md-6 col-xs-12">
@@ -15,12 +17,12 @@
                                         <button type="submit" class="btn btn-primary">
                                             <i class="fa fa-btn fa-user"></i>Update Event
                                         </button>
-                        </a>
+                                    </a>
                                     <a href="{{ url('events/delete/'.$event->id) }}">
                                         <button type="submit" class="btn btn-primary">
                                             <i class="fa fa-btn fa-user"></i>Delete Event
                                         </button>
-                        </a>
+                                    </a>
                                 @endif
 
                                 @if(!isset($currentUser))
@@ -94,10 +96,9 @@
 
                     <!-- Submit Form Input -->
                     <div class="form-group">
-                        {!! Form::submit('Submit', ['class' => 'btn btn-primary form-control']) !!}
+                        {!! Form::submit('Send', ['class' => 'btn btn-primary form-control']) !!}
                     </div>
                     {!! Form::close() !!}
-
                 </div>
                 </div>
                 @endif

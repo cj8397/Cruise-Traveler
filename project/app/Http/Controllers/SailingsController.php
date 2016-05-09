@@ -31,12 +31,14 @@ class SailingsController extends Controller
     //
     protected function GetAllSailings(SearchRequest $request)
     {
+        $destinations = Sailing::select('destination')->groupBy('destination')->get();
+        $ports= Sailing::select('port_org')->groupBy('port_org')->get();
         if ($sailings = Sailing::search($request)) {
             $statsController = new UserSailingsController();
             foreach($sailings as $sailing) {
                 $sailing['stats'] = $statsController->GetTop3Summary($sailing->id);
             }
-            return view('sailings.list', compact('sailings'));
+            return view('sailings.list', compact('sailings', 'destinations', 'ports'));
         } else {
              return redirect::back();
         }

@@ -13,15 +13,12 @@ class UserSailingsTableSeeder extends Seeder
      */
     public function run()
     {
-        // cant drop all data in the table becuase it is refenced in the events table now...
-        // DB::table('user_sailings')->delete();
-
         $firstUser = User::all()->first()->id;
         $firstSailing = Sailing::all()->first()->id;
         $lastSailing = Sailing::all()->last()->id;
 
-        for($i = $firstSailing; $i < $lastSailing; $i++) {
-            for ($j = $firstUser; $j < ($firstUser + 10); $j++) {
+        for($i = $firstSailing; $i <= $lastSailing; $i++) {
+            for ($j = $firstUser; $j <= ($firstUser + 10); $j++) {
                 DB::table('user_sailings')->insert([
                     'user_id' => $j,
                     'sailing_id' => $i

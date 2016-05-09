@@ -2,66 +2,43 @@
 
 @section('styles')
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-    <style>
-        .panel-heading {
-            margin-top:0;
-        }
-
-        .col-xs-4 {
-            padding-left: 0;
-            margin-right: 10px;
-        }
-
-        .col-xs-6, .panel .col-xs-12 {
-            padding: 0px;
-        }
-
-        .col-xs-8 {
-            padding-left: 10px;
-            padding-right: 0;
-            width: 65%;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ URL::asset('styles/custom/sailing-detail.css') }}" />
 @endsection
 
 @section('content')
-    <div class="container">
+<div class="container">
+    <div class="img-wrapper">
         <img class="img-responsive" src="/426631.jpg" alt="">
-        <div class="col-xs-12 text-center">
-            <div class="col-xs-4">
-                <div class="row panel panel-default">
-                    <h2 class="panel-heading">{{$sailing->title}} {{$sailing->cruise_line}} </h2>
-                    @if(!isset($currentUser))
-                    @include('partials/buttons/joinsailing')
+    </div>
+    <div class="col-xs-12 text-center">
+        <div class="col-xs-4">
+            <div class="row panel panel-default">
+                <h2 class="panel-heading">{{$sailing->title}} {{$sailing->cruise_line}} </h2>
+                @if(!isset($currentUser))
+                @include('partials/buttons/joinsailing')
+                @else
+                @include('partials/buttons/leavesailing')
+                @endif
+                <a href="{{ action('EventsController@GetAllEvents', [$sailing->id]) }}">
+                    <button type="button" class="btn btn-primary btn-md">
+                        <i class="fa fa-users" aria-hidden="true"></i>View Events
+                    </button>
+                </a>
+                <h4 class="panel-heading">Number of travellers</h4>
+                <div class="panel-body">
+                    @if(!empty($stats))
+                        <h4> {{$stats->total}}  </h4>
                     @else
-                    @include('partials/buttons/leavesailing')
+                        <h4> 1234 </h4>
                     @endif
-                    <a href="{{ action('EventsController@GetAllEvents', [$sailing->id]) }}">
-                        <button type="button" class="btn btn-primary btn-md">
-                            <i class="fa fa-users" aria-hidden="true"></i>View Events
-                        </button>
-                    </a>
-                    <h4 class="panel-heading">Number of travellers</h4>
-                    <div class="panel-body">
-                        @if(!empty($stats))
-                            <h4> {{$stats->total}}  </h4>
-                        @else
-                            <h4> 1234 </h4>
-                        @endif
-
-                        {{--<h4>@if(isset($stats)) {{ $stats->total }}@endif</h4>--}}
-                    </div>
                 </div>
             </div>
-            @if(isset($currentUser))
-            <div class="col-xs-8">
-                {{--<div class="row panel panel-default">--}}
-                    {{--<h2 class="panel-heading" >Message Board</h2>--}}
-                    {{--<div class="panel-body"><p>  Show when joined </p></div>--}}
-                {{--</div>--}}
-                <div class="panel panel-default">
-                    <h2 class="panel-heading">Demographics</h2>
-                    @if(!empty($stats))
+        </div>
+        @if(!isset($currentUser))
+        <div class="col-xs-8">
+            <div class="panel panel-default">
+                <h2 class="panel-heading">Demographics</h2>
+                @if(!empty($stats))
                     <div class="panel-body">
                         <div class="panel panel-default col-xs-12">
                             <div class="panel-heading ">
@@ -112,48 +89,50 @@
                             </div>
                         </div>
                     </div>
-                        @endif
-                </div>
+                @endif
             </div>
-            @endif
         </div>
-        @if(!empty($thread))
-        <div class="col-xs-12">
-            <div class="row panel panel-default">
-              <div class="panel-heading">
-                <h2>{!! $thread->subject !!}</h2>
-              </div>
-              <div class="panel panel-default">
-                @foreach($thread->messages as $message)
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img src="//www.gravatar.com/avatar/{!! md5($message->user->email) !!}?s=64" alt="{!! $message->user->email !!}" class="img-circle">
-                        </a>
-                        <div class="media-body">
-                            <h5 class="media-heading">{!! $message->user->email !!}</h5>
-                            <p>{!! $message->body !!}</p>
-                            <div class="text-muted"><small>Posted {!! $message->created_at->diffForHumans() !!}</small></div>
-                        </div>
+        @else
+            @if(!empty($thread))
+            <div class="col-xs-8">
+                <div class="row panel panel-default">
+                  <div class="panel-heading">
+                    <h2>{!! $thread->subject !!}</h2>
+                  </div>
+                  <div class="panel-body">
+                      <div class="col-xs-12">
+                          {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
+                              <!-- Message Form Input -->
+                              <div class="form-group clearfix">
+                                  {!! Form::textarea('message', null, ['class' => 'col-xs-9', 'placeholder' => 'Send a message...']) !!}
+                              </div>
+                          <div class="form-group clearfix">
+                              {!! Form::submit('Send', ['class' => 'btn btn-primary col-xs-4']) !!}
+                          </div>
+                          {!! Form::close() !!}
+
+                        @foreach($thread->messages as $message)
+                         <div class="col-xs-12 message">
+                              <div class="media">
+                                  <a class="pull-left" href="#">
+                                      <img src="//www.gravatar.com/avatar/{!! md5($message->user->email) !!}?s=64" alt="{!! $message->user->email !!}" class="img-circle">
+                                  </a>
+                                  <div class="media-body">
+                                      <h5 class="media-heading">{!! $message->user->email !!}</h5>
+                                      <p>{!! $message->body !!}</p>
+                                      <div class="text-muted"><small>Posted {!! $message->created_at->diffForHumans() !!}</small></div>
+                                  </div>
+                              </div>
+                         </div>
+                         @endforeach
+                      </div>
                     </div>
-                @endforeach
                 </div>
-                <h3>Add a new message</h3>
-                {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
-                <!-- Message Form Input -->
-                <div class="form-group">
-                    {!! Form::textarea('message', null, ['class' => 'form-control']) !!}
-                </div>
-
-                <!-- Submit Form Input -->
-                <div class="form-group">
-                    {!! Form::submit('Submit', ['class' => 'btn btn-primary form-control']) !!}
-                </div>
-                {!! Form::close() !!}
-
-            </div>
             </div>
             @endif
+        @endif
     </div>
+</div>
 @endsection
 
 @section('scripts')
