@@ -52,11 +52,10 @@ class Event extends Model
              $query->where('title', 'LIKE', "%$search->search%")
                 ->orWhere('desc', 'LIKE', "%$search->search%")
                 ->orWhere('location', 'LIKE', "%$search->search%");
+            if($search->direction != "" || $search->sort != ""){
+                $query->orderBy($search->sort,$search->direction);
+            }
+            return $query->paginate(6);
         }
-
-        if($search->direction != "" || $search->sort != ""){
-            $query->orderBy($search->sort,$search->direction);
-        }
-        return $query->paginate(6);
     }
 }

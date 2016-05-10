@@ -1,13 +1,12 @@
 @extends('layouts.scrolling')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="img-wrapper">
             <img class="img-responsive" src="/426631.jpg" alt="">
         </div>
-        <div class="row">
-            <div class="col-md-12 col-xs-12">
-                <div class="panel panel-default col-md-6 col-xs-12">
+            <div class="col-md-12 col-xs-12 text-center">
+                <div class="panel panel-default col-md-4 col-xs-12">
                     <div class="panel panel-heading">{!! $event->title !!}</div>
                     <div class="panel panel-body">
                         <ul class="list-group">
@@ -68,7 +67,7 @@
                     </div>
                 </div>
                 @if(!empty($thread) && isset($currentUser))
-                    <div class="row col-md-5 col-md-offset-1 col-xs-12">
+                    <div class="row col-md-7 col-md-offset-1 col-xs-12">
                         <div class="row panel panel-default">
                             <div class="panel-heading">
                                 <h2>{!! $thread->subject !!}</h2>
@@ -105,7 +104,7 @@
                     </div>
                 @endif
                 @if(isset($members))
-                    <div class="row col-md-5 col-md-offset-1 col-xs-12">
+                    <div class="row col-md-7 col-md-offset-1 col-xs-12">
                         <div class="panel panel-default col-md-12 col-xs-12">
                             <div class="panel panel-heading">Participants</div>
                             <div class="panel panel-body">
@@ -122,6 +121,5 @@
                     </div>
                 @endif
             </div>
-        </div>
     </div>
 @endsection
