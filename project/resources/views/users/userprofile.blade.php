@@ -28,7 +28,6 @@
     </script>
 
     <img class="img-responsive" src="/images/cruiseship.jpg">
-    <div class="container">
         <div class="panel panel-default row col-md-3 col-xs-12">
             <div class="panel-body col-md-12 col-xs-12">
                 <img class="img-responsive img-circle" src="/images/profilepic.png" width="200" height="200">
@@ -292,5 +291,4 @@
                 </ul>
             </div>
         </div>
-    </div>
 @endsection

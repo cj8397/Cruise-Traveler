@@ -94,7 +94,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Last Update: May 9th, 2016 @ 15:15 </a></li>
+                            <li><a href="#">Last Update: May 10th, 2016 @ 15:15 </a></li>
                             <li><a href="https://docs.google.com/spreadsheets/d/1KQc5cRAnqdWS55JQb59NHHYKRtqtslBXlHjbWU2QIqc/edit#gid=0">SCRUM WOKRBOOK</a></li>
                             <li><a href="https://docs.google.com/document/d/1yIuRZO1HJ71moInaR_B1Y0mb6yfwxB9oClgWSx5CTpw/edit#heading=h.tphyqzr77ydu">Design Model</a></li>
                         </ul>
@@ -121,27 +121,18 @@
                         @endif
                         {{--</ul>--}}
                     </li>
-                @endif
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
+    @endif
+    </ul>
+</div>
+<!-- /.navbar-collapse -->
+</div>
+<!-- /.container -->
 </nav>
+<div class="container">
 @include('flash::message')
-@if(isset($success))
-    <div class="alert alert-success">
-        {{$success}}
-    </div>
-@endif
-
-@if(isset($failure))
-    <div class="alert alert-danger">
-        {{$failure}}
-    </div>
-@endif
 
 @yield('content')
+</div>
 
 <footer>
     <div class="row">
