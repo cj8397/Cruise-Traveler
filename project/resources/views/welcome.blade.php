@@ -43,12 +43,12 @@
                         </tr>
                     </table>
                     <div class="panel-body">
-                        <form class="form-vertical clearfix" role="form" method="POST" action="{{ url('/login') }}">
+                        <form class="form-vertical clearfix" role="form" method="POST" action="{{ url('/login') }}" required>
                             {!! csrf_field() !!}
                             <div class="col-xs-12 {{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label class="col-xs-12 control-label">Email:</label>
                                 <div class="col-xs-12">
-                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
