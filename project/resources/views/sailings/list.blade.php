@@ -21,6 +21,14 @@
             .panel .col-xs-12 {
                 padding: 5px 0;
             }
+            hr {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+            .stats > .col-md-5 {
+                padding-right: 20px;
+                box-sizing: content-box;
+            }
         </style>
 @endsection
 
@@ -54,7 +62,8 @@
             <input type="submit" value="Submit" class="btn btn-default">
         </form>
     </div>
-    <hr class="style-eight">
+    <div class="col-xs-12"><hr class="style-eight"></div>
+
     @if($sailings->count() < 1 )
         <div>
             <div class="jumbotron"> <h1>No Results Were Found</h1></div>
@@ -104,7 +113,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-md-7 col-xs-12 cities">
+                                <div class="col-md-6 col-xs-12 cities">
                                     <div>
                                         <p><b>Families:</b> {{ $sailing['stats']->family }}%</p>
                                     </div>
@@ -138,7 +147,6 @@
         </div>
         @endforeach
     </div>
-    <hr>
     <!-- Pagination -->
         <div class="row text-center">
             <div class="col-lg-12 col-md-12 col-xs-12">

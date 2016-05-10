@@ -54,12 +54,6 @@ th, td {
     padding: 15px;
 }
 
-.panel-body > a {
-    width: 100%;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-
 .cities {
     overflow-x: visible;
 }
@@ -70,5 +64,45 @@ th, td {
     padding-left: 0;
     padding-right: 0;
     white-space: pre-wrap;
+}
+
+.tile .panel-default > .panel-heading {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.tile .panel-heading:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+.tile .panel-heading > a {
+    color: white;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+}
+
+.tile .panel-body > a {
+    text-align: center;
+}
+
+.tile .stats.panel {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.tile .events > h4 {
+    margin-left: 5px;
+}
+
+.tile .login.panel-heading {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    padding: 10px;
 }
 

@@ -1,9 +1,25 @@
 .img-wrapper {
-    height: 300px;
+    height: 200px;
     overflow: hidden;
 }
 
 .img-wrapper > img {
     position: relative;
-    top: -100px;
+    top: -200px;
+}
+
+
+/* --- PANEL HEADINGS ----- */
+
+.panel-default > .panel-heading {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+/* MESAGING */
+
+.form-group textarea {
+    height: 80px;
+    width: 100%;
 }

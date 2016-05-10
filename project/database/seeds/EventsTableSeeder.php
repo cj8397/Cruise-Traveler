@@ -29,6 +29,7 @@ class EventsTableSeeder extends Seeder
                     'end_date' => $faker->dateTimeBetween($startDate = '+60 days', $endDate='+90 days'),
                     'desc' => "temporary description",
                     'location' => 'deck',
+                    'max_participants' => 15
                 ]);
             }
         }
