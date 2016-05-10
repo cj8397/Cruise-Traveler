@@ -25,16 +25,18 @@ class UserRequest extends Request
     public function rules()
     {
         return [
-            'email' => 'required|max:20',
+            'email' => 'required|email|max:20',
             'password' => 'required|max:20',
+            'password_confirmation' => 'required|same:password'
         ];
     }
 
     public function messages()
     {
         return [
-            'email.required' => 'Please assign an email to the User!',
-            'password.required' => 'Please assign a password to the User!',
+            'email.required' => 'Please enter an email address!',
+            'password.required' => 'Please enter a password!',
+            'password_confirmation.required' => 'Please enter a password!'
         ];
     }
 }
