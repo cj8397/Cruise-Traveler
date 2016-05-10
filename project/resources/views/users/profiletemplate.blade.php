@@ -2,7 +2,6 @@
 
 @section('content')
     <img class="img-responsive" src="/images/cruiseship.jpg">
-    <div class="container">
         <div class="panel panel-default row col-md-3 col-xs-12">
             <div class="panel-body col-md-12 col-xs-12">
                 <img class="img-responsive img-circle" src="/images/profilepic.png" width="200" height="200">
@@ -96,7 +95,6 @@
             @endif
 
         </div>
-    </div>
     {{--<div class="panel-body">
         <div class="row col-md-6 col-xs-6">
             <ul class="list-group">

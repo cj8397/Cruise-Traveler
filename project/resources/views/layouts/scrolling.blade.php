@@ -121,27 +121,18 @@
                         @endif
                         {{--</ul>--}}
                     </li>
-                @endif
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
+    @endif
+    </ul>
+</div>
+<!-- /.navbar-collapse -->
+</div>
+<!-- /.container -->
 </nav>
+<div class="container">
 @include('flash::message')
-@if(isset($success))
-    <div class="alert alert-success">
-        {{$success}}
-    </div>
-@endif
-
-@if(isset($failure))
-    <div class="alert alert-danger">
-        {{$failure}}
-    </div>
-@endif
 
 @yield('content')
+</div>
 
 <footer>
     <div class="row">

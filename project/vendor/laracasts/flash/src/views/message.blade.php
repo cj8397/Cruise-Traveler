@@ -6,7 +6,7 @@
             'body'       => session('flash_notification.message')
         ])
     @else
-        <div class="alert alert-{{ session('flash_notification.level') }}">
+        <div class="alert alert-{{ session('flash_notification.level') }} custom-fade two">
             <button type="button" 
                     class="close" 
                     data-dismiss="alert" 

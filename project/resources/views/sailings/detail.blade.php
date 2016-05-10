@@ -3,10 +3,14 @@
 @section('styles')
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/sailing-detail.css') }}" />
+    <style>
+        .panel .col-xs-12 {
+            padding: 0;
+        }
+    </style>
 @endsection
 
 @section('content')
-<div class="container">
     <div class="img-wrapper">
         <img class="img-responsive" src="/426631.jpg" alt="">
     </div>
@@ -42,8 +46,8 @@
                 <h2 class="panel-heading">Demographics</h2>
                 @if(!empty($stats))
                     <div class="panel-body">
-                        <div class="panel panel-default col-xs-12">
-                            <div class="panel-heading ">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
                                 <h4> Languages </h4>
                             </div>
                             <div class="panel-body">
@@ -67,7 +71,7 @@
                             </div>
                         </div>
                         <div class="panel panel-default col-xs-12">
-                            <div class="panel-heading ">
+                            <div class="panel-heading">
                                 <h4> Ages </h4>
                             </div>
                             <div class="panel-body">
@@ -133,7 +137,6 @@
             @endif
         @endif
     </div>
-</div>
 @endsection
 
 @section('scripts')

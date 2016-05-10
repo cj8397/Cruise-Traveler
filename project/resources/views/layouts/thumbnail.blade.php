@@ -102,19 +102,10 @@
     <!-- /.container -->
 </nav>
 @include('flash::message')
-@if(isset($success))
-    <div class="alert alert-success">
-        {{$success}}
-    </div>
-@endif
 
-@if(isset($failure))
-    <div class="alert alert-danger">
-        {{$failure}}
-    </div>
-@endif
-
-@yield('content')
+<div class="container">
+    @yield('content')
+</div>
 
 <footer>
     <div class="row">

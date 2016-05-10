@@ -5,9 +5,8 @@
 
 .img-wrapper > img {
     position: relative;
-    top: -200px;
+    top: -25%;
 }
-
 
 /* --- PANEL HEADINGS ----- */
 
@@ -17,9 +16,34 @@
     border-color: #2e6da4;
 }
 
-/* MESAGING */
+/* MESSAGING */
 
 .form-group textarea {
     height: 80px;
     width: 100%;
 }
+
+/* FLASH MESSAGES */
+
+@-webkit-keyframes fade-out {
+    0% { opacity: 1; }
+    /*85% {opacity: 1; -webkit-transform: scale(1.05);}*/
+    100% {opacity: 0;}
+}
+
+
+.custom-fade {
+    position: absolute;
+    z-index: 100;
+    -webkit-animation: fade-out 2s ease-in;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: 1;
+    opacity: 1;
+    width: 93%;
+    box-sizing: border-box;
+}
+
+.custom-fade.one {-webkit-animation-delay: .5s;}
+.custom-fade.two {-webkit-animation-delay: 4.5s;}
+.custom-fade.three {-webkit-animation-delay: 3s;}
+.custom-fade.four {-webkit-animation-delay: 5.5s;}

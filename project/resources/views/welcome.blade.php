@@ -6,6 +6,10 @@
             background-image: url("images/intro_image.jpg");
             background-size: 100% 100%;
         }
+        .events .col-xs-12 {
+            margin-bottom: 10px;
+            padding: 0;
+        }
     </style>
 @endsection
 
@@ -143,7 +147,7 @@
                                 @if(!empty($caribsail['events']))
                                     <h4>Events</h4>
                                     @foreach($caribsail['events'] as $event)
-                                        <div class="col-md-4 col-xs-12">
+                                        <div class="col-xs-12">
                                             <a href="/events/detail/{{$event->id}}" class="btn btn-primary btn-md">{{ $event->title }}</a>
                                         </div>
                                     @endforeach
@@ -151,7 +155,7 @@
                                     <div class="text-center">
                                         <h4>Top Events</h4>
                                         @for($i = 0; $i < 3; $i++)
-                                            <div class="col-md-4 col-xs-12">
+                                            <div class="col-xs-12">
                                                 <a href="/sailings?destination=Caribbean" class="btn btn-primary btn-md">
                                                     <div class="panel-heading">Cocktail Party</div>
                                                 </a>
@@ -163,7 +167,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 col-xs-12">
+                <div class="col-sm-4 col-xs-12 tile">
                     <div class="panel panel-default">
                         <div class="panel-heading text-center">
                             <a href="/sailings?destination=Europe/Mediterranean" class="clearfix"><h2>Mediterranean</h2></a>
@@ -222,7 +226,7 @@
                                 @if(!empty($medsail['events']))
                                     <h4>Events</h4>
                                     @foreach($medsail['events'] as $event)
-                                        <div class="col-md-4 col-xs-12">
+                                        <div class="col-xs-12">
                                             <a href="/events/detail/{{$event->id}}" class="btn btn-primary btn-md">{{ $event->title }}</a>
                                         </div>
                                     @endforeach
@@ -230,7 +234,7 @@
                                     <div class="text-center">
                                         <h4>Top Events</h4>
                                         @for($i = 0; $i < 3; $i++)
-                                            <div class="col-md-4 col-xs-12">
+                                            <div class="col-xs-12">
                                                 <a href="/sailings?destination=Caribbean" class="btn btn-primary btn-md">
                                                     <div class="panel-heading">Cocktail Party</div>
                                                 </a>
@@ -242,7 +246,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 col-xs-12">
+                <div class="col-sm-4 col-xs-12 tile">
                     <div class="panel panel-default">
                         <div class="panel-heading text-center">
                             <a href="/sailings?destination=Alaska" class="clearfix"><h2>Alaska</h2></a>
@@ -260,7 +264,7 @@
                                                 <p><b>Confirmed:</b> {{$alassail['stats']->total}}  </p>
                                             </div>
                                             <div>
-                                                <h4> Languages: </h4>
+                                                <p> Languages: </p>
                                                 <ul>
                                                     @foreach($alassail['stats']->languages as $language => $value)
                                                         <li> <b>{{ $language }}: </b> {{ $value }}% </li>
@@ -273,7 +277,7 @@
                                                 <p><b>Families:</b> {{ $alassail['stats']->family }}%</p>
                                             </div>
                                             <div>
-                                                <h4> Cities: </h4>
+                                                <p> Cities: </p>
                                                 <ul>
                                                     @foreach($alassail['stats']->cities as $city => $value)
                                                         <li> <span><b>{{ $city }}: </b> {{ $value }}% </span></li>
@@ -301,7 +305,7 @@
                                 @if(!empty($alassail['events']))
                                     <h4>Events</h4>
                                     @foreach($alassail['events'] as $event)
-                                        <div class="col-md-4 col-xs-12">
+                                        <div class="col-xs-12">
                                             <a href="/events/detail/{{$event->id}}" class="btn btn-primary btn-md">{{ $event->title }}</a>
                                         </div>
                                     @endforeach
@@ -309,7 +313,7 @@
                                     <div class="text-center">
                                         <h4>Top Events</h4>
                                         @for($i = 0; $i < 3; $i++)
-                                            <div class="col-md-4 col-xs-12">
+                                            <div class="col-xs-12">
                                                 <a href="/sailings?destination=Caribbean" class="btn btn-primary btn-md">
                                                     <div class="panel-heading">Cocktail Party</div>
                                                 </a>
