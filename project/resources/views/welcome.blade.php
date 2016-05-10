@@ -2,10 +2,10 @@
 
 @section('styles')
     <style>
-        .intro {
-            background-image: url("images/intro_image.jpg");
-            background-size: 100% 100%;
-        }
+        /*.intro {*/
+            /*background-image: url("images/intro_image.jpg");*/
+            /*background-size: 100% 100%;*/
+        /*}*/
         .events .col-xs-12 {
             margin-bottom: 10px;
             padding: 0;
