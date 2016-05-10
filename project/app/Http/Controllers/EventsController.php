@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\Http\Requests;
 use App\Event;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\EventRequest;
 use App\Http\Requests\SearchRequest;
@@ -33,7 +34,7 @@ class EventsController extends Controller
     {
         //
         if( $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request)){
-            return view('events.list')->with(['events' => $events, 'sailing_id' => $sailing]);
+            return view('events.list')->with(['events' => $events, 'sailing_id' => $sailing,'old' => $request]);
         } else {
             return Redirect::back();
         }

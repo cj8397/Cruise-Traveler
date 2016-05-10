@@ -29,12 +29,15 @@
 <div class="container">
     <div class="col-xs-12">
         <form url="sailings/" class="form navbar-form navbar-right searchform">
-            <input type="text" name="search" class="form-control" placeholder="Search">
+            <input type="text" value="{!! $request->search !!}" name="search" class="form-control" placeholder="Search">
             @if(!empty($destinations))
                 <select name="destination" id="destination" class="form-control">
                     <option value="">Destination</option>
                     @foreach($destinations as $dest)
-                        <option value="{{$dest->destination}}">{{$dest->destination}}</option>
+                        <option @if($request->destination == $dest->destination)
+                                selected
+                                @endif
+                                value="{{$dest->destination}}">{{$dest->destination}}</option>
                     @endforeach
                 </select>
             @endif
@@ -43,14 +46,23 @@
                 <select name="origin" id="origin" class="form-control">
                     <option value="">Port of Origin</option>
                     @foreach($ports as $port)
-                        <option value="{{$port->port_org}}">{{$port->port_org}}</option>
+                        <option  @if($request->origin == $port->port_org)
+                                 selected
+                                 @endif
+                                value="{{$port->port_org}}">{{$port->port_org}}</option>
                     @endforeach
                 </select>
             @endif
             <select name="sort" id="sort" class="form-control">
                 <option value="">Sort</option>
-                <option value="asc">Date: Future to past</option>
-                <option value="desc">Date: Past to future</option>
+                <option @if($request->sort == 'asc')
+                        selected
+                        @endif
+                        value="asc">Date: Future to past</option>
+                <option @if($request->sort == 'desc')
+                        selected
+                        @endif
+                        value="desc">Date: Past to future</option>
             </select>
             <input type="submit" value="Submit" class="btn btn-default">
         </form>
@@ -143,7 +155,11 @@
     <!-- Pagination -->
         <div class="row text-center">
             <div class="col-lg-12 col-md-12 col-xs-12">
-                {{$sailings->links()}}
+                {{$sailings->appends(['search' => $request->search,
+                'destination' => $request->destination,
+                'origin' => $request->origin,
+                'sort' => $request->sort ])
+                ->links()}}
             </div>
         </div>
 </div>

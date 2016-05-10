@@ -38,7 +38,7 @@ class SailingsController extends Controller
             foreach($sailings as $sailing) {
                 $sailing['stats'] = $statsController->GetTop3Summary($sailing->id);
             }
-            return view('sailings.list', compact('sailings', 'destinations', 'ports'));
+            return view('sailings.list', compact('sailings', 'destinations', 'ports','request'));
         } else {
              return redirect::back();
         }

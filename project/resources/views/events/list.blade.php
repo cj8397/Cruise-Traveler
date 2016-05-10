@@ -4,15 +4,29 @@
         <!-- Page Content -->
 <div class="container">
 <div class="row">
-    <form url="events/{!! $sailing_id !!}" class="form navbar-form navbar-right searchform">
-        <input type="text" name="search" class="form-control" placeholder="Search by Event title or Event description.....">
+    <form name="searchEvents" url="search/{!! $sailing_id !!}" class="form navbar-form navbar-right searchform">
+        <input type="text" value="{!! $old->search !!}" name="search" class="form-control" placeholder="Search by Event title or Event description.....">
         <select name="sort" class="form-control" >
-            <option value="start_date">End Date</option>
-            <option value="end_date">Start Date</option>
+            <option @if($old->sort == 'start_date')
+                    selected
+                    @endif
+                    value="start_date">End Date</option>
+            <option @if($old->sort == 'end_date')
+                    selected
+                    @endif
+                    value="end_date">Start Date</option>
         </select>
         <select name="direction" class="form-control">
-            <option value="asc">Date: Future to past</option>
-            <option value="desc">Date: Past to future</option>
+            <option @if($old->sort == 'asc')
+                    selected
+                    @endif
+
+                    value="asc">Date: Future to past</option>
+            <option @if($old->sort == 'desc')
+                    selected
+                    @endif
+
+                    value="desc">Date: Past to future</option>
         </select>
         <input type="submit" value="Search" class="btn btn-default">
     </form>
@@ -92,7 +106,10 @@
             <!-- Pagination -->
             <div class="row text-center">
                 <div class="col-lg-12 col-md-12 col-xs-12">
-                    {{$events->links()}}
+                    {{$events->appends(['search' => $old->search,
+                    'sort' => $old->sort,
+                    'direction' => $old->direction])
+                    ->links()}}
                 </div>
             </div>
     </div>
