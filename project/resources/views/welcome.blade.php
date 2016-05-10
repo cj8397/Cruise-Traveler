@@ -177,9 +177,6 @@
                                 <h4>{!! $medsail->cruise_line !!}</h4>
                                 <img class="img-responsive" src="/images/mediterranean_thumb.png" alt="">
                             </a>
-                            <a href="/sailings?destination=Europe/Mediterranean" class="btn btn-primary btn-md">
-                                <i class="fa fa-users" aria-hidden="true"></i>View Mediteranean Sailings
-                            </a>
                             @if(!empty($medsail['stats']))
                                 @if($medsail['stats']->total != null)
                                     <div class="stats clearfix panel panel-default">
@@ -225,7 +222,6 @@
                                     </div>
                                 </div>
                             @endif
-                            <hr />
                             <div class="events">
                                 @if(!empty($medsail['events']))
                                     <h4>Events</h4>
