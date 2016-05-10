@@ -54,7 +54,7 @@ class Event extends Model
                 ->orWhere('location', 'LIKE', "%$search->search%");
         }
 
-        if($search->direction != "" && $search->sort != ""){
+        if($search->direction != "" || $search->sort != ""){
             $query->orderBy($search->sort,$search->direction);
         }
         return $query->paginate(6);

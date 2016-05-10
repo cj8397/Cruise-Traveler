@@ -66,6 +66,23 @@
                             </li>
                         </ul>
                     </div>
+                    @if(isset($members) && isset($currentUser))
+                        <div class="row col-md-5 col-md-offset-1 col-xs-12">
+                            <div class="panel panel-default col-md-12 col-xs-12">
+                                <div class="panel panel-heading">Participants</div>
+                                <div class="panel panel-body">
+                                    <div class="row">
+                                        @foreach ($members as $mem)
+                                            <a class="col-xs-4 col-md-4" href="/users/userprofile/{!! $mem->user_id !!}">
+                                                <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                                                <span class="label label-default label-pill">{!! $mem->userdetails->first." ".$mem->userdetails->last!!}</span>
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 @if(!empty($thread))
                 <div class="col-xs-8">
@@ -106,22 +123,5 @@
                 @endif
             </div>
         </div>
-        @if(isset($members) && isset($currentUser))
-            <div class="row col-md-5 col-md-offset-1 col-xs-12">
-                <div class="panel panel-default col-md-12 col-xs-12">
-                    <div class="panel panel-heading">Participants</div>
-                    <div class="panel panel-body">
-                        <div class="row">
-                            @foreach ($members as $mem)
-                                <a class="col-xs-4 col-md-4" href="/users/userprofile/{!! $mem->user_id !!}">
-                            <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                                    <span class="label label-default label-pill">{!! $mem->userdetails->first." ".$mem->userdetails->last!!}</span>
-                        </a>
-                            @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-        @endif
     </div>
 @endsection
