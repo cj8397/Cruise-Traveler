@@ -112,3 +112,8 @@
     </div>
     </div>
 @endsection
+@section('scripts')
+<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+
+{!! JsValidator::formRequest('App\Http\Requests\EventRequest') !!}
+@endsection

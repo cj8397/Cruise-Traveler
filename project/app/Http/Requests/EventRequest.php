@@ -30,8 +30,8 @@ class EventRequest extends Request
             'title' => 'required|max:80',
             'start' => 'required|date',
             'end' => 'required|date|after:start',
-            'desc' => 'max:255',
-            'location' => 'max:80',
+            'desc' => 'required|max:255',
+            'location' => 'required|max:80',
             'max_participants' => 'required|numeric|between:0,100'
         ];
     }
@@ -41,6 +41,8 @@ class EventRequest extends Request
         return [
             'title.required' => 'Please assign a title to your event!',
             'start.required' => 'When is your event starting?',
+            'desc.required' => 'Please enter some event details!',
+            'location.required' => 'Where is your event located?',
             'end.required' => 'When is your event ending?',
             'sailing_id.exists' => 'This Sailing doesn\'t exist anymore or has expired!',
             'max_participants.between' =>'The number of participants entered is incorrect, Enter a number between 1-100'
