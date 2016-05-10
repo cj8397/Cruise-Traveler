@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "~5.0",
         "cmgmyr/messenger": "~2.0",
-        "laracasts/flash": "^2.0"
+        "laracasts/flash": "^2.0",
+        "proengsoft/laravel-jsvalidation": "~1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
