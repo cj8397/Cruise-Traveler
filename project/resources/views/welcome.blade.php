@@ -54,7 +54,7 @@
                                     <div class="col-xs-12 {{ $errors->has('email') ? ' has-error' : '' }}">
                                         <label class="col-xs-12 control-label">Email:</label>
                                         <div class="col-xs-12">
-                                            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
                                             @if ($errors->has('email'))
                                                 <span class="help-block">
                                                 <strong>{{ $errors->first('email') }}</strong>
@@ -65,7 +65,7 @@
                                     <div class="col-xs-12 {{ $errors->has('password') ? ' has-error' : '' }}">
                                         <label class="col-xs-12 control-label">Password:</label>
                                         <div class="col-xs-12">
-                                            <input type="password" class="form-control" name="password">
+                                            <input type="password" class="form-control" name="password" required>
 
                                             @if ($errors->has('password'))
                                                 <span class="help-block">
