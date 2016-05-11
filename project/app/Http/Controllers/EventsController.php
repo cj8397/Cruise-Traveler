@@ -33,10 +33,15 @@ class EventsController extends Controller
     protected function GetAllEvents($sailing, SearchRequest $request)
     {
         //
-        if( $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request)){
+        if($request->direction == null){
+            $events = Event::with('userevent')->where('sailing_id', $sailing)->paginate(6);
             return view('events.list')->with(['events' => $events, 'sailing_id' => $sailing,'old' => $request]);
-        } else {
-            return Redirect::back();
+        }else{
+            if( $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request)){
+                return view('events.list')->with(['events' => $events, 'sailing_id' => $sailing,'old' => $request]);
+            } else {
+                return Redirect::back();
+            }
         }
     }
 
