@@ -54,7 +54,7 @@ class EventsController extends Controller
             if($userEvent = UserEvent::where(['user_id' => Auth::user()->id, 'event_id'=> $event_id])->first())
             {
               $thread = Thread::where(['event_id' => $event_id, 'sailing_id' => $event->sailing_id])->first();
-
+              $thread->messages = $thread->messages->sortByDesc('created_at');
               return view('events.eventdetail')->with([
                   'event' => $event,
                   'members' => $members,
