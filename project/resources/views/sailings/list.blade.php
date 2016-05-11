@@ -90,7 +90,7 @@
             <input type="submit" value="Submit" class="btn btn-default">
         </form>
     </div>
-    <hr class="style-eight">
+    <hr class="style-eight col-xs-12">
     @if($sailings->count() < 1 )
         <div>
             <div class="jumbotron"> <h1>No Results Were Found</h1></div>

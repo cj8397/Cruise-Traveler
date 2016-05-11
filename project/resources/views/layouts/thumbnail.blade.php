@@ -46,9 +46,6 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">Home</a>
-            <a class="brand">
-                <img src="https://placehold.it/750x450">
-            </a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -101,17 +98,14 @@
     </div>
     <!-- /.container -->
 </nav>
-@include('flash::message')
-
 <div class="container">
+    @include('flash::message')
     @yield('content')
 </div>
 
 <footer>
     <div class="container">
-        <div class="col-lg-12">
-            <p>Copyright &copy; Your Website 2014</p>
-        </div>
+            <p>Copyright &copy; Cruise Connect 2016</p>
     </div>
 </footer>
 
