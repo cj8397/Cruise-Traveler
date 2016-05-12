@@ -14,8 +14,8 @@
     <div class="img-wrapper">
         <img class="img-responsive" src="/426631.jpg" alt="">
     </div>
-    <div class="col-xs-12 text-center">
-        <div class="col-xs-4">
+    <div class="col-xs-12 col-md-12 col-lg-12 text-center">
+        <div class="col-xs-12 col-md-4 col-lg-4">
             <div class="row panel panel-default">
                 <h2 class="panel-heading">{{$sailing->title}} {{$sailing->cruise_line}} </h2>
                 <div class="panel-body">
@@ -41,7 +41,7 @@
             </div>
         </div>
         @if(!isset($currentUser))
-        <div class="col-xs-8">
+        <div class="col-xs-12 col-md-8 col-lg-8">
             <div class="panel panel-default">
                 <h2 class="panel-heading">Demographics</h2>
                 @if(!empty($stats))
@@ -54,7 +54,7 @@
                                 <div id="language"></div>
                             </div>
                         </div>
-                        <div class="panel panel-default col-xs-6">
+                        <div class="panel panel-default col-xs-12 col-md-12">
                             <div class="panel-heading ">
                                 <h4> Families </h4>
                             </div>
@@ -62,7 +62,7 @@
                                 <div id="families"></div>
                             </div>
                         </div>
-                        <div class="panel panel-default col-xs-6">
+                        <div class="panel panel-default col-xs-12 col-md-12">
                             <div class="panel-heading ">
                                 <h4> Gender </h4>
                             </div>
@@ -70,7 +70,7 @@
                                 <div id="sex"></div>
                             </div>
                         </div>
-                        <div class="panel panel-default col-xs-12">
+                        <div class="panel panel-default col-xs-12 col-md-12">
                             <div class="panel-heading">
                                 <h4> Ages </h4>
                             </div>
@@ -78,7 +78,7 @@
                                 <div id="ages"></div>
                             </div>
                         </div>
-                        <div class="panel panel-default col-xs-6">
+                        <div class="panel panel-default col-xs-12 col-md-12">
                             <div class="panel-heading ">
                                 <h4> Countries </h4>
                             </div>
@@ -86,7 +86,7 @@
                                 <div id="countries"></div>
                             </div>
                         </div>
-                        <div class="panel panel-default col-xs-6">
+                        <div class="panel panel-default col-xs-12 col-md-12">
                             <div class="panel-heading ">
                                 <h4> Cities </h4>
                             </div>
@@ -100,11 +100,11 @@
         </div>
         @else
             @if(!empty($thread))
-            <div class="col-xs-8">
+            <div class="col-xs-12 col-md-12">
                 <div class="row panel panel-default">
                   <h2 class="panel-heading">{!! $thread->subject !!} </h2>
                   <div class="panel-body">
-                      <div class="col-xs-4">
+                      <div class="col-xs-12">
                           {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
                                   <!-- Message Form Input -->
                           <div class="form-group clearfix">
@@ -115,9 +115,9 @@
                           </div>
                           {!! Form::close() !!}
                       </div>
-                      <div class="col-xs-8">
+                      <div class="col-xs-12 col-md-12">
                         @foreach($thread->messages as $message)
-                         <div class="col-xs-12 message">
+                         <div class="col-xs-12 col-md-12 message">
                               <div class="media">
                                   <a class="pull-left" href="#">
                                       <img src="//www.gravatar.com/avatar/{!! md5($message->user->email) !!}?s=64" alt="{!! $message->user->email !!}" class="img-circle">
@@ -144,8 +144,10 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
     <script>
-        Morris.Bar({
+    $(function () {
+        window.languages = Morris.Bar({
             element: 'language',
+            resize: true,
             data: [
                @foreach( $stats->languages as $language => $percentage)
                     { y:'{{$language}}',  a:'{{$percentage}}'},
@@ -156,8 +158,9 @@
             labels: ['Percent']
         });
 
-        Morris.Donut({
+        window.countries = Morris.Donut({
             element: 'countries',
+            resize: true,
             data: [
                 @foreach( $stats->countries as $countries=> $percentage)
                     { label:'{{$countries}}',  value:'{{$percentage}}'},
@@ -166,8 +169,9 @@
             colors: ['#FF0000', '#0000FF']
         });
 
-        Morris.Donut({
+        window.cities = Morris.Donut({
             element: 'cities',
+            resize: true,
             data: [
                     @foreach( $stats->cities as $cities=> $percentage)
                 { label:'{{$cities}}',  value:'{{$percentage}}'},
@@ -175,8 +179,9 @@
             ],
             colors: ['#FF0000', '#0000FF']
         });
-        Morris.Bar({
+        window.ages = Morris.Bar({
             element: 'ages',
+            resize: true,
             data: [
                 @foreach( $stats->ages as $ages=> $percentage)
                     { y:'{{$ages}}',  a:'{{$percentage}}'},
@@ -187,27 +192,37 @@
             labels: ['Percent']
         });
 
-
-
-
-        Morris.Donut({
+        window.families = Morris.Donut({
             element: 'families',
+            resize: true,
             data: [
                 {label: "Family", value: "{{$stats->family}}" },
                 {label: "Non-family", value: "{{$stats->nonfamily}}" }
             ],
             colors: ['#FF0000', '#0000FF']
         });
-        Morris.Donut({
+        window.sex = Morris.Donut({
             element: 'sex',
+            resize: true,
             data: [
                 {label: "Male", value: "{{$stats->male}}" },
                 {label: "Female", value: "{{$stats->female}}" }
             ],
             colors: ['#FF0000', '#0000FF']
         });
-
-
+        $(window).on('resize', function() {
+               if (!window.recentResize) {
+                  window.languages.redraw();
+                  window.countries.redraw();
+                  window.cities.redraw();
+                  window.ages.redraw();
+                  window.families.redraw();
+                  window.sex.redraw();
+                  window.recentResize = true;
+                  setTimeout(function(){ window.recentResize = false; }, 200);
+               }
+            });
+          });
     </script>
 
 @endsection
