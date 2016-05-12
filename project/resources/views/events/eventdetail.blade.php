@@ -8,13 +8,11 @@
     </style>
     @endsection
 @section('content')
-
-    <div class="container">
         <div class="img-wrapper">
             <img class="img-responsive" src="/426631.jpg" alt="">
         </div>
-            <div class="col-md-12 col-xs-12 text-center">
-                <div class="panel panel-default col-md-4 col-xs-12">
+            <div class="col-sm-4 col-xs-12 text-center">
+                <div class="panel panel-default">
                     <div class="panel panel-heading">{!! $event->title !!}</div>
                     <div class="panel panel-body">
                         <ul class="list-group">
@@ -74,8 +72,10 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+            <div class="col-sm-8 col-xs-12 text-center">
                 @if(!empty($thread) && isset($currentUser))
-                    <div class="row col-md-7 col-md-offset-1 col-xs-12">
+                    <div class="row col-xs-12">
                         <div class="row panel panel-default">
                             <div class="panel-heading">
                                 <h2>{!! $thread->subject !!}</h2>
@@ -112,20 +112,16 @@
                     </div>
                 @endif
                 @if(isset($members))
-                    <div class="row col-md-7 col-md-offset-1 col-xs-12">
-                        <div class="panel panel-default col-md-12 col-xs-12">
+                    <div class="row col-xs-12">
+                        <div class="panel panel-default">
                             <div class="panel panel-heading">Participants</div>
                             <div class="panel panel-body">
                                 <div class="row">
-                                    @foreach ($members->chunk(3) as $row)
-                                        <div class="row">
-                                            @foreach($row as $mem)
-                                        <a class="col-xs-4 col-sm-4 profile" href="/users/userprofile/{!! $mem->user_id !!}">
+                                    @foreach ($members as $mem)
+                                        <a class="col-xs-4 col-sm-4 col-md-2 profile" href="/users/userprofile/{!! $mem->user_id !!}">
                                             <img class="img-responsive img-circle" src="/images/profilepic.png" alt="">
                                             <span class="label label-default label-pill">{!! $mem->userdetails->first." ".$mem->userdetails->last!!}</span>
                                         </a>
-                                                @endforeach
-                                        </div>
                                     @endforeach
                                 </div>
                             </div>
@@ -133,5 +129,4 @@
                     </div>
                 @endif
             </div>
-    </div>
 @endsection
