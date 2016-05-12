@@ -118,5 +118,5 @@
     </div>
 @endsection
 @section('scripts')
-{!! JsValidator::formRequest('App\Http\Requests\SailingRequest', '#updateSailingForm'); !!}
+    {!! JsValidator::formRequest('App\Http\Requests\SailingRequest', '#updateSailingForm'); !!}
 @endsection

@@ -1,17 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6128dfe4-63a0-4279-a8f1-b116385ce490" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../repo/IndustryProject/project/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../repo/IndustryProject/project/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../repo/IndustryProject/project/app/Http/Controllers/UserSailingsController.php" afterPath="$PROJECT_DIR$/../repo/IndustryProject/project/app/Http/Controllers/UserSailingsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../repo/IndustryProject/project/app/Http/routes.php" afterPath="$PROJECT_DIR$/../repo/IndustryProject/project/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../repo/IndustryProject/project/database/seeds/EventsTableSeeder.php" afterPath="$PROJECT_DIR$/../repo/IndustryProject/project/database/seeds/EventsTableSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../repo/IndustryProject/project/database/seeds/SailingsTableSeeder.php" afterPath="$PROJECT_DIR$/../repo/IndustryProject/project/database/seeds/SailingsTableSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../repo/IndustryProject/project/database/seeds/UsersTableSeeder.php" afterPath="$PROJECT_DIR$/../repo/IndustryProject/project/database/seeds/UsersTableSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../repo/IndustryProject/project/storage/logs/laravel.log" afterPath="$PROJECT_DIR$/../repo/IndustryProject/project/storage/logs/laravel.log" />
+    <list default="true" id="6128dfe4-63a0-4279-a8f1-b116385ce490" name="Default" comment="Merge branch 'dev' of https://github.com/cj8397/IndustryProject into cheng&#10;&#10;Conflicts:&#10;&#9;project/app/Event.php&#10;&#9;project/app/Http/Controllers/EventsController.php&#10;&#9;project/app/Http/Controllers/SailingsController.php&#10;&#9;project/app/Http/Requests/UserDetailsRequest.php&#10;&#9;project/app/Http/routes.php&#10;&#9;project/app/Sailing.php&#10;&#9;project/bootstrap/cache/services.php&#10;&#9;project/database/seeds/EventsTableSeeder.php&#10;&#9;project/database/seeds/UserEventsTableSeeder.php&#10;&#9;project/public/styles/custom/site.css&#10;&#9;project/public/styles/custom/tiles.css&#10;&#9;project/resources/views/auth/passwords/email.blade.php&#10;&#9;project/resources/views/auth/passwords/reset.blade.php&#10;&#9;project/resources/views/auth/register.blade.php&#10;&#9;project/resources/views/events/createEventForm.blade.php&#10;&#9;project/resources/views/events/eventdetail.blade.php&#10;&#9;project/resources/views/events/list.blade.php&#10;&#9;project/resources/views/events/updateEventForm.blade.php&#10;&#9;project/resources/views/events/userList.blade.php&#10;&#9;project/resources/views/layouts/scrolling.blade.php&#10;&#9;project/resources/views/layouts/thumbnail.blade.php&#10;&#9;project/resources/views/sailings/create.blade.php&#10;&#9;project/resources/views/sailings/detail.blade.php&#10;&#9;project/resources/views/sailings/list.blade.php&#10;&#9;project/resources/views/sailings/update.blade.php&#10;&#9;project/resources/views/users/createdetail.blade.php&#10;&#9;project/resources/views/users/userprofile.blade.php&#10;&#9;project/resources/views/welcome.blade.php&#10;&#9;project/vendor/composer/installed.json&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/.javascript-style.json&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/composer.json&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/gulpfile.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/public/js/jsvalidation.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/public/js/jsvalidation.js.map&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/helpers.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/jsvalidation.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/timezones.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/validations.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/views/bootstrap.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Exceptions/BadRequestHttpException.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Exceptions/PropertyNotFoundException.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/JavascriptRulesTrait.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/JavascriptValidator.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/MessageParser.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/RuleParser.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/ValidatorHandler.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/JsValidationServiceProvider.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/JsValidatorFactory.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Remote/Validator.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/RemoteValidationMiddleware.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Support/AccessProtectedTrait.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Support/DelegatedValidator.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Support/RuleListTrait.php&#10;&#9;project/vendor/symfony/http-kernel/Kernel.php&#10;&#9;project/vendor/symfony/routing/Generator/UrlGenerator.php&#10;">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/app/Event.php" afterPath="$PROJECT_DIR$/project/app/Event.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/app/Http/Controllers/EventsController.php" afterPath="$PROJECT_DIR$/project/app/Http/Controllers/EventsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/app/Http/Controllers/SailingsController.php" afterPath="$PROJECT_DIR$/project/app/Http/Controllers/SailingsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/app/Http/Requests/UserDetailsRequest.php" afterPath="$PROJECT_DIR$/project/app/Http/Requests/UserDetailsRequest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/app/Http/routes.php" afterPath="$PROJECT_DIR$/project/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/app/Sailing.php" afterPath="$PROJECT_DIR$/project/app/Sailing.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/bootstrap/cache/services.php" afterPath="$PROJECT_DIR$/project/bootstrap/cache/services.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/database/seeds/EventsTableSeeder.php" afterPath="$PROJECT_DIR$/project/database/seeds/EventsTableSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/database/seeds/UserEventsTableSeeder.php" afterPath="$PROJECT_DIR$/project/database/seeds/UserEventsTableSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/database/seeds/UserSailingsTableSeeder.php" afterPath="$PROJECT_DIR$/project/database/seeds/UserSailingsTableSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/public/styles/custom/site.css" afterPath="$PROJECT_DIR$/project/public/styles/custom/site.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/public/vendor/jsvalidation/js/jsvalidation.js" afterPath="$PROJECT_DIR$/project/public/vendor/jsvalidation/js/jsvalidation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/public/vendor/jsvalidation/js/jsvalidation.js.map" afterPath="$PROJECT_DIR$/project/public/vendor/jsvalidation/js/jsvalidation.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/admin/userupdate.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/admin/userupdate.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/auth/login.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/auth/login.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/auth/passwords/email.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/auth/passwords/email.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/auth/passwords/reset.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/auth/passwords/reset.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/auth/register.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/auth/register.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/events/createEventForm.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/events/createEventForm.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/events/eventdetail.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/events/eventdetail.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/events/list.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/events/list.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/events/updateEventForm.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/events/updateEventForm.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/layouts/scrolling.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/layouts/scrolling.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/layouts/thumbnail.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/layouts/thumbnail.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/sailings/create.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/sailings/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/sailings/detail.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/sailings/detail.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/sailings/list.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/sailings/list.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/sailings/update.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/sailings/update.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/users/createdetail.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/users/createdetail.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/users/userprofile.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/users/userprofile.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/vendor/flash/message.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/vendor/flash/message.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/vendor/jsvalidation/bootstrap.php" afterPath="$PROJECT_DIR$/project/resources/views/vendor/jsvalidation/bootstrap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/views/welcome.blade.php" afterPath="$PROJECT_DIR$/project/resources/views/welcome.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/composer/autoload_static.php" afterPath="$PROJECT_DIR$/project/vendor/composer/autoload_static.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/.javascript-style.json" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/.javascript-style.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/composer.json" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/gulpfile.js" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/gulpfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/public/js/jsvalidation.js" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/public/js/jsvalidation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/public/js/jsvalidation.js.map" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/public/js/jsvalidation.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/helpers.js" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/helpers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/jsvalidation.js" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/jsvalidation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/timezones.js" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/timezones.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/validations.js" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/validations.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/resources/views/bootstrap.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/resources/views/bootstrap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Exceptions/BadRequestHttpException.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Exceptions/BadRequestHttpException.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Exceptions/PropertyNotFoundException.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Exceptions/PropertyNotFoundException.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/JavascriptRulesTrait.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/JavascriptRulesTrait.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/JavascriptValidator.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/JavascriptValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/MessageParser.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/MessageParser.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/RuleParser.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/RuleParser.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/ValidatorHandler.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/ValidatorHandler.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/JsValidationServiceProvider.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/JsValidationServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/JsValidatorFactory.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/JsValidatorFactory.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Remote/Validator.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Remote/Validator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/RemoteValidationMiddleware.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/RemoteValidationMiddleware.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Support/AccessProtectedTrait.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Support/AccessProtectedTrait.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Support/DelegatedValidator.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Support/DelegatedValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Support/RuleListTrait.php" afterPath="$PROJECT_DIR$/project/vendor/proengsoft/laravel-jsvalidation/src/Support/RuleListTrait.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php" afterPath="$PROJECT_DIR$/project/vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/symfony/http-kernel/Kernel.php" afterPath="$PROJECT_DIR$/project/vendor/symfony/http-kernel/Kernel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/vendor/symfony/routing/Generator/UrlGenerator.php" afterPath="$PROJECT_DIR$/project/vendor/symfony/routing/Generator/UrlGenerator.php" />
     </list>
     <ignored path="migrations.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,32 +86,12 @@
     <favorites_list name="migrations" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="2014_10_12_000000_create_users_table.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="userprofile.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/project/resources/views/users/userprofile.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2016_04_19_151526_sailings.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2016_04_19_151526_sailings.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2016_04_19_151856_user_sailings.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2016_04_19_151856_user_sailings.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="832">
+              <caret line="124" column="57" selection-start-line="124" selection-start-column="57" selection-end-line="124" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -62,26 +100,28 @@
     </leaf>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../repo/IndustryProject" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/project/resources/views/users/userprofile.blade.php" />
+      </list>
+    </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" />
   <component name="JsBuildToolPackageJson" detection-done="true" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
-    <gulpfiles>
-      <GulpfileState>
-        <gulpfile-path>$PROJECT_DIR$/gulpfile.js</gulpfile-path>
-      </GulpfileState>
-    </gulpfiles>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="4" />
-    <option name="y" value="23" />
-    <option name="width" value="1276" />
-    <option name="height" value="777" />
+    <option name="x" value="51" />
+    <option name="y" value="24" />
+    <option name="width" value="1315" />
+    <option name="height" value="744" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -107,113 +147,187 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="migrations" />
+              <option name="myItemId" value="IndustryProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="migrations" />
+              <option name="myItemId" value="IndustryProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="IndustryProject" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="migrations" />
+              <option name="myItemId" value="IndustryProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="IndustryProject" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="migrations" />
+              <option name="myItemId" value="IndustryProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="IndustryProject" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="seeds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="migrations" />
+              <option name="myItemId" value="IndustryProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="IndustryProject" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="migrations" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="users" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IndustryProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IndustryProject" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
-  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="RunManager">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="6128dfe4-63a0-4279-a8f1-b116385ce490" name="Default" comment="" />
       <created>1461780814667</created>
       <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
       <updated>1461780814667</updated>
+      <workItem from="1463087042419" duration="3204000" />
     </task>
+    <task id="LOCAL-00001" summary="Merge branch 'dev' of https://github.com/cj8397/IndustryProject into cheng&#10;&#10;Conflicts:&#10;&#9;project/app/Event.php&#10;&#9;project/app/Http/Controllers/EventsController.php&#10;&#9;project/app/Http/Controllers/SailingsController.php&#10;&#9;project/app/Http/Requests/UserDetailsRequest.php&#10;&#9;project/app/Http/routes.php&#10;&#9;project/app/Sailing.php&#10;&#9;project/bootstrap/cache/services.php&#10;&#9;project/database/seeds/EventsTableSeeder.php&#10;&#9;project/database/seeds/UserEventsTableSeeder.php&#10;&#9;project/public/styles/custom/site.css&#10;&#9;project/public/styles/custom/tiles.css&#10;&#9;project/resources/views/auth/passwords/email.blade.php&#10;&#9;project/resources/views/auth/passwords/reset.blade.php&#10;&#9;project/resources/views/auth/register.blade.php&#10;&#9;project/resources/views/events/createEventForm.blade.php&#10;&#9;project/resources/views/events/eventdetail.blade.php&#10;&#9;project/resources/views/events/list.blade.php&#10;&#9;project/resources/views/events/updateEventForm.blade.php&#10;&#9;project/resources/views/events/userList.blade.php&#10;&#9;project/resources/views/layouts/scrolling.blade.php&#10;&#9;project/resources/views/layouts/thumbnail.blade.php&#10;&#9;project/resources/views/sailings/create.blade.php&#10;&#9;project/resources/views/sailings/detail.blade.php&#10;&#9;project/resources/views/sailings/list.blade.php&#10;&#9;project/resources/views/sailings/update.blade.php&#10;&#9;project/resources/views/users/createdetail.blade.php&#10;&#9;project/resources/views/users/userprofile.blade.php&#10;&#9;project/resources/views/welcome.blade.php&#10;&#9;project/vendor/composer/installed.json&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/.javascript-style.json&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/composer.json&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/gulpfile.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/public/js/jsvalidation.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/public/js/jsvalidation.js.map&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/helpers.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/jsvalidation.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/timezones.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/validations.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/views/bootstrap.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Exceptions/BadRequestHttpException.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Exceptions/PropertyNotFoundException.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/JavascriptRulesTrait.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/JavascriptValidator.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/MessageParser.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/RuleParser.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/ValidatorHandler.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/JsValidationServiceProvider.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/JsValidatorFactory.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Remote/Validator.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/RemoteValidationMiddleware.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Support/AccessProtectedTrait.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Support/DelegatedValidator.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Support/RuleListTrait.php&#10;&#9;project/vendor/symfony/http-kernel/Kernel.php&#10;&#9;project/vendor/symfony/routing/Generator/UrlGenerator.php&#10;">
+      <created>1463088354733</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1463088354733</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="3204000" />
+  </component>
   <component name="ToolWindowManager">
-    <frame x="4" y="23" width="1276" height="777" extended-state="6" />
+    <frame x="51" y="24" width="1315" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959481" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24942966" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -221,31 +335,26 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Merge branch 'dev' of https://github.com/cj8397/IndustryProject into cheng&#10;&#10;Conflicts:&#10;&#9;project/app/Event.php&#10;&#9;project/app/Http/Controllers/EventsController.php&#10;&#9;project/app/Http/Controllers/SailingsController.php&#10;&#9;project/app/Http/Requests/UserDetailsRequest.php&#10;&#9;project/app/Http/routes.php&#10;&#9;project/app/Sailing.php&#10;&#9;project/bootstrap/cache/services.php&#10;&#9;project/database/seeds/EventsTableSeeder.php&#10;&#9;project/database/seeds/UserEventsTableSeeder.php&#10;&#9;project/public/styles/custom/site.css&#10;&#9;project/public/styles/custom/tiles.css&#10;&#9;project/resources/views/auth/passwords/email.blade.php&#10;&#9;project/resources/views/auth/passwords/reset.blade.php&#10;&#9;project/resources/views/auth/register.blade.php&#10;&#9;project/resources/views/events/createEventForm.blade.php&#10;&#9;project/resources/views/events/eventdetail.blade.php&#10;&#9;project/resources/views/events/list.blade.php&#10;&#9;project/resources/views/events/updateEventForm.blade.php&#10;&#9;project/resources/views/events/userList.blade.php&#10;&#9;project/resources/views/layouts/scrolling.blade.php&#10;&#9;project/resources/views/layouts/thumbnail.blade.php&#10;&#9;project/resources/views/sailings/create.blade.php&#10;&#9;project/resources/views/sailings/detail.blade.php&#10;&#9;project/resources/views/sailings/list.blade.php&#10;&#9;project/resources/views/sailings/update.blade.php&#10;&#9;project/resources/views/users/createdetail.blade.php&#10;&#9;project/resources/views/users/userprofile.blade.php&#10;&#9;project/resources/views/welcome.blade.php&#10;&#9;project/vendor/composer/installed.json&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/.javascript-style.json&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/composer.json&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/gulpfile.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/public/js/jsvalidation.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/public/js/jsvalidation.js.map&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/helpers.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/jsvalidation.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/timezones.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/validations.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/views/bootstrap.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Exceptions/BadRequestHttpException.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Exceptions/PropertyNotFoundException.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/JavascriptRulesTrait.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/JavascriptValidator.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/MessageParser.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/RuleParser.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/ValidatorHandler.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/JsValidationServiceProvider.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/JsValidatorFactory.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Remote/Validator.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/RemoteValidationMiddleware.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Support/AccessProtectedTrait.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Support/DelegatedValidator.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Support/RuleListTrait.php&#10;&#9;project/vendor/symfony/http-kernel/Kernel.php&#10;&#9;project/vendor/symfony/routing/Generator/UrlGenerator.php&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'dev' of https://github.com/cj8397/IndustryProject into cheng&#10;&#10;Conflicts:&#10;&#9;project/app/Event.php&#10;&#9;project/app/Http/Controllers/EventsController.php&#10;&#9;project/app/Http/Controllers/SailingsController.php&#10;&#9;project/app/Http/Requests/UserDetailsRequest.php&#10;&#9;project/app/Http/routes.php&#10;&#9;project/app/Sailing.php&#10;&#9;project/bootstrap/cache/services.php&#10;&#9;project/database/seeds/EventsTableSeeder.php&#10;&#9;project/database/seeds/UserEventsTableSeeder.php&#10;&#9;project/public/styles/custom/site.css&#10;&#9;project/public/styles/custom/tiles.css&#10;&#9;project/resources/views/auth/passwords/email.blade.php&#10;&#9;project/resources/views/auth/passwords/reset.blade.php&#10;&#9;project/resources/views/auth/register.blade.php&#10;&#9;project/resources/views/events/createEventForm.blade.php&#10;&#9;project/resources/views/events/eventdetail.blade.php&#10;&#9;project/resources/views/events/list.blade.php&#10;&#9;project/resources/views/events/updateEventForm.blade.php&#10;&#9;project/resources/views/events/userList.blade.php&#10;&#9;project/resources/views/layouts/scrolling.blade.php&#10;&#9;project/resources/views/layouts/thumbnail.blade.php&#10;&#9;project/resources/views/sailings/create.blade.php&#10;&#9;project/resources/views/sailings/detail.blade.php&#10;&#9;project/resources/views/sailings/list.blade.php&#10;&#9;project/resources/views/sailings/update.blade.php&#10;&#9;project/resources/views/users/createdetail.blade.php&#10;&#9;project/resources/views/users/userprofile.blade.php&#10;&#9;project/resources/views/welcome.blade.php&#10;&#9;project/vendor/composer/installed.json&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/.javascript-style.json&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/composer.json&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/gulpfile.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/public/js/jsvalidation.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/public/js/jsvalidation.js.map&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/helpers.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/jsvalidation.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/timezones.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/assets/js/validations.js&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/resources/views/bootstrap.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Exceptions/BadRequestHttpException.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Exceptions/PropertyNotFoundException.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/JavascriptRulesTrait.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/JavascriptValidator.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/MessageParser.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/RuleParser.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Javascript/ValidatorHandler.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/JsValidationServiceProvider.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/JsValidatorFactory.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Remote/Validator.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/RemoteValidationMiddleware.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Support/AccessProtectedTrait.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Support/DelegatedValidator.php&#10;&#9;project/vendor/proengsoft/laravel-jsvalidation/src/Support/RuleListTrait.php&#10;&#9;project/vendor/symfony/http-kernel/Kernel.php&#10;&#9;project/vendor/symfony/routing/Generator/UrlGenerator.php&#10;" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" />
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_04_19_151526_sailings.php" />
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_04_19_151856_user_sailings.php" />
+    <entry file="file://$PROJECT_DIR$/project/resources/views/users/userprofile.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_04_19_151526_sailings.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_04_19_151856_user_sailings.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="832">
+          <caret line="124" column="57" selection-start-line="124" selection-start-column="57" selection-end-line="124" selection-end-column="57" />
           <folding />
         </state>
       </provider>

@@ -32,7 +32,7 @@ class JsValidatorFactory
      * Create a new Validator factory instance.
      *
      * @param \Illuminate\Container\Container $app
-     * @param array                                        $options
+     * @param array $options
      */
     public function __construct($app, array $options = [])
     {
@@ -52,9 +52,9 @@ class JsValidatorFactory
     /**
      * Creates JsValidator instance based on rules and message arrays.
      *
-     * @param array       $rules
-     * @param array       $messages
-     * @param array       $customAttributes
+     * @param array $rules
+     * @param array $messages
+     * @param array $customAttributes
      * @param null|string $selector
      *
      * @return JavascriptValidator
@@ -85,70 +85,10 @@ class JsValidatorFactory
     }
 
     /**
-     * Creates JsValidator instance based on FormRequest.
-     *
-     * @param $formRequest
-     * @param null $selector
-     *
-     * @return JavascriptValidator
-     * @throws FormRequestArgumentException
-     */
-    public function formRequest($formRequest, $selector = null)
-    {
-        if (! is_object($formRequest)) {
-            $formRequest = $this->createFormRequest($formRequest);
-        }
-
-        $rules = method_exists($formRequest, 'rules') ? $formRequest->rules() : [];
-
-        $validator = $this->getValidatorInstance($rules, $formRequest->messages(), $formRequest->attributes());
-
-        return $this->validator($validator, $selector);
-    }
-
-    protected function parseFormRequestName($class)
-    {
-        $params = [];
-        if (is_array($class)) {
-            $params = empty($class[1]) ? $params : $class[1];
-            $class = $class[0];
-        }
-
-        return [$class, $params];
-    }
-
-    /**
-     *  Creates and initializes an Form Request instance.
-     *
-     * @param string $class
-     * @return FormRequest
-     */
-    protected function createFormRequest($class)
-    {
-        /*
-         * @var $formRequest \Illuminate\Foundation\Http\FormRequest
-         * @var $request Request
-         */
-        list($class, $params) = $this->parseFormRequestName($class);
-
-        $request = $this->app->__get('request');
-        $formRequest = $this->app->build($class, $params);
-
-        if ($session = $request->getSession()) {
-            $formRequest->setSession($session);
-        }
-        $formRequest->setUserResolver($request->getUserResolver());
-        $formRequest->setRouteResolver($request->getRouteResolver());
-        $formRequest->setContainer($this->app);
-
-        return $formRequest;
-    }
-
-    /**
      * Creates JsValidator instance based on Validator.
      *
      * @param \Illuminate\Validation\Validator $validator
-     * @param string|null                      $selector
+     * @param string|null $selector
      *
      * @return JavascriptValidator
      */
@@ -161,13 +101,13 @@ class JsValidatorFactory
      * Creates JsValidator instance based on Validator.
      *
      * @param \Illuminate\Validation\Validator $validator
-     * @param string|null                      $selector
+     * @param string|null $selector
      *
      * @return JavascriptValidator
      */
     protected function jsValidator(Validator $validator, $selector = null)
     {
-        $remote = ! $this->options['disable_remote_validation'];
+        $remote = !$this->options['disable_remote_validation'];
         $view = $this->options['view'];
         $selector = is_null($selector) ? $this->options['form_selector'] : $selector;
 
@@ -199,5 +139,65 @@ class JsValidatorFactory
         }
 
         return $token;
+    }
+
+    /**
+     * Creates JsValidator instance based on FormRequest.
+     *
+     * @param $formRequest
+     * @param null $selector
+     *
+     * @return JavascriptValidator
+     * @throws FormRequestArgumentException
+     */
+    public function formRequest($formRequest, $selector = null)
+    {
+        if (!is_object($formRequest)) {
+            $formRequest = $this->createFormRequest($formRequest);
+        }
+
+        $rules = method_exists($formRequest, 'rules') ? $formRequest->rules() : [];
+
+        $validator = $this->getValidatorInstance($rules, $formRequest->messages(), $formRequest->attributes());
+
+        return $this->validator($validator, $selector);
+    }
+
+    /**
+     *  Creates and initializes an Form Request instance.
+     *
+     * @param string $class
+     * @return FormRequest
+     */
+    protected function createFormRequest($class)
+    {
+        /*
+         * @var $formRequest \Illuminate\Foundation\Http\FormRequest
+         * @var $request Request
+         */
+        list($class, $params) = $this->parseFormRequestName($class);
+
+        $request = $this->app->__get('request');
+        $formRequest = $this->app->build($class, $params);
+
+        if ($session = $request->getSession()) {
+            $formRequest->setSession($session);
+        }
+        $formRequest->setUserResolver($request->getUserResolver());
+        $formRequest->setRouteResolver($request->getRouteResolver());
+        $formRequest->setContainer($this->app);
+
+        return $formRequest;
+    }
+
+    protected function parseFormRequestName($class)
+    {
+        $params = [];
+        if (is_array($class)) {
+            $params = empty($class[1]) ? $params : $class[1];
+            $class = $class[0];
+        }
+
+        return [$class, $params];
     }
 }

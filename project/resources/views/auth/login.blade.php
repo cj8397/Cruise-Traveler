@@ -7,7 +7,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
-                    <form id="loginPageForm" class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                    <form id="loginPageForm" class="form-horizontal" role="form" method="POST"
+                          action="{{ url('/login') }}">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -67,5 +68,5 @@
 </div>
 @endsection
 @section('scripts')
-{!! JsValidator::formRequest('App\Http\Requests\LoginRequest', '#loginPageForm'); !!}
+    {!! JsValidator::formRequest('App\Http\Requests\LoginRequest', '#loginPageForm'); !!}
 @endsection

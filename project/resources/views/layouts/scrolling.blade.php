@@ -38,14 +38,14 @@
     <!-- custom theme -->
     {{--<link rel="stylesheet" href="{{ URL::asset('styles/bootstrap.css') }}" />--}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ URL::asset('styles/scrolling-nav.css') }}" />
-    <link rel="stylesheet" href="{{ URL::asset('styles/custom/nav.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('styles/scrolling-nav.css') }}"/>
+    <link rel="stylesheet" href="{{ URL::asset('styles/custom/nav.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/bootstrap-datetimepicker.min.css') }}"/>
-    <link rel="stylesheet" href="{{ URL::asset('styles/custom/site.css') }}" />
-    <link rel="stylesheet" href="{{ URL::asset('styles/custom/tiles.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('styles/custom/site.css') }}"/>
+    <link rel="stylesheet" href="{{ URL::asset('styles/custom/tiles.css') }}"/>
 
     @yield('styles')
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -59,7 +59,8 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -88,8 +89,12 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">Last Update: May 11th, 2016 @ 15:15 </a></li>
-                            <li><a href="https://docs.google.com/spreadsheets/d/1KQc5cRAnqdWS55JQb59NHHYKRtqtslBXlHjbWU2QIqc/edit#gid=0">SCRUM WOKRBOOK</a></li>
-                            <li><a href="https://docs.google.com/document/d/1yIuRZO1HJ71moInaR_B1Y0mb6yfwxB9oClgWSx5CTpw/edit#heading=h.tphyqzr77ydu">Design Model</a></li>
+                            <li>
+                                <a href="https://docs.google.com/spreadsheets/d/1KQc5cRAnqdWS55JQb59NHHYKRtqtslBXlHjbWU2QIqc/edit#gid=0">SCRUM
+                                    WOKRBOOK</a></li>
+                            <li>
+                                <a href="https://docs.google.com/document/d/1yIuRZO1HJ71moInaR_B1Y0mb6yfwxB9oClgWSx5CTpw/edit#heading=h.tphyqzr77ydu">Design
+                                    Model</a></li>
                         </ul>
                     </li>
                     {{--<li><a href="{{ url('/') }}">Login</a></li>--}}
@@ -103,9 +108,9 @@
                     </a>
 
                     <ul class="dropdown-menu" role="menu">--}}
-                            <li>
-                                <a href="{{ url('/users/userprofile/'.Auth::user()->id) }}">Profile</a>
-                            </li>
+                    <li>
+                        <a href="{{ url('/users/userprofile/'.Auth::user()->id) }}">Profile</a>
+                    </li>
                     <li>
                         <a href="{{ url('/logout') }}">Logout</a>
                     </li>
@@ -115,13 +120,13 @@
                         </li>
                         @endif
                         {{--</ul>--}}
-                    </li>
-    @endif
-    </ul>
-</div>
-<!-- /.navbar-collapse -->
-</div>
-<!-- /.container -->
+                        </li>
+                    @endif
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
 </nav>
 <div class="container">
 <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
@@ -154,7 +159,8 @@
                         <td>adminpassword</td>
                     </tr>
                 </table>
-                <form id="loginForm" class="form-vertical clearfix" role="form" method="POST" action="{{ url('/login') }}">
+                <form id="loginForm" class="form-vertical clearfix" role="form" method="POST"
+                      action="{{ url('/login') }}">
                     {!! csrf_field() !!}
                     <div class="col-xs-12 {{ $errors->has('email') ? ' has-error' : '' }}">
                         <label class="col-xs-12 control-label">Email:</label>
@@ -207,7 +213,8 @@
                 <h4 class="modal-title" id="registerModalLabel">Registration</h4>
             </div>
             <div class="modal-body">
-                <form id="registerForm" class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                <form id="registerForm" class="form-horizontal" role="form" method="POST"
+                      action="{{ url('/register') }}">
                     {!! csrf_field() !!}
 
 

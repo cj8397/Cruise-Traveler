@@ -21,10 +21,10 @@ class UserSailingsTableSeeder extends Seeder
         $allSailings = Sailing::pluck('id')->toArray();
         //looping has begun
         $count = 0;
-        foreach($allSailings as $sailing){
-            $count = rand(2,9);
-            foreach($allUsers as $user){
-                if( $user % $count == 0){
+        foreach ($allSailings as $sailing) {
+            $count = rand(2, 9);
+            foreach ($allUsers as $user) {
+                if ($user % $count == 0) {
                     DB::table('user_sailings')->insert([
                         'user_id' => $user,
                         'sailing_id' => $sailing

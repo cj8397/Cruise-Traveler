@@ -11,7 +11,7 @@
         }
     </style>
 @endsection
-@section('content')
+@section('script')
     <script>
         @if(isset($userdetail->dob))
             $(function () {
@@ -23,9 +23,11 @@
             });
 
         });
+        @endif
+        @endsection
+        @section('content')
     </script>
-@endsection
-@endif
+
 
     <img class="img-responsive" src="/images/cruiseship.jpg">
     <div class="container">
@@ -108,7 +110,7 @@
 
             @foreach($usersailings as $sail)
                 @foreach($userevents->where('sailing_id', $sail->sailing_id) as $events)
-                    <div class="modal fade" id="yourModal{{$sail->sailing_id}}" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="yourModal{{$events->event->sailing_id}}" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -117,25 +119,26 @@
                                                 aria-hidden="true">&times;</span></button>
                                     <h4 class="modal-title" id="myModalLabel">{!! $events->event->title !!}</h4>
                                 </div>
-                                <div class="modal-body">
+                                {{--<div class="modal-body">
                                     <ul class="list-group">
                                         <li class="list-group-item">
                                             <h5>Event: <a
-                                                        href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
+                                                        href="/events/detail/{!! $events->event->id !!}">{!! $events->event->start_date !!}</a>
                                             </h5>
                                         </li>
-                                        <li class="list-group-item">{!! $events->event->start_date !!}
+                                        <li class="list-group-item">
+                                            <strong>Location: </strong>{!! $events->event->location !!}
                                         </li>
                                         <li class="list-group-item">
                                             <strong>Role:</strong><br>
-                                            @if ($events->role == "host")
+                                            @if ($events->role == "Host")
                                                 <span class="label label-pill label-warning">{!! $events->role !!}</span>
                                             @else
                                                 <span class="label label-pill label-danger">{!! $events->role !!}</span>
                                             @endif
                                         </li>
                                     </ul>
-                                </div>
+                                </div>--}}
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
@@ -176,7 +179,7 @@
 
         <div class="row text-center">
             <div class="col-lg-12 col-md-12 col-xs-12">
-                {{$usersalings->links()}}
+                {{$usersailings->links()}}
             </div>
         </div>
     </div>

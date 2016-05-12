@@ -7,7 +7,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Register</div>
                     <div class="panel-body">
-                        <form id="createEventForm" class="form-horizontal" role="form" method="POST" action="{{ url('events/form/post')}}">
+                        <form id="createEventForm" class="form-horizontal" role="form" method="POST"
+                              action="{{ url('events/form/post')}}">
                             {!! csrf_field() !!}
 
                             <input type="hidden" name="sailing_id" value={!! $sailing_id !!}/>
@@ -113,5 +114,5 @@
     </div>
 @endsection
 @section('scripts')
-{!! JsValidator::formRequest('App\Http\Requests\EventRequest', ''#createEventForm'); !!}
+    {!! JsValidator::formRequest('App\Http\Requests\EventRequest', ''#createEventForm'); !!}
 @endsection
