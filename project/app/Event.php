@@ -47,12 +47,12 @@ class Event extends Model
     }
     public function scopeSearch($query, $search){
 
-        if($search->search == null && $search->direction == null && $search->sort == null){
-             //$query
+        if ($search->search == null && $search->direction == null && $search->sort == null) {
+            //$query
         }else {
-             $query->where('title', 'LIKE', "%$search->search%");
-            if($search->direction != "" || $search->sort != ""){
-                $query->orderBy($search->sort,$search->direction);
+            $query->where('title', 'LIKE', "%$search->search%");
+            if ($search->direction != "" || $search->sort != "") {
+                $query->orderBy($search->sort, $search->direction);
             }
             return $query;
         }

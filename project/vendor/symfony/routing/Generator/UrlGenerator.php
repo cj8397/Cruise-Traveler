@@ -92,17 +92,17 @@ class UrlGenerator implements UrlGeneratorInterface, ConfigurableRequirementsInt
     /**
      * {@inheritdoc}
      */
-    public function setContext(RequestContext $context)
+    public function getContext()
     {
-        $this->context = $context;
+        return $this->context;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getContext()
+    public function setContext(RequestContext $context)
     {
-        return $this->context;
+        $this->context = $context;
     }
 
     /**
@@ -192,9 +192,9 @@ class UrlGenerator implements UrlGeneratorInterface, ConfigurableRequirementsInt
         // otherwise we would generate a URI that, when followed by a user agent (e.g. browser), does not match this route
         $url = strtr($url, array('/../' => '/%2E%2E/', '/./' => '/%2E/'));
         if ('/..' === substr($url, -3)) {
-            $url = substr($url, 0, -2).'%2E%2E';
+            $url = substr($url, 0, -2) . '%2E%2E';
         } elseif ('/.' === substr($url, -2)) {
-            $url = substr($url, 0, -1).'%2E';
+            $url = substr($url, 0, -1) . '%2E';
         }
 
         $schemeAuthority = '';
@@ -267,7 +267,7 @@ class UrlGenerator implements UrlGeneratorInterface, ConfigurableRequirementsInt
         if ($extra && $query = http_build_query($extra, '', '&')) {
             // "/" and "?" can be left decoded for better user experience, see
             // http://tools.ietf.org/html/rfc3986#section-3.4
-            $url .= '?'.strtr($query, array('%2F' => '/'));
+            $url .= '?' . strtr($query, array('%2F' => '/'));
         }
 
         return $url;

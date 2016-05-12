@@ -54,7 +54,7 @@ class Sailing extends Model
             return $query->paginate(12);
         }
         if($search->search != "") {
-            $query->where('cruise_line','LIKE',"%$search->search%");
+            $query->where('cruise_line', 'LIKE', "%$search->search%");
         }
         if($search->destination == "") { // search based on destination
             //$query->where('destination','LIKE',"%$search->search%");
