@@ -34,6 +34,7 @@ Route::get('/admin/user/{id}/update', 'AdminController@UpdateUser');
 Route::post('/admin/user/{id}/update/save', 'AdminController@SaveUser');
 
 //EventController Stuff
+Route::get('events/users', 'EventsController@GetAllUsers');
 Route::get('events/detail/{event_id}', 'EventsController@GetOneEvent');
 Route::get('events/form/{sailing_id}', 'EventsController@ShowCreateForm');
 Route::post('events/form/post', 'EventsController@CreateEvent');
