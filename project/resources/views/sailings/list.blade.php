@@ -33,11 +33,6 @@
                 padding-top: 0;
             }
 
-            .panel-body .panel-body > h4 {
-                text-decoration: underline;
-                margin-bottom: 0;
-            }
-
             .panel .panel {
                 margin-bottom: 10px;
             }
@@ -90,7 +85,7 @@
             <input type="submit" value="Submit" class="btn btn-default">
         </form>
     </div>
-    <hr class="style-eight">
+    <hr class="style-eight col-xs-12">
     @if($sailings->count() < 1 )
         <div>
             <div class="jumbotron"> <h1>No Results Were Found</h1></div>

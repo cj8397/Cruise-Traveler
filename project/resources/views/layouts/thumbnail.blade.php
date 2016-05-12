@@ -14,10 +14,10 @@
     {{--<!-- Styles -->--}}
     {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">--}}
 
-            <!-- link to sass files -->
+    <!-- link to sass files -->
     {{-- <link href="{{ elixir('styles/app.styles') }}" rel="stylesheet"> --}}
 
-            <!-- custom theme -->
+    <!-- custom theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ URL::asset('styles/4-col-portfolio.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/nav.css') }}" />
@@ -46,9 +46,6 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">Home</a>
-            <a class="brand">
-                <img src="https://placehold.it/750x450">
-            </a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -67,6 +64,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             Documentation <b class="caret"></b>
                         </a>
+
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">Last Update: May 11th, 2016 @ 15:15 </a></li>
                             <li><a href="https://docs.google.com/spreadsheets/d/1KQc5cRAnqdWS55JQb59NHHYKRtqtslBXlHjbWU2QIqc/edit#gid=0">SCRUM WOKRBOOK</a></li>
@@ -244,17 +242,15 @@
         </div>
     </div>
 </div>
-@include('flash::message')
 
 <div class="container">
+    @include('flash::message')
     @yield('content')
 </div>
 
 <footer>
     <div class="container">
-        <div class="col-lg-12">
-            <p>Copyright &copy; Your Website 2014</p>
-        </div>
+            <p>Copyright &copy; Cruise Connect 2016</p>
     </div>
 </footer>
 

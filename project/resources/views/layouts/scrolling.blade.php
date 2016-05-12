@@ -66,9 +66,6 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">Home</a>
-            <a class="brand">
-                <img src="https://placehold.it/750x450">
-            </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
