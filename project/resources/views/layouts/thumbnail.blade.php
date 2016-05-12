@@ -159,7 +159,7 @@
                         <button type="submit" class="btn btn-primary col-xs-3">
                             <i class="fa fa-btn fa-sign-in"></i>Login
                         </button>
-                        <div class="col-xs-5"><input type="checkbox" name="remember"> <span>Remember Me?</span>
+                        <div class="col-xs-5 btn"><input type="checkbox" name="remember"> <span>Remember Me?</span>
                         </div>
                         <div class="col-xs-4"><a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot
                                 Password?</a></div>
@@ -246,13 +246,12 @@
 <div class="container">
     @include('flash::message')
     @yield('content')
+    <footer>
+        <p>Copyright &copy; Cruise Connect 2016</p>
+    </footer>
 </div>
 
-<footer>
-    <div class="container">
-            <p>Copyright &copy; Cruise Connect 2016</p>
-    </div>
-</footer>
+
 
 
 <!-- JavaScripts -->
