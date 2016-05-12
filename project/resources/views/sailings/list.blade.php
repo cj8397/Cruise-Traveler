@@ -176,7 +176,6 @@
     </div>
     @endforeach
             </div>
-        @endforeach
 </div>
 <!-- Pagination -->
 <div class="row text-center">
