@@ -8,6 +8,9 @@
         .panel .col-xs-12 {
             padding: 5px 0;
         }
+        .sailing {
+            height: 80vh;
+        }
 
         .events-container {
             overflow-y: scroll;
@@ -18,8 +21,8 @@
             padding: 10px;
         }
 
-        .sailing {
-            height: 80vh;
+        .events-container > .col-xs-12 {
+            padding: 0;
         }
 
         .events-container p {
@@ -84,10 +87,11 @@
                 </select>
                 <input type="submit" value="Search" class="btn btn-default">
             </form>
+            <div class="col-xs-12">
+                <hr/>
+            </div>
         </div>
-        <div class="col-xs-12">
-        <hr/>
-        </div>
+
         <!-- Page Heading -->
         <div class="text-center">
             <div class=" col-sm-4 col-xs-12">
@@ -122,31 +126,28 @@
                 </div>
             </div>
             <div class="col-sm-7 col-xs-12 events-container">
-                @foreach($events->chunk(2) as $row)
-                    @foreach($row as $event)
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="panel panel-default ">
-                                <h4 class="panel-heading"> {!! ucfirst($event->title) !!}</h4>
-                                <div class="panel-body">
-                                    <p> <b>Starts:</b> {!! $event->start_date !!}</p>
-                                    <p> <b>Ends:</b> {!! $event->end_date !!}</p>
-                                    <a href="/events/detail/{!! $event->id !!}" class="btn btn-primary btn-md">
-                                        View Details
-                                    </a>
+                @if(count($events) > 0)
+                    @foreach($events->chunk(2) as $row)
+                        <div class="col-xs-12">
+                            @foreach($row as $event)
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="panel panel-default ">
+                                        <h4 class="panel-heading"> {!! ucfirst($event->title) !!}</h4>
+                                        <div class="panel-body">
+                                            <p> <b>Starts:</b> {!! $event->start_date !!}</p>
+                                            <p> <b>Ends:</b> {!! $event->end_date !!}</p>
+                                            <a href="/events/detail/{!! $event->id !!}" class="btn btn-primary btn-md">
+                                                View Details
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
                     @endforeach
-                @endforeach
-            </div>
-        </div>
-        <!-- Pagination -->
-        <div class=" text-center">
-            <div class="col-lg-12 col-md-12 col-xs-12">
-                {{$events->appends(['search' => $old->search,
-                'sort' => $old->sort,
-                'direction' => $old->direction])
-                ->links()}}
+                @else
+                    <div class="jumbotron"> <h4>No Results Were Found</h4></div>
+                @endif
             </div>
         </div>
     </div>

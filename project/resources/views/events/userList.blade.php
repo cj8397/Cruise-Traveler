@@ -9,6 +9,10 @@
             padding: 5px 0;
         }
 
+        .sailing  {
+            height: 80vh;
+        }
+
         .events-container {
             overflow-y: scroll;
             height: 80vh;
@@ -17,10 +21,11 @@
             margin-bottom: 40px;
             padding: 10px;
         }
-
-        .sailing  {
-            height: 80vh;
+        .events-container > .col-xs-12 {
+            padding: 0;
         }
+
+
 
         .events-container p {
             text-align: left;
@@ -85,20 +90,22 @@
             </div>
             <div class="col-sm-7 col-xs-12 events-container" style="">
                 @foreach($userSail->event->chunk(2) as $row)
-                    @foreach($row as $event)
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="panel panel-default ">
-                                <h4 class="panel-heading"> {!! ucfirst($event->title) !!}</h4>
-                                <div class="panel-body">
-                                    <p> <b>Starts:</b> {!! $event->start_date !!}</p>
-                                    <p> <b>Ends:</b> {!! $event->end_date !!}</p>
-                                    <a href="/events/detail/{!! $event->id !!}" class="btn btn-primary btn-md">
-                                        View Details
-                                    </a>
+                    <div class="col-xs-12">
+                        @foreach($row as $event)
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="panel panel-default ">
+                                    <h4 class="panel-heading"> {!! ucfirst($event->title) !!}</h4>
+                                    <div class="panel-body">
+                                        <p> <b>Starts:</b> {!! $event->start_date !!}</p>
+                                        <p> <b>Ends:</b> {!! $event->end_date !!}</p>
+                                        <a href="/events/detail/{!! $event->id !!}" class="btn btn-primary btn-md">
+                                            View Details
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 @endforeach
             </div>
         </div>
