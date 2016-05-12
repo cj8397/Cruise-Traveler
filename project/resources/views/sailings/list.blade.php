@@ -97,7 +97,7 @@
         <div class="panel panel-default tile">
             <div class="panel-heading">
                 <a href="{{ action('SailingsController@GetSailing', [$sailing->id]) }}">
-                    <h3> {{$sailing->cruise_line}}</h3>
+                    <h4> {{$sailing->cruise_line}}</h4>
                 </a>
             </div>
             <div class="panel-body">
@@ -175,6 +175,8 @@
         </div>
     </div>
     @endforeach
+            </div>
+        @endforeach
 </div>
 <!-- Pagination -->
 <div class="row text-center">
