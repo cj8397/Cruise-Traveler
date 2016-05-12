@@ -97,20 +97,20 @@ DELIMITER ;
 CALL sailing_city_summary(1);
 
 -- STATS SUMMARY
-
+c
 DELIMITER $$
-CREATE DEFINER=`cruise_user`@`%` PROCEDURE `event_stats_summary`(IN id INT)
+CREATE DEFINER=`cruise_user`@`localhost` PROCEDURE `event_stats_summary`(IN id INT)
 BEGIN
 		SET @male = (SELECT COUNT(ud.sex) as 'male'
 		FROM user_events us, user_details ud
 		WHERE us.event_id = id AND us.user_id =  ud.user_id -- gets you all details in sailing
 		AND ud.sex = 1);
-        
+
         SET @family = (SELECT COUNT(ud.family) as 'families'
 		FROM user_events us, user_details ud
 		WHERE us.event_id = id AND us.user_id = ud.user_id -- gets you all details in sailing
 		AND ud.family = 1);
-        
+
 
         SET @youth =(SELECT COUNT(ud.age) as 'youth'
 		FROM user_events us, user_details ud
@@ -131,25 +131,25 @@ BEGIN
 		FROM user_events us, user_details ud
 		WHERE us.event_id = id AND us.user_id =  ud.user_id -- gets you all details in sailing
 		AND ud.age >= 35 AND ud.age < 45);
-        
+
         SET @youngelders = (SELECT COUNT(ud.age) as 'youngelders'
 		FROM user_events us, user_details ud
 		WHERE us.event_id = id AND us.user_id =  ud.user_id -- gets you all details in sailing
 		AND ud.age >= 45 AND ud.age < 55);
-        
+
         SET @elders = (SELECT COUNT(ud.age) as 'seniors'
 		FROM user_events us, user_details ud
 		WHERE us.event_id = id AND us.user_id =  ud.user_id -- gets you all details in sailing
 		AND ud.age >= 70);
-        
+
         SET @seniors = (SELECT COUNT(ud.age) as 'elders'
 		FROM user_events us, user_details ud
 		WHERE us.event_id = id AND us.user_id =  ud.user_id -- gets you all details in sailing
 		AND ud.age >= 55 AND ud.age < 70);
-        
+
         -- DROP TEMPORARY TABLE IF EXISTS stats;
-        CREATE TEMPORARY TABLE 
-		stats( male INT, family INT, 
+        CREATE TEMPORARY TABLE
+		stats( male INT, family INT,
         youth INT, young INT, adult INT, middleaged INT, youngelders INT, elders INT, seniors INT);
         INSERT INTO stats SELECT @male, @family, @youth, @young, @adult, @middleaged, @youngelders, @elders, @seniors;
         SELECT * FROM stats;
@@ -158,19 +158,19 @@ BEGIN
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`cruise_user`@`%` PROCEDURE `sailing_stats_summary`(IN id INT)
+CREATE DEFINER=`cruise_user`@`localhost` PROCEDURE `sailing_stats_summary`(IN id INT)
 BEGIN
 
 		SET @male = (SELECT COUNT(ud.sex) as 'male'
 		FROM user_sailings us, user_details ud
 		WHERE us.sailing_id = id AND us.user_id =  ud.user_id -- gets you all details in sailing
 		AND ud.sex = 1);
-        
+
         SET @family = (SELECT COUNT(ud.family) as 'families'
 		FROM user_sailings us, user_details ud
 		WHERE us.sailing_id = id AND us.user_id =  ud.user_id -- gets you all details in sailing
 		AND ud.family = 1);
-        
+
 
         SET @youth =(SELECT COUNT(ud.age) as 'youth'
 		FROM user_sailings us, user_details ud
@@ -191,25 +191,25 @@ BEGIN
 		FROM user_sailings us, user_details ud
 		WHERE us.sailing_id = id AND us.user_id =  ud.user_id -- gets you all details in sailing
 		AND ud.age >= 35 AND ud.age < 45);
-        
+
         SET @youngelders = (SELECT COUNT(ud.age) as 'youngelders'
 		FROM user_sailings us, user_details ud
 		WHERE us.sailing_id = id AND us.user_id =  ud.user_id -- gets you all details in sailing
 		AND ud.age >= 45 AND ud.age < 55);
-        
+
         SET @elders = (SELECT COUNT(ud.age) as 'seniors'
 		FROM user_sailings us, user_details ud
 		WHERE us.sailing_id = id AND us.user_id =  ud.user_id -- gets you all details in sailing
 		AND ud.age >= 70);
-        
+
         SET @seniors = (SELECT COUNT(ud.age) as 'elders'
 		FROM user_sailings us, user_details ud
 		WHERE us.sailing_id = id AND us.user_id =  ud.user_id -- gets you all details in sailing
 		AND ud.age >= 55 AND ud.age < 70);
-        
+
         -- DROP TEMPORARY TABLE IF EXISTS stats;
-        CREATE TEMPORARY TABLE 
-		stats( male INT, family INT, 
+        CREATE TEMPORARY TABLE
+		stats( male INT, family INT,
         youth INT, young INT, adult INT, middleaged INT, youngelders INT, elders INT, seniors INT);
         INSERT INTO stats SELECT @male, @family, @youth, @young, @adult, @middleaged, @youngelders, @elders, @seniors;
         SELECT * FROM stats;
