@@ -5,11 +5,15 @@
         .profile{
             padding: 5px;
         }
+        .img-wrapper > img{
+            width:100%;
+            top:-15%;
+        }
     </style>
     @endsection
 @section('content')
         <div class="img-wrapper">
-            <img class="img-responsive" src="/426631.jpg" alt="">
+            <img class="img-responsive" src="/images/cruise_event.PNG" alt="">
         </div>
             <div class="col-sm-4 col-xs-12 text-center">
                 <div class="panel panel-default">

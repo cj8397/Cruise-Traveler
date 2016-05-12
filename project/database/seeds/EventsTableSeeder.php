@@ -36,7 +36,7 @@ Chocolate Journeys Pastry Demonstration,14:00,15:00,Go on a chocolate Journey, D
         $data = str_getcsv($string, "\n");
 
         $faker = Faker::create();
-        foreach($data as $row) {
+        foreach ($data as $row) {
             $eventInfo = explode(",", $row);
             // 12 sailings right now
             foreach (range($first, $last) as $i) {

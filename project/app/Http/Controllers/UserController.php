@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\UserSailing;
-use App\UserEvent;
-use App\UserDetails;
-use Hamcrest\Core\AllOf;
-use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Http\Requests\UserDetailsRequest;
+use App\UserDetails;
+use App\UserEvent;
+use App\UserSailing;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use App\Http\Requests\UserDetailsRequest;
 
 class UserController extends Controller
 {
@@ -23,7 +20,7 @@ class UserController extends Controller
     public function getUserSailings($user_id)
     {
         $userdetail = UserDetails::where('user_id', $user_id)->first();
-        $usersailings = UserSailing::with('sailing')->where('user_id', $user_id)->get();
+        $usersailings = UserSailing::with('sailing')->where('user_id', $user_id)->paginate(6);
         $userevents = UserEvent::with('event')->where('user_id', $user_id)->get();
         $test = UserSailing::with('sailing')->where('user_id', $user_id)->get();
 

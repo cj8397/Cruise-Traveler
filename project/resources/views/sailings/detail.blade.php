@@ -18,6 +18,10 @@
             margin-bottom: 10px;
             width: 140px;
         }
+        .img-wrapper > img{
+            width:100%;
+            top:-15%;
+        }
     </style>
 @endsection
 
