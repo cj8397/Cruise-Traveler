@@ -6,7 +6,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Create User Details</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST"
+                        <form id="createDetailForm" class="form-horizontal" role="form" method="POST"
                               action="{{ action('UserController@createUserDetails') }}">
                             {!! csrf_field() !!}
 
@@ -354,5 +354,5 @@
 @section('scripts')
 <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 
-{!! JsValidator::formRequest('App\Http\Requests\UserDetailsRequest') !!}
+{!! JsValidator::formRequest('App\Http\Requests\UserDetailsRequest', '#createDetailForm'); !!}
 @endsection

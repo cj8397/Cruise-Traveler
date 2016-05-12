@@ -6,7 +6,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Register A New Sailing</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST"
+                        <form id="createSailingForm" class="form-horizontal" role="form" method="POST"
                               action="{{ action('SailingsController@CreateSailing') }}">
                             {!! csrf_field() !!}
 
@@ -106,5 +106,5 @@
 @section('scripts')
 <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 
-{!! JsValidator::formRequest('App\Http\Requests\SailingRequest') !!}
+{!! JsValidator::formRequest('App\Http\Requests\SailingRequest', '#createSailingform'); !!}
 @endsection
