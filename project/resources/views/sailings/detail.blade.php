@@ -7,6 +7,17 @@
         .panel .col-xs-12 {
             padding: 0;
         }
+
+        .panel .message {
+            text-align: left;
+            padding: 10px;
+            /* border-top: 1px solid #ddd; */
+        }
+
+        .left-column .btn-primary {
+            margin-bottom: 10px;
+            width: 140px;
+        }
         .img-wrapper > img{
             width:100%;
             top:-15%;
@@ -18,15 +29,16 @@
     <div class="img-wrapper">
         <img class="img-responsive" src="/426631.jpg" alt="">
     </div>
-    <div class="col-xs-12 col-md-12 col-lg-12 text-center">
-        <div class="col-xs-12 col-md-4 col-lg-4">
+    <div class="col-xs-12 text-center">
+        <div class="col-xs-12 col-sm-4 col-lg-4 left-column">
             <div class="row panel panel-default">
                 <h2 class="panel-heading">{{$sailing->title}} {{$sailing->cruise_line}} </h2>
                 <div class="panel-body">
                     @if(!isset($currentUser))
                         @include('partials/buttons/joinsailing')
                     @else
-                        @include('partials/buttons/leavesailing')
+                        @include('partials/buttons/leavesailing') <br />
+                        @include('partials/buttons/createevent')
                     @endif
                     <a href="{{ action('EventsController@GetAllEvents', [$sailing->id]) }}">
                         <button type="button" class="btn btn-primary btn-md">
@@ -45,7 +57,7 @@
             </div>
         </div>
         @if(!isset($currentUser))
-        <div class="col-xs-12 col-md-8 col-lg-8">
+        <div class="col-xs-12 col-sm-8 col-lg-8">
             <div class="panel panel-default">
                 <h2 class="panel-heading">Demographics</h2>
                 @if(!empty($stats))
@@ -104,11 +116,11 @@
         </div>
         @else
             @if(!empty($thread))
-            <div class="col-xs-12 col-md-8">
-                <div class="row panel panel-default">
-                    <h2 class="panel-heading">{!! $thread->subject !!} </h2>
+            <div class="col-xs-12 col-sm-8">
+                <div class="panel panel-default">
+                  <h2 class="panel-heading">{!! $thread->subject !!} </h2>
                   <div class="panel-body">
-                      <div class="col-xs-4">
+                      <div class="col-xs-12 col-sm-4">
                           {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
                                   <!-- Message Form Input -->
                           <div class="form-group clearfix">
@@ -119,7 +131,7 @@
                           </div>
                           {!! Form::close() !!}
                       </div>
-                      <div class="col-xs-8">
+                      <div class="col-xs-12 col-sm-8">
                         @foreach($thread->messages as $message)
                          <div class="col-xs-12 message">
                               <div class="media">
