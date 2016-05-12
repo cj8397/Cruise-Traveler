@@ -108,28 +108,28 @@
                 <h4 class="modal-title" id="loginModalLabel">Login</h4>
             </div>
             <div class="modal-body">
-                <table class="tg table table-responsive">
-                    <tr class="success">
-                        <th class="tg-amwm">Username</th>
-                        <th class="tg-amwm">Password</th>
-                    </tr>
-                    <tr class="warning">
-                        <td class="tg-baqh">vacation@gmail.com</td>
-                        <td class="tg-baqh">password</td>
-                    </tr>
-                    <tr class="info">
-                        <td>eventhost@gmail.com</td>
-                        <td>password</td>
-                    </tr>
-                    <tr class="danger">
-                        <td>eventparticipant@gmail.com</td>
-                        <td>password</td>
-                    </tr>
-                    <tr class="active">
-                        <td>admin@admin.com</td>
-                        <td>adminpassword</td>
-                    </tr>
-                </table>
+                {{--<table class="tg table table-responsive">--}}
+                    {{--<tr class="success">--}}
+                        {{--<th class="tg-amwm">Username</th>--}}
+                        {{--<th class="tg-amwm">Password</th>--}}
+                    {{--</tr>--}}
+                    {{--<tr class="warning">--}}
+                        {{--<td class="tg-baqh">vacation@gmail.com</td>--}}
+                        {{--<td class="tg-baqh">password</td>--}}
+                    {{--</tr>--}}
+                    {{--<tr class="info">--}}
+                        {{--<td>eventhost@gmail.com</td>--}}
+                        {{--<td>password</td>--}}
+                    {{--</tr>--}}
+                    {{--<tr class="danger">--}}
+                        {{--<td>eventparticipant@gmail.com</td>--}}
+                        {{--<td>password</td>--}}
+                    {{--</tr>--}}
+                    {{--<tr class="active">--}}
+                        {{--<td>admin@admin.com</td>--}}
+                        {{--<td>adminpassword</td>--}}
+                    {{--</tr>--}}
+                {{--</table>--}}
                 <form class="form-vertical clearfix" role="form" method="POST" action="{{ url('/login') }}">
                     {!! csrf_field() !!}
                     <div class="col-xs-12 {{ $errors->has('email') ? ' has-error' : '' }}">

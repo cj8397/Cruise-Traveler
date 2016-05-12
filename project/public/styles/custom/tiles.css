@@ -19,7 +19,9 @@ iframe {
     padding-right: 0;
     margin-left: -10px;
 }
-
+.stats {
+    overflow-x: hidden;
+}
 .events .col-md-4, .stats .col-md-6 {
     padding-left: 5px;
     padding-right: 5px;
