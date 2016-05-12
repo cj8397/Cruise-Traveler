@@ -29,7 +29,7 @@
     25 => 'App\\Providers\\RouteServiceProvider',
     26 => 'Collective\\Html\\HtmlServiceProvider',
     27 => 'Cmgmyr\\Messenger\\MessengerServiceProvider',
-      28 => 'Proengsoft\\JsValidation\\JsValidationServiceProvider',
+    28 => 'Proengsoft\\JsValidation\\JsValidationServiceProvider',
   ),
   'eager' => 
   array (
@@ -48,7 +48,7 @@
     12 => 'App\\Providers\\EventServiceProvider',
     13 => 'App\\Providers\\RouteServiceProvider',
     14 => 'Cmgmyr\\Messenger\\MessengerServiceProvider',
-      15 => 'Proengsoft\\JsValidation\\JsValidationServiceProvider',
+    15 => 'Proengsoft\\JsValidation\\JsValidationServiceProvider',
   ),
   'deferred' => 
   array (

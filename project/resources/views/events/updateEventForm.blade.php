@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Register</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST"
+                        <form id="updateEventForm" class="form-horizontal" role="form" method="POST"
                               action="{{ url('events/update/save/'.$event->id) }}">
                             {!! csrf_field() !!}
 
@@ -103,7 +103,5 @@
     </div>
 @endsection
 @section('scripts')
-    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-
-    {!! JsValidator::formRequest('App\Http\Requests\EventRequest') !!}
+{!! JsValidator::formRequest('App\Http\Requests\EventRequest', ''#updateEventForm'); !!}
 @endsection

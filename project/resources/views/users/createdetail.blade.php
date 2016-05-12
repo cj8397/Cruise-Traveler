@@ -6,7 +6,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Create User Details</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST"
+                        <form id="createDetailForm" class="form-horizontal" role="form" method="POST"
                               action="{{ action('UserController@createUserDetails') }}">
                             {!! csrf_field() !!}
 
@@ -37,16 +37,14 @@
                                 </div>
                             </div>
 
-                            <div><strong>All data collected below will remain anonymous, and will not be shared with
-                                    other users.</strong></div>
-                            <br/>
+                            <div><strong>All data collected below will remain anonymous, and will not be shared with other users.</strong></div><br/>
 
                             <div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Birth Date</label>
                                 <div class="col-md-6">
-                                    <div>
-                                        <input type="text" class="form-control" name="dob" placeholder="YYYY/MM/DD">
-                                    </div>
+                                  <div>
+                                    <input type="text" class="form-control" name="dob" placeholder="YYYY/MM/DD">
+                                  </div>
 
                                     @if ($errors->has('dob'))
                                         <span class="help-block">
@@ -59,10 +57,10 @@
                             <div class="form-group{{ $errors->has('sex') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Gender</label>
                                 <div class="col-md-6">
-                                    <div>
-                                        Male <input type="radio" class="" name="sex" value="1"><br/>
-                                        Female <input type="radio" class="" name="sex" value="0">
-                                    </div>
+                                  <div>
+                                    Male <input type="radio" class="" name="sex" value="1"><br/>
+                                    Female <input type="radio" class="" name="sex" value="0">
+                                  </div>
                                     @if ($errors->has('sex'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('sex') }}</strong>
@@ -137,8 +135,7 @@
                             <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Address</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="address"
-                                           placeholder="1234 1st Street">
+                                    <input type="text" class="form-control" name="address" placeholder="1234 1st Street">
 
                                     @if ($errors->has('address'))
                                         <span class="help-block">
@@ -177,10 +174,10 @@
                             <div class="form-group{{ $errors->has('family') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Family</label>
                                 <div class="col-md-6">
-                                    <div>
-                                        Yes <input type="radio" class="" name="family" value="0"><br/>
-                                        No <input type="radio" class="" name="family" value="1">
-                                    </div>
+                                  <div>
+                                  Yes <input type="radio" class="" name="family" value="0"><br/>
+                                    No <input type="radio" class="" name="family" value="1">
+                                  </div>
 
                                     @if ($errors->has('family'))
                                         <span class="help-block">
@@ -193,10 +190,10 @@
                             <div class="form-group{{ $errors->has('co_travellers') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Co-Travellers</label>
                                 <div class="col-md-6">
-                                    <div>
-                                        Yes <input type="radio" class="" name="co_travellers" value="0"><br/>
-                                        No <input type="radio" class="" name="co_travellers" value="1">
-                                    </div>
+                                  <div>
+                                  Yes <input type="radio" class="" name="co_travellers" value="0"><br/>
+                                    No <input type="radio" class="" name="co_travellers" value="1">
+                                  </div>
 
                                     @if ($errors->has('co_travellers'))
                                         <span class="help-block">
@@ -355,7 +352,7 @@
     </div>
 @endsection
 @section('scripts')
-    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 
-    {!! JsValidator::formRequest('App\Http\Requests\UserDetailsRequest') !!}
+{!! JsValidator::formRequest('App\Http\Requests\UserDetailsRequest', '#createDetailForm'); !!}
 @endsection

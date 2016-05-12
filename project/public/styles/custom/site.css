@@ -8,12 +8,24 @@ body {
 
 .navbar-inverse {
     background-color: #337ab7;
-    border-color: #286090;
+    border-bottom: none;
 }
 
-.navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-brand {
+.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {
     color: #FFF;
 }
+
+.navbar-inverse .navbar-toggle, .navbar-inverse .navbar-toggle:hover {
+    border-color: #eee;
+}
+.navbar-inverse .navbar-toggle:hover {
+    background-color: #FFF;
+}
+
+.navbar-inverse .navbar-toggle .icon-bar:hover {
+    color: #337ab7;
+}
+
 
 body > .container {
     background: #FFF;
@@ -30,6 +42,11 @@ body > .container {
 .img-wrapper > img {
     position: relative;
     top: -25%;
+}
+
+.panel-body .panel-body > h4 {
+    text-decoration: underline;
+    margin-bottom: 0;
 }
 
 /* --- PANEL HEADINGS ----- */
@@ -50,14 +67,11 @@ body > .container {
 /* FLASH MESSAGES */
 
 @-webkit-keyframes fade-out {
-    0% {
-        opacity: 1;
-    }
+    0% { opacity: 1; }
     /*85% {opacity: 1; -webkit-transform: scale(1.05);}*/
-    100% {
-        opacity: 0;
-    }
+    100% {opacity: 0;}
 }
+
 
 .custom-fade {
     position: absolute;
@@ -70,29 +84,18 @@ body > .container {
     box-sizing: border-box;
 }
 
-.custom-fade.one {
-    -webkit-animation-delay: .5s;
-}
-
-.custom-fade.two {
-    -webkit-animation-delay: 4.5s;
-}
-
-.custom-fade.three {
-    -webkit-animation-delay: 3s;
-}
-
-.custom-fade.four {
-    -webkit-animation-delay: 5.5s;
-}
+.custom-fade.one {-webkit-animation-delay: .5s;}
+.custom-fade.two {-webkit-animation-delay: 4.5s;}
+.custom-fade.three {-webkit-animation-delay: 3s;}
+.custom-fade.four {-webkit-animation-delay: 5.5s;}
 
 .error-help-block {
-    color: #a94442;
+  color:#a94442;
 }
 
 /* Footer */
 
 footer .container {
-    background: #337ab7;
     color: #FFF;
+    background: #337ab7;
 }

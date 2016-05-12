@@ -13,8 +13,8 @@
 use App\Http\Controllers\UserSailingsController;
 
 Route::get('/', 'HomeController@index');
-Route::get('/home', function () {
-    return redirect('/');
+Route::get('/home',  function () {
+  return redirect('/');
 });
 
 Route::auth();
@@ -34,6 +34,7 @@ Route::get('/admin/user/{id}/update', 'AdminController@UpdateUser');
 Route::post('/admin/user/{id}/update/save', 'AdminController@SaveUser');
 
 //EventController Stuff
+Route::get('events/users', 'EventsController@GetAllUsers');
 Route::get('events/detail/{event_id}', 'EventsController@GetOneEvent');
 Route::get('events/form/{sailing_id}', 'EventsController@ShowCreateForm');
 Route::post('events/form/post', 'EventsController@CreateEvent');
@@ -101,7 +102,7 @@ Faclal Workshop: Ladies Pamper Party,13:30,15:00,calling all ladies to attend th
 Chocolate Journeys Pastry Demonstration,14:00,15:00,,Deck 7,';
 
     $data = str_getcsv($string, "\n");
-    foreach ($data as $row) {
+    foreach($data as $row) {
         $eventInfo = explode(",", $row);
         var_dump($eventInfo[4]);
     }

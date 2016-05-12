@@ -30,6 +30,23 @@ trait JavascriptRulesTrait
     }
 
     /**
+     * Returns Javascript parameters for After rule.
+     *
+     * @param $attribute
+     * @param array $parameters
+     *
+     * @return array
+     */
+    protected function ruleAfter($attribute, array $parameters)
+    {
+        if (! ($date = strtotime($parameters[0]))) {
+            $date = $this->getAttributeName($parameters[0]);
+        }
+
+        return [$attribute, [$date]];
+    }
+
+    /**
      * Returns Javascript parameters for Before rule.
      *
      * @param $attribute
@@ -43,40 +60,10 @@ trait JavascriptRulesTrait
     }
 
     /**
-     * Returns Javascript parameters for After rule.
-     *
-     * @param $attribute
-     * @param array $parameters
-     *
-     * @return array
-     */
-    protected function ruleAfter($attribute, array $parameters)
-    {
-        if (!($date = strtotime($parameters[0]))) {
-            $date = $this->getAttributeName($parameters[0]);
-        }
-
-        return [$attribute, [$date]];
-    }
-
-    /**
-     * Validate that an attribute is different from another attribute.
-     *
-     * @param string $attribute
-     * @param array $parameters
-     *
-     * @return array
-     */
-    protected function ruleDifferent($attribute, array $parameters)
-    {
-        return $this->ruleSame($attribute, $parameters);
-    }
-
-    /**
      * Validate that two attributes match.
      *
      * @param string $attribute
-     * @param array $parameters
+     * @param array  $parameters
      *
      * @return array
      */
@@ -88,23 +75,23 @@ trait JavascriptRulesTrait
     }
 
     /**
-     * Validate that an attribute exists when all other attributes exists.
+     * Validate that an attribute is different from another attribute.
      *
      * @param string $attribute
-     * @param mixed $parameters
+     * @param array  $parameters
      *
      * @return array
      */
-    protected function ruleRequiredWithAll($attribute, array $parameters)
+    protected function ruleDifferent($attribute, array $parameters)
     {
-        return $this->ruleRequiredWith($attribute, $parameters);
+        return $this->ruleSame($attribute, $parameters);
     }
 
     /**
      * Validate that an attribute exists when any other attribute exists.
      *
      * @param string $attribute
-     * @param mixed $parameters
+     * @param mixed  $parameters
      *
      * @return array
      */
@@ -116,10 +103,23 @@ trait JavascriptRulesTrait
     }
 
     /**
+     * Validate that an attribute exists when all other attributes exists.
+     *
+     * @param string $attribute
+     * @param mixed  $parameters
+     *
+     * @return array
+     */
+    protected function ruleRequiredWithAll($attribute, array $parameters)
+    {
+        return $this->ruleRequiredWith($attribute, $parameters);
+    }
+
+    /**
      * Validate that an attribute exists when another attribute does not.
      *
      * @param string $attribute
-     * @param mixed $parameters
+     * @param mixed  $parameters
      *
      * @return array
      */
@@ -132,7 +132,7 @@ trait JavascriptRulesTrait
      * Validate that an attribute exists when all other attributes do not.
      *
      * @param string $attribute
-     * @param mixed $parameters
+     * @param mixed  $parameters
      *
      * @return array
      */
@@ -145,7 +145,7 @@ trait JavascriptRulesTrait
      * Validate that an attribute exists when another attribute has a given value.
      *
      * @param string $attribute
-     * @param mixed $parameters
+     * @param mixed  $parameters
      *
      * @return array
      */

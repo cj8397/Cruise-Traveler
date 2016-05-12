@@ -43,7 +43,7 @@ $.extend(true, laravelValidation, {
          */
         selector: function (names) {
             var selector = [];
-            if (!$.isArray(names)) {
+            if (!$.isArray(names))  {
                 names = [names];
             }
             for (var i = 0; i < names.length; i++) {
@@ -80,9 +80,9 @@ $.extend(true, laravelValidation, {
             var validator = $.data(element.form, "validator");
             var objRules = validator.settings.rules[element.name];
             if ('laravelValidation' in objRules) {
-                var _rules = objRules.laravelValidation;
+                var _rules=objRules.laravelValidation;
                 for (var i = 0; i < _rules.length; i++) {
-                    if ($.inArray(_rules[i][0], rules) !== -1) {
+                    if ($.inArray(_rules[i][0],rules) !== -1) {
                         found = true;
                         break;
                     }
@@ -133,14 +133,14 @@ $.extend(true, laravelValidation, {
          * @param element
          * @returns object
          */
-        getLaravelValidation: function (rule, element) {
+        getLaravelValidation: function(rule, element) {
 
             var found = undefined;
-            $.each($.validator.staticRules(element), function (key, rules) {
-                if (key === "laravelValidation") {
+            $.each($.validator.staticRules(element), function(key, rules) {
+                if (key==="laravelValidation") {
                     $.each(rules, function (i, value) {
-                        if (value[0] === rule) {
-                            found = value;
+                        if (value[0]===rule) {
+                            found=value;
                         }
                     });
                 }
@@ -163,7 +163,7 @@ $.extend(true, laravelValidation, {
             var fmt = new DateFormatter();
 
             if ($.type(format) === 'object') {
-                var dateRule = this.getLaravelValidation('DateFormat', format);
+                var dateRule=this.getLaravelValidation('DateFormat', format);
                 if (dateRule !== undefined) {
                     format = dateRule[1][0];
                 } else {
@@ -233,11 +233,11 @@ $.extend(true, laravelValidation, {
         },
 
 
-        dependentElement: function (validator, element, name) {
+        dependentElement: function(validator, element, name) {
 
-            var el = validator.findByName(name);
+            var el=validator.findByName(name);
 
-            if (el[0] !== undefined && validator.settings.onfocusout) {
+            if ( el[0]!==undefined  && validator.settings.onfocusout ) {
                 var event = 'blur';
                 if (el[0].tagName === 'SELECT' ||
                     el[0].tagName === 'OPTION' ||
@@ -248,15 +248,16 @@ $.extend(true, laravelValidation, {
                 }
 
                 var ruleName = '.validate-laravelValidation';
-                el.off(ruleName)
+                el.off( ruleName )
                     .off(event + ruleName + '-' + element.name)
-                    .on(event + ruleName + '-' + element.name, function () {
-                        $(element).valid();
+                    .on( event + ruleName + '-' + element.name, function() {
+                        $( element ).valid();
                     });
             }
 
             return el[0];
         }
+
 
 
     }

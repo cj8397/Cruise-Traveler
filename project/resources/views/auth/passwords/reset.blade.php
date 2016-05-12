@@ -17,8 +17,7 @@
                             <label class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input type="email" class="form-control" name="email"
-                                       value="{{ $email or old('email') }}" required>
+                                <input type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -70,7 +69,7 @@
 </div>
 @endsection
 @section('scripts')
-    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 
-    {!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}
+{!! JsValidator::formRequest('App\Http\Requests\UserRequest') !!}
 @endsection

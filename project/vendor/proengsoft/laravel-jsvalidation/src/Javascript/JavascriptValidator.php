@@ -45,7 +45,7 @@ class JavascriptValidator implements Arrayable
 
     /**
      * @param ValidatorHandler $validator
-     * @param array $options
+     * @param array               $options
      */
     public function __construct(ValidatorHandler $validator, $options = [])
     {
@@ -66,47 +66,10 @@ class JavascriptValidator implements Arrayable
     }
 
     /**
-     * Get the view data as an array.
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->getViewData();
-    }
-
-    /**
-     *  Gets view data.
-     *
-     * @return array
-     */
-    protected function getViewData()
-    {
-        $data = $this->validator->validationData($this->remote);
-        $data['selector'] = $this->selector;
-
-        if (!is_null($this->ignore)) {
-            $data['ignore'] = $this->ignore;
-        }
-
-        return $data;
-    }
-
-    /**
-     * Get the string resulting of render default view.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->render();
-    }
-
-    /**
      * Render the specified view with validator data.
      *
      * @param \Illuminate\Contracts\View\View|string|null $view
-     * @param string|null $selector
+     * @param string|null                                 $selector
      *
      * @return string
      */
@@ -120,31 +83,23 @@ class JavascriptValidator implements Arrayable
     }
 
     /**
-     * Set the view to render Javascript Validations.
+     * Get the view data as an array.
      *
-     * @param \Illuminate\Contracts\View\View|string|null $view
-     *
-     * @return JavascriptValidator
+     * @return array
      */
-    public function view($view)
+    public function toArray()
     {
-        $this->view = is_null($view) ? $this->view : $view;
-
-        return $this;
+        return $this->getViewData();
     }
 
     /**
-     * Set the form selector to validate.
+     * Get the string resulting of render default view.
      *
-     * @param string $selector
-     *
-     * @return JavascriptValidator
+     * @return string
      */
-    public function selector($selector)
+    public function __toString()
     {
-        $this->selector = is_null($selector) ? $this->selector : $selector;
-
-        return $this;
+        return $this->render();
     }
 
     /**
@@ -167,6 +122,23 @@ class JavascriptValidator implements Arrayable
     }
 
     /**
+     *  Gets view data.
+     *
+     * @return array
+     */
+    protected function getViewData()
+    {
+        $data = $this->validator->validationData($this->remote);
+        $data['selector'] = $this->selector;
+
+        if (! is_null($this->ignore)) {
+            $data['ignore'] = $this->ignore;
+        }
+
+        return $data;
+    }
+
+    /**
      * Set the form selector to validate.
      *
      * @param string $selector
@@ -179,6 +151,20 @@ class JavascriptValidator implements Arrayable
     }
 
     /**
+     * Set the form selector to validate.
+     *
+     * @param string $selector
+     *
+     * @return JavascriptValidator
+     */
+    public function selector($selector)
+    {
+        $this->selector = is_null($selector) ? $this->selector : $selector;
+
+        return $this;
+    }
+
+    /**
      * Set the input selector to ignore for validation.
      *
      * @param string $ignore
@@ -188,6 +174,20 @@ class JavascriptValidator implements Arrayable
     public function ignore($ignore)
     {
         $this->ignore = $ignore;
+
+        return $this;
+    }
+
+    /**
+     * Set the view to render Javascript Validations.
+     *
+     * @param \Illuminate\Contracts\View\View|string|null $view
+     *
+     * @return JavascriptValidator
+     */
+    public function view($view)
+    {
+        $this->view = is_null($view) ? $this->view : $view;
 
         return $this;
     }

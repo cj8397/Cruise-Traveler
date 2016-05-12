@@ -15,11 +15,13 @@
   "predef": [
     "$",
     "jQuery",
+
     "jasmine",
     "beforeEach",
     "describe",
     "expect",
     "it",
+
     "angular",
     "inject",
     "module"

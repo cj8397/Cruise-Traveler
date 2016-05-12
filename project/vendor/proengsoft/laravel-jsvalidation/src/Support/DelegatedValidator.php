@@ -32,6 +32,11 @@ class DelegatedValidator
         $this->validatorMethod = $this->createProtectedCaller($validator);
     }
 
+    private function callValidator($method, $args = [])
+    {
+        return $this->callProtected($this->validatorMethod, $method, $args);
+    }
+
     /**
      * Get current \Illuminate\Validation\Validator instance.
      *
@@ -106,18 +111,13 @@ class DelegatedValidator
         return $this->callValidator('isImplicit', [$rule]);
     }
 
-    private function callValidator($method, $args = [])
-    {
-        return $this->callProtected($this->validatorMethod, $method, $args);
-    }
-
     /**
      * Replace all error message place-holders with actual values.
      *
      * @param string $message
      * @param string $attribute
      * @param string $rule
-     * @param array $parameters
+     * @param array  $parameters
      *
      * @return string
      */
@@ -129,7 +129,7 @@ class DelegatedValidator
     /**
      * Determine if the given attribute has a rule in the given set.
      *
-     * @param string $attribute
+     * @param string       $attribute
      * @param string|array $rules
      *
      * @return bool

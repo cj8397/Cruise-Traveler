@@ -102,7 +102,7 @@
             @if(!empty($thread))
             <div class="col-xs-8">
                 <div class="row panel panel-default">
-                    <h2 class="panel-heading">{!! $thread->subject !!} </h2>
+                  <h2 class="panel-heading">{!! $thread->subject !!} </h2>
                   <div class="panel-body">
                       <div class="col-xs-4">
                           {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}

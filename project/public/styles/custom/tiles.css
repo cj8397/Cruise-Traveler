@@ -79,7 +79,6 @@ th, td {
     background-color: #286090;
     border-color: #204d74;
 }
-
 .tile .panel-heading > a {
     color: white;
     height: 100%;
@@ -106,4 +105,6 @@ th, td {
     border-color: #ddd;
     padding: 10px;
 }
+
+
 

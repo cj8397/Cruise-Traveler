@@ -63,20 +63,13 @@ class RuleParser
     }
 
     /**
-     * Returns Javascript parameters for remote validated rules.
-     *
-     * @param string $attribute
+     * Gets rules.
      *
      * @return array
      */
-    protected function remoteRule($attribute)
+    public function getRules()
     {
-        $params = [
-            $attribute,
-            $this->remoteToken,
-        ];
-
-        return [$attribute, $params];
+        return $this->validator->getRules();
     }
 
     /**
@@ -101,6 +94,23 @@ class RuleParser
     }
 
     /**
+     * Returns Javascript parameters for remote validated rules.
+     *
+     * @param string $attribute
+     *
+     * @return array
+     */
+    protected function remoteRule($attribute)
+    {
+        $params = [
+            $attribute,
+            $this->remoteToken,
+        ];
+
+        return [$attribute, $params];
+    }
+
+    /**
      * Handles multidimensional attribute names.
      *
      * @param $attribute
@@ -111,19 +121,9 @@ class RuleParser
     {
         $attributeArray = explode('.', $attribute);
         if (count($attributeArray) > 1) {
-            return $attributeArray[0] . '[' . implode('][', array_slice($attributeArray, 1)) . ']';
+            return $attributeArray[0].'['.implode('][', array_slice($attributeArray, 1)).']';
         }
 
         return $attribute;
-    }
-
-    /**
-     * Gets rules.
-     *
-     * @return array
-     */
-    public function getRules()
-    {
-        return $this->validator->getRules();
     }
 }

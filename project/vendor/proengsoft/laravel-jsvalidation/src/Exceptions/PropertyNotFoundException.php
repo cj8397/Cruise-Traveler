@@ -9,8 +9,8 @@ class PropertyNotFoundException extends Exception
     /**
      * Property Not Found Exception.
      *
-     * @param string $property
-     * @param string $caller
+     * @param string    $property
+     * @param string    $caller
      * @param Exception $previous
      */
     public function __construct($property = '', $caller = '', Exception $previous = null)

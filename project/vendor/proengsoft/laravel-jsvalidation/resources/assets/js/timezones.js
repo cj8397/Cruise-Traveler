@@ -21,7 +21,7 @@ $.extend(true, laravelValidation, {
          */
         isTimezone: function (value) {
 
-            var timezones = {
+            var timezones={
                 "africa": [
                     "abidjan",
                     "accra",
@@ -465,14 +465,14 @@ $.extend(true, laravelValidation, {
                 ]
             };
 
-            var tzparts = value.split('/', 2);
-            var continent = tzparts[0].toLowerCase();
-            var city = '';
+            var tzparts= value.split('/',2);
+            var continent=tzparts[0].toLowerCase();
+            var city='';
             if (tzparts[1]) {
-                city = tzparts[1].toLowerCase();
+                city=tzparts[1].toLowerCase();
             }
 
-            return (continent in timezones && ( timezones[continent].length === 0 || timezones[continent].indexOf(city) !== -1))
+            return (continent in timezones && ( timezones[continent].length===0 || timezones[continent].indexOf(city)!==-1))
 
         }
     }

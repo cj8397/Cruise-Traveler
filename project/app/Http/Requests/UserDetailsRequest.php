@@ -39,16 +39,16 @@ class UserDetailsRequest extends Request
             'family' => 'required|Boolean|max:20',
             'co_travellers' => 'Boolean|max:20',
             'two' => 'integer|min:0',
-            'five' => 'integer|min:0',
-            'twelve' => 'integer|min:0',
-            'seventeen' => 'integer|min:0',
-            'twentyfour' => 'integer|min:0',
-            'twentynine' => 'integer|min:0',
-            'thirtynine' => 'integer|min:0',
+             'five' => 'integer|min:0',
+              'twelve' => 'integer|min:0',
+               'seventeen' => 'integer|min:0',
+                'twentyfour' => 'integer|min:0',
+                 'twentynine' => 'integer|min:0',
+                  'thirtynine' => 'integer|min:0',
             'fourtynine' => 'integer|min:0',
-            'fiftynine' => 'integer|min:0',
-            'seventyfour' => 'integer|min:0',
-            'seventyfive' => 'integer|min:0'
+             'fiftynine' => 'integer|min:0',
+              'seventyfour' => 'integer|min:0',
+               'seventyfive' => 'integer|min:0'
         ];
     }
 
@@ -65,16 +65,16 @@ class UserDetailsRequest extends Request
             'family.required' => 'Please specify if you have family!',
             'city.required' => 'Please enter your city!',
             'two.min' => 'Please enter a number greater than -1!',
-            'five.min' => 'Please enter a number greater than -1!',
-            'twelve.min' => 'Please enter a number greater than -1!',
-            'seventeen.min' => 'Please enter a number greater than -1!',
-            'twentyfour.min' => 'Please enter a number greater than -1!',
-            'twentynine.min' => 'Please enter a number greater than -1!',
-            'thirtynine.min' => 'Please enter a number greater than -1!',
+             'five.min' => 'Please enter a number greater than -1!',
+              'twelve.min' => 'Please enter a number greater than -1!',
+               'seventeen.min' => 'Please enter a number greater than -1!',
+                'twentyfour.min' => 'Please enter a number greater than -1!',
+                 'twentynine.min' => 'Please enter a number greater than -1!',
+                  'thirtynine.min' => 'Please enter a number greater than -1!',
             'fourtynine.min' => 'Please enter a number greater than -1!',
-            'fiftynine.min' => 'Please enter a number greater than -1!',
-            'seventyfour.min' => 'Please enter a number greater than -1!',
-            'seventyfive.min' => 'Please enter a number greater than -1!'
+             'fiftynine.min' => 'Please enter a number greater than -1!',
+              'seventyfour.min' => 'Please enter a number greater than -1!',
+               'seventyfive.min' => 'Please enter a number greater than -1!'
         ];
     }
 }

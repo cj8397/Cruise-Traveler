@@ -15,7 +15,7 @@ trait RuleListTrait
         'In', 'Integer', 'Ip', 'Json', 'Max', 'Mimes', 'Min', 'NotIn', 'Numeric',
         'Regex', 'Required', 'RequiredIf', 'RequiredWith', 'RequiredWithAll',
         'RequiredWithout', 'RequiredWithoutAll', 'Same', 'Size', 'Sometimes',
-        'String', 'Timezone', 'Url',];
+        'String', 'Timezone', 'Url', ];
 
     /**
      * Rules validated in Server-Side.
@@ -60,7 +60,7 @@ trait RuleListTrait
     protected function isRemoteRule($rule)
     {
         return in_array($rule, $this->serverRules) ||
-        !in_array($rule, $this->clientRules);
+            ! in_array($rule, $this->clientRules);
     }
 
     /**
@@ -84,7 +84,7 @@ trait RuleListTrait
      */
     protected function validationDisabled($rules)
     {
-        $rules = (array)$rules;
+        $rules = (array) $rules;
 
         return in_array($this->disableJsValidationRule, $rules);
     }
@@ -93,6 +93,7 @@ trait RuleListTrait
      * Check if rules is for input file type.
      *
      * @param $rule
+     
      * @return bool
      */
     protected function isFileRule($rule)

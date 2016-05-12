@@ -21,40 +21,6 @@ class JsValidationServiceProvider extends ServiceProvider
     }
 
     /**
-     * Load and publishes configs.
-     */
-    protected function bootstrapConfigs()
-    {
-        $configFile = realpath(__DIR__ . '/../config/jsvalidation.php');
-
-        $this->mergeConfigFrom($configFile, 'jsvalidation');
-        $this->publishes([$configFile => $this->app['path.config'] . '/jsvalidation.php'], 'config');
-    }
-
-    /**
-     * Configure and publish views.
-     */
-    protected function bootstrapViews()
-    {
-        $viewPath = realpath(__DIR__ . '/../resources/views');
-
-        $this->loadViewsFrom($viewPath, 'jsvalidation');
-        $this->publishes([
-            $viewPath => $this->app['path.base'] . '/resources/views/vendor/jsvalidation',
-        ], 'views');
-    }
-
-    /**
-     * Publish public assets.
-     */
-    protected function publishAssets()
-    {
-        $this->publishes([
-            realpath(__DIR__ . '/../public') => $this->app['path.public'] . '/vendor/jsvalidation',
-        ], 'public');
-    }
-
-    /**
      * Register the application services.
      */
     public function register()
@@ -65,5 +31,39 @@ class JsValidationServiceProvider extends ServiceProvider
             return new JsValidatorFactory($app, $config);
 
         });
+    }
+
+    /**
+     * Configure and publish views.
+     */
+    protected function bootstrapViews()
+    {
+        $viewPath = realpath(__DIR__.'/../resources/views');
+
+        $this->loadViewsFrom($viewPath, 'jsvalidation');
+        $this->publishes([
+            $viewPath => $this->app['path.base'].'/resources/views/vendor/jsvalidation',
+        ], 'views');
+    }
+
+    /**
+     * Load and publishes configs.
+     */
+    protected function bootstrapConfigs()
+    {
+        $configFile = realpath(__DIR__.'/../config/jsvalidation.php');
+
+        $this->mergeConfigFrom($configFile, 'jsvalidation');
+        $this->publishes([$configFile => $this->app['path.config'].'/jsvalidation.php'], 'config');
+    }
+
+    /**
+     * Publish public assets.
+     */
+    protected function publishAssets()
+    {
+        $this->publishes([
+            realpath(__DIR__.'/../public') => $this->app['path.public'].'/vendor/jsvalidation',
+        ], 'public');
     }
 }
