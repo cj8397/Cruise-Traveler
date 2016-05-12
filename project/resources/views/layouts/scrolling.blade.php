@@ -157,7 +157,7 @@
                         <td>adminpassword</td>
                     </tr>
                 </table>
-                <form class="form-vertical clearfix" role="form" method="POST" action="{{ url('/login') }}">
+                <form id="loginForm" class="form-vertical clearfix" role="form" method="POST" action="{{ url('/login') }}">
                     {!! csrf_field() !!}
                     <div class="col-xs-12 {{ $errors->has('email') ? ' has-error' : '' }}">
                         <label class="col-xs-12 control-label">Email:</label>
@@ -192,6 +192,7 @@
                                 Password?</a></div>
                     </div>
                 </form>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -209,7 +210,7 @@
                 <h4 class="modal-title" id="registerModalLabel">Registration</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                <form id="registerForm" class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                     {!! csrf_field() !!}
 
 
@@ -292,7 +293,9 @@
 <script type="text/javascript" src="{{ URL::asset('scripts/scrolling-nav.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('scripts/moment-with-locales.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('scripts/bootstrap-datetimepicker.min.js') }}"></script>
-
+<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+{!! JsValidator::formRequest('App\Http\Requests\UserRequest', '#loginForm'); !!}
+{!! JsValidator::formRequest('App\Http\Requests\UserRequest', '#registerForm'); !!}
 <script type="text/javascript">
     $(function () {
         $('#datetimepickerstart').datetimepicker();

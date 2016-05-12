@@ -29,7 +29,7 @@
                                 <label class="col-md-4 control-label">Start Date And Time</label>
 
                                 <div class="col-md-6">
-                                  <span class="help-block">
+                                  <span class="bg-primary">
                                       <strong> {!! $sailing->start_date !!}</strong>
                                   </span>
                                     <input type="text" class="form-control date" id="datetimepickerstart" name="start"
@@ -47,7 +47,7 @@
                                 <label class="col-md-4 control-label">End Date And Time</label>
 
                                 <div class="col-md-6">
-                                  <span class="help-block">
+                                  <span class="bg-primary">
                                       <strong> {!! $sailing->end_date !!}</strong>
                                   </span>
                                     <input type="text" class="form-control" id="datetimepickersend" name="end"

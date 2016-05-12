@@ -49,12 +49,12 @@
                                 </tr>
                             </table>
                             <div class="panel-body">
-                                <form class="form-vertical clearfix" role="form" method="POST" action="{{ url('/login') }}">
+                                <form id="loginForm2" class="form-vertical clearfix" role="form" method="POST" action="{{ url('/login') }}">
                                     {!! csrf_field() !!}
                                     <div class="col-xs-12 {{ $errors->has('email') ? ' has-error' : '' }}">
                                         <label class="col-xs-12 control-label">Email:</label>
                                         <div class="col-xs-12">
-                                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
                                             @if ($errors->has('email'))
                                                 <span class="help-block">
                                                 <strong>{{ $errors->first('email') }}</strong>
@@ -65,7 +65,7 @@
                                     <div class="col-xs-12 {{ $errors->has('password') ? ' has-error' : '' }}">
                                         <label class="col-xs-12 control-label">Password:</label>
                                         <div class="col-xs-12">
-                                            <input type="password" class="form-control" name="password" required>
+                                            <input type="password" class="form-control" name="password">
 
                                             @if ($errors->has('password'))
                                                 <span class="help-block">
@@ -82,6 +82,9 @@
                                         <div class="col-xs-4"><a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Password?</a></div>
                                     </div>
                                 </form>
+                                @section('scripts')
+                                {!! JsValidator::formRequest('App\Http\Requests\LoginRequest', '#loginForm2'); !!}
+                                @endsection
                             </div>
                     </div>
                 </div>
