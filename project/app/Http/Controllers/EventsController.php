@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\Http\Requests;
 use App\Event;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\EventRequest;
 use App\Http\Requests\SearchRequest;
@@ -32,15 +33,21 @@ class EventsController extends Controller
     protected function GetAllEvents($sailing, SearchRequest $request)
     {
         //
-        if( $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request)){
-            return view('events.list')->with(['events' => $events, 'sailing_id' => $sailing]);
+        $sail = Sailing::where('id', $sailing)->first();
+        if ($request->direction == null) {
+            $events = Event::with('userevent')->where('sailing_id', $sailing)->paginate(6);
+            return view('events.list')->with(['events' => $events, 'sailing' => $sail, 'old' => $request]);
         } else {
-            return Redirect::back();
+            if ($events = Event::with('userevent')->where('sailing_id', $sailing)->search($request)) {
+                return view('events.list')->with(['events' => $events, 'sailing' => $sail, 'old' => $request]);
+            } else {
+                return Redirect::back();
+            }
         }
     }
 
     protected function getAllUserEvents(){
-        $userEvents = UserSailing::with('event','sailing')->where('user_id',Auth::user()->id)->get();
+        $userEvents = UserSailing::with('event', 'sailing')->where('user_id', Auth::user()->id)->paginate(1);
         return view('events.userList')->with('userSailing',$userEvents);
     }
     protected function GetOneEvent($event_id)
@@ -53,7 +60,7 @@ class EventsController extends Controller
             if($userEvent = UserEvent::where(['user_id' => Auth::user()->id, 'event_id'=> $event_id])->first())
             {
               $thread = Thread::where(['event_id' => $event_id, 'sailing_id' => $event->sailing_id])->first();
-
+                $thread->messages = $thread->messages->sortByDesc('created_at');
               return view('events.eventdetail')->with([
                   'event' => $event,
                   'members' => $members,

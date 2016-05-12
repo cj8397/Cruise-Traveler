@@ -23,8 +23,9 @@
             });
 
         });
-        @endif
     </script>
+@endsection
+@endif
 
     <img class="img-responsive" src="/images/cruiseship.jpg">
     <div class="container">
@@ -67,7 +68,7 @@
                 <div class="panel-body col-md-12 col-xs-12">
                     <a href="/sailings">
                         <button type="button" class="btn btn-primary btn-md">
-                            <i class="fa fa-users" aria-hidden="true"></i>Join A Sailing
+                            <i class="fa fa-users" aria-hidden="true"></i>Join Sailings
                         </button>
                     </a>
                 </div>

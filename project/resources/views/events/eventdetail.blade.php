@@ -1,13 +1,12 @@
 @extends('layouts.scrolling')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="img-wrapper">
             <img class="img-responsive" src="/426631.jpg" alt="">
         </div>
-        <div class="row">
-            <div class="col-md-12 col-xs-12">
-                <div class="panel panel-default col-md-6 col-xs-12">
+        <div class="col-md-12 col-xs-12 text-center">
+            <div class="panel panel-default col-md-4 col-xs-12">
                     <div class="panel panel-heading">{!! $event->title !!}</div>
                     <div class="panel panel-body">
                         <ul class="list-group">
@@ -66,62 +65,64 @@
                             </li>
                         </ul>
                     </div>
-                    @if(isset($members) && isset($currentUser))
-                        <div class="row col-md-5 col-md-offset-1 col-xs-12">
-                            <div class="panel panel-default col-md-12 col-xs-12">
-                                <div class="panel panel-heading">Participants</div>
-                                <div class="panel panel-body">
-                                    <div class="row">
-                                        @foreach ($members as $mem)
-                                            <a class="col-xs-4 col-md-4" href="/users/userprofile/{!! $mem->user_id !!}">
-                                                <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                                                <span class="label label-default label-pill">{!! $mem->userdetails->first." ".$mem->userdetails->last!!}</span>
-                                            </a>
-                                        @endforeach
+            </div>
+            @if(!empty($thread) && isset($currentUser))
+                <div class="row col-md-7 col-md-offset-1 col-xs-12">
+                    <div class="row panel panel-default">
+                        <div class="panel-heading">
+                            <h2>{!! $thread->subject !!}</h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-xs-12">
+                                {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
+                                        <!-- Message Form Input -->
+                                <div class="form-group clearfix">
+                                    {!! Form::textarea('message', null, ['class' => 'col-xs-9', 'placeholder' => 'Send a message...']) !!}
                                     </div>
+                                <div class="form-group clearfix">
+                                    {!! Form::submit('Send', ['class' => 'btn btn-primary col-xs-4']) !!}
+                                </div>
+                                {!! Form::close() !!}
+
+                                @foreach($thread->messages as $message)
+                                    <div class="col-xs-12 message">
+                                        <div class="media">
+                                            <a class="pull-left" href="#">
+                                                <img src="//www.gravatar.com/avatar/{!! md5($message->user->email) !!}?s=64"
+                                                     alt="{!! $message->user->email !!}" class="img-circle">
+                                            </a>
+                                            <div class="media-body">
+                                                <h5 class="media-heading">{!! $message->user->email !!}</h5>
+                                                <p>{!! $message->body !!}</p>
+                                                <div class="text-muted">
+                                                    <small>Posted {!! $message->created_at->diffForHumans() !!}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                                 </div>
                             </div>
                         </div>
-                    @endif
                 </div>
-                @if(!empty($thread))
-                <div class="col-xs-8">
-                    <div class="row panel panel-default">
-                      <div class="panel-heading">
-                        <h2>{!! $thread->subject !!}</h2>
-                      </div>
-                      <div class="panel-body">
-                          <div class="col-xs-12">
-                              {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
-                                  <!-- Message Form Input -->
-                                  <div class="form-group clearfix">
-                                      {!! Form::textarea('message', null, ['class' => 'col-xs-9', 'placeholder' => 'Send a message...']) !!}
-                                  </div>
-                              <div class="form-group clearfix">
-                                  {!! Form::submit('Send', ['class' => 'btn btn-primary col-xs-4']) !!}
-                              </div>
-                              {!! Form::close() !!}
-
-                            @foreach($thread->messages as $message)
-                             <div class="col-xs-12 message">
-                                  <div class="media">
-                                      <a class="pull-left" href="#">
-                                          <img src="//www.gravatar.com/avatar/{!! md5($message->user->email) !!}?s=64" alt="{!! $message->user->email !!}" class="img-circle">
-                                      </a>
-                                      <div class="media-body">
-                                          <h5 class="media-heading">{!! $message->user->email !!}</h5>
-                                          <p>{!! $message->body !!}</p>
-                                          <div class="text-muted"><small>Posted {!! $message->created_at->diffForHumans() !!}</small></div>
-                                      </div>
-                                  </div>
-                             </div>
-                             @endforeach
-                          </div>
+            @endif
+            @if(isset($members))
+                <div class="row col-md-7 col-md-offset-1 col-xs-12">
+                    <div class="panel panel-default col-md-12 col-xs-12">
+                        <div class="panel panel-heading">Participants</div>
+                        <div class="panel panel-body">
+                            <div class="row">
+                                @foreach ($members as $mem)
+                                    <a class="col-xs-4 col-md-4" href="/users/userprofile/{!! $mem->user_id !!}">
+                                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                                        <span class="label label-default label-pill">{!! $mem->userdetails->first." ".$mem->userdetails->last!!}</span>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
                         </div>
                     </div>
-                </div>
                 @endif
             </div>
-        </div>
     </div>
 @endsection

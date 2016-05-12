@@ -24,26 +24,28 @@ class UserEventsTableSeeder extends Seeder
 
         for($i = $firstEvent; $i < $lastEvent; $i++) {
           $currEvent = Event::find($i);
+            if ($i % 3 == 0) {
                 DB::table('user_events')->insert([
                     'user_id' => $vacationID,
                     'sailing_id' => $currEvent->sailing_id,
                     'event_id' => $i,
                     'role' => 'Participant'
                 ]);
+            }
 
-                DB::table('user_events')->insert([
-                    'user_id' => $hostID,
-                    'sailing_id' => $currEvent->sailing_id,
-                    'event_id' => $i,
-                    'role' => 'Host'
-                ]);
+            DB::table('user_events')->insert([
+                'user_id' => $hostID,
+                'sailing_id' => $currEvent->sailing_id,
+                'event_id' => $i,
+                'role' => 'Host'
+            ]);
 
-                DB::table('user_events')->insert([
-                    'user_id' => $participantID,
-                    'sailing_id' => $currEvent->sailing_id,
-                    'event_id' => $i,
-                    'role' => 'Participant'
-                ]);
+            DB::table('user_events')->insert([
+                'user_id' => $participantID,
+                'sailing_id' => $currEvent->sailing_id,
+                'event_id' => $i,
+                'role' => 'Participant'
+            ]);
         }
 
 

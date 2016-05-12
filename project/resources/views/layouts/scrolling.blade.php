@@ -91,7 +91,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Last Update: May 9th, 2016 @ 15:15 </a></li>
+                            <li><a href="#">Last Update: May 11th, 2016 @ 15:15 </a></li>
                             <li>
                                 <a href="https://docs.google.com/spreadsheets/d/1KQc5cRAnqdWS55JQb59NHHYKRtqtslBXlHjbWU2QIqc/edit#gid=0">SCRUM
                                     WOKRBOOK</a></li>
@@ -123,13 +123,15 @@
                         </li>
                         @endif
                         {{--</ul>--}}
-                @endif
+                        </li>
+                    @endif
             </ul>
         </div>
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container -->
 </nav>
+<div class="container">
 <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -160,7 +162,8 @@
                         <td>adminpassword</td>
                     </tr>
                 </table>
-                <form class="form-vertical clearfix" role="form" method="POST" action="{{ url('/login') }}">
+                <form id="loginForm" class="form-vertical clearfix" role="form" method="POST"
+                      action="{{ url('/login') }}">
                     {!! csrf_field() !!}
                     <div class="col-xs-12 {{ $errors->has('email') ? ' has-error' : '' }}">
                         <label class="col-xs-12 control-label">Email:</label>
@@ -195,6 +198,7 @@
                                 Password?</a></div>
                     </div>
                 </form>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -212,7 +216,8 @@
                 <h4 class="modal-title" id="registerModalLabel">Registration</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                <form id="registerForm" class="form-horizontal" role="form" method="POST"
+                      action="{{ url('/register') }}">
                     {!! csrf_field() !!}
 
 
@@ -274,22 +279,12 @@
     </div>
 </div>
 @include('flash::message')
-@if(isset($success))
-    <div class="alert alert-success">
-        {{$success}}
-    </div>
-@endif
-
-@if(isset($failure))
-    <div class="alert alert-danger">
-        {{$failure}}
-    </div>
-@endif
 
 @yield('content')
+</div>
 
 <footer>
-    <div class="row">
+    <div class="container">
         <div class="col-lg-12">
             <p>Copyright &copy; Your Website 2014</p>
         </div>
@@ -305,7 +300,9 @@
 <script type="text/javascript" src="{{ URL::asset('scripts/scrolling-nav.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('scripts/moment-with-locales.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('scripts/bootstrap-datetimepicker.min.js') }}"></script>
-
+<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+{!! JsValidator::formRequest('App\Http\Requests\UserRequest', '#loginForm'); !!}
+{!! JsValidator::formRequest('App\Http\Requests\UserRequest', '#registerForm'); !!}
 <script type="text/javascript">
     $(function () {
         $('#datetimepickerstart').datetimepicker();

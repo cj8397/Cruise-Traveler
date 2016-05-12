@@ -38,7 +38,7 @@ class SailingsController extends Controller
             foreach($sailings as $sailing) {
                 $sailing['stats'] = $statsController->GetTop3Summary($sailing->id);
             }
-            return view('sailings.list', compact('sailings', 'destinations', 'ports'));
+            return view('sailings.list', compact('sailings', 'destinations', 'ports', 'request'));
         } else {
              return redirect::back();
         }
@@ -53,6 +53,7 @@ class SailingsController extends Controller
                 {
                   $currentUser = UserSailing::where(['sailing_id' => $id, 'user_id'=> Auth::user()->id])->first();
                     $thread = Thread::where(['event_id' => null, 'sailing_id' => $id])->first();
+                    $thread->messages = $thread->messages->sortByDesc('created_at');
                     return view('sailings.detail', compact('sailing', 'stats', 'thread','currentUser'));
                 }else{
                     return view('sailings.detail', compact('sailing', 'stats','currentUser'));

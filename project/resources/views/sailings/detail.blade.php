@@ -3,10 +3,14 @@
 @section('styles')
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <link rel="stylesheet" href="{{ URL::asset('styles/custom/sailing-detail.css') }}" />
+    <style>
+        .panel .col-xs-12 {
+            padding: 0;
+        }
+    </style>
 @endsection
 
 @section('content')
-<div class="container">
     <div class="img-wrapper">
         <img class="img-responsive" src="/426631.jpg" alt="">
     </div>
@@ -14,16 +18,18 @@
         <div class="col-xs-4">
             <div class="row panel panel-default">
                 <h2 class="panel-heading">{{$sailing->title}} {{$sailing->cruise_line}} </h2>
-                @if(!isset($currentUser))
-                @include('partials/buttons/joinsailing')
-                @else
-                @include('partials/buttons/leavesailing')
-                @endif
-                <a href="{{ action('EventsController@GetAllEvents', [$sailing->id]) }}">
-                    <button type="button" class="btn btn-primary btn-md">
-                        <i class="fa fa-users" aria-hidden="true"></i>View Events
-                    </button>
-                </a>
+                <div class="panel-body">
+                    @if(!isset($currentUser))
+                        @include('partials/buttons/joinsailing')
+                    @else
+                        @include('partials/buttons/leavesailing')
+                    @endif
+                    <a href="{{ action('EventsController@GetAllEvents', [$sailing->id]) }}">
+                        <button type="button" class="btn btn-primary btn-md">
+                            <i class="fa fa-users" aria-hidden="true"></i>View Events
+                        </button>
+                    </a>
+                </div>
                 <h4 class="panel-heading">Number of travellers</h4>
                 <div class="panel-body">
                     @if(!empty($stats))
@@ -40,8 +46,8 @@
                 <h2 class="panel-heading">Demographics</h2>
                 @if(!empty($stats))
                     <div class="panel-body">
-                        <div class="panel panel-default col-xs-12">
-                            <div class="panel-heading ">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
                                 <h4> Languages </h4>
                             </div>
                             <div class="panel-body">
@@ -65,7 +71,7 @@
                             </div>
                         </div>
                         <div class="panel panel-default col-xs-12">
-                            <div class="panel-heading ">
+                            <div class="panel-heading">
                                 <h4> Ages </h4>
                             </div>
                             <div class="panel-body">
@@ -96,21 +102,20 @@
             @if(!empty($thread))
             <div class="col-xs-8">
                 <div class="row panel panel-default">
-                  <div class="panel-heading">
-                    <h2>{!! $thread->subject !!}</h2>
-                  </div>
+                    <h2 class="panel-heading">{!! $thread->subject !!} </h2>
                   <div class="panel-body">
-                      <div class="col-xs-12">
+                      <div class="col-xs-4">
                           {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
-                              <!-- Message Form Input -->
-                              <div class="form-group clearfix">
-                                  {!! Form::textarea('message', null, ['class' => 'col-xs-9', 'placeholder' => 'Send a message...']) !!}
-                              </div>
+                                  <!-- Message Form Input -->
                           <div class="form-group clearfix">
-                              {!! Form::submit('Send', ['class' => 'btn btn-primary col-xs-4']) !!}
+                              {!! Form::textarea('message', null, ['class' => 'col-xs-9', 'placeholder' => 'Send a message...']) !!}
+                          </div>
+                          <div class="form-group clearfix">
+                              {!! Form::submit('Send', ['class' => 'btn btn-primary col-xs-12']) !!}
                           </div>
                           {!! Form::close() !!}
-
+                      </div>
+                      <div class="col-xs-8">
                         @foreach($thread->messages as $message)
                          <div class="col-xs-12 message">
                               <div class="media">
@@ -132,7 +137,6 @@
             @endif
         @endif
     </div>
-</div>
 @endsection
 
 @section('scripts')

@@ -25,7 +25,6 @@ class SailingRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'bail|required|max:20',
             'cruise_line' => 'required|max:20',
             'start' => 'required|date',
             'end' => 'required|date|after:start',
@@ -38,7 +37,6 @@ class SailingRequest extends Request
     public function messages()
     {
         return [
-            'title.required' => 'Please assign a title to your event!',
             'cruise_line.required' => 'Please assign a Cruise Line?',
             'start.required' => 'When does the Sailing start?',
             'end.required' => 'When does the Sailing end?',

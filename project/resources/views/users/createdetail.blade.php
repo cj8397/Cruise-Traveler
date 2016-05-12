@@ -1,7 +1,6 @@
 @extends('layouts.scrolling')
 
 @section('content')
-    <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
@@ -15,7 +14,7 @@
                                 <label class="col-md-4 control-label">First Name</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="first">
+                                    <input type="text" class="form-control" name="first" placeholder="John">
 
                                     @if ($errors->has('first'))
                                         <span class="help-block">
@@ -28,7 +27,7 @@
                             <div class="form-group{{ $errors->has('last') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Last Name</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="last">
+                                    <input type="text" class="form-control" name="last" placeholder="Smith">
 
                                     @if ($errors->has('last'))
                                         <span class="help-block">
@@ -38,12 +37,16 @@
                                 </div>
                             </div>
 
-                            <div><h3>All data collected below will remain anonymous, and will not be shared with other users.</h3></div>
+                            <div><strong>All data collected below will remain anonymous, and will not be shared with
+                                    other users.</strong></div>
+                            <br/>
 
                             <div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Birth Date</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="dob">(YYYY/MM/DD)
+                                    <div>
+                                        <input type="text" class="form-control" name="dob" placeholder="YYYY/MM/DD">
+                                    </div>
 
                                     @if ($errors->has('dob'))
                                         <span class="help-block">
@@ -56,9 +59,10 @@
                             <div class="form-group{{ $errors->has('sex') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Gender</label>
                                 <div class="col-md-6">
-                                    Male <input type="checkbox" class="" name="sex" value="1"><br />
-                                    Female <input type="checkbox" class="" name="sex" value="0">
-
+                                    <div>
+                                        Male <input type="radio" class="" name="sex" value="1"><br/>
+                                        Female <input type="radio" class="" name="sex" value="0">
+                                    </div>
                                     @if ($errors->has('sex'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('sex') }}</strong>
@@ -94,7 +98,7 @@
                             <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Country</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="country">
+                                    <input type="text" class="form-control" name="country" placeholder="Canada">
 
                                     @if ($errors->has('country'))
                                         <span class="help-block">
@@ -107,7 +111,7 @@
                             <div class="form-group{{ $errors->has('region') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Region</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="region">
+                                    <input type="text" class="form-control" name="region" placeholder="BC">
 
                                     @if ($errors->has('region'))
                                         <span class="help-block">
@@ -120,7 +124,7 @@
                             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">City</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="city">
+                                    <input type="text" class="form-control" name="city" placeholder="Vancouver">
 
                                     @if ($errors->has('city'))
                                         <span class="help-block">
@@ -133,7 +137,8 @@
                             <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Address</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="address">
+                                    <input type="text" class="form-control" name="address"
+                                           placeholder="1234 1st Street">
 
                                     @if ($errors->has('address'))
                                         <span class="help-block">
@@ -146,7 +151,7 @@
                             <div class="form-group{{ $errors->has('ethinicity') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Ethinicity</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="ethnicity">
+                                    <input type="text" class="form-control" name="ethnicity" placeholder="White">
 
                                     @if ($errors->has('ethinicity'))
                                         <span class="help-block">
@@ -159,7 +164,7 @@
                             <div class="form-group{{ $errors->has('hobby') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Hobby</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="hobby">
+                                    <input type="text" class="form-control" name="hobby" placeholder="Swimming">
 
                                     @if ($errors->has('hobby'))
                                         <span class="help-block">
@@ -172,8 +177,10 @@
                             <div class="form-group{{ $errors->has('family') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Family</label>
                                 <div class="col-md-6">
-                                  <input type="hidden" class="" name="family" value="0">
-                                    <input type="checkbox" class="" name="family" value="1">
+                                    <div>
+                                        Yes <input type="radio" class="" name="family" value="0"><br/>
+                                        No <input type="radio" class="" name="family" value="1">
+                                    </div>
 
                                     @if ($errors->has('family'))
                                         <span class="help-block">
@@ -186,8 +193,10 @@
                             <div class="form-group{{ $errors->has('co_travellers') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Co-Travellers</label>
                                 <div class="col-md-6">
-                                  <input type="hidden" class="" name="co_travellers" value="0">
-                                    <input type="checkbox" class="" name="co_travellers" value="1">
+                                    <div>
+                                        Yes <input type="radio" class="" name="co_travellers" value="0"><br/>
+                                        No <input type="radio" class="" name="co_travellers" value="1">
+                                    </div>
 
                                     @if ($errors->has('co_travellers'))
                                         <span class="help-block">
@@ -344,5 +353,9 @@
             </div>
         </div>
     </div>
-    </div>
+@endsection
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+
+    {!! JsValidator::formRequest('App\Http\Requests\UserDetailsRequest') !!}
 @endsection

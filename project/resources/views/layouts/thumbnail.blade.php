@@ -68,9 +68,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             Documentation <b class="caret"></b>
                         </a>
-
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Last Update: May 9th, 2016 @ 15:15 </a></li>
+                            <li><a href="#">Last Update: May 11th, 2016 @ 15:15 </a></li>
                             <li>
                                 <a href="https://docs.google.com/spreadsheets/d/1KQc5cRAnqdWS55JQb59NHHYKRtqtslBXlHjbWU2QIqc/edit#gid=0">SCRUM
                                     WOKRBOOK</a></li>
@@ -98,9 +97,9 @@
                         <li>
                             <a href="{{ url('/admin/home') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Admin</a>
                         </li>
-                    @endif
-                    {{--</ul>--}}
-
+                        @endif
+                        {{--</ul>--}}
+                        </li>
                 @endif
             </ul>
         </div>
@@ -251,22 +250,13 @@
     </div>
 </div>
 @include('flash::message')
-@if(isset($success))
-    <div class="alert alert-success">
-        {{$success}}
-    </div>
-@endif
 
-@if(isset($failure))
-    <div class="alert alert-danger">
-        {{$failure}}
-    </div>
-@endif
-
-@yield('content')
+<div class="container">
+    @yield('content')
+</div>
 
 <footer>
-    <div class="row">
+    <div class="container">
         <div class="col-lg-12">
             <p>Copyright &copy; Your Website 2014</p>
         </div>

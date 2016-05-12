@@ -16,7 +16,7 @@ class Sailing extends Model
 
     public function getEndDateAttribute($value)
     {
-        return Carbon::parse($value)->format('l jS \\of F Y h:i:s A');
+        return Carbon::parse($value)->format('F jS, Y');
     }
 
     public function setEndDateAttribute($value)
@@ -26,7 +26,7 @@ class Sailing extends Model
 
     public function getStartDateAttribute($value)
     {
-        return Carbon::parse($value)->format('l jS \\of F Y h:i:s A');
+        return Carbon::parse($value)->format('F jS, Y');
     }
 
     public function setStartDateAttribute($value)
@@ -54,19 +54,17 @@ class Sailing extends Model
             return $query->paginate(12);
         }
         if($search->search != "") {
-            $query->where('cruise_line','LIKE',"%$search->search%")
-                ->orWhere('port_org','LIKE',"%$search->search%")
-                ->orWhere('destination','LIKE',"%$search->search%");
+            $query->where('cruise_line', 'LIKE', "%$search->search%");
         }
         if($search->destination == "") { // search based on destination
-            $query->where('destination','LIKE',"%$search->search%");
+            //$query->where('destination','LIKE',"%$search->search%");
         } else {
             $query->where('destination', $search->destination );
         }
         if($search->origin == "") { // search base on port of origin
-            $query->where('port_org','LIKE',"%$search->search%");
+            //$query->where('port_org','LIKE',"%$search->search%");
         } else {
-            $query->where('port_org','=', $search->origin);
+            $query->where('port_org', $search->origin);
         }
         if($search->sort == ""){
                 $query->orderBy('start_date','desc');

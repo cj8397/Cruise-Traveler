@@ -11,20 +11,6 @@
                               action="{{ action('SailingsController@SaveSailing', $sailing->id) }}">
                             {!! csrf_field() !!}
 
-                            <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Sailing Title</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="title" value="{{$sailing->title}}">
-
-                                    @if ($errors->has('title'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('title') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div class="form-group{{ $errors->has('cruise_line') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Cruise Line</label>
                                 <div class="col-md-6">
@@ -43,6 +29,9 @@
                                 <label class="col-md-4 control-label">Start Date And Time</label>
 
                                 <div class="col-md-6">
+                                  <span class="bg-primary">
+                                      <strong> {!! $sailing->start_date !!}</strong>
+                                  </span>
                                     <input type="text" class="form-control date" id="datetimepickerstart" name="start"
                                            value="{{$sailing->start}}">
 
@@ -58,6 +47,9 @@
                                 <label class="col-md-4 control-label">End Date And Time</label>
 
                                 <div class="col-md-6">
+                                  <span class="bg-primary">
+                                      <strong> {!! $sailing->end_date !!}</strong>
+                                  </span>
                                     <input type="text" class="form-control" id="datetimepickersend" name="end"
                                            value="{{$sailing->end}}">
 
@@ -124,4 +116,9 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+
+    {!! JsValidator::formRequest('App\Http\Requests\SailingRequest') !!}
 @endsection

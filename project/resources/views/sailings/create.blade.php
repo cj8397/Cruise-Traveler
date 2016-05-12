@@ -1,7 +1,6 @@
 @extends('layouts.scrolling')
 
 @section('content')
-    <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
@@ -10,20 +9,6 @@
                         <form class="form-horizontal" role="form" method="POST"
                               action="{{ action('SailingsController@CreateSailing') }}">
                             {!! csrf_field() !!}
-
-                            <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Sailing Title</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="title">
-
-                                    @if ($errors->has('title'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('title') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
 
                             <div class="form-group{{ $errors->has('cruise_line') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Cruise Line</label>
@@ -117,5 +102,9 @@
                 </div>
             </div>
         </div>
-    </div>
+@endsection
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+
+    {!! JsValidator::formRequest('App\Http\Requests\SailingRequest') !!}
 @endsection
