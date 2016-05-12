@@ -1,12 +1,18 @@
 @extends('layouts.scrolling')
+@section('styles')
+    <style>
 
+        .profile{
+            padding: 5px;
+        }
+    </style>
+    @endsection
 @section('content')
-    <div class="container">
         <div class="img-wrapper">
             <img class="img-responsive" src="/426631.jpg" alt="">
         </div>
-            <div class="col-md-12 col-xs-12 text-center">
-                <div class="panel panel-default col-md-4 col-xs-12">
+            <div class="col-sm-4 col-xs-12 text-center">
+                <div class="panel panel-default">
                     <div class="panel panel-heading">{!! $event->title !!}</div>
                     <div class="panel panel-body">
                         <ul class="list-group">
@@ -64,26 +70,44 @@
                                 </p>
                             </li>
                         </ul>
+                        @if(isset($members) && isset($currentUser))
+                            <div class="row col-xs-12">
+                                <div class="panel panel-default">
+                                    <div class="panel panel-heading">Participants</div>
+                                    <div class="panel panel-body">
+                                        <div class="row">
+                                            @foreach ($members as $mem)
+                                                <a class="col-xs-4 col-md-3 profile" href="/users/userprofile/{!! $mem->user_id !!}">
+                                                    <img class="img-responsive img-circle" src="/images/profilepic.png" alt="">
+                                                    <span class="label label-default label-pill">{!! $mem->userdetails->first !!}</span>
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
+            </div>
+            <div class="col-sm-8 col-xs-12">
                 @if(!empty($thread) && isset($currentUser))
-                    <div class="row col-md-7 col-md-offset-1 col-xs-12">
+                    <div class="col-xs-12">
                         <div class="row panel panel-default">
-                            <div class="panel-heading">
-                                <h2>{!! $thread->subject !!}</h2>
-                            </div>
+                            <h2 class="panel-heading"> Message Board </h2>
                             <div class="panel-body">
-                                <div class="col-xs-12">
+                                <div class="col-xs-4">
                                     {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
                                             <!-- Message Form Input -->
                                     <div class="form-group clearfix">
                                         {!! Form::textarea('message', null, ['class' => 'col-xs-9', 'placeholder' => 'Send a message...']) !!}
                                     </div>
                                     <div class="form-group clearfix">
-                                        {!! Form::submit('Send', ['class' => 'btn btn-primary col-xs-4']) !!}
+                                        {!! Form::submit('Send', ['class' => 'btn btn-primary col-xs-12']) !!}
                                     </div>
                                     {!! Form::close() !!}
-
+                                </div>
+                                <div class="col-xs-8">
                                     @foreach($thread->messages as $message)
                                         <div class="col-xs-12 message">
                                             <div class="media">
@@ -103,15 +127,15 @@
                         </div>
                     </div>
                 @endif
-                @if(isset($members))
-                    <div class="row col-md-7 col-md-offset-1 col-xs-12">
-                        <div class="panel panel-default col-md-12 col-xs-12">
+                @if(isset($members) && !isset($currentUser))
+                    <div class="row col-xs-12">
+                        <div class="panel panel-default">
                             <div class="panel panel-heading">Participants</div>
                             <div class="panel panel-body">
                                 <div class="row">
                                     @foreach ($members as $mem)
-                                        <a class="col-xs-4 col-md-4" href="/users/userprofile/{!! $mem->user_id !!}">
-                                            <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                                        <a class="col-xs-4 col-sm-4 col-md-2 profile" href="/users/userprofile/{!! $mem->user_id !!}">
+                                            <img class="img-responsive img-circle" src="/images/profilepic.png" alt="">
                                             <span class="label label-default label-pill">{!! $mem->userdetails->first." ".$mem->userdetails->last!!}</span>
                                         </a>
                                     @endforeach
@@ -121,5 +145,4 @@
                     </div>
                 @endif
             </div>
-    </div>
 @endsection

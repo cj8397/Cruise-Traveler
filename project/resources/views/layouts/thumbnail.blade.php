@@ -108,28 +108,28 @@
                 <h4 class="modal-title" id="loginModalLabel">Login</h4>
             </div>
             <div class="modal-body">
-                <table class="tg table table-responsive">
-                    <tr class="success">
-                        <th class="tg-amwm">Username</th>
-                        <th class="tg-amwm">Password</th>
-                    </tr>
-                    <tr class="warning">
-                        <td class="tg-baqh">vacation@gmail.com</td>
-                        <td class="tg-baqh">password</td>
-                    </tr>
-                    <tr class="info">
-                        <td>eventhost@gmail.com</td>
-                        <td>password</td>
-                    </tr>
-                    <tr class="danger">
-                        <td>eventparticipant@gmail.com</td>
-                        <td>password</td>
-                    </tr>
-                    <tr class="active">
-                        <td>admin@admin.com</td>
-                        <td>adminpassword</td>
-                    </tr>
-                </table>
+                {{--<table class="tg table table-responsive">--}}
+                    {{--<tr class="success">--}}
+                        {{--<th class="tg-amwm">Username</th>--}}
+                        {{--<th class="tg-amwm">Password</th>--}}
+                    {{--</tr>--}}
+                    {{--<tr class="warning">--}}
+                        {{--<td class="tg-baqh">vacation@gmail.com</td>--}}
+                        {{--<td class="tg-baqh">password</td>--}}
+                    {{--</tr>--}}
+                    {{--<tr class="info">--}}
+                        {{--<td>eventhost@gmail.com</td>--}}
+                        {{--<td>password</td>--}}
+                    {{--</tr>--}}
+                    {{--<tr class="danger">--}}
+                        {{--<td>eventparticipant@gmail.com</td>--}}
+                        {{--<td>password</td>--}}
+                    {{--</tr>--}}
+                    {{--<tr class="active">--}}
+                        {{--<td>admin@admin.com</td>--}}
+                        {{--<td>adminpassword</td>--}}
+                    {{--</tr>--}}
+                {{--</table>--}}
                 <form class="form-vertical clearfix" role="form" method="POST" action="{{ url('/login') }}">
                     {!! csrf_field() !!}
                     <div class="col-xs-12 {{ $errors->has('email') ? ' has-error' : '' }}">
@@ -159,7 +159,7 @@
                         <button type="submit" class="btn btn-primary col-xs-3">
                             <i class="fa fa-btn fa-sign-in"></i>Login
                         </button>
-                        <div class="col-xs-5"><input type="checkbox" name="remember"> <span>Remember Me?</span>
+                        <div class="col-xs-5 btn"><input type="checkbox" name="remember"> <span>Remember Me?</span>
                         </div>
                         <div class="col-xs-4"><a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot
                                 Password?</a></div>
@@ -246,13 +246,12 @@
 <div class="container">
     @include('flash::message')
     @yield('content')
+    <footer>
+        <p>Copyright &copy; Cruise Connect 2016</p>
+    </footer>
 </div>
 
-<footer>
-    <div class="container">
-            <p>Copyright &copy; Cruise Connect 2016</p>
-    </div>
-</footer>
+
 
 
 <!-- JavaScripts -->

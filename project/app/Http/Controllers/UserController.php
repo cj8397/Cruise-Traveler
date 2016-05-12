@@ -109,6 +109,6 @@ class UserController extends Controller
               $userDetails->seventyfour = $request->seventyfour;
                $userDetails->seventyfive = $request->seventyfive;
         $userDetails->save();
-        return redirect('users/detail');
+        return redirect('users/userprofile/'.$user_id);
     }
 }

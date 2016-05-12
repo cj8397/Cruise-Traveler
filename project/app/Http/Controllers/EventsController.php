@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\EventRequest;
 use App\Http\Requests\SearchRequest;
 use Cmgmyr\Messenger\Models\Thread;
+use Laracasts\Flash\Flash;
 
 class EventsController extends Controller
 {
@@ -84,8 +85,10 @@ class EventsController extends Controller
       $user_id = Auth::User()->id;
       if(UserSailing::where(['sailing_id' => $sailing_id, 'user_id' => $user_id])->exists())
       {
+          Flash::success('Enter new event information!');
         return view('events.createEventForm')->with('sailing_id', $sailing_id);
       }else{
+          Flash::error('You are not registered in the sailing! sign up to make an event');
         return redirect()->action('SailingsController@GetSailing',[$sailing_id]);
       }
     }

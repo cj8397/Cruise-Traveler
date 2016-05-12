@@ -113,5 +113,5 @@
     </div>
 @endsection
 @section('scripts')
-{!! JsValidator::formRequest('App\Http\Requests\EventRequest', ''#createEventForm'); !!}
+{!! JsValidator::formRequest('App\Http\Requests\EventRequest', '#createEventForm') !!}
 @endsection
