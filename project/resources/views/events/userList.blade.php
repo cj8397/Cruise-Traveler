@@ -2,7 +2,7 @@
 
 @section('content')
         <!-- Page Content -->
-    <!-- Page Heading -->
+<!-- Page Heading -->
     @foreach($userSailing as $userSail)
         <div class="container-fluid text-center panel panel-primary">
             <div class="row col-sm-4 col-xs-12">
@@ -10,7 +10,7 @@
                     <div class="panel-heading">
                         <a href="{{ action('SailingsController@GetSailing', [$userSail->sailing->id]) }}">
                             <h3> {{$userSail->sailing->cruise_line}}</h3>
-                </a>
+                        </a>
                     </div>
                     <div class="panel-body">
                         <div class="panel panel-default">
@@ -31,31 +31,31 @@
                             </div>
                         </div>
                     </div>
-        </div>
-    </div>
+                </div>
+            </div>
 
             <div class="row col-sm-7 col-sm-offset-1 col-xs-12" style="overflow-y: scroll; height:500px">
                 @foreach($userSail->event->chunk(2) as $row)
                     <div class="row ">
                         @foreach($row as $event)
                             <div class="panel panel-default col-sm-6 col-xs-12 portfolio-item">
-                <ul class="list-group">
-                    <li  class="list-group-item">
-                        <h4> {!! ucfirst($event->title) !!}</h4>
-                    </li>
-                    <li class="list-group-item alert alert-info">
-                        <p>{!! $event->start_date !!}</p>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="/events/detail/{!! $event->id !!}">
-                            <button type="button" class="btn btn-primary btn-md">
-                                <i class="fa fa-users" aria-hidden="true"></i>Event Detail
-                            </button>
-                        </a>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <h4> {!! ucfirst($event->title) !!}</h4>
+                                    </li>
+                                    <li class="list-group-item alert alert-info">
+                                        <p>{!! $event->start_date !!}</p>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="/events/detail/{!! $event->id !!}">
+                                            <button type="button" class="btn btn-primary btn-md">
+                                                <i class="fa fa-users" aria-hidden="true"></i>Event Detail
+                                            </button>
+                                        </a>
 
-                    </li>
-                </ul>
-            </div>
+                                    </li>
+                                </ul>
+                            </div>
                         @endforeach
                     </div>
                 @endforeach

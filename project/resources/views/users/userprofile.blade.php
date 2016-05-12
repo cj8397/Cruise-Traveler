@@ -108,23 +108,25 @@
                 <p>Please click on Join Sailing button above</p>
             @endif
 
-            @foreach($usersailings as $sail)
-                @foreach($userevents->where('sailing_id', $sail->sailing_id) as $events)
-                    <div class="modal fade" id="yourModal{{$events->event->sailing_id}}" tabindex="-1" role="dialog"
-                         aria-labelledby="myModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
+
+            <div class="modal fade" id="yourModal{{$sailing->sailing_id}}" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        @foreach($usersailings as $sail)
+                            @foreach($userevents->where('sailing_id', $sail->sailing_id) as $events)
+
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                                 aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">{!! $events->event->title !!}</h4>
+                                    <h4 class="modal-title" id="myModalLabel"><a
+                                                href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
+                                    </h4>
                                 </div>
-                                {{--<div class="modal-body">
+                                <div class="modal-body">
                                     <ul class="list-group">
                                         <li class="list-group-item">
-                                            <h5>Event: <a
-                                                        href="/events/detail/{!! $events->event->id !!}">{!! $events->event->start_date !!}</a>
-                                            </h5>
+                                            <h5><strong>Start Time: </strong>{!! $events->event->start_date !!}</h5>
                                         </li>
                                         <li class="list-group-item">
                                             <strong>Location: </strong>{!! $events->event->location !!}
@@ -138,24 +140,25 @@
                                             @endif
                                         </li>
                                     </ul>
-                                </div>--}}
+                                </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
+            </div>
 
-                {{--<a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-btn fa-user"></i>Create an Event
-                    </button>
-                </a>--}}
+            {{--<a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-btn fa-user"></i>Create an Event
+                </button>
+            </a>--}}
 
-            @endforeach
+
         </div>
-                <!-- Pagination -->
+        <!-- Pagination -->
         {{--<div class="row text-center">
             <div class="col-lg-12 col-md-12 col-xs-12">
                 <ul class="pagination">
