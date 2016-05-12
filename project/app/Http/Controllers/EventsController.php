@@ -35,10 +35,10 @@ class EventsController extends Controller
         //
         $sail = Sailing::where('id',$sailing)->first();
         if($request->direction == null){
-            $events = Event::with('userevent')->where('sailing_id', $sailing)->paginate(6);
+            $events = Event::with('userevent')->where('sailing_id', $sailing)->get();
             return view('events.list')->with(['events' => $events, 'sailing' => $sail,'old' => $request]);
         }else{
-            if( $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request)){
+            if( $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request)->get()){
                 return view('events.list')->with(['events' => $events, 'sailing' => $sail,'old' => $request]);
             } else {
                 return Redirect::back();

@@ -28,7 +28,7 @@ class Event extends Model
 
     public function getEndDateAttribute($value)
     {
-        return Carbon::parse($value)->format('l jS \\of F Y h:i:s A');
+        return Carbon::parse($value)->format('F jS, Y - g:i A');
     }
 
     public function setEndDateAttribute($value)
@@ -38,7 +38,7 @@ class Event extends Model
 
     public function getStartDateAttribute($value)
     {
-        return Carbon::parse($value)->format('l jS \\of F Y h:i:s A');
+        return Carbon::parse($value)->format('F jS, Y - g:i A');
     }
 
     public function setStartDateAttribute($value)
@@ -48,13 +48,13 @@ class Event extends Model
     public function scopeSearch($query, $search){
 
         if($search->search == null && $search->direction == null && $search->sort == null){
-             $query->paginate(6);
+             //$query
         }else {
              $query->where('title', 'LIKE', "%$search->search%");
             if($search->direction != "" || $search->sort != ""){
                 $query->orderBy($search->sort,$search->direction);
             }
-            return $query->paginate(6);
+            return $query;
         }
     }
 }
