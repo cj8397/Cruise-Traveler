@@ -90,16 +90,16 @@
                      </a>--}}
 
                     {{--<ul class="dropdown-menu" role="menu">--}}
-                        <li>
-                            <a href="{{ url('/users/userprofile/'.Auth::user()->id) }}">Profile</a>
-                        </li>
+                    <li>
+                        <a href="{{ url('/users/userprofile/'.Auth::user()->id) }}">Profile</a>
+                    </li>
                     <li><a href="{{ url('/logout') }}">Logout</a></li>
                     @if (Auth::user()->isAdmin())
                         <li>
                             <a href="{{ url('/admin/home') }}"><i class="glyphicon glyphicon-circle-arrow-left"></i>Admin</a>
                         </li>
-                        @endif
-                        {{--</ul>--}}
+                    @endif
+                    {{--</ul>--}}
 
                 @endif
             </ul>

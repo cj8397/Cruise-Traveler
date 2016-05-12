@@ -13,8 +13,8 @@
 @endsection
 @section('content')
     <script>
-    @if(isset($userdetail->dob))
-        $(function () {
+        @if(isset($userdetail->dob))
+            $(function () {
 
             $('.toggle').click(function (event) {
                 event.preventDefault();
@@ -35,13 +35,8 @@
             <div class="col-md-12 col-xs-12">
                 <ul class="list-group">
                     <li class="list-group-item"><h4>Email: </h4>{{ Auth::user()->email }}</li>
-                    {{--<li class="list-group-item">{{ Auth::user()->email }}</li>--}}
                     <li class="list-group-item"><h4>First Name: </h4>{{ $userdetail->first }}</li>
-                    {{--<li class="list-group-item">{{ Auth::user()->first }}</li>--}}
                     <li class="list-group-item"><h4>Last Name: </h4>{{ $userdetail->last }}</li>
-                    {{--<li class="list-group-item">{{ Auth::user()->last }}</li>--}}
-                    {{--<li class="list-group-item"><h4>Date of Birth: </h4>{{ Auth::user()->dob }}</li>--}}
-                    {{--<li class="list-group-item">{{ Auth::user()->dob }}</li>--}}
                     <li class="list-group-item"><h4>Gender: </h4>
                         @if ($userdetail->sex === 1)
                             Male
@@ -61,7 +56,8 @@
                         <li class="list-group-item"><h4>Language: </h4>{{ $userdetail->lang }}</li>
                     </ul>
                 </div>
-                <a href="@if(isset($userdetail->dob))#credits @else{{url('users/detail')}}@endif" class="toggle btn btn-primary">More Details</a>
+                <a href="@if(isset($userdetail->dob))#credits @else{{url('users/detail')}}@endif"
+                   class="toggle btn btn-primary">More Details</a>
             </div>
         </div>
 
@@ -109,9 +105,6 @@
                 <p>Please click on Join Sailing button above</p>
             @endif
 
-
-
-            {{--<div id="demo" class="well hidden">--}}
             @foreach($usersailings as $sail)
                 @foreach($userevents->where('sailing_id', $sail->sailing_id) as $events)
                     <div class="modal fade" id="yourModal{{$sail->sailing_id}}" tabindex="-1" role="dialog"
@@ -148,32 +141,7 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
-                    {{--<ul class="list-group">
-                        <li class="list-group-item">
-                            <h5>Event: <a
-                                        href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
-                            </h5>
-                        </li>
-                        <li class="list-group-item">{!! $events->event->start_date !!}
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Role:</strong><br>
-                            @if ($events->role == "host")
-                                <span class="label label-pill label-warning">{!! $events->role !!}</span>
-                            @else
-                                <span class="label label-pill label-danger">{!! $events->role !!}</span>
-                            @endif
-                        </li>
-                    </ul>--}}
                 @endforeach
-
 
                 {{--<a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
                     <button type="submit" class="btn btn-primary">
@@ -182,94 +150,7 @@
                 </a>--}}
 
             @endforeach
-            {{--</div>--}}
-
         </div>
-        {{--<div class="panel panel-default col-md-8 col-md-offset-1 col-xs-12">
-            --}}{{--@if(isset($usersailings))--}}{{--
-            --}}{{--@foreach($usersailings as $sailings)--}}{{--
-            @if(isset($usersailings))
-                @foreach($usersailings->slice(0, 5) as $sailing)
-                    --}}{{--@for ($x = 0; $x < count($details); $x++)--}}{{--
-                    <div class="row col-md-12 col-xs-12">
-                        <hr>
-                        <div class="panel-body col-md-6 col-xs-12">
-                            <div class="panel-heading">
-                                <a href="#demo" class="toggle btn btn-info">
-                                    <label class="label-info"><h4>{!! $sailing->sailing->cruise_line !!}</h4></label>
-                                </a>
-                            </div>
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <strong>Start Date: </strong>{!! $sailing->sailing->start_date !!} <br>
-                                    <strong>Departing Port: </strong>{!! $sailing->sailing->port_org !!} <br>
-                                    <strong>Destination: </strong>{!! $sailing->sailing->destination !!} <br>
-                                    <strong>Sailing ID: </strong>{!! $sailing->sailing->id !!}
-                                </li>
-                            </ul>
-                        </div>
-
-                        --}}{{--<div class="panel-body col-md-6 col-xs-12">
-                            <a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-user"></i>Create an Event
-                                </button>
-                            </a>
-                        </div>--}}{{--
-
-                        <div class="panel-body col-md-6 col-xs-12">
-                            <div id="demo" class="well hidden">
-                            @foreach($userevents->where('sailing_id', $sailing->sailing_id)->slice(0, 5) as $events)
-                                --}}{{--@if($events != null)--}}{{--
-                                --}}{{--@foreach($eventdetails[$events->event_id] as $edetail)--}}{{--
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <h5>Event: <a
-                                                    href="/events/detail/{!! $events->event->id !!}">{!! $events->event->title !!}</a>
-                                        </h5>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong>Role:</strong><br>
-                                        @if ($events->role == "host")
-                                            <span class="label label-pill label-warning">{!! $events->role !!}</span>
-                                        @else
-                                            <span class="label label-pill label-danger">{!! $events->role !!}</span>
-                                        @endif
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong>Start:</strong><br>
-                                        {!! $events->event->start_date !!}
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong>End:</strong><br>
-                                        {!! $events->event->end_date !!}
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong>Location:</strong><br>
-                                        {!! $events->event->location !!}
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong>Sailing ID:</strong><br>
-                                        {!! $events->sailing_id !!}
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong>Event ID:</strong><br>
-                                        {!! $events->event->id !!}
-                                    </li>
-                                </ul>
-                                --}}{{--@else--}}{{--
-                                --}}{{--<span class="label label-pill label-default">You are not participating in any events for this sailing... =(</span>--}}{{--
-                                --}}{{--@endif--}}{{--
-                            @endforeach
-    </div>
-                        </div>
-                        --}}{{--@endfor--}}{{--
-                    </div>
-                @endforeach
-            @endif
-        </div>--}}
-
-
                 <!-- Pagination -->
         {{--<div class="row text-center">
             <div class="col-lg-12 col-md-12 col-xs-12">
