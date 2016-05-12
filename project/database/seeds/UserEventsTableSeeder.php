@@ -21,21 +21,20 @@ class UserEventsTableSeeder extends Seeder
 
         $userSailings = UserSailing::all();
         $eventsHosted = [];
-        foreach($userSailings as $userSail){
-            $allEvents = Event::all()->where('sailing_id',$userSail->sailing_id)->pluck('id');
-            $number = rand(2,9);
-            foreach($allEvents as $event){
-                if($hostID == $userSail->user_id){
-                    if($event % 2 == 0){
+        foreach ($userSailings as $userSail) {
+            $allEvents = Event::all()->where('sailing_id', $userSail->sailing_id)->pluck('id');
+            $number = rand(2, 9);
+            foreach ($allEvents as $event) {
+                if ($hostID == $userSail->user_id) {
+                    if ($event % 2 == 0) {
                         DB::table('user_events')->insert([
                             'user_id' => $userSail->user_id,
                             'sailing_id' => $userSail->sailing_id,
                             'event_id' => $event,
                             'role' => 'Host'
                         ]);
-                        array_push($eventsHosted,$event);
-                    }
-                    else{
+                        array_push($eventsHosted, $event);
+                    } else {
                         DB::table('user_events')->insert([
                             'user_id' => $userSail->user_id,
                             'sailing_id' => $userSail->sailing_id,
@@ -43,18 +42,16 @@ class UserEventsTableSeeder extends Seeder
                             'role' => 'Participant'
                         ]);
                     }
-                }
-                else{
-                    if($event % $number == 0){
-                        if(in_array($event,$eventsHosted)){
+                } else {
+                    if ($event % $number == 0) {
+                        if (in_array($event, $eventsHosted)) {
                             DB::table('user_events')->insert([
                                 'user_id' => $userSail->user_id,
                                 'sailing_id' => $userSail->sailing_id,
                                 'event_id' => $event,
                                 'role' => 'Participant'
                             ]);
-                        }
-                        else{
+                        } else {
                             DB::table('user_events')->insert([
                                 'user_id' => $userSail->user_id,
                                 'sailing_id' => $userSail->sailing_id,

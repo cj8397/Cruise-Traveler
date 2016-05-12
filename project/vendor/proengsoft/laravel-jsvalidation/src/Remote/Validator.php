@@ -89,7 +89,7 @@ class Validator
      */
     protected function setRemoteValidation($attribute, BaseValidator $validator)
     {
-        if (! array_key_exists($attribute, $validator->getRules())) {
+        if (!array_key_exists($attribute, $validator->getRules())) {
             throw new BadRequestHttpException("Undefined '$attribute' attribute");
         }
 
@@ -111,7 +111,7 @@ class Validator
 
         foreach ($rules as $i => $rule) {
             $parsedRule = call_user_func($protectedValidator, 'parseRule', [$rule]);
-            if ($disabled || ! $this->isRemoteRule($parsedRule[0])) {
+            if ($disabled || !$this->isRemoteRule($parsedRule[0])) {
                 unset($rules[$i]);
             }
         }

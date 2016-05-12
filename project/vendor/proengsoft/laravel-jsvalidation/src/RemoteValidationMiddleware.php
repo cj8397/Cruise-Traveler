@@ -28,7 +28,7 @@ class RemoteValidationMiddleware
      * RemoteValidationMiddleware constructor.
      *
      * @param ValidationFactory $validator
-     * @param Config            $config
+     * @param Config $config
      */
     public function __construct(ValidationFactory $validator, Config $config)
     {
@@ -40,7 +40,7 @@ class RemoteValidationMiddleware
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param Closure                  $next
+     * @param Closure $next
      *
      * @return mixed
      */

@@ -34,13 +34,13 @@ class EventsController extends Controller
     protected function GetAllEvents($sailing, SearchRequest $request)
     {
         //
-        $sail = Sailing::where('id',$sailing)->first();
-        if($request->direction == null){
+        $sail = Sailing::where('id', $sailing)->first();
+        if ($request->direction == null) {
             $events = Event::with('userevent')->where('sailing_id', $sailing)->get();
-            return view('events.list')->with(['events' => $events, 'sailing' => $sail,'old' => $request]);
-        }else{
-            if( $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request)->get()){
-                return view('events.list')->with(['events' => $events, 'sailing' => $sail,'old' => $request]);
+            return view('events.list')->with(['events' => $events, 'sailing' => $sail, 'old' => $request]);
+        } else {
+            if ($events = Event::with('userevent')->where('sailing_id', $sailing)->search($request)->get()) {
+                return view('events.list')->with(['events' => $events, 'sailing' => $sail, 'old' => $request]);
             } else {
                 return Redirect::back();
             }
@@ -48,7 +48,7 @@ class EventsController extends Controller
     }
 
     protected function getAllUserEvents(){
-        $userEvents = UserSailing::with('event','sailing')->where('user_id',Auth::user()->id)->paginate(1);
+        $userEvents = UserSailing::with('event', 'sailing')->where('user_id', Auth::user()->id)->paginate(1);
         return view('events.userList')->with('userSailing',$userEvents);
     }
     protected function GetOneEvent($event_id)
@@ -61,7 +61,7 @@ class EventsController extends Controller
             if($userEvent = UserEvent::where(['user_id' => Auth::user()->id, 'event_id'=> $event_id])->first())
             {
               $thread = Thread::where(['event_id' => $event_id, 'sailing_id' => $event->sailing_id])->first();
-              $thread->messages = $thread->messages->sortByDesc('created_at');
+                $thread->messages = $thread->messages->sortByDesc('created_at');
               return view('events.eventdetail')->with([
                   'event' => $event,
                   'members' => $members,
@@ -95,19 +95,19 @@ class EventsController extends Controller
 
     protected function GetAllUsers()
     {
-       // dd(rand(2,9));
-       // dd(Sailing::pluck('id')->toArray());
+        // dd(rand(2,9));
+        // dd(Sailing::pluck('id')->toArray());
         $userSailings = UserSailing::all();
-        dd(Event::all()->where('sailing_id',2)->pluck('id')->toArray());
-        foreach($userSailings as $userSail){
+        dd(Event::all()->where('sailing_id', 2)->pluck('id')->toArray());
+        foreach ($userSailings as $userSail) {
 
-            $allEvents = Event::all()->where('sailing_id',$userSail->sailing_id);
-            foreach($allEvents as $event){
+            $allEvents = Event::all()->where('sailing_id', $userSail->sailing_id);
+            foreach ($allEvents as $event) {
                 var_dump($event->title);
             }
         }
         dd(User::pluck('id')->toArray());
-        dd(Event::where('sailing_id',Sailing::first()->id+1)->get());
+        dd(Event::where('sailing_id', Sailing::first()->id + 1)->get());
     }
 
     protected function CreateEvent(EventRequest $request)

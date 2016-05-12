@@ -8,6 +8,7 @@
         .panel .col-xs-12 {
             padding: 5px 0;
         }
+
         .sailing {
             height: 80vh;
         }
@@ -51,9 +52,9 @@
         }
 
     </style>
-@endsection
-@section('content')
-    <!-- Page Content -->
+    @endsection
+    @section('content')
+            <!-- Page Content -->
     <div class="container">
         <div class="col-xs-12">
             <form name="searchEvents" url="search/{!! $sailing->id!!}" class="form navbar-form navbar-right searchform">
@@ -134,8 +135,8 @@
                                     <div class="panel panel-default ">
                                         <h4 class="panel-heading"> {!! ucfirst($event->title) !!}</h4>
                                         <div class="panel-body">
-                                            <p> <b>Starts:</b> {!! $event->start_date !!}</p>
-                                            <p> <b>Ends:</b> {!! $event->end_date !!}</p>
+                                            <p><b>Starts:</b> {!! $event->start_date !!}</p>
+                                            <p><b>Ends:</b> {!! $event->end_date !!}</p>
                                             <a href="/events/detail/{!! $event->id !!}" class="btn btn-primary btn-md">
                                                 View Details
                                             </a>
@@ -146,7 +147,7 @@
                         </div>
                     @endforeach
                 @else
-                    <div class="jumbotron"> <h4>No Results Were Found</h4></div>
+                    <div class="jumbotron"><h4>No Results Were Found</h4></div>
                 @endif
             </div>
         </div>

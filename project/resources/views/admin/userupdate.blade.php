@@ -52,5 +52,5 @@
     </div>
 @endsection
 @section('scripts')
-{!! JsValidator::formRequest('App\Http\Requests\LoginRequest', '#updateUserForm'); !!}
+    {!! JsValidator::formRequest('App\Http\Requests\LoginRequest', '#updateUserForm'); !!}
 @endsection

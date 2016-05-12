@@ -51,12 +51,29 @@ class ValidatorHandler
         $this->messages->setDelegatedValidator($validator);
     }
 
+    /**
+     * Returns view data to render javascript.
+     *
+     * @param bool $remote
+     * @return array
+     */
+    public function validationData($remote = true)
+    {
+        $jsMessages = array();
+        $jsValidations = $this->generateJavascriptValidations($remote);
+
+        return [
+            'rules' => $jsValidations,
+            'messages' => $jsMessages,
+        ];
+    }
+
     protected function generateJavascriptValidations($includeRemote = true)
     {
         $jsValidations = array();
 
         foreach ($this->validator->getRules() as $attribute => $rules) {
-            if (! $this->jsValidationEnabled($attribute)) {
+            if (!$this->jsValidationEnabled($attribute)) {
                 continue;
             }
 
@@ -65,6 +82,18 @@ class ValidatorHandler
         }
 
         return $jsValidations;
+    }
+
+    /**
+     * Check if JS Validation is disabled for attribute.
+     *
+     * @param $attribute
+     *
+     * @return bool
+     */
+    public function jsValidationEnabled($attribute)
+    {
+        return !$this->validator->hasRule($attribute, self::JSVALIDATION_DISABLE);
     }
 
     /**
@@ -103,34 +132,5 @@ class ValidatorHandler
     protected function isValidatable($jsRule, $includeRemote)
     {
         return $jsRule && ($includeRemote || $jsRule !== RuleParser::REMOTE_RULE);
-    }
-
-    /**
-     * Check if JS Validation is disabled for attribute.
-     *
-     * @param $attribute
-     *
-     * @return bool
-     */
-    public function jsValidationEnabled($attribute)
-    {
-        return ! $this->validator->hasRule($attribute, self::JSVALIDATION_DISABLE);
-    }
-
-    /**
-     * Returns view data to render javascript.
-     *
-     * @param bool $remote
-     * @return array
-     */
-    public function validationData($remote = true)
-    {
-        $jsMessages = array();
-        $jsValidations = $this->generateJavascriptValidations($remote);
-
-        return [
-            'rules' => $jsValidations,
-            'messages' => $jsMessages,
-        ];
     }
 }
