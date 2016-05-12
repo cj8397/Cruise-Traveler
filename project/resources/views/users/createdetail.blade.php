@@ -37,16 +37,14 @@
                                 </div>
                             </div>
 
-                            <div><strong>All data collected below will remain anonymous, and will not be shared with
-                                    other users.</strong></div>
-                            <br/>
+                            <div><strong>All data collected below will remain anonymous, and will not be shared with other users.</strong></div><br/>
 
                             <div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Birth Date</label>
                                 <div class="col-md-6">
-                                    <div>
-                                        <input type="text" class="form-control" name="dob" placeholder="YYYY/MM/DD">
-                                    </div>
+                                  <div>
+                                    <input type="text" class="form-control" name="dob" placeholder="YYYY/MM/DD">
+                                  </div>
 
                                     @if ($errors->has('dob'))
                                         <span class="help-block">
@@ -59,10 +57,10 @@
                             <div class="form-group{{ $errors->has('sex') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Gender</label>
                                 <div class="col-md-6">
-                                    <div>
-                                        Male <input type="radio" class="" name="sex" value="1"><br/>
-                                        Female <input type="radio" class="" name="sex" value="0">
-                                    </div>
+                                  <div>
+                                    Male <input type="radio" class="" name="sex" value="1"><br/>
+                                    Female <input type="radio" class="" name="sex" value="0">
+                                  </div>
                                     @if ($errors->has('sex'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('sex') }}</strong>
@@ -137,8 +135,7 @@
                             <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Address</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="address"
-                                           placeholder="1234 1st Street">
+                                    <input type="text" class="form-control" name="address" placeholder="1234 1st Street">
 
                                     @if ($errors->has('address'))
                                         <span class="help-block">
@@ -177,10 +174,10 @@
                             <div class="form-group{{ $errors->has('family') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Family</label>
                                 <div class="col-md-6">
-                                    <div>
-                                        Yes <input type="radio" class="" name="family" value="0"><br/>
-                                        No <input type="radio" class="" name="family" value="1">
-                                    </div>
+                                  <div>
+                                  Yes <input type="radio" class="" name="family" value="0"><br/>
+                                    No <input type="radio" class="" name="family" value="1">
+                                  </div>
 
                                     @if ($errors->has('family'))
                                         <span class="help-block">
@@ -193,148 +190,14 @@
                             <div class="form-group{{ $errors->has('co_travellers') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Co-Travellers</label>
                                 <div class="col-md-6">
-                                    <div>
-                                        Yes <input type="radio" class="" name="co_travellers" value="0"><br/>
-                                        No <input type="radio" class="" name="co_travellers" value="1">
-                                    </div>
+                                  <div>
+                                  Yes <input type="radio" class="" name="co_travellers" value="0"><br/>
+                                    No <input type="radio" class="" name="co_travellers" value="1">
+                                  </div>
 
                                     @if ($errors->has('co_travellers'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('co_travellers') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('two') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">0-2</label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="two">
-
-                                    @if ($errors->has('two'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('two') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group{{ $errors->has('five') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">2-5</label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="five">
-
-                                    @if ($errors->has('five'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('five') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group{{ $errors->has('twelve') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">6-12</label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="twelve">
-
-                                    @if ($errors->has('twelve'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('twelve') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group{{ $errors->has('seventeen') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">13-17</label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="seventeen">
-
-                                    @if ($errors->has('seventeen'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('seventeen') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group{{ $errors->has('twentyfour') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">18-24</label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="twentyfour">
-
-                                    @if ($errors->has('twentyfour'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('twentyfour') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group{{ $errors->has('twentynine') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">25-29</label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="twentynine">
-
-                                    @if ($errors->has('twentynine'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('twentynine') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group{{ $errors->has('thirtynine') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">30-39</label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="thirtynine">
-
-                                    @if ($errors->has('thirtynine'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('thirtynine') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group{{ $errors->has('fourtynine') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">40-49</label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="fourtynine">
-
-                                    @if ($errors->has('fourtynine'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('fourtynine') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group{{ $errors->has('fiftynine') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">50-59</label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="fiftynine">
-
-                                    @if ($errors->has('fiftynine'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('fiftynine') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group{{ $errors->has('seventyfour') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">60-74</label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="seventyfour">
-
-                                    @if ($errors->has('seventyfour'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('seventyfour') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('seventyfive') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">75+</label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="seventyfive">
-
-                                    @if ($errors->has('seventyfive'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('seventyfive') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -355,7 +218,5 @@
     </div>
 @endsection
 @section('scripts')
-    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-
-    {!! JsValidator::formRequest('App\Http\Requests\UserDetailsRequest', '#createDetailForm'); !!}
+{!! JsValidator::formRequest('App\Http\Requests\UserDetailsRequest', '#createDetailForm'); !!}
 @endsection
