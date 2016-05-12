@@ -113,7 +113,8 @@
                     </div>
                     <div class="panel-body">
                         <h4> {{$sailing->destination}} </h4>
-                        <div class="col-xs-12"> <b>Port of Origin:</b> {{$sailing->port_org}}</div>
+                        <div class="col-xs-12"> <b>Port of Origin:</b> </div>
+                        <div class="col-xs-12"> {{$sailing->port_org}} </div>
                         <div class="col-xs-12"> <b>Departs:</b> {{$sailing->start_date }} </div>
                         <div class="col-xs-12"> <b>Returns:</b> {{ $sailing->end_date }}</div>
                     </div>
