@@ -33,12 +33,13 @@ class EventsController extends Controller
     protected function GetAllEvents($sailing, SearchRequest $request)
     {
         //
+        $sail = Sailing::where('id',$sailing)->first();
         if($request->direction == null){
             $events = Event::with('userevent')->where('sailing_id', $sailing)->paginate(6);
-            return view('events.list')->with(['events' => $events, 'sailing_id' => $sailing,'old' => $request]);
+            return view('events.list')->with(['events' => $events, 'sailing' => $sail,'old' => $request]);
         }else{
             if( $events = Event::with('userevent')->where('sailing_id',$sailing)->search($request)){
-                return view('events.list')->with(['events' => $events, 'sailing_id' => $sailing,'old' => $request]);
+                return view('events.list')->with(['events' => $events, 'sailing' => $sail,'old' => $request]);
             } else {
                 return Redirect::back();
             }
@@ -46,7 +47,7 @@ class EventsController extends Controller
     }
 
     protected function getAllUserEvents(){
-        $userEvents = UserSailing::with('event','sailing')->where('user_id',Auth::user()->id)->get();
+        $userEvents = UserSailing::with('event','sailing')->where('user_id',Auth::user()->id)->paginate(1);
         return view('events.userList')->with('userSailing',$userEvents);
     }
     protected function GetOneEvent($event_id)

@@ -53,13 +53,16 @@ class Sailing extends Model
         if($search->search == "" && $search->destination == "" && $search->origin == "" && $search->sort == "" ){
             return $query->paginate(12);
         }
+        if($search->search != "") {
+            $query->where('cruise_line','LIKE',"%$search->search%");
+        }
         if($search->destination == "") { // search based on destination
-            $query->where('destination','LIKE',"%$search->search%");
+            //$query->where('destination','LIKE',"%$search->search%");
         } else {
             $query->where('destination', $search->destination );
         }
         if($search->origin == "") { // search base on port of origin
-            $query->where('port_org','LIKE',"%$search->search%");
+            //$query->where('port_org','LIKE',"%$search->search%");
         } else {
             $query->where('port_org', $search->origin);
         }
@@ -67,11 +70,6 @@ class Sailing extends Model
                 $query->orderBy('start_date','desc');
         }elseif($search->sort != ""){
             $query->orderBy('start_date',$search->sort);
-        }
-        if($search->search != "") {
-            $query->where('cruise_line','LIKE',"%$search->search%")
-                ->Where('port_org','LIKE',"%$search->search%")
-                ->Where('destination','LIKE',"%$search->search%");
         }
         //JUST NEED SORT LOGIC
         return $query->paginate(12);

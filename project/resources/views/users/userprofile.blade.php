@@ -12,7 +12,6 @@
     </style>
 @endsection
 @section('content')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
     @if(isset($userdetail->dob))
         $(function () {
@@ -28,6 +27,7 @@
     </script>
 
     <img class="img-responsive" src="/images/cruiseship.jpg">
+    <div class="container">
         <div class="panel panel-default row col-md-3 col-xs-12">
             <div class="panel-body col-md-12 col-xs-12">
                 <img class="img-responsive img-circle" src="/images/profilepic.png" width="200" height="200">
@@ -69,7 +69,7 @@
             <div class="panel-heading">
                 <h2>Sailings & Events</h2>
                 <div class="panel-body col-md-12 col-xs-12">
-                    <a href="/sailings/list">
+                    <a href="/sailings">
                         <button type="button" class="btn btn-primary btn-md">
                             <i class="fa fa-users" aria-hidden="true"></i>Join Sailings
                         </button>
@@ -271,7 +271,7 @@
 
 
                 <!-- Pagination -->
-        <div class="row text-center">
+        {{--<div class="row text-center">
             <div class="col-lg-12 col-md-12 col-xs-12">
                 <ul class="pagination">
                     <li>
@@ -290,5 +290,6 @@
                         <a href="../users/userprofile.blade.php/">&raquo;</a>
                 </ul>
             </div>
-        </div>
+        </div>--}}
+    </div>
 @endsection

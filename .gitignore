@@ -4,7 +4,7 @@
 
 # User-specific stuff:
 project/.idea/
-#.idea/workspace.xml
+.idea/workspace.xml
 #.idea/tasks.xml
 #.idea/dictionaries
 #.idea/vcs.xml
