@@ -12,8 +12,9 @@
     </style>
 @endsection
 @section('content')
+@if(isset($userdetail->dob))
+@section('scripts')
     <script>
-    @if(isset($userdetail->dob))
         $(function () {
 
             $('.toggle').click(function (event) {
@@ -23,8 +24,9 @@
             });
 
         });
-        @endif
     </script>
+    @endsection
+    @endif
 
     <img class="img-responsive" src="/images/cruiseship.jpg">
     <div class="container">
