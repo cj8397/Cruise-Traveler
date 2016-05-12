@@ -7,8 +7,9 @@
         .panel .col-xs-12 {
             padding: 0;
         }
-        .img-wrapper{
-            width: 1200px;
+        .img-wrapper > img{
+            width:100%;
+            top:-15%;
         }
     </style>
 @endsection

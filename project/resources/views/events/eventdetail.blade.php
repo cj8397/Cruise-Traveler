@@ -13,7 +13,7 @@
     @endsection
 @section('content')
         <div class="img-wrapper">
-            <img src="/images/cruise_event.PNG" alt="">
+            <img class="img-responsive" src="/images/cruise_event.PNG" alt="">
         </div>
             <div class="col-sm-4 col-xs-12 text-center">
                 <div class="panel panel-default">
