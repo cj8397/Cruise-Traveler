@@ -2,91 +2,115 @@
 
 @section('styles')
     <style>
-        /*.intro {*/
-            /*background-image: url("images/intro_image.jpg");*/
-            /*background-size: 100% 100%;*/
-        /*}*/
+
+        body {
+            width: 100vw;
+        }
+
+        body > .container {
+            padding: 0;
+            margin: none;
+            width: 100vw;
+        }
+
+        .intro {
+            background-image: url("images/main_layout2.jpg");
+            background-size: 100% 100%;
+            padding-top: 20px;
+            height: 100vh;
+            width: 100vw;
+        }
+
         .events .col-xs-12 {
             margin-bottom: 10px;
             padding: 0;
+        }
+
+        .sailings {
+            height: 100vh;
+            width: 100vw;
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+
+        footer .container {
+            width: 100vw;
+            padding-top: 30px;
+            padding-bottom: 30px;
         }
     </style>
 @endsection
 
 @section('content')
-
-    <!-- Intro Section -->
-    <div class="container-fluid">
         @if (Auth::guest())
-            <div class="intro clearfix">
-                <div class="col-xs-12 col-sm-6 ">
-                    <iframe src="https://www.youtube.com/embed/CnAUfvWlBGs"
-                            frameborder="2" allowfullscreen></iframe>
-                </div>
-                <div class="col-xs-12 col-sm-6  login">
-                    <div class="panel panel-default">
-                        <div class="panel-heading login"><h4>Login</h4></div>
-                            <table class="tg table table-responsive">
-                                <tr class="success">
-                                    <th class="tg-amwm">Username</th>
-                                    <th class="tg-amwm">Password</th>
-                                </tr>
-                                <tr class="warning">
-                                    <td class="tg-baqh">vacation@gmail.com</td>
-                                    <td class="tg-baqh">password</td>
-                                </tr>
-                                <tr class="info">
-                                    <td>eventhost@gmail.com</td>
-                                    <td>password</td>
-                                </tr>
-                                <tr class="danger">
-                                    <td>eventparticipant@gmail.com</td>
-                                    <td>password</td>
-                                </tr>
-                                <tr class="active">
-                                    <td>admin@admin.com</td>
-                                    <td>adminpassword</td>
-                                </tr>
-                            </table>
-                            <div class="panel-body">
-                                <form class="form-vertical clearfix" role="form" method="POST" action="{{ url('/login') }}">
-                                    {!! csrf_field() !!}
-                                    <div class="col-xs-12 {{ $errors->has('email') ? ' has-error' : '' }}">
-                                        <label class="col-xs-12 control-label">Email:</label>
-                                        <div class="col-xs-12">
-                                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-                                            @if ($errors->has('email'))
-                                                <span class="help-block">
-                                                <strong>{{ $errors->first('email') }}</strong>
-                                            </span>
-                                            @endif
+            <div class="clearfix intro-wrapper">
+                <div class="intro clearfix">
+                    <div class="col-xs-11 col-xs-offset-1 col-sm-6 col-sm-offset-5 login">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h4>Login</h4></div>
+                                <table class="tg table table-responsive">
+                                    <tr class="success">
+                                        <th class="tg-amwm">Username</th>
+                                        <th class="tg-amwm">Password</th>
+                                    </tr>
+                                    <tr class="warning">
+                                        <td class="tg-baqh">vacation@gmail.com</td>
+                                        <td class="tg-baqh">password</td>
+                                    </tr>
+                                    <tr class="info">
+                                        <td>eventhost@gmail.com</td>
+                                        <td>password</td>
+                                    </tr>
+                                    <tr class="danger">
+                                        <td>eventparticipant@gmail.com</td>
+                                        <td>password</td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td>admin@admin.com</td>
+                                        <td>adminpassword</td>
+                                    </tr>
+                                </table>
+                                <div class="panel-body">
+                                    <form class="form-vertical clearfix" role="form" method="POST" action="{{ url('/login') }}">
+                                        {!! csrf_field() !!}
+                                        <div class="col-xs-12 {{ $errors->has('email') ? ' has-error' : '' }}">
+                                            <label class="col-xs-12 control-label">Email:</label>
+                                            <div class="col-xs-12">
+                                                <input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                                @if ($errors->has('email'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-xs-12 {{ $errors->has('password') ? ' has-error' : '' }}">
-                                        <label class="col-xs-12 control-label">Password:</label>
-                                        <div class="col-xs-12">
-                                            <input type="password" class="form-control" name="password" required>
+                                        <div class="col-xs-12 {{ $errors->has('password') ? ' has-error' : '' }}">
+                                            <label class="col-xs-12 control-label">Password:</label>
+                                            <div class="col-xs-12">
+                                                <input type="password" class="form-control" name="password" required>
 
-                                            @if ($errors->has('password'))
-                                                <span class="help-block">
-                                                <strong>{{ $errors->first('password') }}</strong>
-                                            </span>
-                                            @endif
+                                                @if ($errors->has('password'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-xs-12 buttons">
-                                        <button type="submit" class="btn btn-primary col-xs-3">
-                                            <i class="fa fa-btn fa-sign-in"></i>Login
-                                        </button>
-                                        <div class="col-xs-5"><input type="checkbox" name="remember"> <span>Remember Me?</span></div>
-                                        <div class="col-xs-4"><a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Password?</a></div>
-                                    </div>
-                                </form>
-                            </div>
+                                        <div class="col-xs-12 buttons">
+                                            <button type="submit" class="btn btn-primary col-xs-3">
+                                                <i class="fa fa-btn fa-sign-in"></i>Login
+                                            </button>
+                                            <div class="col-xs-5 btn"><input type="checkbox" name="remember"> <span>Remember Me?</span></div>
+                                            <div class="col-xs-4"><a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Password?</a></div>
+                                        </div>
+                                    </form>
+                                </div>
+                        </div>
                     </div>
                 </div>
             </div>
         @endif
+        <div class="sailings">
             <div class="col-xs-12">
                 <div class="col-sm-4 col-xs-12 tile">
                     <div class="panel panel-default">
@@ -167,6 +191,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-4 col-xs-12 tile">
                     <div class="panel panel-default">
                         <div class="panel-heading text-center">
@@ -326,5 +351,5 @@
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
 @endsection
