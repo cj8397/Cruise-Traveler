@@ -173,5 +173,11 @@
                 </ul>
             </div>
         </div>--}}
+
+        <div class="row text-center">
+            <div class="col-lg-12 col-md-12 col-xs-12">
+                {{$usersalings->links()}}
+            </div>
+        </div>
     </div>
 @endsection
