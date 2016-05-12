@@ -100,11 +100,11 @@
         </div>
         @else
             @if(!empty($thread))
-            <div class="col-xs-12 col-md-12">
+            <div class="col-xs-12 col-md-8">
                 <div class="row panel panel-default">
                   <h2 class="panel-heading">{!! $thread->subject !!} </h2>
                   <div class="panel-body">
-                      <div class="col-xs-12">
+                      <div class="col-xs-4">
                           {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
                                   <!-- Message Form Input -->
                           <div class="form-group clearfix">
@@ -115,9 +115,9 @@
                           </div>
                           {!! Form::close() !!}
                       </div>
-                      <div class="col-xs-12 col-md-12">
+                      <div class="col-xs-8">
                         @foreach($thread->messages as $message)
-                         <div class="col-xs-12 col-md-12 message">
+                         <div class="col-xs-12 message">
                               <div class="media">
                                   <a class="pull-left" href="#">
                                       <img src="//www.gravatar.com/avatar/{!! md5($message->user->email) !!}?s=64" alt="{!! $message->user->email !!}" class="img-circle">
