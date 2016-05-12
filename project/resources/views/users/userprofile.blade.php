@@ -175,11 +175,13 @@
                 @endforeach
 
 
-                {{--<a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
+                {{--
+                <a href="{{ url('events/form/'.($sailing->sailing->id)) }}">
                     <button type="submit" class="btn btn-primary">
                         <i class="fa fa-btn fa-user"></i>Create an Event
                     </button>
-                </a>--}}
+                </a>
+                --}}
 
             @endforeach
             {{--</div>--}}

@@ -33,11 +33,6 @@
                 padding-top: 0;
             }
 
-            .panel-body .panel-body > h4 {
-                text-decoration: underline;
-                margin-bottom: 0;
-            }
-
             .panel .panel {
                 margin-bottom: 10px;
             }

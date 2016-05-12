@@ -44,6 +44,11 @@ body > .container {
     top: -25%;
 }
 
+.panel-body .panel-body > h4 {
+    text-decoration: underline;
+    margin-bottom: 0;
+}
+
 /* --- PANEL HEADINGS ----- */
 
 .panel-default > .panel-heading {

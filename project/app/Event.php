@@ -28,7 +28,7 @@ class Event extends Model
 
     public function getEndDateAttribute($value)
     {
-        return Carbon::parse($value)->format('l jS \\of F Y h:i:s A');
+        return Carbon::parse($value)->format('F jS, Y - g:i A');
     }
 
     public function setEndDateAttribute($value)
@@ -38,7 +38,7 @@ class Event extends Model
 
     public function getStartDateAttribute($value)
     {
-        return Carbon::parse($value)->format('l jS \\of F Y h:i:s A');
+        return Carbon::parse($value)->format('F jS, Y - g:i A');
     }
 
     public function setStartDateAttribute($value)
