@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Update User</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST"
+                        <form id="updateUserForm" class="form-horizontal" role="form" method="POST"
                               action="{{ action('AdminController@SaveUser', $user->id) }}">
                             {!! csrf_field() !!}
 
@@ -50,4 +50,7 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+{!! JsValidator::formRequest('App\Http\Requests\LoginRequest', '#updateUserForm'); !!}
 @endsection
