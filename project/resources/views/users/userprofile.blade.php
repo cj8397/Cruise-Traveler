@@ -11,7 +11,7 @@
         }
     </style>
 @endsection
-@section('script')
+@section('scripts')
     <script>
         @if(isset($userdetail->dob))
             $(function () {
@@ -22,10 +22,10 @@
                 $(target).toggleClass('hidden show');
             });
         });
+        </script>
         @endif
         @endsection
         @section('content')
-    </script>
 
 
     <img class="img-responsive" src="/images/cruiseship.jpg">
